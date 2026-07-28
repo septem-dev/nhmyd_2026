@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-title" content="NH마이데이터" />
+	<meta http-equiv="imagetoolbar" content="no" />
+	<meta name="robots" content="no-index,follow" />
+	<meta name="title" content="" />
+	<meta name="author" content="" />
+	<meta name="content" content="" />
+	<meta name="keywords" content="NH마이데이터" />
+	<meta name="description" content="NH마이데이터" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="-1" />
+	<title>Attached File | UI Guide</title>
+	<script src="../pub-assets/js/head-mb-update.js"></script>
+</head>
+<body>
+	<div class="wrapper nhasset nds">
+		<!-- header -->
+		<div class="header">
+			<a href="javascript:;" class="btnBack"><span class="blind">이전화면으로</span></a>
+			<h1>Attached File</h1>
+			<a href="javascript:;" class="btnGoHome" role="button"><span class="blind">Home</span></a>
+		</div>
+		<!-- //header -->
+		<div class="container">
+			<!-- input 타입 -->
+			<h2 class="guide-title">input 타입</h2>
+			<form class="mt20">
+                <div>
+                    <input type="file" id="directory_upload" webkitdirectory>
+                </div>
+                <div class="file_list">
+                    <p></p>
+                </div>
+            </form>
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    //const input = document.getElementById('directory_upload');
+                    const input = document.querySelector('#directory_upload');
+                    const preview = document.querySelector('.file_list');
+                    input.addEventListener('change', showTextFile);
+                    function showTextFile () {
+                        const selectedFiles = input.files;
+                        const list = document.createElement('ul');
+                        preview.appendChild(list);
+                        for(const file of selectedFiles){
+                            const listItem = document.createElement('li');
+                            const summary = document.createElement('span');
+                            const size = document.createElement('em');
+                            //summary.textContent = file.name + ',';
+                            summary.textContent = file.webkitRelativePath ;
+                            size.textContent = returnFilesSize(file.size);
+                            listItem.appendChild(summary);
+                            //listItem.appendChild(size);
+                            list.appendChild(listItem);
+                        }
+                        function returnFilesSize(number){
+                            return (number/1024).toFixed(2);
+                        }
+                    }
+                });
+            </script>
+		</div>
+	</div>
+</body>
+
+</html>
