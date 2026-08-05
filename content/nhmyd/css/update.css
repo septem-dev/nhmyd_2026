@@ -910,7 +910,7 @@
 .nds .process-step-h__label--active {font-weight:var(--font-weight-medium);color:var(--color-font-point)}
 .nds .process-step-h__label--default {color:var(--color-font-1)}
 .nds .process-progress-h {display:flex;align-items:center;justify-content:center;gap:63px;width:100%;box-sizing:border-box;margin:24px 0 32px}
-.nds .process-progress-h__title {flex:1 0 0;min-width:0;font-size:var(--type-size-16);font-weight:var(--font-weight-medium);line-height:24px;letter-spacing:-0.32px;color:var(--color-font-green-newtro)}
+.nds .process-progress-h__title {flex:1 0 0;min-width:0;font-size:var(--type-size-16);font-weight:var(--font-weight-medium);line-height:24px;letter-spacing:-0.32px;color:var(--color-font-3)}
 .nds .process-progress-h .process-progress-number {flex-shrink:0}
 /* ---- process-progress-number ---- */
 .nds .process-progress-number {display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:var(--radius-full);background:var(--color-bg-container)}
