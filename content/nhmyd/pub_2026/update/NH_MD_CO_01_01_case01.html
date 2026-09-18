@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <script src="../pub-assets/js/head-mb-update.js"></script>
+        <title>자산&middot;부채 통합분석</title>
+    </head>
+
+    <!--
+        피그마 node 2770:17073(Container)에 "부채/자산 보유 여부 × 세부 조건"에 따른 케이스 19종이
+        한 프레임 안에 전부 나열되어 있습니다. 실제 화면에서는 API 응답(연결된 자산/부채 유무, 개수,
+        진단 가능 부채 존재 여부 등)에 따라 그 중 하나만 노출되지만, 퍼블 확인용으로 19개 케이스를
+        4개 상위 조건 그룹으로 묶어 전부 마크업해 두었습니다
+        (NH_MD_CO_01_05.html의 입력값 정상/오류 2케이스 마크업과 동일한 방식).
+        각 케이스 라벨 텍스트는 피그마 원문 그대로이며, 확인 목적의 표기라 실제 화면엔 노출되지 않습니다
+        (.qa-case-group__label / .qa-case__label 은 update.css에서 이 페이지 전용으로 추가).
+    -->
+
+    <body class="bgcolor">
+        <div class="wrapper nhasset nds">
+            <div class="header bgcolor">
+                <a href="javascript:;" role="button" class="btnBack"><span class="blind">이전화면으로</span></a>
+                <h1>자산&middot;부채 통합분석</h1>
+                <a href="javascript:;" class="btnGoHome" role="button"><span class="blind">Home</span></a>
+                <a href="javascript:;" class="btnAll" role="button"><span class="blind">전체메뉴</span></a>
+            </div>
+
+            <div class="container bgcolor">
+                    <section class="analysis-section">
+                        <div class="brief-top">
+                            <span class="brief-top__updated">2026.12.12 09:09 기준</span>
+                        </div>
+                    </section>
+                    <!--나의 자산-->
+                    <section class="analysis-section">
+                        <!--모든 데이터 연결이 안 되어 있는 경우-->
+                        <h2 class="text text--h4">아직 연결된 자산이 없어요</h2>
+                        <div class="info-card info-card__nodate">
+                            <p class="text--body2-medium">
+                                자산을 등록하시면 내 자산 현황을 기반으로 <em>부채를 알뜰하게 줄일 수 있는 방법을 AI가 추천</em>해드려요.
+                            </p>
+                            <button type="button" class="card-btn">내 자산 연결하러 가기</button>
+                        </div>
+
+                        <!--데이터 연결은 했으나 데이터 값이 0인 경우-->
+                        <h2 class="text text--h4">연결된 자산이 0원이에요</h2>
+                        <div class="info-card info-card__nodate">
+                            <p class="text--body2-medium">
+                                <em>분석을 시작하려면 자산이 필요해요.</em>혹시 다른 계좌가 있다면 연결하고 맞춤 서비스를 받아보세요.
+                            </p>
+                            <button type="button" class="card-btn">내 자산 연결하러 가기</button>
+                        </div>
+                    </section>
+                    <!--나의 부채-->
+                    <section class="analysis-section">
+                        <!-- 부채 = 미연결 -->
+                        <h2 class="text text--h4">부채 내역이 조회되지 않아요</h2>
+                        <div class="info-card info-card__nodate">
+                            <p class="text--body2-medium">
+                                부채를 연결하시면 <em>AI가 내 상황에 꼭 맞는 부채 관리법</em>을 찾아드려요. 
+                            </p>
+                            <button type="button" class="card-btn">내 부채 연결하러 가기</button>
+                        </div>
+                        <!-- 부채 = 0 -->
+                        <h2 class="text text--h4">현재 남아있는 부채가 없어요</h2>
+                        <div class="info-card info-card__nodate">
+                            <p class="text--body2-medium">
+                            <em>이용 중인 대출이 있어야 분석을 진행할 수 있어요.</em>
+                            다른 금융사에 남아있는 대출이 있는지 확인해 보세요. 
+                            </p>
+                            <button type="button" class="card-btn">내 부채 연결하러 가기</button>
+                        </div>
+                    </section>
+                    <section class="analysis-section mt16">
+                        <div class="connect-nudge">
+                            <p class="connect-nudge__text">자산을 연결하고 맞춤 리포트를 완성하세요</p>
+                            <img class="connect-nudge__img" src="../../images/update//img-3d-money-stack.png" alt="">
+                        </div>
+                    </section>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                // AI대출금리케어 프로모 배너 — 스와이프 캐러셀(3개 슬라이드, 루프). 인디케이터는
+                // .indicator-number를 .swiper-wrapper 밖(swiper-container 바로 아래)에 두어
+                // 슬라이드가 넘어가도 화면에 고정되어 있게 하고, 현재 번호는 Swiper의
+                // activeIndex 대신 DOM에 항상 정확히 붙는 .swiper-slide-active +
+                // data-swiper-slide-index로 계산합니다(루프 모드에서는 원본 인덱스가
+                // data-swiper-slide-index에 그대로 보존되어 이 방식이 가장 안전합니다).
+                if (typeof Swiper !== 'undefined') {
+                    var promoTrack = document.getElementById('fundPromoSwiper');
+                    if (promoTrack) {
+                        var indicatorEl = promoTrack.querySelector('.indicator-number');
+                        var currentEl = indicatorEl ? indicatorEl.querySelector('.indicator-number__current') : null;
+                        var prevBtn = indicatorEl ? indicatorEl.querySelector('.indicator-number__arrow[aria-label="이전"]') : null;
+                        var nextBtn = indicatorEl ? indicatorEl.querySelector('.indicator-number__arrow[aria-label="다음"]') : null;
+                        var pauseBtn = indicatorEl ? indicatorEl.querySelector('.indicator-number__control') : null;
+
+                        function syncPromoIndicator() {
+                            if (!currentEl) return;
+                            var activeSlide = promoTrack.querySelector('.swiper-slide-active');
+                            if (!activeSlide) return;
+                            var dataIdx = activeSlide.getAttribute('data-swiper-slide-index');
+                            var idx = dataIdx !== null ? parseInt(dataIdx, 10) : -1;
+                            if (isNaN(idx) || idx < 0) {
+                                var originals = Array.prototype.slice.call(promoTrack.querySelectorAll('.swiper-wrapper > .swiper-slide:not(.swiper-slide-duplicate)'));
+                                idx = originals.indexOf(activeSlide);
+                            }
+                            if (idx > -1) currentEl.textContent = idx + 1;
+                        }
+
+                        var promoSwiper = new Swiper('#fundPromoSwiper', {
+                            slidesPerView: 1,
+                            spaceBetween: 0,
+                            loop: true,
+                            a11y: false,
+                            autoplay: { delay: 4000, disableOnInteraction: false },
+                            on: {
+                                init: syncPromoIndicator,
+                                slideChange: syncPromoIndicator,
+                                slideChangeTransitionEnd: syncPromoIndicator
+                            }
+                        });
+
+                        // 클릭 직후 바로 한 번 더 동기화합니다 — Swiper의 slideChange 이벤트는
+                        // 전환 애니메이션 완료 시점에 묶여 있어서(느린 기기/백그라운드 탭 등
+                        // 트랜지션이 늦게 끝나는 환경) 화살표를 여러 번 빠르게 눌렀을 때 인디케이터가
+                        // 잠깐 실제 슬라이드보다 늦게 따라갈 수 있습니다. activeIndex 자체는 slideTo
+                        // 호출과 동시에 갱신되므로, 클릭 즉시 동기화하면 이 지연 없이 항상 정확합니다.
+                        if (prevBtn) prevBtn.addEventListener('click', function () { promoSwiper.slidePrev(); syncPromoIndicator(); });
+                        if (nextBtn) nextBtn.addEventListener('click', function () { promoSwiper.slideNext(); syncPromoIndicator(); });
+                        if (pauseBtn) {
+                            pauseBtn.addEventListener('click', function () {
+                                if (pauseBtn.getAttribute('aria-label') === '재생') {
+                                    promoSwiper.autoplay.start();
+                                    pauseBtn.setAttribute('aria-label', '일시정지');
+                                } else {
+                                    promoSwiper.autoplay.stop();
+                                    pauseBtn.setAttribute('aria-label', '재생');
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
