@@ -599,6 +599,53 @@ window.renderBottomsheetList = function (options) {
         });
     }
 
+    function initAssetBarLegend() {
+        document.querySelectorAll(".asset-bar-wrap").forEach(function (wrap) {
+            var trigger = wrap.querySelector(".asset-bar-trigger");
+            var legend = wrap.querySelector(".asset-bar-legend");
+            var closeBtn = legend ? legend.querySelector(".asset-bar-legend__close") : null;
+            if (!trigger || !legend) return;
+
+            function close(moveFocus) {
+                legend.hidden = true;
+                trigger.setAttribute("aria-expanded", "false");
+                if (moveFocus) trigger.focus();
+            }
+
+            function open() {
+                document.querySelectorAll(".asset-bar-legend").forEach(function (other) {
+                    if (other !== legend) other.hidden = true;
+                });
+                document.querySelectorAll(".asset-bar-trigger").forEach(function (other) {
+                    if (other !== trigger) other.setAttribute("aria-expanded", "false");
+                });
+                legend.hidden = false;
+                trigger.setAttribute("aria-expanded", "true");
+            }
+
+            trigger.addEventListener("click", function () {
+                if (legend.hidden) open();
+                else close(false);
+            });
+
+            if (closeBtn) {
+                closeBtn.addEventListener("click", function () {
+                    close(true);
+                });
+            }
+
+            document.addEventListener("click", function (e) {
+                if (legend.hidden) return;
+                if (wrap.contains(e.target)) return;
+                close(false);
+            });
+
+            legend.addEventListener("keydown", function (e) {
+                if (e.key === "Escape") close(true);
+            });
+        });
+    }
+
     function initChipAnchorScroll() {
         document.querySelectorAll(".chips.is-sticky").forEach(function (chipsEl) {
             var chips = Array.prototype.slice.call(chipsEl.querySelectorAll(".chip-single"));
@@ -751,6 +798,7 @@ window.renderBottomsheetList = function (options) {
         initChipAccordion();
         initChipSingle();
         initBottomsheetList();
+        initAssetBarLegend();
         initChipAnchorScroll();
         initStickyFooter();
         initLottie();

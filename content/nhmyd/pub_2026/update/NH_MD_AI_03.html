@@ -74,6 +74,56 @@
                         </div>
                         <p class="blind">기대수익과 투자위험의 관계를 나타낸 그래프입니다. 가로축은 투자위험이 낮음에서 높음으로, 세로축은 기대수익이 낮음에서 높음으로 올라갑니다. 기대수익이 가장 높은 곡선 위에 최적 위치가 있고, 제안 위치는 그보다 기대수익이 낮은 곡선 아래에 있습니다.</p>
                     </div>
+
+
+					<!-- 계좌 미연결의 경우 케이스 -->
+                    <div class="info-card ai is-locked">
+                        <div class="card-head tooltipWrap is-card">
+                            <h3 class="text--h4">내 투자성향 기대수익 제안 자산</h3>
+                            <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span class="blind">내 투자성향 기대수익 제안 자산 도움말</span></button>
+                            <div class="tooltipCont" style="display: none">
+                                <h3>안내사항</h3>
+                                <ul>
+                                    <li>그래프 내의 선은 위험이 같을 때 기대수익이 가장 높은 자산배분을 이은 선이에요. 두 점은 제안 포트폴리오와 최적 포트폴리오의 위치를 통해 얼만큼 서로 차이가 있는지 보여줘요.</li>
+                                </ul>
+                                <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
+                            </div>
+                        </div>
+    
+                        <p class="text--caption2 mt12">기대수익이 가장 높은 선 위에 내 투자성향 중 최적의 위치와 내 자산의 위치를 표시했어요.</p>
+    
+                        <hr class="divider is-dash-f0" />
+    
+                        <p class="text text--h5 text--font3">
+                            현재 선택된 자산대비
+                            <br />
+                            <em class="text--point-chart">{기대수익과 투자위험}이 조정됐어요.</em>
+                        </p>
+    
+                        <div class="curve-chart" aria-hidden="true">
+                            <p class="curve-chart__axis-name">기대수익</p>
+                            <p class="curve-chart__axis-top">높음</p>
+                            <div class="curve-chart__box"></div>
+                            <p class="curve-chart__axis-bottom">
+                                <span>낮음</span>
+                                <span>높음</span>
+                            </p>
+                            <p class="curve-chart__axis-name is-right">투자위험</p>
+                        </div>
+                        <p class="blind">기대수익과 투자위험의 관계를 나타낸 그래프입니다. 가로축은 투자위험이 낮음에서 높음으로, 세로축은 기대수익이 낮음에서 높음으로 올라갑니다. 기대수익이 가장 높은 곡선 위에 최적 위치가 있고, 제안 위치는 그보다 기대수익이 낮은 곡선 아래에 있습니다.</p>
+
+                        <div class="card-lock">
+                            <div class="card-lock__group">
+                                <p class="card-lock__title">내 투자성향 기대수익 제안</p>
+                                <p class="card-lock__desc">
+                                    AI 포트폴리오 진단 받고, 수익을 높이는
+                                    <br />
+                                    인사이트 정보를 확인해보세요!
+                                </p>
+                            </div>
+                            <button type="button" class="card-btn">자산 연결하기</button>
+                        </div>
+                    </div>
                 </section>
 
                 <!-- 최적 포트폴리오 -->
