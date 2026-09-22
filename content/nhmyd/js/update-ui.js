@@ -16,6 +16,14 @@ function isNdsScope($target) {
     return false;
 }
 
+function supportsHasSelector() {
+    try {
+        return !!(window.CSS && CSS.supports && CSS.supports("selector(:has(a))"));
+    } catch (e) {
+        return false;
+    }
+}
+
 var legacyPopClose = window.popClose;
 
 window.popClose = function (e) {
@@ -522,6 +530,8 @@ window.renderBottomsheetList = function (options) {
             var container = pop ? pop.querySelector(".popCont") : document.querySelector(".container");
             if (!container) return;
 
+            container.classList.add("js-has-sticky-footer");
+
             function sync() {
                 container.style.setProperty("--sticky-footer-pad", footer.offsetHeight + "px");
             }
@@ -538,6 +548,59 @@ window.renderBottomsheetList = function (options) {
                     setTimeout(sync, 250);
                 });
             });
+        });
+    }
+
+    /*
+     * :has() 미지원 브라우저(iOS 15.0~15.3 등) 대응.
+     * 네이티브 :has()가 있으면 CSS가 이미 처리하므로 아무 것도 하지 않고,
+     * 없을 때만 동일한 조건을 jQuery로 재현해 대체 클래스를 붙인다.
+     */
+    function initFixedCtaSpacingFallback() {
+        if (supportsHasSelector()) return;
+
+        $(".container").each(function () {
+            var $c = $(this);
+            var hasCta = $c.find(".areaBtnDefault").length > 0 || $c.next(".areaBtnDefault").length > 0;
+            $c.toggleClass("js-no-fixed-cta", !hasCta);
+            $c.toggleClass("js-has-onboard", $c.children(".onboard").length > 0);
+        });
+
+        $(".accordion-notice").each(function () {
+            var $notice = $(this);
+            var hasCtaAfter = $notice.nextAll(".areaBtnDefault").length > 0 || $notice.nextAll(".btn-cta.is-fixed").length > 0;
+            $notice.toggleClass("js-has-cta-after", hasCtaAfter);
+        });
+
+        $(".popWrap.fullLayerPop .popInner").each(function () {
+            var $inner = $(this);
+            $inner.toggleClass("js-has-areaBtnDefault", $inner.find(".popBtnWrap .areaBtnDefault").length > 0);
+            $inner.toggleClass("js-has-bgcolor-inner", $inner.find(".popCont__inner.bgcolor").length > 0);
+        });
+
+        $(".popCont").each(function () {
+            var $cont = $(this);
+            $cont.toggleClass("js-has-accordion-notice", $cont.find(".accordion-notice").length > 0);
+        });
+    }
+
+    /*
+     * 거래내역 미리보기 블러(.txn-preview) 마스킹.
+     * 기존에는 .nds .txn-preview:has(.switch__input:not(:checked)) 로만 처리되어
+     * :has() 미지원 브라우저에서는 스위치를 꺼도 금액이 그대로 노출되는 문제가 있었음.
+     * 스위치 상태를 JS로 직접 반영해 모든 브라우저에서 동일하게 동작하도록 보강.
+     */
+    function initTxnPreviewMask() {
+        $(".txn-preview").each(function () {
+            var $wrap = $(this);
+            var $input = $wrap.find(".txn-preview__switch .switch__input").first();
+            if (!$input.length) return;
+
+            function sync() {
+                $wrap.toggleClass("is-masked", !$input.is(":checked"));
+            }
+            sync();
+            $input.on("change", sync);
         });
     }
 
@@ -801,6 +864,8 @@ window.renderBottomsheetList = function (options) {
         initAssetBarLegend();
         initChipAnchorScroll();
         initStickyFooter();
+        initFixedCtaSpacingFallback();
+        initTxnPreviewMask();
         initLottie();
         observeSlidePopConfirmContent();
 

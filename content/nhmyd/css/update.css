@@ -278,6 +278,7 @@
 .nds .right {text-align:right !important}
 .nds .container {padding-left:var(--spacing-24) !important;padding-right:var(--spacing-24) !important}
 .nds .container:not(:has(.areaBtnDefault)):not(:has(+ .areaBtnDefault)) {padding-bottom:60px}
+.nds .container.js-no-fixed-cta {padding-bottom:60px}
 .nds .guide-title {font-size:var(--type-size-15);font-weight:700;margin-bottom:var(--spacing-8)}
 .nds .guide-desc {font-size:var(--type-size-14);font-weight:400;color:var(--primitive-red-200);margin-bottom:var(--spacing-16)}
 .nds .demo{vertical-align:top;margin-bottom:var(--spacing-16)}
@@ -853,8 +854,10 @@
 .nds.popWrap.fullLayerPop .popInner .popCont.popCont:where(.is-row) { display:flex;flex-direction:column;justify-content:space-between;min-height:calc(100% - 50px); }
 .nds.popWrap.fullLayerPop .popInner .popCont{padding-bottom:60px !important}
 .nds.popWrap.fullLayerPop .popInner:has(.popBtnWrap .areaBtnDefault) .popCont {padding-bottom:88px !important}
+.nds.popWrap.fullLayerPop .popInner.js-has-areaBtnDefault .popCont {padding-bottom:88px !important}
 .nds.popWrap.fullLayerPop .popInner {background-color:var(--color-bg-default)}
 .nds.popWrap.fullLayerPop .popInner:has(.popCont__inner.bgcolor) {background-color:#F6F6F6}
+.nds.popWrap.fullLayerPop .popInner.js-has-bgcolor-inner {background-color:#F6F6F6}
 .nds.popWrap .popInner h1.normal{font-weight:var(--font-weight-light)}
 .nds.popWrap .popInner h1.normal strong{font-weight:var(--font-weight-semibold)}
 
@@ -1365,9 +1368,12 @@
 .nds .accordion-notice:has(~ .areaBtnDefault) {padding-bottom:88px}
 .nds .popBtnWrap > .sticky-footer .accordion-notice:has(~ .areaBtnDefault) {padding-bottom:32px}
 .nds .accordion-notice:has(~ .btn-cta:where(.is-fixed)) {padding-bottom:88px}
+.nds .accordion-notice.js-has-cta-after {padding-bottom:88px}
+.nds .popBtnWrap > .sticky-footer .accordion-notice.js-has-cta-after {padding-bottom:32px}
 /* --- sticky-footer --- */
 .nds .sticky-footer {position:fixed;left:0;right:0;bottom:0;z-index:1100;width:100%;background:var(--color-bg-default)}
 .nds:has(> .sticky-footer) > .container {padding-bottom:calc(var(--sticky-footer-pad, 0px) + var(--spacing-40)) !important}
+.nds > .container.js-has-sticky-footer {padding-bottom:calc(var(--sticky-footer-pad, 0px) + var(--spacing-40)) !important}
 .nds .sticky-footer .areaBtnDefault {position:static;padding-top:var(--spacing-32)}
 .nds .sticky-footer .btn-cta{margin-top:32px} 
 .nds .btn-cta {display:flex;gap:var(--spacing-8);padding:0;background:linear-gradient(to top, var(--primitive-base-0) 90%, rgba(255, 255, 255, 0) 100%)}
@@ -2033,6 +2039,7 @@
 .nds .txn-preview__amount {margin:0;font-size:15px;font-weight:var(--font-weight-medium);letter-spacing:-0.3px;line-height:24px;color:var(--color-font-3)}
 .nds .txn-preview__card > * {transition:filter .2s ease}
 .nds .txn-preview:has(.txn-preview__switch .switch__input:not(:checked)) .txn-preview__card > * {filter:blur(3px);pointer-events:none;user-select:none}
+.nds .txn-preview.is-masked .txn-preview__card > * {filter:blur(3px);pointer-events:none;user-select:none}
 .nds .fund-donut__callout {position:absolute;top:16px;left:105px;padding:6px 12px;background-color:var(--primitive-base-0);border-radius:var(--radius-8);box-shadow:0 0 4px rgba(0,0,0,0.1);font-size:11px;font-weight:var(--font-weight-medium);letter-spacing:-0.22px;color:var(--color-font-3);white-space:nowrap;z-index:1}
 .nds .fund-donut__callout::after {content:"";position:absolute;top:50%;right:100%;transform:translateY(-50%);width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-right:6px solid var(--primitive-base-0)}
 .nds .fund-donut__callout strong{color:var(--color1)}
@@ -2174,10 +2181,12 @@
 .nds .asset-group__body {padding:var(--spacing-20) 0 var(--spacing-4);}
 .nds .asset-group__body > .asset-list {margin-top:0}
 .nds .popCont:has(.accordion-notice) .popCont__inner.bgcolor {padding-bottom:var(--spacing-40) !important}
+.nds .popCont.js-has-accordion-notice .popCont__inner.bgcolor {padding-bottom:var(--spacing-40) !important}
 /* 팝업(fullLayerPop)에서도 일반 화면과 같은 sticky-footer 를 씁니다 */
 .nds .popBtnWrap > .sticky-footer {z-index:1000}
 .nds .sticky-footer .areaBtnDefault {position:static !important}
 .nds.popWrap.fullLayerPop .popInner .popCont:has(~ .popBtnWrap .sticky-footer) {padding-bottom:calc(var(--sticky-footer-pad, 112px) + var(--spacing-24)) !important}
+.nds.popWrap.fullLayerPop .popInner .popCont.js-has-sticky-footer {padding-bottom:calc(var(--sticky-footer-pad, 112px) + var(--spacing-24)) !important}
 .nds .asset-list__more {display:flex;justify-content:center;margin:var(--spacing-24) 0 0}
 .nds .asset-list__more[hidden] {display:none}
 .nds .btn-arrow__icon:where(.is-chevron-down) {-webkit-mask-image:url("../images/update/ic-arrow-down-short.svg");mask-image:url("../images/update/ic-arrow-down-short.svg")}
@@ -2344,6 +2353,7 @@
 .nds .onboard__frame {position:absolute;top:26px;left:50%;transform:translateX(-50%);width:260px;height:calc(100% - 21px);box-sizing:border-box;border:5px solid var(--primitive-base-0);border-bottom:0;border-radius:50px 50px 0 0;box-shadow:0 1px 26px 0 rgba(0, 0, 0, 0.1);overflow:hidden}
 .nds .onboard__frame img {display:block;width:100%;height:100%;-o-object-fit:cover;object-fit:cover;-o-object-position:top center;object-position:top center}
 .nds .container:has(> .onboard) {padding-bottom:120px !important}
+.nds .container.js-has-onboard {padding-bottom:120px !important}
 
 /* -- NH_MD_AI_02 : AI 포트폴리오 진단(제안 대상 선택) -- */
 .nds .ai-section .info-card { border-radius:var(--spacing-16);  }
