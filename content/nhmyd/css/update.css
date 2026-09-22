@@ -740,6 +740,7 @@
 .nds .popBtnWrap .popBtn > a.confirmBtn {width:calc(100% - 100px) !important}
 .nds .areaBtnDefault {table-layout:auto !important;border-width:0 16px 32px !important;border-spacing:8px 0 !important;background:var(--background) !important}
 .nds.fullLayerPop .popBtnWrap .areaBtnDefault{padding-top:var(--spacing-32)}
+.nds.fullLayerPop .popBtnWrap > .sticky-footer .areaBtnDefault {padding-top:0}
 /* ---- Accordion (notice/box/line/gray) --- */
 .nds .accordion-notice {width:100%;background:var(--color-bg-default)}
 .nds .accordion-notice__item {position:relative}
@@ -1361,12 +1362,13 @@
 .nds .areaBtnStatic [class^="btn"] {white-space:nowrap}
 .nds .accordion-notice + .areaBtnStatic {margin-top:var(--spacing-32)}
 .nds .accordion-notice:has(~ .areaBtnDefault) {padding-bottom:90px}
+.nds .popBtnWrap > .sticky-footer .accordion-notice:has(~ .areaBtnDefault) {padding-bottom:32px}
 .nds .accordion-notice:has(~ .btn-cta:where(.is-fixed)) {padding-bottom:88px}
-/* --- sticky-footer
+/* --- sticky-footer --- */
 .nds .sticky-footer {position:fixed;left:0;right:0;bottom:0;z-index:1100;width:100%;background:var(--color-bg-default)}
 .nds:has(> .sticky-footer) > .container {padding-bottom:calc(var(--sticky-footer-pad, 0px) + var(--spacing-40)) !important}
 .nds .sticky-footer .areaBtnDefault {position:static;padding-top:var(--spacing-32)}
-.nds .sticky-footer .btn-cta{margin-top:32px} --- */
+.nds .sticky-footer .btn-cta{margin-top:32px} 
 .nds .btn-cta {display:flex;gap:var(--spacing-8);padding:0;background:linear-gradient(to top, var(--primitive-base-0) 90%, rgba(255, 255, 255, 0) 100%)}
 .nds .btn-cta .btn {min-width:0;width:70%}
 .nds .btn-cta:not(.half) [class^="btn"]:first-child:not(:last-child){width:calc(100%/3)}
@@ -2153,6 +2155,10 @@
 .nds .asset-group__body {padding:var(--spacing-20) 0 var(--spacing-4);}
 .nds .asset-group__body > .asset-list {margin-top:0}
 .nds .popCont > .accordion-notice {margin-top:var(--spacing-40)}
+/* 팝업(fullLayerPop)에서도 일반 화면과 같은 sticky-footer 를 씁니다 */
+.nds .popBtnWrap > .sticky-footer {z-index:1000}
+.nds .sticky-footer .areaBtnDefault {position:static !important}
+.nds.popWrap.fullLayerPop .popInner .popCont:has(~ .popBtnWrap .sticky-footer) {padding-bottom:calc(var(--sticky-footer-pad, 112px) + var(--spacing-24)) !important}
 .nds .asset-list__more {display:flex;justify-content:center;margin:var(--spacing-24) 0 0}
 .nds .asset-list__more[hidden] {display:none}
 .nds .btn-arrow__icon:where(.is-chevron-down) {-webkit-mask-image:url("../images/update/ic-arrow-down-short.svg");mask-image:url("../images/update/ic-arrow-down-short.svg")}
