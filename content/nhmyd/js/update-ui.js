@@ -841,17 +841,54 @@ window.renderBottomsheetList = function (options) {
     }
     window.initLottie = initLottie;
 
+    /*
+     * html 엘리먼트에 nds 클래스를 동기화한다.
+     * - .wrapper.nds 뿐 아니라 .popWrap.nds(팝업 단독 화면)만 있어도 반영한다.
+     * - querySelector(".wrapper")는 문서상 첫 번째 요소만 잡기 때문에, 공통 헤더/푸터 include 등에서
+     *   nds가 없는 다른 .wrapper가 먼저 나오면 조용히 실패할 수 있다. .wrapper.nds 처럼 클래스를
+     *   합쳐서 조회하면 순서와 무관하게 nds가 붙은 요소를 바로 찾을 수 있어 이 문제를 피한다.
+     * - DOMContentLoaded 시점에는 nds 대상이 전혀 없다가(레거시 화면에서 nds 팝업이 나중에 동적으로
+     *   열리는 경우 등) 이후 DOM에 추가되는 경우까지 MutationObserver로 잡아서 그때 다시 반영한다.
+     */
     function syncNdsClassToHtml() {
-        var wrapper = document.querySelector(".wrapper");
-        if (wrapper && wrapper.classList.contains("nds")) {
-            document.documentElement.classList.add("nds");
+        var observer = null;
+
+        function hasNdsRoot() {
+            return !!(document.querySelector(".wrapper.nds") || document.querySelector(".popWrap.nds"));
+        }
+
+        function stopWatching() {
+            if (observer) {
+                observer.disconnect();
+                observer = null;
+            }
+        }
+
+        function applyIfNeeded() {
+            if (document.documentElement.classList.contains("nds")) {
+                stopWatching();
+                return;
+            }
+            if (hasNdsRoot()) {
+                document.documentElement.classList.add("nds");
+                stopWatching();
+            }
+        }
+
+        applyIfNeeded();
+
+        if (!document.documentElement.classList.contains("nds") && window.MutationObserver) {
+            observer = new MutationObserver(applyIfNeeded);
+            observer.observe(document.documentElement, { childList: true, subtree: true });
         }
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-        if (!isNdsScope()) return;
-
+        // nds 대상이 처음부터 없는 순수 레거시 화면에서도, 이후 nds 팝업이 동적으로 열릴 수 있으므로
+        // isNdsScope() 게이트보다 먼저, 조건 없이 호출한다. 내부적으로 nds 대상이 없으면 아무 것도 하지 않는다.
         syncNdsClassToHtml();
+
+        if (!isNdsScope()) return;
         initAccordion();
         initTermsToggle();
         initTermsSelectAll();
