@@ -769,80 +769,6 @@ window.renderBottomsheetList = function (options) {
         });
     }
 
-    /* ---- Lottie : data-lottie-json 으로 JSON 을 불러와 재생 ----
-       레거시 nhasset-ui-myd.js 가 data-lottie 를 이미 쓰고 있어(js/lottie/*.js 를 절대경로로 로드)
-       속성 이름을 data-lottie-json 으로 분리했습니다. lottie 라이브러리는 nhasset-ui-myd.js 에
-       번들되어 있어 별도 로드가 필요 없습니다.
-
-       <div class="lottie-anim" data-lottie-json="../../images/update/json/sunny.json"></div>
-
-       data-lottie-json 값은 이름 또는 경로를 씁니다.
-         "Sunny"                   : 이름만 → 기본 폴더 + sunny.json
-         "ai/loading"              : 하위 폴더 → 기본 폴더 + ai/loading.json
-         "ai/loading.json"         : 확장자를 적어도 같습니다
-         "../../images/etc/a.json" : ./ ../ / http(s):// 로 시작하면 쓴 그대로 사용
-
-       data-lottie-loop="false"     : 1회만 재생(기본 true)
-       data-lottie-autoplay="false" : 자동재생 끄기(기본 true)
-       data-lottie-base="경로/"     : 기본 폴더 변경(기본 /content/nhmyd/images/update/json/)
-       data-lottie-ratio="false"    : 비율 자동 적용 끄기(CSS 로 직접 잡을 때)
-
-       비율은 JSON 의 w / h 를 읽어 aspect-ratio 로 넣습니다(정사각 고정 아님).
-       폭은 CSS 변수 --lottie-size 로 잡습니다.
-
-       window.initLottie(scope)     : 나중에 추가된 영역만 다시 초기화
-       el.lottieAnim                : lottie 인스턴스(play/pause/stop/goToAndPlay 사용) */
-    var LOTTIE_BASE = "/content/nhmyd/images/update/json/";
-
-    function lottieSrc(value, base) {
-        if (/^(?:[a-z][a-z0-9+.-]*:)?\/\//i.test(value) || /^[./]/.test(value)) return value;
-        var parts = value.split("/");
-        for (var i = 0; i < parts.length; i++) {
-            parts[i] = encodeURIComponent(parts[i]);
-        }
-        var path = parts.join("/");
-        return base + (/\.json$/i.test(path) ? path : path + ".json");
-    }
-
-    function lottieRatio(el, anim) {
-        if (el.getAttribute("data-lottie-ratio") === "false") return;
-        var data = anim.animationData;
-        if (!data || !data.w || !data.h) return;
-        el.style.aspectRatio = data.w + " / " + data.h;
-    }
-
-    function initLottie(scope) {
-        if (typeof lottie === "undefined") return;
-        var root = scope || document;
-        var nodes = root.querySelectorAll ? root.querySelectorAll("[data-lottie-json]") : [];
-        Array.prototype.forEach.call(nodes, function (el) {
-            if (el.lottieAnim) return;
-            var value = el.getAttribute("data-lottie-json");
-            if (!value) return;
-            var base = el.getAttribute("data-lottie-base") || LOTTIE_BASE;
-            var anim = lottie.loadAnimation({
-                container: el,
-                renderer: "svg",
-                loop: el.getAttribute("data-lottie-loop") !== "false",
-                autoplay: el.getAttribute("data-lottie-autoplay") !== "false",
-                path: lottieSrc(value, base),
-            });
-            el.lottieAnim = anim;
-            anim.addEventListener("data_ready", function () {
-                lottieRatio(el, anim);
-            });
-            anim.addEventListener("DOMLoaded", function () {
-                lottieRatio(el, anim);
-                console.log("Lottie Path", lottieSrc(value, base))
-            });
-            anim.addEventListener("data_failed", function () {
-                el.classList.add("is-failed");
-                console.log("Lottie Load Failde Path", lottieSrc(value, base));
-            });
-        });
-    }
-    window.initLottie = initLottie;
-
     /*
      * html 엘리먼트에 nds 클래스를 동기화한다.
      * - .wrapper.nds 뿐 아니라 .popWrap.nds(팝업 단독 화면)만 있어도 반영한다.
@@ -905,7 +831,6 @@ window.renderBottomsheetList = function (options) {
         initStickyFooter();
         initFixedCtaSpacingFallback();
         initTxnPreviewMask();
-        initLottie();
         observeSlidePopConfirmContent();
 
         if (document.fonts && document.fonts.ready && typeof document.fonts.ready.then === "function") {

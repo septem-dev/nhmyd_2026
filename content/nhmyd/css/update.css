@@ -420,11 +420,10 @@
 .nds .textarea:where(.is-error) .textarea__wrap {border-color:var(--color-border-error)}
 .nds .textarea:where(.is-error) .textarea__msg {color:var(--color-font-error)}
 .nds .textarea__clear::before {color:var(--color-font-5);content:"";display:block;width:24px;height:24px;background-color:currentColor;-webkit-mask-image:url("../images/update/ic-cancel-fill.svg");mask-image:url("../images/update/ic-cancel-fill.svg");-webkit-mask-size:contain;mask-size:contain}
-/* ---- Lottie : update-ui.js 의 initLottie() 가 data-lottie-json 을 읽어 재생합니다 ---- */
+/* ---- Lottie : JSON(fetch) 방식은 서버 환경상 사용 불가로 제거됨. data-lottie/uiSetLottie() 레거시 방식으로만 재생하며,
+   .lottie-anim 은 그 레거시 엘리먼트의 크기(정사각 aspect-ratio)를 잡는 용도로만 계속 사용합니다. ---- */
 .nds .lottie-anim {display:block;width:var(--lottie-size, 160px);aspect-ratio:1;flex-shrink:0}
 .nds .lottie-anim svg {display:block;width:100% !important;height:100% !important}
-.nds .lottie-anim:where(.is-failed) {display:flex;align-items:center;justify-content:center;border:1px dashed var(--color-border-1);border-radius:var(--radius-8);box-sizing:border-box}
-.nds .lottie-anim:where(.is-failed)::before {content:"JSON을 불러오지 못했어요";font-size:var(--type-size-13);line-height:20px;color:var(--color-font-4);text-align:center}
 
 
 /* ---- Tooltip ---- */
