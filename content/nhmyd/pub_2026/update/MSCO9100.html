@@ -1,7 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
     <head>
-        <meta charset="utf-8" />
+        <meta charset="utf-8">
         <script src="../pub-assets/js/head-mb-update.js"></script>
         <title>NH마이데이터 인트로</title>
     </head>
@@ -14,16 +14,17 @@
                 <a href="javascript:;" class="btnGoHome" role="button"><span class="blind">Home</span></a>
             </div>
 
-            <div class="container pb32">
-                <div class="text-stack mb0">
+            <div class="container">
+                <div class="intro-hero">
+                    <img src="../../images/update/img-doc-swing.png" alt="" width="132" />
+                </div>
+
+                <div class="text-stack">
                     <p class="text text--h2">
                         스마트한 금융생활의 시작
                         <br />
                         NH마이데이터와 함께해 보세요!
                         <span class="text text--caption mt4">준법감사인 심의필 2025-5973(2025.12.01~2026.11.18)</span>
-                    </p>
-                    <p class="stack-visual mt32 mb32">
-                        <img src="../../images/update/img-ally-welcome-group.png" alt="" />
                     </p>
                 </div>
 
@@ -31,7 +32,7 @@
                     <p class="text text--body2 text--font3">NH마이데이터 서비스 가입 전 신중히 고민하고 필요한 서비스만 가입해주세요. 언제든지 해지할 수 있어요.</p>
                     <button type="button" class="btn-arrow" onclick="location.href='MSPS3120.html'">
                         <span>마이데이터 가입현황 확인</span>
-                        <span class="btn-arrow__icon is-right" aria-hidden="true"></span>
+                        <span class="btn-arrow__icon btn-arrow__icon--right" aria-hidden="true"></span>
                     </button>
                 </div>
 
@@ -40,7 +41,7 @@
                         <div class="terms-card__list">
                             <div class="terms-link">
                                 <div class="terms-link__check">
-                                    <label class="check-basic is-xs">
+                                    <label class="check-basic check-basic--xs">
                                         <input type="checkbox" class="check-basic__input" id="agreeTerms1" />
                                         <span class="check-basic__icon"></span>
                                         <span class="terms-link__text">[필수] NH마이데이터서비스 이용약관</span>
@@ -50,7 +51,7 @@
                             </div>
                             <div class="terms-link">
                                 <div class="terms-link__check">
-                                    <label class="check-basic is-xs">
+                                    <label class="check-basic check-basic--xs">
                                         <input type="checkbox" class="check-basic__input" id="agreeTerms2" />
                                         <span class="check-basic__icon"></span>
                                         <span class="terms-link__text">[필수] 개인(신용)정보 수집·이용 동의서 (NH 마이데이터 서비스)</span>
@@ -60,27 +61,22 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn-arrow flex-end">
+                    <button type="button" class="btn-arrow" style="align-self:flex-end">
                         <span>개인정보처리방침</span>
-                        <span class="btn-arrow__icon is-right" aria-hidden="true"></span>
+                        <span class="btn-arrow__icon btn-arrow__icon--right" aria-hidden="true"></span>
                     </button>
                 </div>
-
-                <div class="input-box mt40">
-                    <p class="input-box__label">권유직원(선택)</p>
-                    <a href="javascript:;" class="input-box__field pr8">
-                        <span class="input-box__ghost">이름 또는 사번을 입력하세요</span>
-                        <span class="input-box__btn">직원찾기</span>
-                    </a>
-                </div>
             </div>
-            <div class="areaBtnStatic">
+            <div class="areaBtnDefault">
                 <a href="javascript:;" id="btnTermsConfirm" class="btnPressPoint disabled" role="button" aria-disabled="true">서비스 가입</a>
+                <!-- <a href="javascript:;" class="btnPressPoint" role="button">서비스 가입</a> -->
             </div>
         </div>
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
+                //두 필수 약관에 모두 동의해야 '서비스 가입' 버튼이 활성화됩니다.
+                //a 태그는 disabled 속성이 없으므로 class + aria-disabled로 상태를 관리합니다.
                 var checkboxes = [document.getElementById('agreeTerms1'), document.getElementById('agreeTerms2')];
                 var joinBtn = document.getElementById('btnTermsConfirm');
 

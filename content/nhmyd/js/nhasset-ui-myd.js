@@ -1101,3 +1101,28 @@ function pzTouchFix() {
 
 	observer.observe(document.body, {childList: true, subtree: true});
 }
+
+
+// [MD2609_095] 구글 스토어 정책 변경에 따른 올원뱅크스마트뱅킹 앱 테스트
+document.addEventListener('DOMContentLoaded',function(){
+	fullLayerHeight2 = function() {
+		var $winH = $(window).height();
+		var fullTit = $(".fullLayerPop .popInner h1").length > 0 ? $(".fullLayerPop .popInner h1").outerHeight() : $(".fullLayerPop .popInner h2").outerHeight();
+		var fullBtnAra = $(".fullLayerPop .popBtnWrap .popBtn").length > 0 ? $(".fullLayerPop .popBtnWrap .popBtn").outerHeight() : 0;
+		$(".fullLayerPop .popInner .popCont").css({height:$winH - fullTit - fullBtnAra});
+	};
+	fullLayerHeight2();
+});
+var popResizeTimer;
+$(window).on('resize', function(){
+	clearTimeout(popResizeTimer);
+	popResizeTimer = setTimeout(function(){
+		if($('.fullLayerPop').length) {
+			fullLayerPop();
+			fullLayerHeight2();
+		}
+		if($('.slidePopConfirm').length) {
+			slidePopConfirm();
+		}
+	}, 100);
+});

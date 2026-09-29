@@ -2351,3 +2351,8 @@ a{pointer-events:auto;touch-action:manipulation} /* 2025-12-05 롱프레스 제�
 
 /* [MD2607_074] 청년 재무상담 영업점 안내 화면 개발 */
 .nhasset .serviceVisual08{background:url('../images/makebetter/banner/img_service_visual_08.png') no-repeat right 15% bottom / cover;}
+
+/*[MD2609_095] 구글 스토어 정책 변경에 따른 올원뱅크스마트뱅킹 앱 테스트 */
+@media screen and (min-width:400px) {
+	.nhasset .formHolder.check input[type='checkbox'] {transform:translateY(0);}
+}

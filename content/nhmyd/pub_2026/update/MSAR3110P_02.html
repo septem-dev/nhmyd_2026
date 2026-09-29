@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <script src="../pub-assets/js/head-mb-update.js"></script>
+        <title>[P] 권유직원 선택</title>
+        <script>
+            $(document).ready(function () {
+                slidePopConfirm(); //TO-BE 디자인 높이 조절되는 slidePopConfirm 사용
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="wrapper nhasset"><!-- 바닥페이지 --></div>
+        <div class="nhasset popWrap nds slidePopConfirm">
+            <div class="dim"></div>
+            <div class="popInner">
+                <h1>가입에 도움을 준 직원이 있나요?</h1>
+                <div class="popCont">
+                    <div class="popCont__inner">
+                        <div class="tab-bar" role="tablist" aria-label="tab-bar 예시">
+                            <button type="button" id="tab-bar-1" class="tab-bar__item" role="tab" aria-selected="false" aria-controls="panel-bar-1" tabindex="-1">이름(사번)</button>
+                            <button type="button" id="tab-bar-2" class="tab-bar__item tab-bar__item--active" role="tab" aria-selected="true" aria-controls="panel-bar-2" tabindex="0">영업점</button>
+                        </div>
+                        <div id="panel-bar-1" class="tab-panel" role="tabpanel" aria-labelledby="tab-bar-1" tabindex="0" hidden>
+                            <div class="input-box">
+                                <label class="input-box__label blind" for="search-box-1">이름(사번)</label>
+                                <div class="input-box__field">
+                                    <input type="text" id="search-box-1" class="input-box__input" placeholder="이름 또는 사번을 입력하세요" />
+                                    <span class="input-box__icon input-box__icon--search" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="panel-bar-2" class="tab-panel" role="tabpanel" aria-labelledby="tab-bar-2" tabindex="0">
+                            <div class="input-box">
+                                <label class="input-box__label blind" for="search-box-2">영업점</label>
+                                <div class="input-box__field">
+                                    <input type="text" id="search-box-2" class="input-box__input" placeholder="영업점을 입력하세요" />
+                                    <span class="input-box__icon input-box__icon--search" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="popBtnWrap">
+                    <div class="popBtn">
+                        <a href="javascript:;" class="btnPressDefault" role="button">다음에</a>
+                        <a href="javascript:;" class="confirmBtn disabled" role="button" aria-disabled="true">선택하기</a>
+                    </div>
+                    <a href="javascript:;" onclick="popClose(this);return false;" class="popClose" title="해당 창을 닫습니다." role="button">
+                        <img src="../../images/common/btn_popClose.png" alt="닫기" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

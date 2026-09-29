@@ -774,17 +774,17 @@ window.renderBottomsheetList = function (options) {
        속성 이름을 data-lottie-json 으로 분리했습니다. lottie 라이브러리는 nhasset-ui-myd.js 에
        번들되어 있어 별도 로드가 필요 없습니다.
 
-       <div class="lottie-anim" data-lottie-json="Sunny"></div>
+       <div class="lottie-anim" data-lottie-json="../../images/update/json/sunny.json"></div>
 
        data-lottie-json 값은 이름 또는 경로를 씁니다.
-         "Sunny"                   : 이름만 → 기본 폴더 + Sunny.json
+         "Sunny"                   : 이름만 → 기본 폴더 + sunny.json
          "ai/loading"              : 하위 폴더 → 기본 폴더 + ai/loading.json
          "ai/loading.json"         : 확장자를 적어도 같습니다
          "../../images/etc/a.json" : ./ ../ / http(s):// 로 시작하면 쓴 그대로 사용
 
        data-lottie-loop="false"     : 1회만 재생(기본 true)
        data-lottie-autoplay="false" : 자동재생 끄기(기본 true)
-       data-lottie-base="경로/"     : 기본 폴더 변경(기본 ../../images/update/json/)
+       data-lottie-base="경로/"     : 기본 폴더 변경(기본 /content/nhmyd/images/update/json/)
        data-lottie-ratio="false"    : 비율 자동 적용 끄기(CSS 로 직접 잡을 때)
 
        비율은 JSON 의 w / h 를 읽어 aspect-ratio 로 넣습니다(정사각 고정 아님).
@@ -792,7 +792,7 @@ window.renderBottomsheetList = function (options) {
 
        window.initLottie(scope)     : 나중에 추가된 영역만 다시 초기화
        el.lottieAnim                : lottie 인스턴스(play/pause/stop/goToAndPlay 사용) */
-    var LOTTIE_BASE = "../../images/update/json/";
+    var LOTTIE_BASE = "/content/nhmyd/images/update/json/";
 
     function lottieSrc(value, base) {
         if (/^(?:[a-z][a-z0-9+.-]*:)?\/\//i.test(value) || /^[./]/.test(value)) return value;
@@ -833,9 +833,11 @@ window.renderBottomsheetList = function (options) {
             });
             anim.addEventListener("DOMLoaded", function () {
                 lottieRatio(el, anim);
+                console.log("Lottie Path", lottieSrc(value, base))
             });
             anim.addEventListener("data_failed", function () {
                 el.classList.add("is-failed");
+                console.log("Lottie Load Failde Path", lottieSrc(value, base));
             });
         });
     }

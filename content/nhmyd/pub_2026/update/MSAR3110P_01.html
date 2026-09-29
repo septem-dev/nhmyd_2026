@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <script src="../pub-assets/js/head-mb-update.js"></script>
+        <title>[P] 권유직원 선택</title>
+        <script>
+            $(document).ready(function () {
+                slidePopConfirm(); //TO-BE 디자인 높이 조절되는 slidePopConfirm 사용
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="wrapper nhasset"><!-- 바닥페이지 --></div>
+        <div class="nhasset popWrap nds slidePopConfirm">
+            <div class="dim"></div>
+            <div class="popInner">
+                <h1>가입에 도움을 준 직원이 있나요?</h1>
+                <div class="popCont">
+                    <div class="popCont__inner">
+                        <div class="tab-bar" role="tablist" aria-label="tab-bar 예시">
+                            <button type="button" id="tab-bar-1" class="tab-bar__item tab-bar__item--active" role="tab" aria-selected="true" aria-controls="panel-bar-1" tabindex="0">이름(사번)</button>
+                            <button type="button" id="tab-bar-2" class="tab-bar__item" role="tab" aria-selected="false" aria-controls="panel-bar-2" tabindex="-1">영업점</button>
+                        </div>
+                        <div id="panel-bar-1" class="tab-panel" role="tabpanel" aria-labelledby="tab-bar-1" tabindex="0">
+                            <div class="input-box">
+                                <label class="input-box__label blind" for="search-box-1">이름(사번)</label>
+                                <div class="input-box__field">
+                                    <input type="text" id="search-box-1" class="input-box__input" placeholder="이름 또는 사번을 입력하세요" autocomplete="off" />
+                                    <button type="button" class="input-box__icon input-box__icon--clear" id="searchClear1" aria-label="검색어 지우기" hidden></button>
+                                    <span class="input-box__icon input-box__icon--search" aria-hidden="true"></span>
+                                </div>
+                                <p class="input-box__message" id="searchMsg1" hidden>검색조건에 2글자 이상 입력하세요.</p>
+                            </div>
+
+                            <div class="text-stack mt32 mb0" id="searchResultWrap1" hidden>
+                                <p class="text text--body1 text--font1" id="searchCount1">
+                                    총
+                                    <span class="text--point" id="searchCountNum1">0</span>
+                                    건
+                                </p>
+                                <div class="bottomsheet-list bt-1" id="searchList1" role="listbox" aria-label="검색 결과"></div>
+                            </div>
+
+                            <div class="empty empty--result" id="searchEmpty1" hidden>
+                                <span class="empty__icon" aria-hidden="true"></span>
+                                <p class="empty__text">검색결과가 없습니다</p>
+                            </div>
+                        </div>
+                        <div id="panel-bar-2" class="tab-panel" role="tabpanel" aria-labelledby="tab-bar-2" tabindex="0" hidden>
+                            <div class="input-box">
+                                <label class="input-box__label blind" for="search-box-2">영업점</label>
+                                <div class="input-box__field">
+                                    <input type="text" id="search-box-2" class="input-box__input" placeholder="영업점을 입력하세요" />
+                                    <span class="input-box__icon input-box__icon--search" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="popBtnWrap">
+                    <div class="popBtn">
+                        <a href="javascript:;" class="btnPressDefault" role="button">다음에</a>
+                        <a href="javascript:;" class="confirmBtn disabled" role="button" aria-disabled="true">선택하기</a>
+                    </div>
+                    <!--<a href="javascript:;" onclick="popClose(this);return false;" class="popClose" title="해당 창을 닫습니다." role="button">
+                        <img src="../../images/common/btn_popClose.png" alt="닫기" />-->
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(function () {
+                //데모용 샘플 데이터 — 실제 연동 시 검색 API 결과로 교체
+                //name: 검색 매칭용 실명, label: 화면에 노출되는 마스킹 표기
+                var SAMPLE_STAFF = [
+                    { name: '김수인', label: '김*인 (0640****) 신길동' },
+                    { name: '김수영', label: '김*영 (1341****) 광화문금융센터 기업금융지원센터 디지털전략팀' },
+                    { name: '김수정', label: '김*정 (1441****) 삼성푸른금융센터' },
+                    { name: '김수현', label: '김*현 (1965****) 파주시청<출>' },
+                    { name: '김수민', label: '김*민 (2841****) 압구정역' },
+                    { name: '김수빈', label: '김*빈 (3312****) 강남금융센터' },
+                    { name: '김수호', label: '김*호 (4127****) 여의도금융센터' },
+                    { name: '김수경', label: '김*경 (5033****) 판교테크노밸리' },
+                    { name: '김수아', label: '김*아 (6210****) 잠실역' },
+                    { name: '김수진', label: '김*진 (7145****) 수원영통지점' },
+                    { name: '김수영2', label: '김*영 (8322****) 대전둔산지점' },
+                    { name: '김수완', label: '김*완 (9051****) 부산해운대지점' }
+                ];
+
+                var $input = $('#search-box-1');
+                var $clear = $('#searchClear1');
+                var $msg = $('#searchMsg1');
+                var $resultWrap = $('#searchResultWrap1');
+                var $countNum = $('#searchCountNum1');
+                var $empty = $('#searchEmpty1');
+                var $confirmBtn = $('.popBtnWrap .confirmBtn');
+                var currentResults = [];
+                var selectedIndex = -1;
+
+                //팝업 높이를 뷰포트 80%로 제한하고 넘치면 popCont 내부만 스크롤시키는 로직은
+                //update-ui.js의 slidePopConfirm() 오버라이드가 모든 .nds 화면에 공통 적용합니다.
+                //이 화면은 검색 결과처럼 열려 있는 동안 내용이 계속 바뀌므로, 바뀔 때마다 애니메이션
+                //없이 즉시 다시 맞추기 위해 그 공용 함수(window.syncSlidePopConfirmHeight)를
+                //그대로 재사용합니다(로컬로 따로 복제해서 들고 있지 않음).
+                function resyncPopHeight() {
+                    window.syncSlidePopConfirmHeight(false);
+                }
+
+                function syncConfirmBtn() {
+                    var enabled = selectedIndex > -1;
+                    $confirmBtn.toggleClass('disabled', !enabled);
+                    if (enabled) { $confirmBtn.removeAttr('aria-disabled'); } else { $confirmBtn.attr('aria-disabled', 'true'); }
+                }
+
+                //실제 DOM 렌더링은 update-ui.js의 공용 renderBottomsheetList()가 담당합니다
+                //(.bottomsheet-list는 이 화면만 쓰는 게 아니라 여러 화면이 공유하는 nds 컴포넌트라
+                //검색/선택 화면이 더 생길 걸 대비해 공통 유틸로 옮겼습니다). 여기서는 이 화면의
+                //상태(currentResults/selectedIndex)와 선택 후 동작(재렌더링/버튼 활성화/팝업
+                //높이 재계산)만 연결합니다.
+                function renderList() {
+                    window.renderBottomsheetList({
+                        container: 'searchList1',
+                        items: currentResults,
+                        selectedIndex: selectedIndex,
+                        onSelect: function (i) {
+                            selectedIndex = selectedIndex === i ? -1 : i;
+                            renderList();
+                            syncConfirmBtn();
+                            resyncPopHeight();
+                        }
+                    });
+                }
+
+                function updateSearch() {
+                    var q = $.trim($input.val());
+                    $clear.prop('hidden', q.length === 0);
+                    selectedIndex = -1;
+                    syncConfirmBtn();
+
+                    if (q.length < 2) {
+                        $msg.prop('hidden', q.length === 0);
+                        $resultWrap.prop('hidden', true);
+                        $empty.prop('hidden', true);
+                        currentResults = [];
+                        resyncPopHeight();
+                        return;
+                    }
+
+                    $msg.prop('hidden', true);
+                    currentResults = SAMPLE_STAFF.filter(function (item) { return item.name.indexOf(q) > -1; });
+
+                    if (currentResults.length > 0) {
+                        $countNum.text(currentResults.length.toLocaleString());
+                        renderList();
+                        $resultWrap.prop('hidden', false);
+                        $empty.prop('hidden', true);
+                    } else {
+                        $resultWrap.prop('hidden', true);
+                        $empty.prop('hidden', false);
+                    }
+                    resyncPopHeight();
+                }
+
+                $input.on('input', updateSearch);
+                $clear.on('click', function () {
+                    $input.val('').trigger('input').trigger('focus');
+                });
+
+                //화면 회전/리사이즈 시 80% 제한 재계산은 update-ui.js가 모든 .nds 화면에
+                //공통으로 처리하므로 여기서 따로 등록하지 않습니다.
+
+                //slidePopConfirm()이 popInner를 먼저 펼친(100ms) 뒤, 이 화면의 초기 검색 상태
+                //기준으로 80% 제한을 한 번 더 확실히 적용합니다.
+                setTimeout(resyncPopHeight, 150);
+            });
+        </script>
+    </body>
+</html>

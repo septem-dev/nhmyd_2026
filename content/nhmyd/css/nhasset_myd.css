@@ -125,6 +125,13 @@
 	--border-color:#ebebeb; /* 추가 260625 */
 
 	/* [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 */
+	--gray-100:#f6f6f6;
+	--gray-200:#f0f0f0;
+	--gray-300:#e1e1e1;
+	--gray-400:#d3d3d3;
+	--gray-500:#b3b3b3;
+	--gray-600:#707070;
+	
 	/* 등급색상 */
 	--diag-grade1:#d10f0f; /* 공격투자형 */
 	--diag-grade2:#da6f11; /* 적극투자형 */
@@ -139,7 +146,7 @@
 	--diag-warning4:#12a396; /* 보통위험 */
 	--diag-warning5:#2b9ac9; /* 낮은위험 */
 	--diag-warning6:#015aac; /* 매우낮은위험 */
-	/* [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 */
+	/* //[MD2605_047] 마이데이터 펀드 권유 프로세스 개선 */
 }
 
 @media screen and (min-width:641px) {
@@ -2625,15 +2632,15 @@ html {--footer-pading-top:0px}
 /* [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 */
 .nhasset .investBox {padding:20px;}
 .nhasset .investBox + .investBox {margin-top:12px;}
-.nhasset .investBox .investCard {display: flex; justify-content: space-between; align-items: center;}
+.nhasset .investBox .investCard {display: flex; justify-content: space-between; align-items: center; gap:20px;}
 .nhasset .investBox .linkTxt2 {font-size: var(--fontSize13); white-space: nowrap;}
 .nhasset .investBox .investbtnWrap {display:flex; justify-content:space-between; align-items:center; margin-bottom:2px;}
 
-.nhasset .grade1.-diag {color:var(--diag-grade1);}
-.nhasset .grade2.-diag {color:var(--diag-grade2);}
-.nhasset .grade3.-diag {color:var(--diag-grade3);}
-.nhasset .grade4.-diag {color:var(--diag-grade4);}
-.nhasset .grade5.-diag {color:var(--diag-grade5);}
+.nhasset .grade1.-diag, .nhasset .grade1.diag {color:var(--diag-grade1);}
+.nhasset .grade2.-diag, .nhasset .grade2.diag {color:var(--diag-grade2);}
+.nhasset .grade3.-diag, .nhasset .grade3.diag {color:var(--diag-grade3);}
+.nhasset .grade4.-diag, .nhasset .grade4.diag {color:var(--diag-grade4);}
+.nhasset .grade5.-diag, .nhasset .grade5.diag {color:var(--diag-grade5);}
 
 .nhasset .recAgreeCase {position:relative;}
 .nhasset .recAgreeCase .agreeBlur {position:absolute;left:0;top:0;display:flex;align-items:center; width:100%;height:100%;z-index:10;}
@@ -2645,7 +2652,520 @@ html {--footer-pading-top:0px}
 .nhasset .recAgreeCase .link {display:inline-block;padding:0 10px;margin-top:7px;font-size:var(--fontSize12);color:#fff;background:var(--point1);font-weight:400;border-radius:var(--size24);height:var(--size24);line-height:var(--size24);}
 .nhasset .recAgreeCase .link.-multi {height:auto; line-height:inherit; padding:8px 15px;}
 
+/** MSCO7110P, MSCO7120P, MSCO7130P, MSCO7140P **/
+.nhasset.popWrap .investLayer .confirmMsg p {color:var(--gray-800); text-align:left;}
+.nhasset.popWrap .investLayer .confirmMsg p + p {margin-top:8px;}
+.nhasset.popWrap .investLayer .confirmMsg .tit {font-weight:600;}
+.nhasset.popWrap .investLayer .confirmDesc {margin-top:8px; padding:12px 20px; background:#f8f8f8; border-radius:12px; font-size:var(--fontSize12); color:#666; text-align:left;}
+.nhasset.popWrap .investLayer .popBtn > a {padding:11px 16px;}
+.nhasset .investLayer .popBtnWrap .popBtn {position: relative; height: 94px; border: solid #fff; border-width: 2px 8px 22px; border-spacing: 8px; border-collapse: separate; background: #fff; box-shadow: 0 -1px 0 0 #fff;}
+.nhasset .investLayer .popBtnWrap .popBtn > a, .nhasset .investLayer .popBtnWrap .popBtn > a:hover, .nhasset .investLayer .popBtnWrap .popBtn > a:active, .nhasset .investLayer .popBtnWrap .popBtn > a:link{width:30%;padding:0 10px;height:56px;border-radius:12px;font-weight:500 !important;white-space:nowrap;line-height:56px;font-size:var(--fontSize18) !important}
+.nhasset .investLayer .popBtnWrap .popBtn > a:only-child{width:100%}
+.nhasset .investLayer .popBtnWrap .popBtn > a.confirmBtn{width:70%;background:var(--point1);border-color:var(--point1);color:#fff}
+.nhasset .investLayer .popBtnWrap .popBtn.half > a{width:50% !important}
+.nhasset.popWrap .popInner.investLayer{background:#fff}
+.nhasset.popWrap .popInner.investLayer .popCont{overflow:auto;padding:0 24px 24px}
+.nhasset.popWrap .investLayer .popBtnWrap .popBtn{height:auto;border-width:2px 14px 12px;border-spacing:8px}
+.nhasset.popWrap .investLayer .popBtnWrap .popBtn > a{height:48px;border-radius:10px;border:1px solid var(--gray-400);background:#fff;color:var(--color1);line-height:24px}
+.nhasset.popWrap .investLayer .popBtnWrap .popBtn > a.confirmBtn{color:var(--point1);border-color:var(--point1);background-color:#fff}
+.nhasset.popWrap .popInner.investLayer .popCont {padding-bottom:14px;}
+.nhasset.popWrap .investLayer .confirmMsg {padding:40px 0 0; font-size:var(--fontSize15) !important;}
+
+/** MSCO7200 **/
+.nhasset .diagTit {margin-top:24px;}
+.nhasset .diagTit h2 {font-size:var(--fontSize22);}
+.nhasset .diagTit.-img01 {padding-bottom:156px; margin-bottom:20px; background:url(../images/diagTit_img01.png) no-repeat center bottom; background-size:120px auto; text-align:center;}
+.nhasset .diagList li {position:relative; padding-left:10px; font-size:var(--fontSize13); color:var(--color3);}
+.nhasset .diagList li:before {display:inline-block; content:''; position:absolute; top:10px; left:0; width:3px; height:3px; border-radius:50%; background: var(--color3);}
+.nhasset .diagList li + li {margin-top:8px;}
+.nhasset .lineTypeWrap {padding:20px; border:1px solid var(--gray-300); border-radius:16px; box-shadow:0px 5px 15px 0px rgba(0, 0, 0, 0.04);}
+.nhasset .rightBtn {text-align: right;}
+.nhasset .lineTypeWrap .rightBtn {padding-top: 16px; margin-top:24px; border-top: 1px solid var(--line2);}
+.nhasset .container.typeO {padding-bottom:140px;}
+
+.nhasset .areaBtnDefault.mbType{border:solid var(--background);table-layout:auto;border-width:2px 8px 24px;border-spacing:8px;border-collapse:separate;background:var(--background)}
+.nhasset .areaBtnDefault.mbType [class^="btn"]{padding:0 20px;border-radius:12px;font-size:18px;font-weight:500}
+.nhasset .areaBtnDefault.mbType:not(.half) [class^="btn"]:first-child:not(:last-child),
+.nhasset .areaBtnDefault.mbType [class^="btn"].disabled{background-color:var(--gray-200);color:var(--color5);pointer-events:none}
+.btnPressPoint{background:var(--point1)}
+.nhasset .areaBtnDefault.mbType .btnPressDefault{background-color:#fff;border:1px solid var(--gray-400);color:var(--color1)}
+
+/** MSCO7210P **/
+.nhasset .diagAcc > a, .nhasset .diagAcc > button {display:block; width:100%; position:relative; overflow:hidden; padding:19px 40px 19px 20px; border:1px solid var(--line2); border-radius:12px;}
+.nhasset .diagAcc .accValue {font-size:var(--fontSize16); font-weight:600;}
+.nhasset .diagAcc:first-child {margin-top:24px;}
+.nhasset .diagAcc .analysisCate::after {content:'';position:absolute;top:50%;right:16px;width:24px;height:24px;background:url('../images/makebetter/icon/ico_arr_down_24.svg') no-repeat center / 24px auto;transform:translateY(-50%)}
+.nhasset [data-toggle="wrap"].active .analysisCate::after{transform:rotate(180deg) translateY(50%)}
+.nhasset .diagAcc  + .diagAcc {margin-top:16px;}
+.nhasset .diagAcc .accCont {padding-top:24px;}
+.nhasset .diagAcc .accCont dt {font-size:var(--fontSize16); font-weight:600;}
+.nhasset .diagAcc .accCont dd + dt {margin-top:16px;}
+.nhasset .diagAcc .accCont dd {margin-top:12px; font-size:var(--fontSize15); color:var(--color3);}
+.nhasset .bul.-diag {position:relative; margin-top:8px; padding-left:10px;}
+.nhasset .bul.-diag:before {display:inline-block; content: ''; position:absolute; top:10px; left:0; width:3px; height:3px; border-radius:50%; background: var(--color3);}
+.nhasset .diagAcc .accCont .img-desc {margin-top:12px; font-size:var(--fontSize13); color:#666;}
+.nhasset .diagAcc .accCont .tblData1 {border-top: 1px solid var(--line2); border-bottom:1px solid var(--line2);}
+.nhasset .diagAcc.active .accCont thead th, .nhasset .diagAcc.active .accCont thead td, .nhasset .diagAcc.active .accCont tbody th {background:#f6f6f6 !important; border-color:var(--line2); color: var(--color1) !important;}
+.nhasset .diagAcc .accCont th, .nhasset .diagAcc .accCont td {border-color:var(--line2); word-break: break-all;}
+.nhasset .diagAcc .accCont .tbl-desc {margin-top:12px;}
+.nhasset .diagAcc .accCont .tbl-desc li {margin-top:8px; font-size:var(--fontSize13); color:var(--color4);}
+
+.nhasset .matrixWrap.-diag {width:100%; padding:0 12px; box-sizing:border-box;}
+.nhasset .matrixWrap.-diag .chartArea {display:flex;}
+.nhasset .matrixWrap.-diag .chartAxisY {display:flex; flex-direction:column; justify-content:space-between; width:68px; flex-shrink:0; border-right:1px solid rgba(130, 130, 130, 0.3);; padding-right:4px;}
+.nhasset .matrixWrap.-diag .chartAxisY .axisLabel {height:41px; display:flex; align-items:center; justify-content:flex-end; text-align:right; font-size:var(--fontSize10); color:var(--color5); line-height:1.4;}
+.nhasset .matrixWrap.-diag .chartPlot {flex:1; position:relative;}
+.nhasset .matrixWrap.-diag .plotRow {height:41px; display:flex; align-items:center; border-bottom:1px dashed rgba(130, 130, 130, 0.3);}
+.nhasset .matrixWrap.-diag .plotRow:last-child {border-bottom:none;}
+.nhasset .matrixWrap.-diag .plotCell {width:20%; text-align:center;}
+.nhasset .matrixWrap.-diag .chartAxisX {display:flex; margin-left:67px; padding-top:6px; border-top:1px solid rgba(130, 130, 130, 0.3);;}
+.nhasset .matrixWrap.-diag .chartAxisX .axisLabel {flex:1; width:20%; text-align:center; font-size:var(--fontSize10); color:var(--color5);}
+.nhasset .matrixWrap.-diag .chk {display:inline-block; width:24px; height:24px; background-repeat:no-repeat; background-position:0 0;}
+.nhasset .matrixWrap.-diag .chk.g1 {background-image:url(../images/ico_graph_chk01_24.svg);}
+.nhasset .matrixWrap.-diag .chk.g2 {background-image:url(../images/ico_graph_chk02_24.svg);}
+.nhasset .matrixWrap.-diag .chk.g3 {background-image:url(../images/ico_graph_chk03_24.svg);}
+.nhasset .matrixWrap.-diag .chk.g4 {background-image:url(../images/ico_graph_chk04_24.svg);}
+.nhasset .matrixWrap.-diag .chk.g5 {background-image:url(../images/ico_graph_chk05_24.svg);}
+
+/** MSCO7300 **/
+.mt24 {margin-top:24px !important;}
+.nhasset .boxRadio.-diag {margin-top:24px;}
+.nhasset .boxRadio.-diag input[type='radio'] {border:1px solid var(--line2);}
+.nhasset .boxRadio.rowType.-diag input[type="radio"] + label {padding:10px 0; border-radius:12px !important; font-size:var(--fontSize16); color:var(--color3); font-weight:500;}
+.nhasset .boxRadio.-diag input:checked + label {border: 1px solid var(--point1); color: var(--point1);}
+.nhasset .boxRadio.-diag input:checked + label:before {display:none;}
+
+/** MSCO7400 **/
+.nhasset .diagTit h3 {font-size:var(--fontSize18);}
+.nhasset .diagDesc {margin-top:12px; color:var(--color4);}
+.nhasset .btnBodyLine.-multi {height:auto; line-height:inherit; padding:13px 16px;}
+.nhasset .areaBodyBtnFlex.-diag {margin-top: 24px;}
+.nhasset .areaBodyBtnFlex.-diag .btnBodyLine.-multi {border-radius:10px; color:var(--color3); border-color:var(--gray-400);}
+.nhasset .gradeInfo .diagTit {margin-top:32px;}
+.nhasset .gradeInfo .tagGroup {margin-top:16px;}
+.nhasset .tagGroup {font-size:0;}
+.nhasset .tagGroup .tag {padding:3px 8px; margin-bottom:0; border-radius:4px; font-size:var(--fontSize10); line-height:inherit;}
+.nhasset .tagGroup .warning-grade1 {color:var(--diag-warning1); border:1px solid var(--diag-warning1);}
+.nhasset .tagGroup .warning-grade2 {color:var(--diag-warning2); border:1px solid var(--diag-warning2);}
+.nhasset .tagGroup .warning-grade3 {color:var(--diag-warning3); border:1px solid var(--diag-warning3);}
+.nhasset .tagGroup .warning-grade4 {color:var(--diag-warning4); border:1px solid var(--diag-warning4);}
+.nhasset .tagGroup .warning-grade5 {color:var(--diag-warning5); border:1px solid var(--diag-warning5);}
+.nhasset .tagGroup .warning-grade6  {color:var(--diag-warning6); border:1px solid var(--diag-warning6);}
+.nhasset .gradeInfo + .diagBtnWrap {margin-top:40px; margin-bottom:32px;}
+.nhasset .gradeInfo .graphImg {margin-top:32px;}
+.nhasset .diagBtnWrap .btnBodyLine {padding:11px 16px; height:auto; line-height:inherit; border-color:var(--gray-300); font-size:var(--fontSize16); color:var(--color3);}
+.nhasset .diagBtnWrap.type2 .btnBodyLine {border: 1px solid var(--gray-400); border-radius:12px;}
+.nhasset .diagBtnWrap.type2 .btnBodyLine + .btnBodyLine {margin-top:12px;}
+.nhasset .survDesc {margin-top:12px; font-size:var(--fontSize13); color:var(--color4);}
+
+/* 알아두세요 */
+.nhasset .container.typeO .info_area .noticeBtn .info_area_title{font-size:var(--fontSize16);background:url('../images/makebetter/icon/ico_notice_24.svg') no-repeat left center / 24px auto;padding-left:26px;line-height:24px}
+.nhasset .container.typeO .info_area .noticeBtn .info_area_title::after{content:'';position:absolute;top:50%;margin-top:-12px;right:0;width:24px;height:24px;background:url('../images/makebetter/icon/ico_arr_down_24.svg') no-repeat center center / 24px auto}
+.nhasset .container.typeO .info_area a.noticeBtn[aria-expanded="true"] .info_area_title::after{transform:rotate(-180deg)}
+.nhasset .container.typeO .info_area .noticeBtn + ul[class^='listBul']{margin-top:24px}
+.nhasset .container.typeO .listBul.disc>li{padding-left:11px;font-size:var(--fontSize14);color:var(--color3)}
+.nhasset .container.typeO .listBul.disc>li + li{margin-top:8px}
+.nhasset .container.typeO .listBul.disc>li:before,
+.nhasset .container.typeO .noticeWrap .listBul.dash>li:before{top:clamp(8px, 0.8rem, 12px);background:var(--gray-600)}
+
+/** MSCO7410P **/
+.nhasset .diagGroup {margin-top: 32px;}
+.nhasset .diagGroup .survQ, .nhasset .diagGroup .survA {margin-top:16px;}
+.nhasset .diagGroup .survQ {font-size:var(--fontSize16);}
+.nhasset .diagGroup .survQ .num {margin-right:5px; font-weight:600;}
+.nhasset .diagGroup .survA + .survA {margin-top:12px;}
+.nhasset .diagGroup .survA > p {padding:16px; border:1px solid var(--point1); border-radius: 10px; font-size:var(--fontSize15); color:var(--color3);}
+.nhasset .diagGroup .survA.-box > p {padding:20px 16px; border:none; background:var(--gray-100);}
+.nhasset .diagGroup .survA.-img > p {display:flex; align-items:center; gap:12px;}
+.nhasset .diagGroup .survA.-img img {width:36px; height:36px;}
+.nhasset .diagGroup .survA.-ox > p {display:block; height:50px; line-height:50px; padding:0; font-size:0; text-indent:-9999px;}
+.nhasset .diagGroup .survA.-ox .o {background:url(../images/diag_surV_o_on.png) no-repeat center center; background-size:26px auto;}
+.nhasset .diagGroup .survA.-ox .x {background:url(../images/diag_surV_x_on.png) no-repeat center center; background-size:26px auto;}
+
+.nhasset .fullyWrap{margin:0 -16px;padding:24px 16px 32px}
+.nhasset .fullyWrap:last-of-type{padding-bottom:0}
+
+/** MSCO7420P **/
+.nhasset .popBtnDesc {display:table-row; text-align:center;}
+
+/** MSCO7430P **/
+.nhasset .formWrap.diagWrap {margin-top:16px;}
+.nhasset .formWrap.diagWrap .stList a {height:auto; line-height:inherit; padding:14px 20px; border:1px solid var(--gray-300); border-radius:12px;}
+.nhasset .formWrap.diagWrap .stList .selectValue {height:36px; line-height:36px; padding-left:44px; background-repeat:no-repeat; background-position:0 center; background-size:36px auto; font-size:var(--fontSize18); color:var(--color1); font-weight:500;}
+.nhasset .formWrap.diagWrap .stList .selectValue.grade01 {background-image:url(../images/diag_grade01.png);}
+.nhasset .formWrap.diagWrap .stList .selectValue.grade02 {background-image:url(../images/diag_grade02.png);}
+.nhasset .formWrap.diagWrap .stList .selectValue.grade03 {background-image:url(../images/diag_grade03.png);}
+.nhasset .formWrap.diagWrap .stList .selectValue.grade04 {background-image:url(../images/diag_grade04.png);}
+.nhasset .formWrap.diagWrap .stList .selectValue.grade05 {background-image:url(../images/diag_grade05.png);}
+.nhasset .formWrap.diagWrap .stList .selectValue.warning01 {background-image:url(../images/diag_warning01.png);}
+.nhasset .formWrap.diagWrap .stList .selectValue.warning02 {background-image:url(../images/diag_warning02.png);}
+.nhasset .formWrap.diagWrap .stList .selectValue.warning03 {background-image:url(../images/diag_warning03.png);}
+.nhasset .formWrap.diagWrap .stList .selectValue.warning04 {background-image:url(../images/diag_warning04.png);}
+.nhasset .formWrap.diagWrap .stList .selectValue.warning05 {background-image:url(../images/diag_warning05.png);}
+.nhasset .formWrap.diagWrap .stList .selectValue.warning06 {background-image:url(../images/diag_warning06.png);}
+.nhasset .formWrap.diagWrap .stList .selectBtn {top:50%; right:10px; margin-top:-12px; width:24px; height:24px; border-radius:12px;}
+.nhasset .gradeCont {position:relative; margin-top:24px;}
+.nhasset .gradeCont li {display:flex; justify-content:space-between; margin-top:12px; font-size:var(--fontSize15);}
+.nhasset .gradeCont .gradeTit {color:var(--color3);}
+.nhasset .gradeCont .gradeTxt {color:var(--color1); font-weight:500;}
+.nhasset .gradeCont .gradeTxt .tagGroup {margin-top:0; margin-right:-4px;}
+.nhasset .diagWrap .gradeCont .toolTipBtn,
+.nhasset .diagSurvWarp .toolTipBtn {width:24px;height:24px;margin:-2px 0 0 0;background:url('../images/makebetter/icon/ico_tooltip_24.svg') no-repeat center / 18px auto}
+.nhasset .gradeCont .tblData1 th, .nhasset .gradeCont .tblData1 td {padding:9px 8px; font-size:var(--fontSize14); text-align:left;}
+.nhasset .gradeCont .tblData1 th {background:var(--gray-100); color:var(--color1);}
+.nhasset .gradeCont .tblData1 td {color:var(--color3);}
+.nhasset .gradeCont .tblData1 .bul {position:relative; padding-left:10px;}
+.nhasset .gradeCont .tblData1 .bul:before {display:inline-block; content: ''; position:absolute; top:9px; left:0; width:4px; height:4px; border-radius:50%; background:var(--gray-600);}
+
+/** MSCO7500 **/
+.nhasset .survNoti {margin-top:12px;}
+.nhasset .survA.boxRadio .boxRadioInn label {border-color:var(--gray-400); border-radius: 10px !important;}
+.nhasset .survA.boxRadio.rowType .boxRadioInn label {display:flex; gap:12px; justify-content:flex-start; align-items:center; color: var(--color3);}
+.nhasset .survA.boxRadio input[type="radio"] + label, .nhasset .survA.boxRadio input[type="checkbox"] + label {padding:16px 12px; text-align:left;}
+.nhasset .survA.boxRadio input:checked + label {color:var(--color3); font-weight:400; border-width:1px; border-color:var(--point1) !important;}
+.nhasset .survA.boxRadio input:checked + label:before {display:none;}
+.nhasset .rightDesc {position:relative; margin-top:16px; text-align:right;}
+.nhasset .rightDesc .toolTipBtn {background-size:18px auto;}
+.nhasset .diagGroup .tooltipCont li.bul.-diag:first-child {margin-top:0;}
+.nhasset .diagGroup .tooltipCont .bul.-diag {padding-right:20px;}
+.nhasset .survA.boxRadio.-img img {width:36px; height:auto;}
+.nhasset .survA.boxRadio.-ox input[type="radio"] + label, .nhasset .survA.boxRadio.-ox input[type="checkbox"] + label  {height:50px; line-height:50px; padding:0; text-indent:-9999px;}
+.nhasset .survA.boxRadio.-ox label {font-size:0;}
+.nhasset .survA.boxRadio.-ox .o {background:url(../images/diag_surV_o.png) no-repeat center center; background-size:26px auto;}
+.nhasset .survA.boxRadio.-ox .x {background:url(../images/diag_surV_x.png) no-repeat center center; background-size:26px auto;}
+.nhasset .survA.boxRadio.-ox input:checked + label .o {background-image:url(../images/diag_surV_o_on.png);}
+.nhasset .survA.boxRadio.-ox input:checked + label .x {background-image:url(../images/diag_surV_x_on.png);}
+.nhasset .diagSurvWarp .survChk {display:flex; gap:8px; align-items: top; margin:32px 0;}
+.nhasset .diagSurvWarp .survChk input[type='checkbox'] + label {margin-left:4px;}
+
+.nhasset .diagFin h1 {padding-top: 124px; font-size: var(--fontSize26);}
+.nhasset .diagFin h1.-check.-diag {background: url('../images/makebetter/icon/img_agree-check_68.svg') no-repeat 0 24px / 68px auto;}
+.nhasset.popWrap.fullLayerPop .popInner .popBtnWrap .popDownload {position:absolute; top:7px; right:55px; width:36px; height:36px; background: url(../images/ico_download_24.png) no-repeat center; background-size: 24px auto;}
+.nhasset.popWrap.fullLayerPop .popInner .popBtnWrap .popDownload img {display:none;}
+.Android .nhasset.popWrap.fullLayerPop .popInner .popBtnWrap .popDownload {position:fixed;}
+.nhasset .survA.boxRadio.rowType .boxRadioInn + .boxRadioInn{padding-top:12px}
+
+/* MSCO7510 */
+.dataLoadingWrap.ae {display:block; background: none; position:fixed; left:0; top:0; width:100%; height:100%; z-index:2000;}
+.dataLoadingWrap.ae .dataLoading .inner{margin-top:-100px; color:#111; background:url('../images/data_loading001.gif')no-repeat center top; padding-top:130px; background-size:120px auto; text-align:center; font-weight:600;}
+
 /* [MD2607_074] 청년 재무상담 영업점 안내 화면 개발 */
-.nhasset .defTit.icoFin {margin-top: 0; background: url('../images/contents/bg_tit_cal01.png') center right/57px 47px no-repeat;}
+.nhasset .defTit.icoFin {margin-top: 0; background: url('../images/contents/bg_tit_cal01.png') center right/auto 47px no-repeat;}
 .nhasset .adrContWrap.-fin .adrList {margin-top:0;}
 .nhasset .adrContWrap.-fin li:first-child {border-top:none; margin-top:0;}
+
+/* [MD2607_078] 마이데이터 금리인하요구권 관련 공공마이데이터 연계 */
+.bdT0 {border-top: none !important;}
+.bdL {border-left:1px solid #ebebeb !important;}
+.nhasset [class^="wrapTbl"] td {border-bottom:1px solid #ebebeb;}
+[class^="wrapTbl"] .cell-bg {background: #f8f8f8; border-bottom:1px solid #ebebeb;}
+[class^="wrapTbl"].blue .cell-bg {background-color: #249EC3; color: #fff;}
+.nhasset .popBtnWrap .popBtn.multi > a, .nhasset .popBtnWrap .popBtn.multi > a:hover, .nhasset .popBtnWrap .popBtn.multi > a:active, .nhasset .popBtnWrap .popBtn.multi > a:link,
+.nhasset .areaBtnDefault.multi [class*='btn'] {padding-top:10px; padding-bottom:10px; line-height:1.6; vertical-align:middle;}
+
+/*[MD2609_095] 구글 스토어 정책 변경에 따른 올원뱅크스마트뱅킹 앱 테스트 */
+@media screen and (min-width:400px) {
+	/* MSASC180P 타이틀 텍스트 겹침 */
+	.nhasset .boxTypeWrap .prodListTit.img05 {height:auto;}
+	
+	/* 체크박스 위치 */
+	.nhasset .wrapFormTooltip .formHolder input[type='checkbox'].chekTypeOther {transform:translateY(0);}
+	.nhasset .formHolder.check input[type='checkbox'] {transform:translateY(6px);}
+
+	/* 예시 뱃지 위치 */
+	.assetConnectInfo .title + div {display:flex; justify-content:center;}
+	.assetConnectInfo .title + div .tag {margin-left:-238px;}
+
+	/* 범례 동그라미 위치 */
+	.nhasset .graphAddEx .ty01 [class^="bl"]:before, .nhasset .graphAddEx .ty02 [class^="Bl"]:before {vertical-align:middle;}
+	
+	/* productMenu 와 msaeCont 사이 간격, 버튼아이콘 위치 */
+	.nhasset .productMenu {padding-bottom:40px;}
+	.nhasset .msaeAreaWrap .msaeCont {margin-top:60px;}
+	.nhasset .productMenu > .linkbtn.le:before {transform:rotate(-180deg) translateY(2px);}
+	.nhasset .productMenu > .linkbtn.ri:after {transform:translateY(-2px);}
+
+	/* 가장 많이 보유한 주식 TOP3 뱃지 잘림 */
+	.nhasset .msaeStockLank ul li .tag {height:min-content;}
+
+	/* vs 위치, 가운데 들어가는 텍스트 타원bg 크기 */
+	.nhasset .investTop .investCom {text-align:center;}
+	.nhasset .investCont li .investTit {width:90px; margin-left:-45px;}
+
+	/* 편집버튼 위치 */
+	.nhasset .editBtn {width:25px; height:30px; margin:0 5px 0 0; text-align:center;}
+	.nhasset .editBtn:after {padding:10px; background-position:center center;}
+
+	/* 그래프영역 텍스트 겹침 */
+	.graphVerWrap.graphPeer.ownMinus {padding-top:50px;}
+
+	/* 이미지 정렬 */
+	.nhasset .gradeInfo .graphImg {text-align:center;}
+
+	/* MSPS3110 비주얼영역 텍스트 겹침 */
+	.recommendGroupWrap {background-size: auto 207px;}
+
+	/* 설정 초기화 버튼 아이콘 위치 */
+	.nhasset .cs.btnSetReset button:before {top:50%; transform:translateY(-5px);}
+
+	/* MSHT1110, MSHT1110P, MSPS1210P 이미지 정렬 */
+	.nhasset .stepList .imgWrapNor,
+	.nhasset .certStep > li .certStepImg {text-align:center;}
+
+	/* MSLFM000 자동차 보험확인 이미지 정렬 */
+	.bannerSwiperImgtype .swiper-slide.bannerPrd1 > a {display:block; text-align: center;}
+
+	/* MSHC1c00P 슬라이드 내 이미지 비율 */
+	.nhasset .shareListBanner {max-width:400px; margin: 20px auto 0 auto;}
+
+	/* MSCSM110 슬라이드영역 이미지 비율 */
+	.nhasset .csChartWrap .swiper-slide {max-width:360px;}
+	.nhasset .csChartWrap .boxTypeWrap {height:clamp(320px,32rem,480px);}
+
+	/* MSFP4100 버튼 텍스트 두줄로 떨어짐 */
+	.nhasset .accontfpList .contBtn01 {line-height:inherit;}
+
+	/* MSAE9110 슬라이드 내 이미지 비율 */
+	.nhasset .texSavingBanner .swiper-slide {max-width:260px; height:186px;}
+	.nhasset .insiteBanner .swiper-slide {max-width:260px; height:196px;}
+	
+	/* MSAE9110 배너 내 이미지 정렬 */
+	.nhasset .yabannerArea .yabanner.ty02 img:only-child {display:block; margin:0 auto;}
+
+	/* MSAE6500 카드 내 이미지 비율 */
+	.nhasset .yatexCutWrap .thumbList .imgArea {height:auto; font-size:0;}
+
+	/* MSCS5200 이미지 비율 */
+	.nhasset .coach_bg img {position:relative;}
+
+	/* MSHT1271P 텍스트 하단 여백 */
+	.nhasset .kakaoLinkWrap a {height:100px;}
+}
+@media screen and (min-width:600px) {
+	/* 타이틀 영역 텍스트 오른쪽 여백 넓음(버튼 말줄임 영역 넓이 조정 필요) */
+	.nhasset .cardComparedTitle .inner button span,
+	.nhasset .cardChangeWrap .cs.cardComparedTitle .inner button > span {max-width: 350px;}
+
+	/* briefing_case 타이틀 두줄일경우 위아래 여백 */
+	.nhasset .briefTit {height:auto; min-height:50px;}
+
+	/* MSCS4800 슬라이드 내 이미지 비율 */
+	.nhasset .areaBanner1 .swiper-slide {max-width:550px;}
+
+	/* MSHT2700 배너 이미지 비율 */
+	.nhasset .notiSlidePop .notiImg img {max-height:none;}
+}
+
+
+
+.season-bg{
+	position:fixed; /* 부모에 position:relative 필요 */
+	inset:0;
+	/* z-index:2; */
+	z-index:0;
+	overflow:hidden;
+	pointer-events:none;
+}
+
+.season-bg ~ .wrapper .fullyWrap > div,
+.season-bg ~ .wrapper .fullyWrap .boxTypeWrap  {position:relative;}
+
+/* 상단 색조 — 계절마다 배경색만 교체 */
+	.season-bg .s-tint{
+	position:absolute;
+	left:0; right:0; top:0;
+	height:180px;
+}
+
+/* 콘텐츠 레이어 (참고) */
+	.app-body,
+	.app-nav,
+	.app-cta{
+	position:relative;
+	z-index:3;
+}
+
+/* 모션 최소화 설정 존중 — 접근성 필수 */
+@media (prefers-reduced-motion:reduce){
+	.season-bg > *:not(.s-tint){ display:none }
+	.season-bg .s-tint{ opacity:.6 }
+}
+
+.season-spring .s-tint{
+	background:linear-gradient(180deg,rgba(255,232,240,.50),rgba(255,255,255,0));
+}
+.season-spring .s-petal{
+	position:absolute;
+	top:-16px;
+	left:var(--x);
+	font-size:var(--size);
+	line-height:1;
+	opacity:0;
+	will-change:transform,opacity;
+	animation:spring-fall var(--dur) linear infinite;
+	animation-delay:var(--delay);
+}
+@keyframes spring-fall{
+	0% { transform:translate(0,-16px) rotate(var(--rot)); opacity:0 }
+	7% { opacity:var(--op) }
+	35% { transform:translate(26px,220px) rotate(calc(var(--rot) + 140deg)) }
+	65% { transform:translate(-20px,470px) rotate(calc(var(--rot) + 280deg)) }
+	90% { opacity:calc(var(--op) * .8) }
+	100% { transform:translate(20px,880px) rotate(calc(var(--rot) + 460deg)); opacity:0 }
+}
+	
+
+.season-summer .s-tint{
+	background:linear-gradient(180deg,rgba(198,238,250,.60),rgba(255,255,255,0));
+}
+
+/* 상단 파도 */
+.season-summer .s-waves{
+	position:absolute;
+	left:0; right:0; top:0;
+	height:120px;
+	overflow:hidden;
+}
+.season-summer .s-wave{
+	position:absolute;
+	left:0; top:0;
+	width:200%; /* path 2개를 이어 붙인 폭 */
+	height:100%;
+	animation:summer-wave linear infinite;
+}
+.season-summer .s-wave svg{
+	display:block;
+	width:100%;
+	height:100%;
+	transform:scaleY(-1); /* 뒤집어 위에서 내려오는 수면으로 */
+}
+.season-summer .s-wave.w1{ animation-duration:9s; opacity:.30 }
+.season-summer .s-wave.w2{ animation-duration:13s; opacity:.22; top:-8px }
+.season-summer .s-wave.w3{ animation-duration:6.5s; opacity:.38; top:-16px }
+
+@keyframes summer-wave{
+	0% { transform:translateX(0) }
+	100% { transform:translateX(-50%) }
+}
+
+/* 물방울 — 아래에서 수면으로 */
+.season-summer .s-bubble{
+	position:absolute;
+	bottom:-14px;
+	left:var(--x);
+	width:var(--size);
+	height:var(--size);
+	border-radius:50%;
+	background:radial-gradient(circle at 32% 28%,
+	rgba(255,255,255,.95), rgba(140,215,240,.40));
+	box-shadow:0 0 8px rgba(120,205,235,.55),
+	inset 0 0 4px rgba(255,255,255,.80);
+	opacity:0;
+	will-change:transform,opacity;
+	animation:summer-bubble var(--dur) ease-in-out infinite;
+	animation-delay:var(--delay);
+}
+@keyframes summer-bubble{
+	0% { transform:translate(0,0) scale(.65); opacity:0 }
+	10% { opacity:var(--op) }
+	35% { transform:translate(-13px,-220px) scale(1) }
+	65% { transform:translate(11px,-460px) scale(1.06) }
+	88% { opacity:calc(var(--op) * .6) }
+	100% { transform:translate(-7px,-880px) scale(1.14); opacity:0 }
+}
+
+.season-autumn .s-tint{
+	background:linear-gradient(180deg,rgba(255,238,214,.55),rgba(255,255,255,0));
+}
+.season-autumn .s-leaf{
+	position:absolute;
+	top:-16px;
+	left:var(--x);
+	font-size:var(--size);
+	line-height:1;
+	opacity:0;
+	will-change:transform,opacity;
+	animation:autumn-fall var(--dur) linear infinite;
+	animation-delay:var(--delay);
+}
+@keyframes autumn-fall{
+	0% { transform:translate(0,-16px) rotate(var(--rot)); opacity:0 }
+	7% { opacity:var(--op) }
+	32% { transform:translate(22px,210px) rotate(calc(var(--rot) + 120deg)) }
+	62% { transform:translate(-20px,460px) rotate(calc(var(--rot) + 250deg)) }
+	90% { opacity:calc(var(--op) * .8) }
+	100% { transform:translate(16px,880px) rotate(calc(var(--rot) + 420deg)); opacity:0 }
+}
+
+.season-winter .s-tint{
+	background:linear-gradient(180deg,rgba(216,236,250,.50),rgba(255,255,255,0));
+}
+.season-winter .s-flake{
+	position:absolute;
+	top:-10px;
+	left:var(--x);
+	width:var(--size);
+	height:var(--size);
+	border-radius:50%;
+	background:#fff;
+	box-shadow:0 0 5px rgba(150,198,232,.95),
+	0 0 2px rgba(130,180,220,.90);
+	opacity:0;
+	will-change:transform,opacity;
+	animation:winter-fall var(--dur) linear infinite;
+	animation-delay:var(--delay);
+}
+@keyframes winter-fall{
+	0% { transform:translate(0,-10px); opacity:0 }
+	8% { opacity:var(--op) }
+	50% { transform:translate(var(--sx),430px) }
+	90% { opacity:calc(var(--op) * .8) }
+	100% { transform:translate(calc(var(--sx) * -.6),880px); opacity:0 }
+}
+	
+.season-birthday .s-tint{
+	background:linear-gradient(180deg,rgba(255,235,245,.55),rgba(255,255,255,0));
+}
+
+/* 색종이 */
+	.season-birthday .s-confetti{
+	position:absolute;
+	top:-16px;
+	left:var(--x);
+	width:var(--w);
+	height:var(--h);
+	border-radius:1.5px;
+	opacity:0;
+	will-change:transform,opacity;
+	animation:bday-confetti var(--dur) linear infinite;
+	animation-delay:var(--delay);
+}
+@keyframes bday-confetti{
+	0% { transform:translate(0,-16px) rotate(var(--rot)) rotateY(0); opacity:0 }
+	7% { opacity:.95 }
+	35% { transform:translate(24px,215px) rotate(calc(var(--rot) + 160deg)) rotateY(360deg) }
+	65% { transform:translate(-20px,465px) rotate(calc(var(--rot) + 320deg)) rotateY(720deg) }
+	90% { opacity:.8 }
+	100% { transform:translate(18px,880px) rotate(calc(var(--rot) + 520deg)) rotateY(1080deg); opacity:0 }
+}
+
+/* 풍선 — 아래에서 위로 */
+	.season-birthday .s-balloon{
+	position:absolute;
+	bottom:-70px;
+	left:var(--x);
+	font-size:var(--size);
+	line-height:1;
+	opacity:0;
+	will-change:transform,opacity;
+	animation:bday-balloon var(--dur) linear infinite;
+	animation-delay:var(--delay);
+}
+@keyframes bday-balloon{
+	0% { transform:translate(0,0) rotate(-4deg); opacity:0 }
+	10% { opacity:.9 }
+	40% { transform:translate(15px,-320px) rotate(5deg) }
+	70% { transform:translate(-11px,-600px) rotate(-3deg) }
+	90% { opacity:.7 }
+	100% { transform:translate(9px,-900px) rotate(4deg); opacity:0 }
+}
