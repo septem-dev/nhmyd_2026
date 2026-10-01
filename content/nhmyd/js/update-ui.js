@@ -1,318 +1,309 @@
 /* 2026-07-28 */
+/* 2026-10-01 merge-safe 리팩터링: .wrapper.nds / .popWrap.nds 가 있는 화면에서만 동작하도록 전체를 하나의 게이트 뒤로 통합 */
 /*
  * [di9] UI Dev Team
  * update/ , sample_update/ 화면(.nds 컴포넌트)에서 공통으로 쓰는 UI 스크립트.
- * head-mb-update.js가 <head>에서 document.write로 주입하므로,
- * DOM 참조는 반드시 DOMContentLoaded 이후에 실행합니다.
+ *
+ * 이 파일은 nhasset-ui-myd-mb.js 와 합쳐져 "모든 화면"에서 로드될 수 있다는 전제로 작성되었습니다.
+ * 그래서 다음 원칙을 지킵니다:
+ *   1) .wrapper.nds 또는 .popWrap.nds 가 페이지 어딘가에 없으면, 이 파일은 사실상 아무 것도 하지 않습니다.
+ *      (전역 함수 재정의도, 이벤트 바인딩도, init 호출도 전부 지연/생략됩니다.)
+ *   2) nds 대상이 처음부터 없다가 나중에(팝업 등으로) 동적으로 추가되는 경우도 MutationObserver로 감지해
+ *      그 시점에 한 번만 활성화합니다.
+ *   3) 스크립트가 <head>에서 document.write로 주입되어 DOM이 아직 없는 시점에 실행되든,
+ *      <body> 뒤쪽에서 실행되어 DOM이 이미 있는 시점이든 동일하게 동작하도록 만들었습니다.
+ *      (document.write 전제를 더 이상 하지 않습니다.)
  */
 
-function isNdsScope($target) {
-    if ($target && $target.length) {
-        var $popWrap = $target.hasClass("popWrap") ? $target : $target.closest(".popWrap");
-        if ($popWrap.length && $popWrap.hasClass("nds")) return true;
-    }
-    if ($(".wrapper").hasClass("nds")) return true;
-    if ($(".popWrap.nds").length > 0) return true;
-    return false;
-}
+(function () {
+    // nhasset-ui-myd-mb.js 와 합쳐 모든 화면에서 로드될 수 있으므로, 레거시 쪽이 기대하는
+    // sloppy(비strict) 전역 변수 관행(예: scrollPosY 암묵적 전역 할당)과 충돌하지 않도록
+    // 이 파일 전체를 strict 모드로 승격하지 않습니다.
 
-function supportsHasSelector() {
-    try {
-        return !!(window.CSS && CSS.supports && CSS.supports("selector(:has(a))"));
-    } catch (e) {
+    // ---------------------------------------------------------------
+    // 활성화 여부 판단
+    // ---------------------------------------------------------------
+    function isNdsScope($target) {
+        if ($target && $target.length) {
+            var $popWrap = $target.hasClass("popWrap") ? $target : $target.closest(".popWrap");
+            if ($popWrap.length && $popWrap.hasClass("nds")) return true;
+        }
+        if ($(".wrapper").hasClass("nds")) return true;
+        if ($(".popWrap.nds").length > 0) return true;
         return false;
     }
-}
 
-var legacyPopClose = window.popClose;
-
-window.popClose = function (e) {
-    var $popWrap = $(e).closest(".popWrap");
-    if (!isNdsScope($popWrap)) {
-        if (typeof legacyPopClose === "function") legacyPopClose(e);
-        return;
+    function supportsHasSelector() {
+        try {
+            return !!(window.CSS && CSS.supports && CSS.supports("selector(:has(a))"));
+        } catch (e) {
+            return false;
+        }
     }
 
-    scrollPosY = $("body").css("top");
-    var $slidePopInner = $popWrap.find(".popInner");
-    var isSlidePop = $popWrap.hasClass("slidePopOption") || $popWrap.hasClass("slidePopConfirm") || $popWrap.hasClass("bankSetWrap");
+    function hasNdsRoot() {
+        return !!(document.querySelector(".wrapper.nds") || document.querySelector(".popWrap.nds"));
+    }
 
-    $popWrap.find(".dim").fadeOut(100);
+    var activated = false;
 
-    if (isSlidePop) {
-        $slidePopInner.animate({ height: 0 }, 150, function () {
-            $popWrap.hide();
+    // ---------------------------------------------------------------
+    // 레거시 전역 함수 오버라이드 (activate() 이후에만 설치)
+    // ---------------------------------------------------------------
+
+    /* 툴팁이 들어갈 수 있는 위/아래 한계.
+       화면 높이뿐 아니라 잘라내는(overflow) 조상까지 따집니다.
+       히어로 카드처럼 overflow:hidden 안에 있으면 그 박스가 한계가 됩니다. */
+    function tooltipBounds(el) {
+        var bounds = { top: 0, bottom: $(window).height() };
+        while (el && el !== document.body && el.nodeType === 1) {
+            var overflow = window.getComputedStyle(el).overflowY;
+            if (overflow !== "visible") {
+                var rect = el.getBoundingClientRect();
+                bounds.top = Math.max(bounds.top, rect.top);
+                bounds.bottom = Math.min(bounds.bottom, rect.bottom);
+            }
+            el = el.parentElement;
+        }
+        return bounds;
+    }
+
+    function syncSlidePopConfirmHeight(animate) {
+        $(".slidePopConfirm:visible").each(function () {
+            var $pop = $(this);
+            var $popInner = $pop.find(".popInner");
+            var $popCont = $pop.find(".popCont");
+            var $tabPanels = $pop.find(".tab-panel");
+            var $bottomsheetLists = $pop.find(".bottomsheet-list");
+            var confirmTit = $pop.find(".popInner h1").length > 0 ? $pop.find(".popInner h1").outerHeight() : $pop.find(".popInner h2").outerHeight();
+            var confirmBtnAra = $pop.find(".popBtnWrap .popBtn").length > 0 ? $pop.find(".popBtnWrap").outerHeight() : 0;
+
+            $popCont.css({ maxHeight: "none", overflowY: "visible" });
+            $tabPanels.css({ maxHeight: "none", overflowY: "visible" });
+            $bottomsheetLists.css({ maxHeight: "none", overflowY: "visible" });
+            var naturalContH = $popCont.outerHeight();
+            var naturalTotal = naturalContH + confirmBtnAra + confirmTit;
+
+            var maxPopInnerH = $(window).height() * 0.8;
+            var targetPopInnerH = Math.min(naturalTotal, maxPopInnerH);
+            $popInner.stop(true);
+            if (animate) {
+                $popInner.animate({ height: targetPopInnerH }, 100);
+            } else {
+                $popInner.css({ height: targetPopInnerH });
+            }
+
+            var maxContH = targetPopInnerH - confirmTit - confirmBtnAra;
+            if (naturalContH <= maxContH) {
+                return;
+            }
+
+            var $scrollTarget = $bottomsheetLists.filter(":visible");
+            if ($scrollTarget.length === 0) $scrollTarget = $tabPanels.not("[hidden]");
+
+            if ($scrollTarget.length > 0) {
+                var otherH = naturalContH - $scrollTarget.outerHeight();
+                var maxScrollTargetH = Math.max(maxContH - otherH, 0);
+                $scrollTarget.css({ maxHeight: maxScrollTargetH, overflowY: "auto" });
+            } else {
+                $popCont.css({ maxHeight: maxContH, overflowY: "auto" });
+            }
         });
-    } else {
-        $popWrap.hide();
     }
 
-    if ($(".popWrap:visible").not($popWrap).length === 0) {
-        scrollUnlock(scrollPosY);
+    var slidePopContentObserver = null;
+    var slidePopSyncScheduled = false;
+
+    function scheduleSlidePopConfirmSync() {
+        if (slidePopSyncScheduled) return;
+        slidePopSyncScheduled = true;
+        window.requestAnimationFrame(function () {
+            slidePopSyncScheduled = false;
+            syncSlidePopConfirmHeight(false);
+        });
     }
 
-    $("#popupLayer_div").children(".fullLayerPop").children(".fullLayerPop").attr("aria-hidden", false).removeAttr("inert");
-    $("#popupLayer_div").children(".fullLayerPop").attr("aria-hidden", false).removeAttr("inert");
-};
+    function observeSlidePopConfirmContent() {
+        if (typeof ResizeObserver !== "function") return;
+        if (!slidePopContentObserver) slidePopContentObserver = new ResizeObserver(scheduleSlidePopConfirmSync);
+        slidePopContentObserver.disconnect();
 
-var legacyCalendarAlign = window.calendarAlign;
-
-window.calendarAlign = function () {
-    if (!isNdsScope()) {
-        if (typeof legacyCalendarAlign === "function") legacyCalendarAlign();
-        return;
+        $(".slidePopConfirm.nds .popCont").each(function () {
+            var inner = this.querySelector(".popCont__inner");
+            if (inner) {
+                slidePopContentObserver.observe(inner);
+                return;
+            }
+            for (var i = 0; i < this.children.length; i++) slidePopContentObserver.observe(this.children[i]);
+        });
     }
 
-    $(".yearSet").each(function () {
-        if ($(this).hasClass("noneAction")) {
-            $(this).attr("aria-hidden", "true");
-        } else {
-            $(this).attr("aria-hidden", "false");
-        }
-    });
+    function registerLegacyOverrides() {
+        var legacyPopClose = window.popClose;
 
-    $(".yearSet > ol").each(function () {
-        var $ol = $(this);
-        var rowH = $ol.children("li").first().outerHeight();
-        if (!rowH) {
-            return;
-        }
-        var viewH = $ol.outerHeight();
-        var padY = Math.max(0, (viewH - rowH) / 2);
+        window.popClose = function (e) {
+            var $popWrap = $(e).closest(".popWrap");
+            if (!isNdsScope($popWrap)) {
+                if (typeof legacyPopClose === "function") legacyPopClose(e);
+                return;
+            }
 
-        this.style.setProperty("padding", padY + "px 0", "important");
-        $ol.data("rowH", rowH);
+            scrollPosY = $("body").css("top");
+            var $slidePopInner = $popWrap.find(".popInner");
+            var isSlidePop = $popWrap.hasClass("slidePopOption") || $popWrap.hasClass("slidePopConfirm") || $popWrap.hasClass("bankSetWrap");
 
-        var $listIndex = $ol.find("a.active,button.active").attr("title", "선택됨").parent("li").index();
-        $ol.scrollTop($listIndex * rowH);
-    });
+            $popWrap.find(".dim").fadeOut(100);
 
-    $(".yearSet ol a,.yearSet ol button").click(function () {
-        if ($(".yearSet").hasClass("noneAction")) {
-            return;
-        }
-        var $this = $(this);
-        var $ol = $this.parents("ol");
-        var rowH = $ol.data("rowH") || $ol.children("li").first().outerHeight();
-        var $thisParent = $ol.find("a,button");
-        $thisParent.removeClass("active").attr("title", "");
-        $this.addClass("active").attr("title", "선택됨");
-        var $listIndex = $this.parent("li").index();
-        $ol.stop().animate({ scrollTop: $listIndex * rowH }, 300);
-    });
+            if (isSlidePop) {
+                $slidePopInner.animate({ height: 0 }, 150, function () {
+                    $popWrap.hide();
+                });
+            } else {
+                $popWrap.hide();
+            }
 
-    var scrollEndEvntTimerId;
-    function visibleEvnt() {
-        var $el = $(this);
-        var rowH = $el.data("rowH") || $el.children("li").first().outerHeight();
-        var items = $el.find("li");
-        var idx = Math.round($el.scrollTop() / rowH);
-        items.eq(idx).addClass("on").children().addClass("active").parent().siblings().removeClass("on").children().removeClass("active");
+            if ($(".popWrap:visible").not($popWrap).length === 0) {
+                scrollUnlock(scrollPosY);
+            }
 
-        clearTimeout(scrollEndEvntTimerId);
-        scrollEndEvntTimerId = setTimeout(function () {
-            $(".yearSet > ol").off("scroll", visibleEvnt);
-            $el.stop().animate(
-                { scrollTop: idx * rowH },
-                {
-                    duration: 40,
-                    step: function (now, fx) {
-                        if (fx.pos == 1) {
-                            $(this).scrollTop(idx * rowH - rowH);
-                            setTimeout(function () {
-                                $(".yearSet > ol").on("scroll", visibleEvnt);
-                            }, 100);
-                        }
-                    },
-                },
-            );
-        }, 100);
-    }
-
-    setTimeout(function () {
-        $(".yearSet > ol").on("scroll", visibleEvnt);
-    }, 500);
-};
-
-var legacyTooltipOpen = window.tooltipOpen;
-
-/* 툴팁이 들어갈 수 있는 위/아래 한계.
-   화면 높이뿐 아니라 잘라내는(overflow) 조상까지 따집니다.
-   히어로 카드처럼 overflow:hidden 안에 있으면 그 박스가 한계가 됩니다. */
-function tooltipBounds(el) {
-    var bounds = { top: 0, bottom: $(window).height() };
-    while (el && el !== document.body && el.nodeType === 1) {
-        var overflow = window.getComputedStyle(el).overflowY;
-        if (overflow !== "visible") {
-            var rect = el.getBoundingClientRect();
-            bounds.top = Math.max(bounds.top, rect.top);
-            bounds.bottom = Math.min(bounds.bottom, rect.bottom);
-        }
-        el = el.parentElement;
-    }
-    return bounds;
-}
-
-window.tooltipOpen = function ($obj) {
-    if (!isNdsScope($obj)) {
-        if (typeof legacyTooltipOpen === "function") legacyTooltipOpen($obj);
-        return;
-    }
-
-    var $tooltipCont = $obj.closest(".tooltipWrap").find(".tooltipCont");
-    $(".tooltipCont").removeClass("is-top").hide();
-    $tooltipCont.css({ width: $(window).width() - 32 });
-    $tooltipCont.show();
-
-    var contRect = $tooltipCont[0].getBoundingClientRect();
-    var btnRect = $obj[0].getBoundingClientRect();
-    var bounds = tooltipBounds($obj[0].parentElement);
-    var $ctaWrap = $obj.closest(".popWrap").find(".popBtnWrap");
-    if ($ctaWrap.length) bounds.bottom = Math.min(bounds.bottom, $ctaWrap[0].getBoundingClientRect().top);
-
-    if (contRect.bottom > bounds.bottom && btnRect.top - bounds.top > bounds.bottom - btnRect.bottom) {
-        $tooltipCont.addClass("is-top");
-    }
-};
-
-var legacyTooltipClose = window.tooltipClose;
-
-window.tooltipClose = function ($obj) {
-    $obj.closest(".tooltipCont").removeClass("is-top");
-    if (typeof legacyTooltipClose === "function") legacyTooltipClose($obj);
-};
-
-function syncSlidePopConfirmHeight(animate) {
-    $(".slidePopConfirm:visible").each(function () {
-        var $pop = $(this);
-        var $popInner = $pop.find(".popInner");
-        var $popCont = $pop.find(".popCont");
-        var $tabPanels = $pop.find(".tab-panel");
-        var $bottomsheetLists = $pop.find(".bottomsheet-list");
-        var confirmTit = $pop.find(".popInner h1").length > 0 ? $pop.find(".popInner h1").outerHeight() : $pop.find(".popInner h2").outerHeight();
-        var confirmBtnAra = $pop.find(".popBtnWrap .popBtn").length > 0 ? $pop.find(".popBtnWrap").outerHeight() : 0;
-
-        $popCont.css({ maxHeight: "none", overflowY: "visible" });
-        $tabPanels.css({ maxHeight: "none", overflowY: "visible" });
-        $bottomsheetLists.css({ maxHeight: "none", overflowY: "visible" });
-        var naturalContH = $popCont.outerHeight();
-        var naturalTotal = naturalContH + confirmBtnAra + confirmTit;
-
-        var maxPopInnerH = $(window).height() * 0.8;
-        var targetPopInnerH = Math.min(naturalTotal, maxPopInnerH);
-        $popInner.stop(true);
-        if (animate) {
-            $popInner.animate({ height: targetPopInnerH }, 100);
-        } else {
-            $popInner.css({ height: targetPopInnerH });
-        }
-
-        var maxContH = targetPopInnerH - confirmTit - confirmBtnAra;
-        if (naturalContH <= maxContH) {
-            return;
-        }
-
-        var $scrollTarget = $bottomsheetLists.filter(":visible");
-        if ($scrollTarget.length === 0) $scrollTarget = $tabPanels.not("[hidden]");
-
-        if ($scrollTarget.length > 0) {
-            var otherH = naturalContH - $scrollTarget.outerHeight();
-            var maxScrollTargetH = Math.max(maxContH - otherH, 0);
-            $scrollTarget.css({ maxHeight: maxScrollTargetH, overflowY: "auto" });
-        } else {
-            $popCont.css({ maxHeight: maxContH, overflowY: "auto" });
-        }
-    });
-}
-window.syncSlidePopConfirmHeight = syncSlidePopConfirmHeight;
-
-var slidePopContentObserver = null;
-var slidePopSyncScheduled = false;
-
-function scheduleSlidePopConfirmSync() {
-    if (slidePopSyncScheduled) return;
-    slidePopSyncScheduled = true;
-    window.requestAnimationFrame(function () {
-        slidePopSyncScheduled = false;
-        syncSlidePopConfirmHeight(false);
-    });
-}
-
-function observeSlidePopConfirmContent() {
-    if (typeof ResizeObserver !== "function") return;
-    if (!slidePopContentObserver) slidePopContentObserver = new ResizeObserver(scheduleSlidePopConfirmSync);
-    slidePopContentObserver.disconnect();
-
-    $(".slidePopConfirm.nds .popCont").each(function () {
-        var inner = this.querySelector(".popCont__inner");
-        if (inner) {
-            slidePopContentObserver.observe(inner);
-            return;
-        }
-        for (var i = 0; i < this.children.length; i++) slidePopContentObserver.observe(this.children[i]);
-    });
-}
-window.observeSlidePopConfirmContent = observeSlidePopConfirmContent;
-
-window.slidePopConfirm = function () {
-    scrollLock();
-    $(".slidePopConfirm").show();
-    setTimeout(function () {
-        syncSlidePopConfirmHeight(true);
-        observeSlidePopConfirmContent();
-    }, 100);
-};
-
-$(window).on("resize orientationchange", function () {
-    if (!isNdsScope()) return;
-    syncSlidePopConfirmHeight(false);
-    if ($(".fullLayerPop:visible").length > 0 && typeof window.fullLayerHeight === "function") {
-        window.fullLayerHeight();
-    }
-});
-
-window.renderBottomsheetList = function (options) {
-    options = options || {};
-    var container = typeof options.container === "string" ? document.getElementById(options.container) : options.container;
-    if (!container) return;
-
-    var items = options.items || [];
-    var selectedIndex = typeof options.selectedIndex === "number" ? options.selectedIndex : -1;
-    var getLabel =
-        options.getLabel ||
-        function (item) {
-            return item.label;
+            $("#popupLayer_div").children(".fullLayerPop").children(".fullLayerPop").attr("aria-hidden", false).removeAttr("inert");
+            $("#popupLayer_div").children(".fullLayerPop").attr("aria-hidden", false).removeAttr("inert");
         };
-    var onSelect = options.onSelect;
 
-    container.innerHTML = "";
-    items.forEach(function (item, i) {
-        var selected = i === selectedIndex;
-        var btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "bottomsheet-list__item" + (selected ? " is-selected" : "");
-        btn.setAttribute("role", "option");
-        btn.setAttribute("aria-selected", selected ? "true" : "false");
+        var legacyCalendarAlign = window.calendarAlign;
 
-        var label = document.createElement("span");
-        label.textContent = getLabel(item);
-        btn.appendChild(label);
+        window.calendarAlign = function () {
+            if (!isNdsScope()) {
+                if (typeof legacyCalendarAlign === "function") legacyCalendarAlign();
+                return;
+            }
 
-        var check = document.createElement("span");
-        check.className = "bottomsheet-list__check";
-        check.setAttribute("aria-hidden", "true");
-        btn.appendChild(check);
+            $(".yearSet").each(function () {
+                if ($(this).hasClass("noneAction")) {
+                    $(this).attr("aria-hidden", "true");
+                } else {
+                    $(this).attr("aria-hidden", "false");
+                }
+            });
 
-        btn.addEventListener("click", function () {
-            if (typeof onSelect === "function") onSelect(i, item);
+            $(".yearSet > ol").each(function () {
+                var $ol = $(this);
+                var rowH = $ol.children("li").first().outerHeight();
+                if (!rowH) {
+                    return;
+                }
+                var viewH = $ol.outerHeight();
+                var padY = Math.max(0, (viewH - rowH) / 2);
+
+                this.style.setProperty("padding", padY + "px 0", "important");
+                $ol.data("rowH", rowH);
+
+                var $listIndex = $ol.find("a.active,button.active").attr("title", "선택됨").parent("li").index();
+                $ol.scrollTop($listIndex * rowH);
+            });
+
+            $(".yearSet ol a,.yearSet ol button").click(function () {
+                if ($(".yearSet").hasClass("noneAction")) {
+                    return;
+                }
+                var $this = $(this);
+                var $ol = $this.parents("ol");
+                var rowH = $ol.data("rowH") || $ol.children("li").first().outerHeight();
+                var $thisParent = $ol.find("a,button");
+                $thisParent.removeClass("active").attr("title", "");
+                $this.addClass("active").attr("title", "선택됨");
+                var $listIndex = $this.parent("li").index();
+                $ol.stop().animate({ scrollTop: $listIndex * rowH }, 300);
+            });
+
+            var scrollEndEvntTimerId;
+            function visibleEvnt() {
+                var $el = $(this);
+                var rowH = $el.data("rowH") || $el.children("li").first().outerHeight();
+                var items = $el.find("li");
+                var idx = Math.round($el.scrollTop() / rowH);
+                items.eq(idx).addClass("on").children().addClass("active").parent().siblings().removeClass("on").children().removeClass("active");
+
+                clearTimeout(scrollEndEvntTimerId);
+                scrollEndEvntTimerId = setTimeout(function () {
+                    $(".yearSet > ol").off("scroll", visibleEvnt);
+                    $el.stop().animate(
+                        { scrollTop: idx * rowH },
+                        {
+                            duration: 40,
+                            step: function (now, fx) {
+                                if (fx.pos == 1) {
+                                    $(this).scrollTop(idx * rowH - rowH);
+                                    setTimeout(function () {
+                                        $(".yearSet > ol").on("scroll", visibleEvnt);
+                                    }, 100);
+                                }
+                            },
+                        },
+                    );
+                }, 100);
+            }
+
+            setTimeout(function () {
+                $(".yearSet > ol").on("scroll", visibleEvnt);
+            }, 500);
+        };
+
+        var legacyTooltipOpen = window.tooltipOpen;
+
+        window.tooltipOpen = function ($obj) {
+            if (!isNdsScope($obj)) {
+                if (typeof legacyTooltipOpen === "function") legacyTooltipOpen($obj);
+                return;
+            }
+
+            var $tooltipCont = $obj.closest(".tooltipWrap").find(".tooltipCont");
+            $(".tooltipCont").removeClass("is-top").hide();
+            $tooltipCont.css({ width: $(window).width() - 32 });
+            $tooltipCont.show();
+
+            var contRect = $tooltipCont[0].getBoundingClientRect();
+            var btnRect = $obj[0].getBoundingClientRect();
+            var bounds = tooltipBounds($obj[0].parentElement);
+            var $ctaWrap = $obj.closest(".popWrap").find(".popBtnWrap");
+            if ($ctaWrap.length) bounds.bottom = Math.min(bounds.bottom, $ctaWrap[0].getBoundingClientRect().top);
+
+            if (contRect.bottom > bounds.bottom && btnRect.top - bounds.top > bounds.bottom - btnRect.bottom) {
+                $tooltipCont.addClass("is-top");
+            }
+        };
+
+        var legacyTooltipClose = window.tooltipClose;
+
+        window.tooltipClose = function ($obj) {
+            $obj.closest(".tooltipCont").removeClass("is-top");
+            if (typeof legacyTooltipClose === "function") legacyTooltipClose($obj);
+        };
+
+        window.syncSlidePopConfirmHeight = syncSlidePopConfirmHeight;
+        window.observeSlidePopConfirmContent = observeSlidePopConfirmContent;
+
+        window.slidePopConfirm = function () {
+            scrollLock();
+            $(".slidePopConfirm").show();
+            setTimeout(function () {
+                syncSlidePopConfirmHeight(true);
+                observeSlidePopConfirmContent();
+            }, 100);
+        };
+
+        $(window).on("resize orientationchange", function () {
+            syncSlidePopConfirmHeight(false);
+            if ($(".fullLayerPop:visible").length > 0 && typeof window.fullLayerHeight === "function") {
+                window.fullLayerHeight();
+            }
         });
 
-        container.appendChild(btn);
-    });
-};
+    }
 
-(function () {
-    "use strict";
+    // ---------------------------------------------------------------
+    // .nds 컴포넌트 init 함수들 (activate() 이후, DOM 준비 시 1회 실행)
+    // ---------------------------------------------------------------
 
     var autoIdSeq = 0;
     function ensureId(el, prefix) {
@@ -467,7 +458,7 @@ window.renderBottomsheetList = function (options) {
                 return id ? document.getElementById(id) : null;
             }
 
-            function activate(tab, moveFocus) {
+            function activateTab(tab, moveFocus) {
                 tabs.forEach(function (t) {
                     var selected = t === tab;
                     t.setAttribute("aria-selected", selected ? "true" : "false");
@@ -481,7 +472,7 @@ window.renderBottomsheetList = function (options) {
 
             tabs.forEach(function (tab, i) {
                 tab.addEventListener("click", function () {
-                    activate(tab, false);
+                    activateTab(tab, false);
                 });
                 tab.addEventListener("keydown", function (e) {
                     var targetIndex = null;
@@ -499,7 +490,7 @@ window.renderBottomsheetList = function (options) {
                     e.preventDefault();
 
                     e.stopPropagation();
-                    activate(tabs[targetIndex], true);
+                    activateTab(tabs[targetIndex], true);
                 });
             });
         });
@@ -769,54 +760,7 @@ window.renderBottomsheetList = function (options) {
         });
     }
 
-    /*
-     * html 엘리먼트에 nds 클래스를 동기화한다.
-     * - .wrapper.nds 뿐 아니라 .popWrap.nds(팝업 단독 화면)만 있어도 반영한다.
-     * - querySelector(".wrapper")는 문서상 첫 번째 요소만 잡기 때문에, 공통 헤더/푸터 include 등에서
-     *   nds가 없는 다른 .wrapper가 먼저 나오면 조용히 실패할 수 있다. .wrapper.nds 처럼 클래스를
-     *   합쳐서 조회하면 순서와 무관하게 nds가 붙은 요소를 바로 찾을 수 있어 이 문제를 피한다.
-     * - DOMContentLoaded 시점에는 nds 대상이 전혀 없다가(레거시 화면에서 nds 팝업이 나중에 동적으로
-     *   열리는 경우 등) 이후 DOM에 추가되는 경우까지 MutationObserver로 잡아서 그때 다시 반영한다.
-     */
-    function syncNdsClassToHtml() {
-        var observer = null;
-
-        function hasNdsRoot() {
-            return !!(document.querySelector(".wrapper.nds") || document.querySelector(".popWrap.nds"));
-        }
-
-        function stopWatching() {
-            if (observer) {
-                observer.disconnect();
-                observer = null;
-            }
-        }
-
-        function applyIfNeeded() {
-            if (document.documentElement.classList.contains("nds")) {
-                stopWatching();
-                return;
-            }
-            if (hasNdsRoot()) {
-                document.documentElement.classList.add("nds");
-                stopWatching();
-            }
-        }
-
-        applyIfNeeded();
-
-        if (!document.documentElement.classList.contains("nds") && window.MutationObserver) {
-            observer = new MutationObserver(applyIfNeeded);
-            observer.observe(document.documentElement, { childList: true, subtree: true });
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        // nds 대상이 처음부터 없는 순수 레거시 화면에서도, 이후 nds 팝업이 동적으로 열릴 수 있으므로
-        // isNdsScope() 게이트보다 먼저, 조건 없이 호출한다. 내부적으로 nds 대상이 없으면 아무 것도 하지 않는다.
-        syncNdsClassToHtml();
-
-        if (!isNdsScope()) return;
+    function runFeatureInit() {
         initAccordion();
         initTermsToggle();
         initTermsSelectAll();
@@ -838,5 +782,51 @@ window.renderBottomsheetList = function (options) {
                 if ($(".slidePopConfirm.nds:visible").length > 0) syncSlidePopConfirmHeight(false);
             });
         }
-    });
+    }
+
+    // ---------------------------------------------------------------
+    // 활성화 게이트: .wrapper.nds / .popWrap.nds 가 있을 때만, 딱 한 번
+    // ---------------------------------------------------------------
+    function activate() {
+        if (activated) return;
+        activated = true;
+
+        document.documentElement.classList.add("nds");
+        registerLegacyOverrides();
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", runFeatureInit, { once: true });
+        } else {
+            runFeatureInit();
+        }
+    }
+
+    function watchForNds() {
+        if (hasNdsRoot()) {
+            activate();
+            return;
+        }
+
+        if (!window.MutationObserver) {
+            // 구형 브라우저 폴백: DOMContentLoaded 시점에 한 번 더 확인
+            document.addEventListener(
+                "DOMContentLoaded",
+                function () {
+                    if (hasNdsRoot()) activate();
+                },
+                { once: true },
+            );
+            return;
+        }
+
+        var observer = new MutationObserver(function () {
+            if (hasNdsRoot()) {
+                observer.disconnect();
+                activate();
+            }
+        });
+        observer.observe(document.documentElement, { childList: true, subtree: true });
+    }
+
+    watchForNds();
 })();

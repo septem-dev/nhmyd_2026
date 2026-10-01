@@ -19,16 +19,16 @@
 
                 <h2 class="guide-title">bottomsheet-list — 단일 선택 목록</h2>
                 <!-- prettier-ignore -->
-                <p class="note">선택된 항목에 <code>is-selected</code> + <code>aria-pressed="true"</code>를 줍니다. 항목이 데이터로 내려오는 경우 <code>window.renderBottomsheetList()</code>로 그립니다.</p>
+                <p class="note">선택된 항목에 <code>is-selected</code> + <code>aria-pressed="true"</code>를 줍니다. 항목이 데이터로 내려오는 경우 화면 스크립트에서 직접 버튼을 생성해 그립니다.</p>
                 <div class="demo">
                     <button type="button" class="btn is-tertiary is-md" id="openList">계좌 선택 시트 열기</button>
                 </div>
 
                 <hr class="divider" />
 
-                <h2 class="guide-title">renderBottomsheetList() — 스크립트로 그리기</h2>
+                <h2 class="guide-title">스크립트로 그리기</h2>
                 <!-- prettier-ignore -->
-                <p class="note"><code>{ container, items, selectedIndex, getLabel, onSelect }</code>를 넘기면 항목 버튼을 만들고 선택 표시(<code>bottomsheet-list__check</code>)까지 붙여 줍니다.</p>
+                <p class="note">데이터 배열을 받아 항목 버튼을 만들고 선택 표시(<code>bottomsheet-list__check</code>)까지 붙이는 로컬 렌더링 예시입니다.</p>
                 <div class="demo">
                     <button type="button" class="btn is-tertiary is-md" id="openRendered">스크립트로 그린 시트 열기</button>
                     <p class="text text--body3 text--font4" style="margin-top: 12px">선택한 값 : <strong id="pickedLabel">-</strong></p>
@@ -148,19 +148,43 @@
                     { label: '농협은행 ISA', amount: 52000000 },
                     { label: 'NH투자증권 종합위탁', amount: 31000000 }
                 ];
-                document.getElementById('openRendered').addEventListener('click', function () {
-                    window.renderBottomsheetList({
-                        container: 'renderedList',
-                        items: ITEMS,
-                        selectedIndex: 1,
-                        getLabel: function (item) {
-                            return item.label;
-                        },
-                        onSelect: function (i, item) {
+
+                // 2026-10: update-ui.js의 공용 renderBottomsheetList()는 사용처가 없어져
+                // 제거했습니다. 이 가이드 페이지의 데모 렌더링도 화면 로컬 함수로 분리합니다.
+                function renderRenderedList(selectedIndex) {
+                    var container = document.getElementById('renderedList');
+                    if (!container) return;
+
+                    container.innerHTML = '';
+                    ITEMS.forEach(function (item, i) {
+                        var selected = i === selectedIndex;
+
+                        var btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'bottomsheet-list__item' + (selected ? ' is-selected' : '');
+                        btn.setAttribute('role', 'option');
+                        btn.setAttribute('aria-selected', selected ? 'true' : 'false');
+
+                        var label = document.createElement('span');
+                        label.textContent = item.label;
+                        btn.appendChild(label);
+
+                        var check = document.createElement('span');
+                        check.className = 'bottomsheet-list__check';
+                        check.setAttribute('aria-hidden', 'true');
+                        btn.appendChild(check);
+
+                        btn.addEventListener('click', function () {
                             document.getElementById('pickedLabel').textContent = item.label;
                             $('#sheetRendered .popClose').trigger('click');
-                        }
+                        });
+
+                        container.appendChild(btn);
                     });
+                }
+
+                document.getElementById('openRendered').addEventListener('click', function () {
+                    renderRenderedList(1);
                     open('sheetRendered');
                 });
 

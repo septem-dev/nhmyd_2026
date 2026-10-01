@@ -107,17 +107,43 @@
                     if (enabled) { $confirmBtn.removeAttr('aria-disabled'); } else { $confirmBtn.attr('aria-disabled', 'true'); }
                 }
 
+                // 2026-10 개발 피드백: update-ui.js의 공용 renderBottomsheetList()는 item.label
+                // 한 줄 텍스트만 다루는 범용 함수라, 실제 직원 검색 결과(이름/사번/영업점 등 다중 필드,
+                // 검색어 하이라이트 등)를 다루기엔 커스터마이징 여지가 부족하다는 피드백을 받았습니다.
+                // 그래서 이 화면만 리스트 렌더링을 직접 소유하도록 로컬 함수로 분리했습니다.
+                // (update-ui.js의 renderBottomsheetList()는 다른 화면(MSAR3110P_01.html)에서
+                // 계속 사용 중이라 그대로 유지했습니다.)
                 function renderList() {
-                    window.renderBottomsheetList({
-                        container: 'searchList1',
-                        items: currentResults,
-                        selectedIndex: selectedIndex,
-                        onSelect: function (i) {
+                    var container = document.getElementById('searchList1');
+                    if (!container) return;
+
+                    container.innerHTML = '';
+                    currentResults.forEach(function (item, i) {
+                        var selected = i === selectedIndex;
+
+                        var btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'bottomsheet-list__item' + (selected ? ' is-selected' : '');
+                        btn.setAttribute('role', 'option');
+                        btn.setAttribute('aria-selected', selected ? 'true' : 'false');
+
+                        var label = document.createElement('span');
+                        label.textContent = item.label;
+                        btn.appendChild(label);
+
+                        var check = document.createElement('span');
+                        check.className = 'bottomsheet-list__check';
+                        check.setAttribute('aria-hidden', 'true');
+                        btn.appendChild(check);
+
+                        btn.addEventListener('click', function () {
                             selectedIndex = selectedIndex === i ? -1 : i;
                             renderList();
                             syncConfirmBtn();
                             resyncPopHeight();
-                        }
+                        });
+
+                        container.appendChild(btn);
                     });
                 }
 
