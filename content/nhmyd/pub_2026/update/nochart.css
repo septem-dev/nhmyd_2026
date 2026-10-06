@@ -1,5 +1,5 @@
 @charset "utf-8";
-/* nochart.css — Chart.js 없이 그린 차트 검토용(*_nochart.html) 스타일
+/* nochart.css — Chart.js 없이 그린 차트(기본 화면용, Chart.js 버전은 *_chart.html) 스타일
    확정 시 update.css로 옮길 것 */
 
 /* 도넛 (NH_MD_AI_01, NH_MD_AI_04, MSPS3430P) */
@@ -21,7 +21,8 @@
 .nds .nc-stack__seg {flex:0 1 0%;min-width:0.6%}
 .nds .nc-stack__seg.is-edge {min-width:22px}
 .nds .nc-stack.is-play {animation:ncStackReveal 1s cubic-bezier(0.165, 0.84, 0.44, 1) both}
-@keyframes ncStackReveal {from {clip-path:inset(0 100% 0 0)} to {clip-path:inset(0 0 0 0)}}
+/* 잘라내는 영역에도 막대와 같은 둥근 모서리(8px)를 줘서, 펼쳐지는 동안 오른쪽 끝이 각지지 않게 함 */
+@keyframes ncStackReveal {from {clip-path:inset(0 100% 0 0 round 8px)} to {clip-path:inset(0 0 0 0 round 8px)}}
 
 /* 증감 비교 막대 (NH_MD_01~04 인사이트 카드)
    - 가운데(0) 기준 왼쪽 = 이전, 오른쪽 = 현재. 막대 길이(%)는 축 최대값 대비 비율

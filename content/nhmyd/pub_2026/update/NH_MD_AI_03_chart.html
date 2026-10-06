@@ -2,65 +2,7 @@
 <html lang="ko">
     <head>
         <meta charset="utf-8" />
-        <!-- [nochart] 검토용 사본: 공통 head(head-mb-update.js)에서 chart.js 한 줄만 뺀 내용을 인라인 + nochart.css/js 추가 -->
-        <script>
-            /**
-             * Head include
-             * ------------------
-             * css & script 공통 include
-             */
-
-            (function () {
-                var str =
-                    "" +
-                    '<meta http-equiv="Content-Script-Type" content="text/javascript">' +
-                    '<meta http-equiv="Content-Style-Type" content="text/css">' +
-                    '<meta http-equiv="X-UA-Compatible" content="IE=edge">' +
-                    '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">' +
-                    '<meta name="apple-mobile-web-app-title" content="NH마이데이터">' +
-                    '<meta http-equiv="imagetoolbar" content="no">' +
-                    '<meta name="robots" content="no-index,follow">' +
-                    '<meta name="title" content="">' +
-                    '<meta name="author" content="">' +
-                    '<meta name="content" content="">' +
-                    '<meta name="keywords" content="NH마이데이터">' +
-                    '<meta name="description" content="NH마이데이터">' +
-                    '<meta http-equiv="Pragma" content="no-cache">' +
-                    '<meta http-equiv="Expires" content="-1">' +
-                    // title은 공통 include에 넣지 않음 — 각 html 파일에서 <title>로 직접 지정
-
-                    '<link type="text/css" rel="stylesheet" href="../../css/swiper.min.css">' +
-                    '<link type="text/css" rel="stylesheet" href="../../css/nh_base.css">' +
-                    '<link rel="stylesheet" type="text/css" href="../../css/nh_layout.css">' +
-                    '<link rel="stylesheet" type="text/css" href="../../css/nh_comm.css">' +
-                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_logos.css">' +
-                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_com.css" id="changeCom">' +
-                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_cont.css" id="changeCont">' +
-                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd.css">' + //2023 마이데이터 고도화
-                    '<link type="text/css" rel="stylesheet" href="../../css/ms_allone.css">' +
-                    '<link type="text/css" rel="stylesheet" href="../../css/ms_pay.css">' + //NH-Pay
-                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd_mb.css?20250912">' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
-                    //'<link rel="stylesheet" type="text/css" href="../../css/update.css">' + //2026 NH농협은행 nds 적용
-                    // OF는 실 단말 하이브리드 웹뷰에서만 주입되는 네이티브 브릿지 전역객체라, pub 폴더를 브라우저로 단독
-                    // 열람하는 이 환경에는 존재하지 않음. nhasset-ui.js의 popOpenRun()이 OF.exeStatus를 가드 없이
-                    // 참조하고 있어서(레거시 원본 소스는 수정하지 않음) 여기서 빈 객체로 미리 정의해 ReferenceError를
-                    // 막는다. 실제 단말에서는 OF가 먼저 주입되어 있으므로 이 줄은 아무 영향을 주지 않는다.
-                    "<script>window.OF = window.OF || {};<\/script>" +
-                    '<script src="../../js/jquery-1.9.1.min.js"><\/script>' +
-                    '<script src="../../js/jquery-ui.min.js"><\/script>' +
-                    '<script src="../../js/jquery.ui.touch-punch.min.js"><\/script>' +
-                    '<script src="../../js/swiper.7.4.1.min.js"><\/script>' +
-                    '<script src="../../js/common_ui.js"><\/script>' +
-                    '<script src="../../js/nhasset-ui.js"><\/script>' +
-                    '<script src="../../js/nhasset-ui-myd.js"><\/script>' + //2023 마이데이터 고도화
-                    '<script src="../../js/nhasset-ui-myd-mb.js"><\/script>' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
-                    '<script src="../../js/update-ui.js"><\/script>' + '<link rel="stylesheet" type="text/css" href="./nochart.css">' + '<script src="./nochart.js"><\/script>'; //2026 NH농협은행 nds 적용 화면 UI 스크립트
-                //    '<link type="text/css" rel="stylesheet" href="../pub-assets/css/guide.css">'; //가이드용 css 실제 서비스에는 불필요
-                // +'<script src="../pub-assets/js/guide.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요
-                // +'<script src="../pub-assets/js/guide-mb.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요 //2025 NH농협은행 비대면 마이데이터 고객여정 개선
-                document.write(str);
-            })();
-        </script>
+        <script src="../pub-assets/js/head-mb-update.js"></script>
         <title>AI 포트폴리오 진단</title>
     </head>
 
@@ -122,8 +64,7 @@
                             <p class="curve-chart__axis-name">기대수익</p>
                             <p class="curve-chart__axis-top">높음</p>
                             <div class="curve-chart__box">
-                                <!-- [nochart] 정적 SVG: 곡선은 화면 폭에 맞춰 늘어나고(선 두께 유지), 점·라벨은 % 좌표로 배치. 데이터 연동 시 좌표 계산은 개발 -->
-                                <span class="nc-plot" style="--nc-base:85.37%"><svg class="nc-line" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M58.82 847.87C58.82 847.87 69.41 847.2 76.47 846.65C83.53 846.04 87.06 845.73 94.12 845.06C101.18 844.39 104.71 844.02 111.76 843.23C118.82 842.38 122.35 841.95 129.41 840.91C136.47 839.94 140 839.39 147.06 838.17C154.12 836.95 157.65 836.34 164.71 834.82C171.76 833.35 175.29 832.56 182.35 830.79C189.41 829.02 192.98 828.11 200 825.98C207.1 823.78 210.62 822.68 217.65 820.12C224.74 817.56 228.27 816.16 235.29 813.11C242.39 810 245.92 808.41 252.94 804.76C260.04 801.1 263.6 799.15 270.59 794.82C277.72 790.43 281.25 788.11 288.24 783.11C295.37 777.93 298.93 775.18 305.88 769.33C313.05 763.29 316.62 760.12 323.53 753.35C330.74 746.28 334.26 742.62 341.18 734.82C348.38 726.77 351.91 722.5 358.82 713.72C366.03 704.57 369.56 699.76 376.47 689.94C383.68 679.63 387.21 674.33 394.12 663.41C401.32 652.07 404.85 646.22 411.76 634.39C418.97 622.07 422.46 615.73 429.41 603.05C436.58 589.88 440.07 583.23 447.06 569.82C454.19 556.1 457.68 549.15 464.71 535.24C471.8 521.22 475.29 514.09 482.35 500C489.41 485.91 492.9 478.78 500 464.76C507.02 450.85 510.51 443.9 517.65 430.18C524.63 416.77 528.13 410.12 535.29 396.95C542.24 384.27 545.74 377.93 552.94 365.61C559.85 353.78 563.38 347.93 570.59 336.59C577.5 325.67 581.03 320.37 588.24 310.06C595.15 300.24 598.68 295.43 605.88 286.28C612.79 277.5 616.32 273.23 623.53 265.18C630.44 257.38 633.97 253.72 641.18 246.65C648.09 239.88 651.65 236.71 658.82 230.67C665.77 224.82 669.34 222.07 676.47 216.89C683.46 211.89 686.99 209.57 694.12 205.18C701.1 200.85 704.67 198.9 711.76 195.24C718.79 191.59 722.32 190 729.41 186.89C736.43 183.84 739.96 182.44 747.06 179.88C754.08 177.32 757.61 176.22 764.71 174.02C771.73 171.89 775.29 170.98 782.35 169.21C789.41 167.44 792.94 166.65 800 165.18C807.06 163.66 810.59 163.05 817.65 161.83C824.71 160.61 828.24 160.06 835.29 159.09C842.35 158.05 845.88 157.62 852.94 156.77C860 155.98 863.53 155.61 870.59 154.94C877.65 154.27 881.18 153.96 888.24 153.35C895.29 152.8 898.82 152.56 905.88 152.13C912.94 151.65 916.47 151.46 923.53 151.1C930.59 150.67 941.18 150.24 941.18 150.24" fill="none" stroke="#ff7e7e" stroke-width="2" vector-effect="non-scaling-stroke"/></svg><span class="nc-point" style="left:80.88%;top:16.05%;background:#ff7e7e"><span class="nc-point__label">최적</span></span><span class="nc-point" style="left:61.47%;top:55.66%;background:#707070"><span class="nc-point__label">제안</span></span></span>
+                                <canvas id="ai03ReturnChart" aria-hidden="true"></canvas>
                             </div>
                             <p class="curve-chart__axis-bottom">
                                 <span>낮음</span>
@@ -403,7 +344,80 @@
             <span class="btn-floating__icon" aria-hidden="true"></span>
         </button>
         <script>
-            /* [nochart] 기대수익 곡선은 정적 SVG로 대체 */
+            (function () {
+                var canvas = document.getElementById('ai03ReturnChart');
+                if (!canvas || typeof Chart === 'undefined') return;
+
+                var PAD_X = (100 * 16) / 240;
+                var PAD_Y = (100 * 24) / 116;
+
+                var curve = [];
+                for (var x = 0; x <= 100; x += 2) {
+                    curve.push({ x: x, y: 100 / (1 + Math.exp(-0.1 * (x - 48))) });
+                }
+
+                var POINTS = [
+                    { x: 85, y: 98, label: '최적', color: '#ff7e7e' },
+                    { x: 63, y: 42, label: '제안', color: '#707070' }
+                ];
+
+                var pointLabelPlugin = {
+                    id: 'ai03PointLabel',
+                    afterDatasetsDraw: function (chart) {
+                        var ctx = chart.ctx;
+                        ctx.save();
+                        ctx.font = '400 10px Pretendard, sans-serif';
+                        ctx.fillStyle = '#121212';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'top';
+                        POINTS.forEach(function (p, i) {
+                            var meta = chart.getDatasetMeta(i + 1);
+                            if (!meta || !meta.data || !meta.data[0]) return;
+                            var el = meta.data[0];
+                            ctx.fillText(p.label, el.x, el.y + 4 + 4);
+                        });
+                        ctx.restore();
+                    }
+                };
+
+                var datasets = [
+                    {
+                        type: 'line',
+                        data: curve,
+                        borderColor: '#ff7e7e',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        tension: 0.4,
+                        fill: false
+                    }
+                ];
+                POINTS.forEach(function (p) {
+                    datasets.push({
+                        type: 'scatter',
+                        data: [{ x: p.x, y: p.y }],
+                        backgroundColor: p.color,
+                        borderWidth: 0,
+                        pointRadius: 4,
+                        pointHoverRadius: 4
+                    });
+                });
+
+                new Chart(canvas.getContext('2d'), {
+                    data: { datasets: datasets },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        events: [],
+                        layout: { padding: 0 },
+                        scales: {
+                            x: { type: 'linear', min: -PAD_X, max: 100 + PAD_X, display: false, grid: { display: false } },
+                            y: { type: 'linear', min: -PAD_Y, max: 100 + PAD_Y, display: false, grid: { display: false } }
+                        },
+                        plugins: { legend: { display: false }, tooltip: { enabled: false } }
+                    },
+                    plugins: [pointLabelPlugin]
+                });
+            })();
 
             (function() {
                 var floating = document.querySelector('.btn-floating__circle');

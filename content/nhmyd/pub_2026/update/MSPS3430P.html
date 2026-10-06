@@ -2,62 +2,70 @@
 <html lang="ko">
     <head>
         <meta charset="utf-8" />
-        <script src="../pub-assets/js/head-mb-update.js"></script>
+        <!-- [nochart] Chart.js 미사용 기본 버전 (Chart.js 버전: 파일명_chart.html) — 공통 head(head-mb-update.js)에서 chart.js 한 줄만 뺀 내용을 인라인 + nochart.css/js 추가 -->
+        <script>
+            /**
+             * Head include
+             * ------------------
+             * css & script 공통 include
+             */
+
+            (function () {
+                var str =
+                    "" +
+                    '<meta http-equiv="Content-Script-Type" content="text/javascript">' +
+                    '<meta http-equiv="Content-Style-Type" content="text/css">' +
+                    '<meta http-equiv="X-UA-Compatible" content="IE=edge">' +
+                    '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">' +
+                    '<meta name="apple-mobile-web-app-title" content="NH마이데이터">' +
+                    '<meta http-equiv="imagetoolbar" content="no">' +
+                    '<meta name="robots" content="no-index,follow">' +
+                    '<meta name="title" content="">' +
+                    '<meta name="author" content="">' +
+                    '<meta name="content" content="">' +
+                    '<meta name="keywords" content="NH마이데이터">' +
+                    '<meta name="description" content="NH마이데이터">' +
+                    '<meta http-equiv="Pragma" content="no-cache">' +
+                    '<meta http-equiv="Expires" content="-1">' +
+                    // title은 공통 include에 넣지 않음 — 각 html 파일에서 <title>로 직접 지정
+
+                    '<link type="text/css" rel="stylesheet" href="../../css/swiper.min.css">' +
+                    '<link type="text/css" rel="stylesheet" href="../../css/nh_base.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nh_layout.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nh_comm.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_logos.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_com.css" id="changeCom">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_cont.css" id="changeCont">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd.css">' + //2023 마이데이터 고도화
+                    '<link type="text/css" rel="stylesheet" href="../../css/ms_allone.css">' +
+                    '<link type="text/css" rel="stylesheet" href="../../css/ms_pay.css">' + //NH-Pay
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd_mb.css?20250912">' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                    //'<link rel="stylesheet" type="text/css" href="../../css/update.css">' + //2026 NH농협은행 nds 적용
+                    // OF는 실 단말 하이브리드 웹뷰에서만 주입되는 네이티브 브릿지 전역객체라, pub 폴더를 브라우저로 단독
+                    // 열람하는 이 환경에는 존재하지 않음. nhasset-ui.js의 popOpenRun()이 OF.exeStatus를 가드 없이
+                    // 참조하고 있어서(레거시 원본 소스는 수정하지 않음) 여기서 빈 객체로 미리 정의해 ReferenceError를
+                    // 막는다. 실제 단말에서는 OF가 먼저 주입되어 있으므로 이 줄은 아무 영향을 주지 않는다.
+                    "<script>window.OF = window.OF || {};<\/script>" +
+                    '<script src="../../js/jquery-1.9.1.min.js"><\/script>' +
+                    '<script src="../../js/jquery-ui.min.js"><\/script>' +
+                    '<script src="../../js/jquery.ui.touch-punch.min.js"><\/script>' +
+                    '<script src="../../js/swiper.7.4.1.min.js"><\/script>' +
+                    '<script src="../../js/common_ui.js"><\/script>' +
+                    '<script src="../../js/nhasset-ui.js"><\/script>' +
+                    '<script src="../../js/nhasset-ui-myd.js"><\/script>' + //2023 마이데이터 고도화
+                    '<script src="../../js/nhasset-ui-myd-mb.js"><\/script>' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                    '<script src="../../js/update-ui.js"><\/script>' + '<link rel="stylesheet" type="text/css" href="./nochart.css">' + '<script src="./nochart.js"><\/script>'; //2026 NH농협은행 nds 적용 화면 UI 스크립트
+                //    '<link type="text/css" rel="stylesheet" href="../pub-assets/css/guide.css">'; //가이드용 css 실제 서비스에는 불필요
+                // +'<script src="../pub-assets/js/guide.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요
+                // +'<script src="../pub-assets/js/guide-mb.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요 //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                document.write(str);
+            })();
+        </script>
         <title>[P] 상품구매카테고리 수집동의</title>
         <script>
             $(document).ready(function () {
                 slidePopConfirm();
 
-                if (typeof Chart !== 'undefined') {
-                    var donutCanvas = document.querySelector('[data-category-donut-chart]');
-                    if (donutCanvas) {
-                        var categoryColors = ['#38e784', '#ffa856', '#ede100', '#ff7e7e'];
-                        new Chart(donutCanvas.getContext('2d'), {
-                            type: 'doughnut',
-                            data: {
-                                labels: ['식비', '쇼핑', '여행', '의료비'],
-                                datasets: [{
-                                    data: [40, 30, 20, 10],
-                                    backgroundColor: [categoryColors[0], 'transparent', 'transparent', 'transparent'],
-                                    borderWidth: 0,
-                                    borderRadius: { outerStart: 4, outerEnd: 4, innerStart: 4, innerEnd: 4 }
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                cutout: '45%',
-                                events: [],
-                                spacing: 0,
-                                animation: false,
-                                plugins: { legend: { display: false }, tooltip: { enabled: false } }
-                            },
-                            plugins: [{
-                                id: 'shrinkOtherCategories',
-                                afterDatasetsDraw: function (chart) {
-                                    var meta = chart.getDatasetMeta(0);
-                                    var shrinkPx = 8;
-                                    var ctx = chart.ctx;
-                                    for (var i = 1; i <= 3; i++) {
-                                        var arc = meta.data[i];
-                                        if (!arc) continue;
-                                        var p = arc.getProps(['x', 'y', 'startAngle', 'endAngle', 'innerRadius', 'outerRadius'], true);
-                                        var outerR = Math.max(p.innerRadius, p.outerRadius - shrinkPx);
-                                        var innerR = p.innerRadius;
-                                        ctx.save();
-                                        ctx.beginPath();
-                                        ctx.arc(p.x, p.y, outerR, p.startAngle, p.endAngle);
-                                        ctx.arc(p.x, p.y, innerR, p.endAngle, p.startAngle, true);
-                                        ctx.closePath();
-                                        ctx.fillStyle = categoryColors[i];
-                                        ctx.fill();
-                                        ctx.restore();
-                                    }
-                                }
-                            }]
-                        });
-                    }
-                }
             });
         </script>
     </head>
@@ -84,7 +92,8 @@
                             </div>
                             <div class="txn-preview__card fund-donut">
                                 <div class="fund-donut__chart">
-                                    <canvas data-category-donut-chart width="120" height="120" role="img" aria-label="식비 40%, 쇼핑 30%, 여행 20%, 의료비 10%"></canvas>
+                                    <!-- [nochart] 정적 SVG: 강조 항목(식비)만 바깥 반지름 유지, 나머지는 8px 줄임 -->
+                                    <svg class="nc-donut" data-category-donut-chart viewBox="0 0 120 120" role="img" aria-label="식비 40%, 쇼핑 30%, 여행 20%, 의료비 10%" focusable="false"><path d="M90.56 102.07A52 52 0 0 1 10.55 76.07L34.32 68.34A27 27 0 0 0 75.87 81.84Z" fill="#ffa856"/><path d="M10.55 76.07A52 52 0 0 1 29.44 17.93L44.13 38.16A27 27 0 0 0 34.32 68.34Z" fill="#ede100"/><path d="M29.44 17.93A52 52 0 0 1 60 8L60 33A27 27 0 0 0 44.13 38.16Z" fill="#ff7e7e"/><path d="M64 4.14A56 56 0 0 1 96.07 102.84L81.31 82.52A31 31 0 0 0 64 29.26Z" fill="#38e784" stroke="#38e784" stroke-width="8" stroke-linejoin="round"/></svg>
                                     <span class="fund-donut__callout">
                                         식비
                                         <br />

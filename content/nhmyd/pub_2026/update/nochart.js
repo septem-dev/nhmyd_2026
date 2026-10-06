@@ -1,4 +1,4 @@
-/* nochart.js — Chart.js 없이 그린 차트 검토용(*_nochart.html) 스크립트
+/* nochart.js — Chart.js 없이 그린 차트(기본 화면용, Chart.js 버전은 *_chart.html) 스크립트
    계산 로직 없음: 누적 막대 애니메이션 재생, 비교 막대 툴팁 표시만 담당
    확정 시 update-ui.js로 옮길 것 */
 (function () {

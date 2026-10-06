@@ -3,7 +3,65 @@
 
 <head>
     <meta charset="utf-8" />
-    <script src="../pub-assets/js/head-mb-update.js"></script>
+    <!-- [nochart] Chart.js 미사용 기본 버전 (Chart.js 버전: 파일명_chart.html) — 공통 head(head-mb-update.js)에서 chart.js 한 줄만 뺀 내용을 인라인 + nochart.css/js 추가 -->
+    <script>
+        /**
+         * Head include
+         * ------------------
+         * css & script 공통 include
+         */
+
+        (function () {
+            var str =
+                "" +
+                '<meta http-equiv="Content-Script-Type" content="text/javascript">' +
+                '<meta http-equiv="Content-Style-Type" content="text/css">' +
+                '<meta http-equiv="X-UA-Compatible" content="IE=edge">' +
+                '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">' +
+                '<meta name="apple-mobile-web-app-title" content="NH마이데이터">' +
+                '<meta http-equiv="imagetoolbar" content="no">' +
+                '<meta name="robots" content="no-index,follow">' +
+                '<meta name="title" content="">' +
+                '<meta name="author" content="">' +
+                '<meta name="content" content="">' +
+                '<meta name="keywords" content="NH마이데이터">' +
+                '<meta name="description" content="NH마이데이터">' +
+                '<meta http-equiv="Pragma" content="no-cache">' +
+                '<meta http-equiv="Expires" content="-1">' +
+                // title은 공통 include에 넣지 않음 — 각 html 파일에서 <title>로 직접 지정
+
+                '<link type="text/css" rel="stylesheet" href="../../css/swiper.min.css">' +
+                '<link type="text/css" rel="stylesheet" href="../../css/nh_base.css">' +
+                '<link rel="stylesheet" type="text/css" href="../../css/nh_layout.css">' +
+                '<link rel="stylesheet" type="text/css" href="../../css/nh_comm.css">' +
+                '<link rel="stylesheet" type="text/css" href="../../css/nhasset_logos.css">' +
+                '<link rel="stylesheet" type="text/css" href="../../css/nhasset_com.css" id="changeCom">' +
+                '<link rel="stylesheet" type="text/css" href="../../css/nhasset_cont.css" id="changeCont">' +
+                '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd.css">' + //2023 마이데이터 고도화
+                '<link type="text/css" rel="stylesheet" href="../../css/ms_allone.css">' +
+                '<link type="text/css" rel="stylesheet" href="../../css/ms_pay.css">' + //NH-Pay
+                '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd_mb.css?20250912">' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                //'<link rel="stylesheet" type="text/css" href="../../css/update.css">' + //2026 NH농협은행 nds 적용
+                // OF는 실 단말 하이브리드 웹뷰에서만 주입되는 네이티브 브릿지 전역객체라, pub 폴더를 브라우저로 단독
+                // 열람하는 이 환경에는 존재하지 않음. nhasset-ui.js의 popOpenRun()이 OF.exeStatus를 가드 없이
+                // 참조하고 있어서(레거시 원본 소스는 수정하지 않음) 여기서 빈 객체로 미리 정의해 ReferenceError를
+                // 막는다. 실제 단말에서는 OF가 먼저 주입되어 있으므로 이 줄은 아무 영향을 주지 않는다.
+                "<script>window.OF = window.OF || {};<\/script>" +
+                '<script src="../../js/jquery-1.9.1.min.js"><\/script>' +
+                '<script src="../../js/jquery-ui.min.js"><\/script>' +
+                '<script src="../../js/jquery.ui.touch-punch.min.js"><\/script>' +
+                '<script src="../../js/swiper.7.4.1.min.js"><\/script>' +
+                '<script src="../../js/common_ui.js"><\/script>' +
+                '<script src="../../js/nhasset-ui.js"><\/script>' +
+                '<script src="../../js/nhasset-ui-myd.js"><\/script>' + //2023 마이데이터 고도화
+                '<script src="../../js/nhasset-ui-myd-mb.js"><\/script>' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                '<script src="../../js/update-ui.js"><\/script>' + '<link rel="stylesheet" type="text/css" href="./nochart.css">' + '<script src="./nochart.js"><\/script>'; //2026 NH농협은행 nds 적용 화면 UI 스크립트
+            //    '<link type="text/css" rel="stylesheet" href="../pub-assets/css/guide.css">'; //가이드용 css 실제 서비스에는 불필요
+            // +'<script src="../pub-assets/js/guide.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요
+            // +'<script src="../pub-assets/js/guide-mb.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요 //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+            document.write(str);
+        })();
+    </script>
     <title>기간별 성과 예측</title>
     <script>
         $(document).ready(function () {
@@ -82,20 +140,21 @@
     
                             <hr class="divider is-dash-e1 mt32 mb32" />
     
-                            <!-- 성과 요약 그래프 (Chart.js) -->
+                            <!-- 성과 요약 그래프 (정적 SVG) -->
                             <h3 class="text--h5 text--font3">성과 요약 그래프</h3>
                             <div class="predict-chart" aria-hidden="true">
                                 <p class="predict-chart__unit">단위 : 만원</p>
                                 <div class="predict-chart__body">
                                     <ul class="predict-chart__yaxis" data-ai0301-yaxis>
-                                        <li>10,000</li>
-                                        <li>7,500</li>
-                                        <li>5,000</li>
-                                        <li>2,500</li>
+                                        <li>16,000</li>
+                                        <li>12,000</li>
+                                        <li>8,000</li>
+                                        <li>4,000</li>
                                         <li>0</li>
                                     </ul>
                                     <div class="predict-chart__box">
-                                        <canvas id="ai0301Chart"></canvas>
+                                        <!-- [nochart] 정적 SVG: 연도별 금액·Y축 눈금 계산은 데이터 연동 시 개발 -->
+                                        <svg class="nc-line" style="--nc-base:calc(100% - 24px)" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M8.55 728.2C8.55 728.2 79.66 712.58 117.78 702.92C156.11 693.2 188.89 684.38 226.97 672.92C265.34 661.46 298.16 650.96 336.2 637.42C374.62 623.76 407.48 611.29 445.38 595.34C483.93 579.1 516.79 564.33 554.62 545.51C593.25 526.24 626.15 508.65 663.8 486.4C702.56 463.48 735.51 442.7 773.03 416.4C811.97 389.16 844.96 364.44 882.22 333.48C921.37 301.01 991.45 235.22 991.45 235.22" fill="none" stroke="#38e784" stroke-width="2" vector-effect="non-scaling-stroke"/><path d="M8.55 728.2C8.55 728.2 79.57 715.96 117.78 708.65C156.03 701.29 188.8 694.61 226.97 686.24C265.26 677.81 298.03 670.17 336.2 660.62C374.49 650.96 407.31 642.3 445.38 631.35C483.72 620.34 516.54 610.34 554.62 597.87C592.99 585.28 625.77 573.88 663.8 559.61C702.22 545.17 735.04 532.13 773.03 515.84C811.5 499.33 844.32 484.44 882.22 465.84C920.77 446.97 991.45 408.71 991.45 408.71" fill="none" stroke="#09b2c5" stroke-width="2" vector-effect="non-scaling-stroke"/><path d="M8.55 728.2C8.55 728.2 79.57 719.66 117.78 714.72C155.98 709.72 188.76 705.34 226.97 699.83C265.21 694.38 297.99 689.55 336.2 683.54C374.44 677.53 407.18 672.19 445.38 665.62C483.63 659.04 516.41 653.15 554.62 645.9C592.86 638.65 625.64 632.19 663.8 624.27C702.09 616.29 734.87 609.21 773.03 600.51C811.32 591.74 844.06 583.93 882.22 574.38C920.51 564.72 991.45 545.67 991.45 545.67" fill="none" stroke="#ff7e7e" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
                                     </div>
                                     <p class="predict-chart__xaxis">
                                         <span>1년</span>
@@ -159,104 +218,7 @@
         </div>
     </div>
     <script>
-        // [수정] 팝업이 열린 뒤에 그리도록 변경 — 팝업이 display:none일 때 그리면 캔버스가 0×0으로 잡혀 그래프가 깨짐
-        function drawAi0301Chart() {
-            var canvas = document.getElementById('ai0301Chart');
-            if (!canvas || typeof Chart === 'undefined') return;
-
-            var START = 3000;
-            var TARGET = { good: 13800, avg: 10000, bad: 7000 };
-            var SERIES = [
-                { key: 'good', color: '#38e784' },
-                { key: 'avg', color: '#09b2c5' },
-                { key: 'bad', color: '#ff7e7e' }
-            ];
-
-            var years = 10;
-            var yLabelEls = document.querySelectorAll('[data-ai0301-yaxis] li');
-
-            function buildSeries(target) {
-                var rate = Math.pow(target / START, 1 / (years - 1));
-                var data = [];
-                for (var y = 1; y <= years; y++) data.push({ x: y, y: START * Math.pow(rate, y - 1) });
-                return data;
-            }
-
-            function niceMax(v) {
-                var step = Math.pow(10, String(Math.round(v / 4)).length - 1);
-                return Math.ceil(v / (4 * step)) * 4 * step;
-            }
-            var yMax = niceMax(Math.max(TARGET.good, TARGET.avg, TARGET.bad));
-
-            for (var i = 0; i < yLabelEls.length; i++) {
-                yLabelEls[i].textContent = Math.round((yMax * (4 - i)) / 4).toLocaleString('ko-KR');
-            }
-
-            var BOX_W = 234;
-            var BOX_H = 178;
-            var padX = ((years - 1) * 2) / (BOX_W - 4);
-            var padY = (yMax * 24) / (BOX_H - 48);
-
-            // [수정] 값 0(기준선)으로 먼저 그린 뒤 실제 값으로 업데이트해 선이 올라오는 애니메이션을 보장
-            //        (Chart.js 최초 애니메이션은 생성 직후 캔버스 크기 재계산(resize)에 밀려 건너뛰어지는 경우가 있음)
-            var targets = SERIES.map(function (s) { return buildSeries(TARGET[s.key]); });
-            var chart = new Chart(canvas.getContext('2d'), {
-                type: 'line',
-                data: {
-                    datasets: SERIES.map(function (s) {
-                        return {
-                            data: buildSeries(TARGET[s.key]).map(function (p) { return { x: p.x, y: 0 }; }),
-                            borderColor: s.color,
-                            borderWidth: 2,
-                            pointRadius: 0,
-                            tension: 0.35,
-                            fill: false
-                        };
-                    })
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    animation: false,
-                    events: [],
-                    layout: { padding: 0 },
-                    scales: {
-                        x: { type: 'linear', min: 1 - padX, max: years + padX, display: false, grid: { display: false } },
-                        y: { type: 'linear', min: -padY, max: yMax + padY, display: false, grid: { display: false } }
-                    },
-                    plugins: { legend: { display: false }, tooltip: { enabled: false } }
-                }
-            });
-
-            var played = false;
-            function play() {
-                if (played) return;
-                played = true;
-                chart.data.datasets.forEach(function (ds, idx) {
-                    ds.data = targets[idx];
-                });
-                chart.options.animation = { duration: 1000, easing: 'easeOutQuart' };
-                chart.update();
-            }
-            requestAnimationFrame(function () {
-                requestAnimationFrame(play);
-            });
-            setTimeout(play, 300);
-        }
-        // [수정] 그래프가 화면에 보일 때 그리기 시작 — 스크롤해야 보이는 위치라 로드 시 그리면 애니메이션이 화면 밖에서 끝나 버림
-        $(function () {
-            var box = document.querySelector('.predict-chart__box');
-            if (!box || !('IntersectionObserver' in window)) {
-                requestAnimationFrame(drawAi0301Chart);
-                return;
-            }
-            var io = new IntersectionObserver(function (entries) {
-                if (!entries[0].isIntersecting) return;
-                io.disconnect();
-                drawAi0301Chart();
-            }, { threshold: 0.3 });
-            io.observe(box);
-        });
+        /* [nochart] 성과 요약 그래프는 정적 SVG로 대체 (기존 스크립트가 계산하던 Y축 눈금 16,000 기준을 마크업에 고정) */
     </script>
 </body>
 

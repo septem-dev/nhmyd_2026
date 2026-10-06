@@ -2,7 +2,65 @@
 <html lang="ko">
     <head>
         <meta charset="utf-8" />
-        <script src="../pub-assets/js/head-mb-update.js"></script>
+        <!-- [nochart] Chart.js 미사용 기본 버전 (Chart.js 버전: 파일명_chart.html) — 공통 head(head-mb-update.js)에서 chart.js 한 줄만 뺀 내용을 인라인 + nochart.css/js 추가 -->
+        <script>
+            /**
+             * Head include
+             * ------------------
+             * css & script 공통 include
+             */
+
+            (function () {
+                var str =
+                    "" +
+                    '<meta http-equiv="Content-Script-Type" content="text/javascript">' +
+                    '<meta http-equiv="Content-Style-Type" content="text/css">' +
+                    '<meta http-equiv="X-UA-Compatible" content="IE=edge">' +
+                    '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">' +
+                    '<meta name="apple-mobile-web-app-title" content="NH마이데이터">' +
+                    '<meta http-equiv="imagetoolbar" content="no">' +
+                    '<meta name="robots" content="no-index,follow">' +
+                    '<meta name="title" content="">' +
+                    '<meta name="author" content="">' +
+                    '<meta name="content" content="">' +
+                    '<meta name="keywords" content="NH마이데이터">' +
+                    '<meta name="description" content="NH마이데이터">' +
+                    '<meta http-equiv="Pragma" content="no-cache">' +
+                    '<meta http-equiv="Expires" content="-1">' +
+                    // title은 공통 include에 넣지 않음 — 각 html 파일에서 <title>로 직접 지정
+
+                    '<link type="text/css" rel="stylesheet" href="../../css/swiper.min.css">' +
+                    '<link type="text/css" rel="stylesheet" href="../../css/nh_base.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nh_layout.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nh_comm.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_logos.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_com.css" id="changeCom">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_cont.css" id="changeCont">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd.css">' + //2023 마이데이터 고도화
+                    '<link type="text/css" rel="stylesheet" href="../../css/ms_allone.css">' +
+                    '<link type="text/css" rel="stylesheet" href="../../css/ms_pay.css">' + //NH-Pay
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd_mb.css?20250912">' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                    //'<link rel="stylesheet" type="text/css" href="../../css/update.css">' + //2026 NH농협은행 nds 적용
+                    // OF는 실 단말 하이브리드 웹뷰에서만 주입되는 네이티브 브릿지 전역객체라, pub 폴더를 브라우저로 단독
+                    // 열람하는 이 환경에는 존재하지 않음. nhasset-ui.js의 popOpenRun()이 OF.exeStatus를 가드 없이
+                    // 참조하고 있어서(레거시 원본 소스는 수정하지 않음) 여기서 빈 객체로 미리 정의해 ReferenceError를
+                    // 막는다. 실제 단말에서는 OF가 먼저 주입되어 있으므로 이 줄은 아무 영향을 주지 않는다.
+                    "<script>window.OF = window.OF || {};<\/script>" +
+                    '<script src="../../js/jquery-1.9.1.min.js"><\/script>' +
+                    '<script src="../../js/jquery-ui.min.js"><\/script>' +
+                    '<script src="../../js/jquery.ui.touch-punch.min.js"><\/script>' +
+                    '<script src="../../js/swiper.7.4.1.min.js"><\/script>' +
+                    '<script src="../../js/common_ui.js"><\/script>' +
+                    '<script src="../../js/nhasset-ui.js"><\/script>' +
+                    '<script src="../../js/nhasset-ui-myd.js"><\/script>' + //2023 마이데이터 고도화
+                    '<script src="../../js/nhasset-ui-myd-mb.js"><\/script>' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                    '<script src="../../js/update-ui.js"><\/script>' + '<link rel="stylesheet" type="text/css" href="./nochart.css">' + '<script src="./nochart.js"><\/script>'; //2026 NH농협은행 nds 적용 화면 UI 스크립트
+                //    '<link type="text/css" rel="stylesheet" href="../pub-assets/css/guide.css">'; //가이드용 css 실제 서비스에는 불필요
+                // +'<script src="../pub-assets/js/guide.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요
+                // +'<script src="../pub-assets/js/guide-mb.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요 //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                document.write(str);
+            })();
+        </script>
         <title>자산관리 포털 메인-일반인 | 마이데이터</title>
     </head>
 
@@ -63,7 +121,8 @@
                                                     </p>
                                                 </div>
                                                 <div class="hero__chart-box">
-                                                    <canvas data-chart-canvas="liquidity" aria-hidden="true"></canvas>
+                                                    <!-- [nochart] CSS 누적 막대: flex-grow = 항목 비중(%), 양끝 최소 폭 22px·가운데 최소 0.6% -->
+                                                    <span class="nc-stack is-play" data-chart-canvas="liquidity" aria-hidden="true"><i class="nc-stack__seg is-edge" style="flex-grow:85.51;background:#f4ff3f"></i><i class="nc-stack__seg" style="flex-grow:6.44;background:#ff7e7e"></i><i class="nc-stack__seg" style="flex-grow:7.97;background:#49d8ff"></i><i class="nc-stack__seg is-edge" style="flex-grow:0.07;background:#ffa856"></i></span>
                                                 </div>
                                                 <ul class="hero__legend" style="margin-top: 12px;">
                                                     <li>
@@ -121,14 +180,9 @@
                                                     <span class="hcb-chart-meta__unit">단위:만원</span>
                                                 </div>
                                                 <div class="hcb-chart-canvas-wrap">
-                                                    <canvas data-insight-chart="liquidity" aria-hidden="true"></canvas>
+                                                    <!-- [nochart] 정적 증감 비교 막대(접근성: 항목별 버튼 + 이전·현재·증감액 낭독): 축 최대값(60,000만원)·막대 길이·증감 금액은 데이터 연동 시 개발에서 계산 -->
+                                                    <div class="nc-cmp" data-insight-chart="liquidity" role="group" aria-label="이전·현재 자산 비교 차트. 항목을 선택하면 증감액을 보여줘요."><div class="nc-cmp__labels" aria-hidden="true"><span>입출금</span><span>예적금</span><span>외화</span><span>기타</span></div><div class="nc-cmp__plot"><button type="button" class="nc-cmp__row" data-label="입출금" data-diff="+30,500,000원" aria-label="입출금, 이전 560,000,000원, 현재 590,500,000원, 30,500,000원 증가"><i class="nc-cmp__bar is-prev" style="width:46.67%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:49.21%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="예적금" data-diff="+2,500,000원" aria-label="예적금, 이전 42,000,000원, 현재 44,500,000원, 2,500,000원 증가"><i class="nc-cmp__bar is-prev" style="width:3.5%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:3.71%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="외화" data-diff="+3,048,000원" aria-label="외화, 이전 52,000,000원, 현재 55,048,000원, 3,048,000원 증가"><i class="nc-cmp__bar is-prev" style="width:4.33%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:4.59%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="기타" data-diff="+50,000원" aria-label="기타, 이전 450,000원, 현재 500,000원, 50,000원 증가"><i class="nc-cmp__bar is-prev" style="width:0.04%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:0.04%" aria-hidden="true"></i></button></div><div class="nc-cmp__axis" aria-hidden="true"><span>60,000</span><span>0</span><span>60,000</span></div></div>
                                                 </div>
-                                                <ul class="blind">
-                                                    <li>입출금: 이전 560,000,000원, 현재 590,500,000원</li>
-                                                    <li>예적금: 이전 42,000,000원, 현재 44,500,000원</li>
-                                                    <li>외화: 이전 52,000,000원, 현재 55,048,000원</li>
-                                                    <li>기타: 이전 450,000원, 현재 500,000원</li>
-                                                </ul>
                                                 <div class="hcb-legend is-compare">
                                                     <span class="hcb-legend__item">
                                                         <i style="background: #c8d2e4;"></i>
@@ -185,7 +239,8 @@
                                                     </p>
                                                 </div>
                                                 <div class="hero__chart-box">
-                                                    <canvas data-chart-canvas="invest" aria-hidden="true"></canvas>
+                                                    <!-- [nochart] CSS 누적 막대: flex-grow = 항목 비중(%), 양끝 최소 폭 22px·가운데 최소 0.6% -->
+                                                    <span class="nc-stack is-play" data-chart-canvas="invest" aria-hidden="true"><i class="nc-stack__seg is-edge" style="flex-grow:37.47;background:#f4ff3f"></i><i class="nc-stack__seg" style="flex-grow:12.49;background:#ff7e7e"></i><i class="nc-stack__seg" style="flex-grow:0.02;background:#49d8ff"></i><i class="nc-stack__seg" style="flex-grow:0.02;background:#ffa856"></i><i class="nc-stack__seg" style="flex-grow:0.02;background:#38e784"></i><i class="nc-stack__seg is-edge" style="flex-grow:49.96;background:#c8d2e4"></i></span>
                                                 </div>
                                                 <ul class="hero__legend mt12">
                                                     <li>
@@ -257,16 +312,9 @@
                                                     <span class="hcb-chart-meta__unit">단위:만원</span>
                                                 </div>
                                                 <div class="hcb-chart-canvas-wrap">
-                                                    <canvas data-insight-chart="invest" aria-hidden="true"></canvas>
+                                                    <!-- [nochart] 정적 증감 비교 막대(접근성: 항목별 버튼 + 이전·현재·증감액 낭독): 축 최대값(250만원)·막대 길이·증감 금액은 데이터 연동 시 개발에서 계산 -->
+                                                    <div class="nc-cmp" data-insight-chart="invest" role="group" aria-label="이전·현재 자산 비교 차트. 항목을 선택하면 증감액을 보여줘요."><div class="nc-cmp__labels" aria-hidden="true"><span>국내주식</span><span>해외주식</span><span>채권</span><span>펀드</span><span>예수금</span><span>기타</span></div><div class="nc-cmp__plot"><button type="button" class="nc-cmp__row" data-label="국내주식" data-diff="-75,000원" aria-label="국내주식, 이전 1,575,000원, 현재 1,500,000원, 75,000원 감소"><i class="nc-cmp__bar is-prev" style="width:31.5%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:30%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="해외주식" data-diff="-25,000원" aria-label="해외주식, 이전 525,000원, 현재 500,000원, 25,000원 감소"><i class="nc-cmp__bar is-prev" style="width:10.5%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:10%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="채권" data-diff="-50원" aria-label="채권, 이전 1,050원, 현재 1,000원, 50원 감소"><i class="nc-cmp__bar is-prev" style="width:0.02%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:0.02%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="펀드" data-diff="-50원" aria-label="펀드, 이전 1,050원, 현재 1,000원, 50원 감소"><i class="nc-cmp__bar is-prev" style="width:0.02%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:0.02%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="예수금" data-diff="-50원" aria-label="예수금, 이전 1,050원, 현재 1,000원, 50원 감소"><i class="nc-cmp__bar is-prev" style="width:0.02%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:0.02%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="기타" data-diff="-100,000원" aria-label="기타, 이전 2,100,000원, 현재 2,000,000원, 100,000원 감소"><i class="nc-cmp__bar is-prev" style="width:42%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:40%" aria-hidden="true"></i></button></div><div class="nc-cmp__axis" aria-hidden="true"><span>250</span><span>0</span><span>250</span></div></div>
                                                 </div>
-                                                <ul class="blind">
-                                                    <li>국내주식: 이전 1,575,000원, 현재 1,500,000원</li>
-                                                    <li>해외주식: 이전 525,000원, 현재 500,000원</li>
-                                                    <li>채권: 이전 1,050원, 현재 1,000원</li>
-                                                    <li>펀드: 이전 1,050원, 현재 1,000원</li>
-                                                    <li>예수금: 이전 1,050원, 현재 1,000원</li>
-                                                    <li>기타: 이전 2,100,000원, 현재 2,000,000원</li>
-                                                </ul>
                                                 <div class="hcb-legend is-compare">
                                                     <span class="hcb-legend__item">
                                                         <i style="background: #c8d2e4;"></i>
@@ -320,7 +368,8 @@
                                                     </p>
                                                 </div>
                                                 <div class="hero__chart-box">
-                                                    <canvas data-chart-canvas="pension" aria-hidden="true"></canvas>
+                                                    <!-- [nochart] CSS 누적 막대: flex-grow = 항목 비중(%), 양끝 최소 폭 22px·가운데 최소 0.6% -->
+                                                    <span class="nc-stack is-play" data-chart-canvas="pension" aria-hidden="true"><i class="nc-stack__seg is-edge" style="flex-grow:86.82;background:#f4ff3f"></i><i class="nc-stack__seg" style="flex-grow:13.05;background:#ff7e7e"></i><i class="nc-stack__seg is-edge" style="flex-grow:0.13;background:#49d8ff"></i></span>
                                                 </div>
                                                 <ul class="hero__legend" style="margin-top: 12px;">
                                                     <li>
@@ -371,13 +420,9 @@
                                                     <span class="hcb-chart-meta__unit">단위:만원</span>
                                                 </div>
                                                 <div class="hcb-chart-canvas-wrap">
-                                                    <canvas data-insight-chart="pension" aria-hidden="true"></canvas>
+                                                    <!-- [nochart] 정적 증감 비교 막대(접근성: 항목별 버튼 + 이전·현재·증감액 낭독): 축 최대값(700만원)·막대 길이·증감 금액은 데이터 연동 시 개발에서 계산 -->
+                                                    <div class="nc-cmp" data-insight-chart="pension" role="group" aria-label="이전·현재 자산 비교 차트. 항목을 선택하면 증감액을 보여줘요."><div class="nc-cmp__labels" aria-hidden="true"><span>개인연금</span><span>퇴직연금</span><span>공적연금</span></div><div class="nc-cmp__plot"><button type="button" class="nc-cmp__row" data-label="개인연금" data-diff="+354,328원" aria-label="개인연금, 이전 6,300,000원, 현재 6,654,328원, 354,328원 증가"><i class="nc-cmp__bar is-prev" style="width:45%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:47.53%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="퇴직연금" data-diff="+50,000원" aria-label="퇴직연금, 이전 950,000원, 현재 1,000,000원, 50,000원 증가"><i class="nc-cmp__bar is-prev" style="width:6.79%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:7.14%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="공적연금" data-diff="+10,000원" aria-label="공적연금, 이전 0원, 현재 10,000원, 10,000원 증가"><i class="nc-cmp__bar is-prev" style="width:0%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:0.07%" aria-hidden="true"></i></button></div><div class="nc-cmp__axis" aria-hidden="true"><span>700</span><span>0</span><span>700</span></div></div>
                                                 </div>
-                                                <ul class="blind">
-                                                    <li>개인연금: 이전 6,300,000원, 현재 6,654,328원</li>
-                                                    <li>퇴직연금: 이전 950,000원, 현재 1,000,000원</li>
-                                                    <li>공적연금: 이전 0원, 현재 10,000원</li>
-                                                </ul>
                                                 <div class="hcb-legend is-compare">
                                                     <span class="hcb-legend__item">
                                                         <i style="background: #c8d2e4;"></i>
@@ -1137,7 +1182,6 @@
                     var label = slideEl.getAttribute('data-category-label');
                     if (!label) return;
                     var realSlideEl = swiperEl.querySelector('.swiper-slide:not(.swiper-slide-duplicate)[data-category-label="' + label + '"]');
-                    var realInsightCanvas = realSlideEl && realSlideEl.querySelector('[data-insight-chart]');
                     var siblingSlides = swiperEl.querySelectorAll('.swiper-slide[data-category-label="' + label + '"]');
                     siblingSlides.forEach(function (otherSlideEl) {
                         if (otherSlideEl === slideEl) return;
@@ -1154,14 +1198,7 @@
                             btn.tabIndex = onVisibleFace ? 0 : -1;
                         });
 
-                        var otherInsightCanvas = otherSlideEl.querySelector('[data-insight-chart]');
-                        if (realInsightCanvas && otherInsightCanvas && otherSlideEl.classList.contains('swiper-slide-duplicate')) {
-                            if (otherInsightCanvas.width !== realInsightCanvas.width) otherInsightCanvas.width = realInsightCanvas.width;
-                            if (otherInsightCanvas.height !== realInsightCanvas.height) otherInsightCanvas.height = realInsightCanvas.height;
-                            var ctx = otherInsightCanvas.getContext('2d');
-                            ctx.clearRect(0, 0, otherInsightCanvas.width, otherInsightCanvas.height);
-                            ctx.drawImage(realInsightCanvas, 0, 0);
-                        }
+                        /* [nochart] 캔버스 복사 불필요 (DOM 차트) */
                     });
                 }
 
@@ -1408,419 +1445,7 @@
                 });
             })();
 
-            (function () {
-                if (typeof Chart === 'undefined') return;
-
-                var heroBarCharts = {};
-
-                function replayHeroBarChart(categoryKey) {
-                    var entry = heroBarCharts[categoryKey];
-                    if (!entry) return;
-                    var chart = entry.chart;
-                    chart.data.datasets.forEach(function (ds, i) {
-                        ds.data[0] = 0;
-                    });
-                    chart.update('none');
-                    syncCloneCanvases(categoryKey, chart.canvas);
-                    var restored = false;
-                    function restore() {
-                        if (restored) return;
-                        restored = true;
-                        chart.data.datasets.forEach(function (ds, i) {
-                            ds.data[0] = entry.targets[i];
-                        });
-                        chart.update();
-                    }
-                    requestAnimationFrame(function () {
-                        requestAnimationFrame(restore);
-                    });
-                    setTimeout(restore, 300);
-                }
-                window.replayHeroBarChart = replayHeroBarChart;
-
-                function syncCloneCanvases(categoryKey, realCanvas) {
-                    var clones = document.querySelectorAll('.swiper-slide.swiper-slide-duplicate [data-chart-canvas="' + categoryKey + '"]');
-                    clones.forEach(function (cloneCanvas) {
-                        if (cloneCanvas.width !== realCanvas.width) cloneCanvas.width = realCanvas.width;
-                        if (cloneCanvas.height !== realCanvas.height) cloneCanvas.height = realCanvas.height;
-                        var ctx = cloneCanvas.getContext('2d');
-                        ctx.clearRect(0, 0, cloneCanvas.width, cloneCanvas.height);
-                        ctx.drawImage(realCanvas, 0, 0);
-                    });
-                }
-
-                function getOrCreateTooltip(chart) {
-                    var tooltipEl = chart.canvas.parentNode.querySelector('div.chartjs-tooltip');
-                    if (!tooltipEl) {
-                        tooltipEl = document.createElement('div');
-                        tooltipEl.className = 'chartjs-tooltip';
-                        chart.canvas.parentNode.appendChild(tooltipEl);
-                    }
-                    return tooltipEl;
-                }
-
-                function externalTooltipHandler(context) {
-                    var chart = context.chart;
-                    var tooltip = context.tooltip;
-                    var tooltipEl = getOrCreateTooltip(chart);
-
-                    if (tooltip.opacity === 0) {
-                        tooltipEl.style.opacity = 0;
-                        return;
-                    }
-
-                    if (tooltip.body) {
-                        var titleLines = tooltip.title || [];
-                        var bodyLines = tooltip.body.map(function (b) { return b.lines; });
-
-                        var innerHtml = '';
-                        titleLines.forEach(function (title) {
-                            innerHtml += '<div class="chartjs-tooltip__title">' + title + '</div>';
-                        });
-                        bodyLines.forEach(function (lines, i) {
-                            var colors = tooltip.labelColors[i];
-                            lines.forEach(function (line) {
-                                innerHtml +=
-                                    '<div class="chartjs-tooltip__row">' +
-                                    '<span class="chartjs-tooltip__chip" style="background:' + colors.backgroundColor + '"></span>' +
-                                    line +
-                                    '</div>';
-                            });
-                        });
-                        tooltipEl.innerHTML = innerHtml;
-                    }
-
-                    positionChartTooltip(tooltipEl, chart, tooltip);
-                }
-
-                function positionChartTooltip(tooltipEl, chart, tooltip) {
-                    var positionX = chart.canvas.offsetLeft;
-                    var positionY = chart.canvas.offsetTop;
-                    tooltipEl.style.opacity = 1;
-                    tooltipEl.style.left = positionX + tooltip.caretX + 'px';
-                    tooltipEl.style.top = positionY + tooltip.caretY - 10 + 'px';
-                    tooltipEl.style.transform = 'translate(-50%, -100%)';
-                    tooltipEl.style.removeProperty('--tt-arrow-left');
-
-                    var edgeMargin = 8;
-                    var rect = tooltipEl.getBoundingClientRect();
-                    var shift = 0;
-                    if (rect.left < edgeMargin) {
-                        shift = edgeMargin - rect.left;
-                    } else if (rect.right > window.innerWidth - edgeMargin) {
-                        shift = (window.innerWidth - edgeMargin) - rect.right;
-                    }
-                    if (shift !== 0) {
-                        tooltipEl.style.transform = 'translate(calc(-50% + ' + shift + 'px), -100%)';
-                        tooltipEl.style.setProperty('--tt-arrow-left', 'calc(50% - ' + shift + 'px)');
-                    }
-                }
-
-                function makeDataset(label, value, color) {
-                    return { label: label, data: [value], backgroundColor: color, hoverBackgroundColor: color, borderWidth: 0 };
-                }
-
-                function buildStackedBarChart(categoryKey, datasets) {
-                    var canvas = document.querySelector('.swiper-slide:not(.swiper-slide-duplicate) [data-chart-canvas="' + categoryKey + '"]');
-                    if (!canvas) return;
-                    var boxRect = canvas.getBoundingClientRect();
-                    var boxHeightPx = boxRect.height > 0 ? boxRect.height : 22;
-                    var boxWidthPx = boxRect.width > 0 ? boxRect.width : 300;
-                    var realTotalForBoost = datasets.reduce(function (sum, ds) { return sum + ds.data[0]; }, 0);
-                    var pxPerUnit = realTotalForBoost > 0 ? boxWidthPx / realTotalForBoost : 0;
-                    var minEdgeValue = pxPerUnit > 0 ? boxHeightPx / pxPerUnit : 0;
-                    var minGeneralValue = realTotalForBoost * 0.006;
-                    datasets.forEach(function (ds, dsIndex) {
-                        ds.realValue = ds.data[0];
-                        var isEdgeSegment = dsIndex === 0 || dsIndex === datasets.length - 1;
-                        var minVisualValue = isEdgeSegment ? minEdgeValue : minGeneralValue;
-                        if (realTotalForBoost > 0 && ds.data[0] < minVisualValue) {
-                            ds.data[0] = minVisualValue;
-                        }
-                    });
-                    var PILL_RADIUS = 8;
-                    datasets[0].borderRadius = { topLeft: PILL_RADIUS, bottomLeft: PILL_RADIUS, topRight: 0, bottomRight: 0 };
-                    datasets[0].borderSkipped = false;
-                    for (var i = 1; i < datasets.length - 1; i++) {
-                        datasets[i].borderRadius = 0;
-                        datasets[i].borderSkipped = false;
-                    }
-                    var last = datasets[datasets.length - 1];
-                    last.borderRadius = { topLeft: 0, bottomLeft: 0, topRight: PILL_RADIUS, bottomRight: PILL_RADIUS };
-                    last.borderSkipped = false;
-
-                    var total = datasets.reduce(function (sum, ds) { return sum + ds.data[0]; }, 0);
-
-                    var chart = new Chart(canvas.getContext('2d'), {
-                        type: 'bar',
-                        data: { labels: ['자산'], datasets: datasets },
-                        options: {
-                            indexAxis: 'y',
-                            responsive: true,
-                            maintainAspectRatio: false,
-
-                            animation: {
-                                onProgress: function () { syncCloneCanvases(categoryKey, canvas); },
-                                onComplete: function () { syncCloneCanvases(categoryKey, canvas); }
-                            },
-
-                            datasets: {
-                                bar: { categoryPercentage: 1, barPercentage: 1 }
-                            },
-                            events: [],
-                            plugins: {
-                                legend: { display: false },
-                                tooltip: { enabled: false }
-                            },
-                            layout: { padding: 0 },
-                            scales: {
-                                x: { stacked: true, display: false, min: 0, max: total },
-                                y: { stacked: true, display: false }
-                            }
-                        }
-                    });
-
-                    heroBarCharts[categoryKey] = {
-                        chart: chart,
-                        targets: datasets.map(function (ds) { return ds.data[0]; })
-                    };
-                }
-
-                buildStackedBarChart('liquidity', [
-                    makeDataset('입출금', 590500000, '#f4ff3f'),
-                    makeDataset('예적금', 44500000, '#ff7e7e'),
-                    makeDataset('외화', 55048000, '#49d8ff'),
-                    makeDataset('기타', 500000, '#ffa856')
-                ]);
-
-                buildStackedBarChart('invest', [
-                    makeDataset('국내주식', 1500000, '#f4ff3f'),
-                    makeDataset('해외주식', 500000, '#ff7e7e'),
-                    makeDataset('채권', 1000, '#49d8ff'),
-                    makeDataset('펀드', 1000, '#ffa856'),
-                    makeDataset('예수금', 1000, '#38e784'),
-                    makeDataset('기타', 2000000, '#c8d2e4')
-                ]);
-
-                buildStackedBarChart('pension', [
-                    makeDataset('개인연금', 6654328, '#f4ff3f'),
-                    makeDataset('퇴직연금', 1000000, '#ff7e7e'),
-                    makeDataset('공적연금', 10000, '#49d8ff')
-                ]);
-
-                buildStackedBarChart('loan', [
-                    makeDataset('신용대출', 15580000, '#f4ff3f'),
-                    makeDataset('주택담보대출', 375059500, '#08d561')
-                ]);
-
-                function syncBackFaceCloneCanvases(categoryKey, attrName) {
-                    var realCanvas = document.querySelector('.swiper-slide:not(.swiper-slide-duplicate) [' + attrName + '="' + categoryKey + '"]');
-                    if (!realCanvas) return;
-                    var clones = document.querySelectorAll('.swiper-slide.swiper-slide-duplicate [' + attrName + '="' + categoryKey + '"]');
-                    clones.forEach(function (cloneCanvas) {
-                        if (cloneCanvas.width !== realCanvas.width) cloneCanvas.width = realCanvas.width;
-                        if (cloneCanvas.height !== realCanvas.height) cloneCanvas.height = realCanvas.height;
-                        var ctx = cloneCanvas.getContext('2d');
-                        ctx.clearRect(0, 0, cloneCanvas.width, cloneCanvas.height);
-                        ctx.drawImage(realCanvas, 0, 0);
-                    });
-                }
-
-                function buildInsightChart(categoryKey, labels, visualPrev, visualNow, realPrev, realNow, colors) {
-                    var canvas = document.querySelector('.swiper-slide:not(.swiper-slide-duplicate) [data-insight-chart="' + categoryKey + '"]');
-                    if (!canvas) return;
-                    var BAR_RADIUS = 2;
-
-                    function insightDiffTooltipHandler(context) {
-                        var chart = context.chart;
-                        var tooltip = context.tooltip;
-                        var tooltipEl = getOrCreateTooltip(chart);
-                        if (tooltip.opacity === 0) {
-                            tooltipEl.style.opacity = 0;
-                            return;
-                        }
-                        if (tooltip.dataPoints && tooltip.dataPoints.length) {
-                            var idx = tooltip.dataPoints[0].dataIndex;
-                            var diff = realNow[idx] - realPrev[idx];
-                            var sign = diff >= 0 ? '+' : '-';
-                            tooltipEl.innerHTML = '<div class="chartjs-tooltip__row">' + sign + Math.abs(diff).toLocaleString() + '원</div>';
-                        }
-                        positionChartTooltip(tooltipEl, chart, tooltip);
-                    }
-
-                    var datasets = [
-                        { label: '금월', data: visualNow, backgroundColor: colors.now, borderRadius: BAR_RADIUS, borderSkipped: false },
-                        { label: '전월', data: visualPrev, backgroundColor: colors.prev, borderRadius: BAR_RADIUS, borderSkipped: false }
-                    ];
-
-                    new Chart(canvas.getContext('2d'), {
-                        type: 'bar',
-                        data: { labels: labels, datasets: datasets },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            onResize: function () { syncBackFaceCloneCanvases(categoryKey, 'data-insight-chart'); },
-                            datasets: { bar: { barPercentage: 0.9, categoryPercentage: 0.8 } },
-                            events: ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove'],
-                            plugins: {
-                                legend: { display: false },
-                                tooltip: { enabled: false, external: insightDiffTooltipHandler }
-                            },
-                            scales: {
-                                x: {
-                                    grid: { display: false },
-                                    border: { display: false },
-                                    ticks: { font: { size: 12 }, color: '#4f5359', maxRotation: 0, minRotation: 0 }
-                                },
-                                y: { display: false, beginAtZero: true }
-                            }
-                        }
-                    });
-                }
-
-                function buildCompareBarChart(categoryKey, labels, prevWon, nowWon, colors) {
-                    var canvas = document.querySelector('.swiper-slide:not(.swiper-slide-duplicate) [data-insight-chart="' + categoryKey + '"]');
-                    if (!canvas) return;
-
-                    var MAN = 10000;
-                    var BAR_H = 11;
-                    var prev = prevWon.map(function (v) { return -(v / MAN); });
-                    var now = nowWon.map(function (v) { return v / MAN; });
-
-                    var peak = Math.max.apply(
-                        null,
-                        prevWon.map(function (v) { return v / MAN; }).concat(nowWon.map(function (v) { return v / MAN; }))
-                    );
-                    var step = Math.pow(10, Math.floor(Math.log10(peak || 1))) / 2;
-                    var axisMax = Math.ceil(peak / step) * step;
-
-                    function compareDiffTooltipHandler(context) {
-                        var chart = context.chart;
-                        var tooltip = context.tooltip;
-                        var tooltipEl = getOrCreateTooltip(chart);
-                        if (tooltip.opacity === 0) {
-                            tooltipEl.style.opacity = 0;
-                            return;
-                        }
-                        if (tooltip.dataPoints && tooltip.dataPoints.length) {
-                            var idx = tooltip.dataPoints[0].dataIndex;
-                            var diff = nowWon[idx] - prevWon[idx];
-                            var sign = diff >= 0 ? '+' : '-';
-                            tooltipEl.innerHTML = '<div class="chartjs-tooltip__row">' + sign + Math.abs(diff).toLocaleString() + '원</div>';
-                        }
-                        positionChartTooltip(tooltipEl, chart, tooltip);
-                    }
-
-                    var barCapPlugin = {
-                        id: 'compareBarCaps',
-                        afterDatasetsDraw: function (chart) {
-                            var ctx = chart.ctx;
-                            var zeroPx = chart.scales.x.getPixelForValue(0);
-                            chart.data.datasets.forEach(function (ds, di) {
-                                var meta = chart.getDatasetMeta(di);
-                                if (meta.hidden) return;
-                                var dir = di === 0 ? -1 : 1;
-                                meta.data.forEach(function (bar) {
-                                    var props = bar.getProps(['x', 'y', 'height'], true);
-                                    var h = props.height;
-                                    if (!h) return;
-                                    var r = h / 2;
-                                    var top = props.y - r;
-                                    var len = Math.max(Math.abs(props.x - zeroPx), r);
-                                    var x0 = zeroPx;
-                                    var xTip = x0 + dir * len;
-                                    var xArc = xTip - dir * r;
-                                    ctx.save();
-                                    ctx.fillStyle = ds.barColor;
-                                    ctx.beginPath();
-                                    ctx.moveTo(x0, top);
-                                    ctx.lineTo(xArc, top);
-                                    ctx.arc(xArc, top + r, r, -Math.PI / 2, Math.PI / 2, dir < 0);
-                                    ctx.lineTo(x0, top + h);
-                                    ctx.closePath();
-                                    ctx.fill();
-                                    ctx.restore();
-                                });
-                            });
-                        }
-                    };
-
-                    new Chart(canvas.getContext('2d'), {
-                        type: 'bar',
-                        plugins: [barCapPlugin],
-                        data: {
-                            labels: labels,
-                            datasets: [
-                                { label: '이전', data: prev, backgroundColor: 'transparent', barColor: colors.prev, borderSkipped: false },
-                                { label: '현재', data: now, backgroundColor: 'transparent', barColor: colors.now, borderSkipped: false }
-                            ]
-                        },
-                        options: {
-                            indexAxis: 'y',
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            onResize: function () { syncBackFaceCloneCanvases(categoryKey, 'data-insight-chart'); },
-                            datasets: { bar: { barThickness: BAR_H } },
-                            events: ['mousemove', 'mouseout', 'click', 'touchstart', 'touchmove'],
-                            plugins: {
-                                legend: { display: false },
-                                tooltip: { enabled: false, external: compareDiffTooltipHandler }
-                            },
-                            scales: {
-                                x: {
-                                    stacked: true,
-                                    min: -axisMax,
-                                    max: axisMax,
-                                    grid: { color: '#f0f0f0', drawTicks: false },
-                                    border: { display: false },
-                                    ticks: {
-                                        stepSize: axisMax / 2,
-                                        font: { size: 10 },
-                                        color: '#767676',
-                                        padding: 6,
-                                        callback: function (value) {
-                                            if (value === 0) return '0';
-                                            if (Math.abs(value) === axisMax) return Math.abs(value).toLocaleString();
-                                            return '';
-                                        }
-                                    }
-                                },
-                                y: {
-                                    stacked: true,
-                                    grid: { display: false },
-                                    border: { display: false },
-                                    ticks: { font: { size: 12 }, color: '#4f5359', padding: 10, crossAlign: 'far' }
-                                }
-                            }
-                        }
-                    });
-                }
-
-                buildCompareBarChart(
-                    'liquidity',
-                    ['입출금', '예적금', '외화', '기타'],
-                    [560000000, 42000000, 52000000, 450000],
-                    [590500000, 44500000, 55048000, 500000],
-                    { prev: '#c8d2e4', now: '#a1f069' }
-                );
-
-                buildCompareBarChart(
-                    'invest',
-                    ['국내주식', '해외주식', '채권', '펀드', '예수금', '기타'],
-                    [1575000, 525000, 1050, 1050, 1050, 2100000],
-                    [1500000, 500000, 1000, 1000, 1000, 2000000],
-                    { prev: '#c8d2e4', now: '#a1f069' }
-                );
-
-                buildCompareBarChart(
-                    'pension',
-                    ['개인연금', '퇴직연금', '공적연금'],
-                    [6300000, 950000, 0],
-                    [6654328, 1000000, 10000],
-                    { prev: '#c8d2e4', now: '#a1f069' }
-                );
-
-            })();
+            /* [nochart] Chart.js 막대 생성 스크립트 제거 → 누적 막대는 CSS, 비교 막대는 정적 마크업. 재생·툴팁은 nochart.js */
 
             (function () {
                 var sheet = document.getElementById('loanAccountSheet');

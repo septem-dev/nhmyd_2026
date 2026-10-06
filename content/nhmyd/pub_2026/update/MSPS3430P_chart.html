@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <script src="../pub-assets/js/head-mb-update.js"></script>
+        <title>[P] 상품구매카테고리 수집동의</title>
+        <script>
+            $(document).ready(function () {
+                slidePopConfirm();
+
+                if (typeof Chart !== 'undefined') {
+                    var donutCanvas = document.querySelector('[data-category-donut-chart]');
+                    if (donutCanvas) {
+                        var categoryColors = ['#38e784', '#ffa856', '#ede100', '#ff7e7e'];
+                        new Chart(donutCanvas.getContext('2d'), {
+                            type: 'doughnut',
+                            data: {
+                                labels: ['식비', '쇼핑', '여행', '의료비'],
+                                datasets: [{
+                                    data: [40, 30, 20, 10],
+                                    backgroundColor: [categoryColors[0], 'transparent', 'transparent', 'transparent'],
+                                    borderWidth: 0,
+                                    borderRadius: { outerStart: 4, outerEnd: 4, innerStart: 4, innerEnd: 4 }
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                cutout: '45%',
+                                events: [],
+                                spacing: 0,
+                                animation: false,
+                                plugins: { legend: { display: false }, tooltip: { enabled: false } }
+                            },
+                            plugins: [{
+                                id: 'shrinkOtherCategories',
+                                afterDatasetsDraw: function (chart) {
+                                    var meta = chart.getDatasetMeta(0);
+                                    var shrinkPx = 8;
+                                    var ctx = chart.ctx;
+                                    for (var i = 1; i <= 3; i++) {
+                                        var arc = meta.data[i];
+                                        if (!arc) continue;
+                                        var p = arc.getProps(['x', 'y', 'startAngle', 'endAngle', 'innerRadius', 'outerRadius'], true);
+                                        var outerR = Math.max(p.innerRadius, p.outerRadius - shrinkPx);
+                                        var innerR = p.innerRadius;
+                                        ctx.save();
+                                        ctx.beginPath();
+                                        ctx.arc(p.x, p.y, outerR, p.startAngle, p.endAngle);
+                                        ctx.arc(p.x, p.y, innerR, p.endAngle, p.startAngle, true);
+                                        ctx.closePath();
+                                        ctx.fillStyle = categoryColors[i];
+                                        ctx.fill();
+                                        ctx.restore();
+                                    }
+                                }
+                            }]
+                        });
+                    }
+                }
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="wrapper nhasset"><!-- 바닥페이지 --></div>
+        <div class="nhasset popWrap nds slidePopConfirm">
+            <div class="dim"></div>
+            <div class="popInner">
+                <h1 class="normal">
+                    <strong>무엇을 샀는지</strong>
+                    알 수 있어요
+                </h1>
+                <div class="popCont">
+                    <div class="popCont__inner">
+                        <p class="txn-caption">상품구매 카테고리 수집·이용 동의</p>
+                        <div class="txn-preview">
+                            <div class="txn-preview__switch">
+                                <label class="switch is-xs">
+                                    <span class="switch__title">미리보기</span>
+                                    <input type="checkbox" class="switch__input inputChecked" id="pmAlertSwitch" checked="">
+                                    <span class="switch__track"></span>
+                                </label>
+                            </div>
+                            <div class="txn-preview__card fund-donut">
+                                <div class="fund-donut__chart">
+                                    <canvas data-category-donut-chart width="120" height="120" role="img" aria-label="식비 40%, 쇼핑 30%, 여행 20%, 의료비 10%"></canvas>
+                                    <span class="fund-donut__callout">
+                                        식비
+                                        <br />
+                                        <strong>40%</strong>
+                                    </span>
+                                </div>
+                                <div class="fund-donut__legend">
+                                    <div class="fund-donut__legend-row">
+                                        <span class="fund-donut__chip" style="background-color:#38e784"></span>
+                                        <span class="fund-donut__legend-label">식비</span>
+                                    </div>
+                                    <div class="fund-donut__legend-row">
+                                        <span class="fund-donut__chip" style="background-color:#ffa856"></span>
+                                        <span class="fund-donut__legend-label">쇼핑</span>
+                                    </div>
+                                    <div class="fund-donut__legend-row">
+                                        <span class="fund-donut__chip" style="background-color:#ede100"></span>
+                                        <span class="fund-donut__legend-label">여행</span>
+                                    </div>
+                                    <div class="fund-donut__legend-row">
+                                        <span class="fund-donut__chip" style="background-color:#ff7e7e"></span>
+                                        <span class="fund-donut__legend-label">의료비</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="bullet is-dot mt12">
+                                <li class="bullet__item">실제 구매 상품명이 아닌 분류된 카테고리 정보만 수집·표시됩니다</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="popBtnWrap">
+                    <div class="popBtn half">
+                        <a href="javascript:;" class="confirmBtn" role="button">다음에</a>
+                        <a href="javascript:;" class="confirmBtn" role="button">동의하기</a>
+                    </div>
+                    <a href="javascript:;" onclick="popClose(this);return false;" class="popClose" title="해당 창을 닫습니다." role="button">
+                        <img src="../../images/common/btn_popClose.png" alt="닫기" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
