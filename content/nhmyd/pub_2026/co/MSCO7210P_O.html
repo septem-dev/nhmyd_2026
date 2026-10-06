@@ -1,0 +1,337 @@
+<!DOCTYPE html >
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-title" content="NH마이데이터">
+<meta http-equiv="imagetoolbar" content="no">
+<meta name="robots" content="no-index,follow">
+<meta name="title" content="">
+<meta name="author" content="">
+<meta name="content" content="">
+<meta name="keywords" content="NH마이데이터">
+<meta name="description" content="NH마이데이터">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<title>[P] 투자자성향진단 상세안내</title>
+<script src="../pub-assets/js/head.js"></script> <!-- [수정 260803] [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 : head.js로 수정 -->
+<script>
+	$(document).ready(function() {
+		fullLayerPop();
+	});
+</script>
+</head>
+<body>
+<div class="wrapper nhasset"><!-- 바닥페이지 --></div>
+
+<!-- ###################################### -->
+<!-- ### [팝업] [P] 투자자성향진단 상세안내   ### -->
+<!-- ###################################### -->
+<div class="nhasset popWrap fullLayerPop" role="dialog">
+	<div class="popInner mbType"> <!-- [수정 260803] [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 : class="mbType" 추가 -->
+		<h1>투자자성향진단 상세안내</h1>
+		<div class="popCont">
+
+      <!-- -------------------------------------- -->
+      <!-- [SECTION] 투자자 유형 및 투자 가능 펀드 -->
+      <!-- -------------------------------------- -->
+      <div class="diagAcc active" data-toggle="wrap">
+        <button type="button" class="analysisCate" aria-expanded="true" data-toggle="btn">
+          <h3 class="accValue">투자자 유형 및 투자 가능 펀드</h3>
+          <span class="accBtn" aria-hidden="true"></span>
+        </button>
+        <div class="accCont" data-toggle="con">
+          <dl>
+            <dt>공격투자형</dt>
+            <dd>
+              <p>시장 평균 수익률을 훨씬 넘어서는 높은 수준의 투자수익을 추구. 자산가치의 변동에 따른 손실위험을 적극 수용. 투자자금 대부분을 주식, 주식형 펀드 또는 파생상품 등의 위험자산에 투자할 의향이 있음.</p>
+              <p class="bul -diag">투자  가능 펀드 : 모든 등급 펀드</p>
+            </dd>
+            <dt>적극투자형</dt>
+            <dd>
+              <p>투자원금의 보전 보다는 위험을 감내하더라도 높은 수준의 투자수익을 추구. 투자자금의 상당 부분을 주식, 주식형 펀드 또는 파생상품 등의 위험자산에 투자할 의향이 있음.</p>
+              <p class="bul -diag">투자  가능 펀드 : 3~6등급 펀드</p>
+            </dd>
+            <dt>위험중립형</dt>
+            <dd>
+              <p>투자에는 그에 상응하는 투자위험이 있음을 충분히 인식하고 있으며, 예·적금 보다 높은 수익을 기대할 수 있다면 일정 수준의 손실위험을 감수.</p>
+              <p class="bul -diag">투자  가능 펀드 : 4~6등급 펀드</p>
+            </dd>
+            <dt>안정추구형</dt>
+            <dd>
+              <p>투자원금의 손실위험은 최소화하고, 이자소득이나 배당소득 수준의 안정적인 투자를 목표로 함. 다만, 수익을 위해 단기적인 손실을 수용할 수 있으며, 예·적금보다 높은 수익을 위해 자산 중 일부를 변동성 높은 상품에 투자할 의향이 있음.</p>
+              <p class="bul -diag">투자  가능 펀드 : 5~6등급 펀드</p>
+            </dd>
+            <dt>안정형</dt>
+            <dd>
+              <p>예금 또는 적금 수준의 수익률을 기대하며, 투자원금에 손실이 발생하는 것을 원하지 않음.</p>
+              <p class="bul">투자  가능 펀드 : 6등급 펀드</p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <!-- -------------------------------------- -->
+      <!-- [SECTION] 투자자성향별 적합 상품 분류 -->
+      <!-- -------------------------------------- -->
+      <div class="diagAcc" data-toggle="wrap">
+        <button type="button" class="analysisCate" aria-expanded="false" data-toggle="btn">
+          <h3 class="accValue">투자자성향별 적합 상품 분류</h3>
+          <span class="accBtn" aria-hidden="true"></span>
+        </button>
+        <div class="accCont" data-toggle="con" style="display: none;">
+          <div class="matrixWrap -diag">
+            <div class="chartArea" aria-hidden="true">
+              <div class="chartAxisY">
+                <span class="axisLabel">매우높은위험<br>1등급</span>
+                <span class="axisLabel">높은위험<br>2등급</span>
+                <span class="axisLabel">다소높은위험<br>3등급</span>
+                <span class="axisLabel">보통위험<br>4등급</span>
+                <span class="axisLabel">낮은위험<br>5등급</span>
+                <span class="axisLabel">매우낮은위험<br>6등급</span>
+              </div>
+              <div class="chartPlot">
+                <div class="plotRow">
+                  <div class="plotCell"><span class="chk g1"></span></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                </div>
+                <div class="plotRow">
+                  <div class="plotCell"><span class="chk g1"></span></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                </div>
+                <div class="plotRow">
+                  <div class="plotCell"><span class="chk g1"></span></div>
+                  <div class="plotCell"><span class="chk g2"></span></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                </div>
+                <div class="plotRow">
+                  <div class="plotCell"><span class="chk g1"></span></div>
+                  <div class="plotCell"><span class="chk g2"></span></div>
+                  <div class="plotCell"><span class="chk g3"></span></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                </div>
+                <div class="plotRow">
+                  <div class="plotCell"><span class="chk g1"></span></div>
+                  <div class="plotCell"><span class="chk g2"></span></div>
+                  <div class="plotCell"><span class="chk g3"></span></div>
+                  <div class="plotCell"><span class="chk g4"></span></div>
+                  <div class="plotCell"></div>
+                </div>
+                <div class="plotRow">
+                  <div class="plotCell"><span class="chk g1"></span></div>
+                  <div class="plotCell"><span class="chk g2"></span></div>
+                  <div class="plotCell"><span class="chk g3"></span></div>
+                  <div class="plotCell"><span class="chk g4"></span></div>
+                  <div class="plotCell"><span class="chk g5"></span></div>
+                </div>
+              </div>
+            </div>
+            <div class="chartAxisX" aria-hidden="true">
+              <span class="axisLabel">공격투자형</span>
+              <span class="axisLabel">적극투자형</span>
+              <span class="axisLabel">위험중립형</span>
+              <span class="axisLabel">안정추구형</span>
+              <span class="axisLabel">안정형</span>
+            </div>
+
+            <!-- [D] 스크린리더용 테이블 -->
+            <table class="blind">
+              <caption>위험등급별로 가입 가능한 투자자성향을 나타낸 표</caption>
+              <thead>
+                <tr>
+                  <th scope="col" id="colGrade">위험등급</th>
+                  <th scope="col" id="colGrade01">공격투자형</th>
+                  <th scope="col" id="colGrade02">적극투자형</th>
+                  <th scope="col" id="colGrade03">위험중립형</th>
+                  <th scope="col" id="colGrade04">안정추구형</th>
+                  <th scope="col" id="colGrade05">안정형</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row" id="rowG1">매우높은위험 1등급</th>
+                  <td headers="rowG1 colGrade01">가능</td>
+                  <td headers="rowG1 colGrade02">해당 없음</td>
+                  <td headers="rowG1 colGrade03">해당 없음</td>
+                  <td headers="rowG1 colGrade04">해당 없음</td>
+                  <td headers="rowG1 colGrade05">해당 없음</td>
+                </tr>
+                <tr>
+                  <th scope="row" id="rowG2">높은위험 2등급</th>
+                  <td headers="rowG2 colGrade01">가능</td>
+                  <td headers="rowG2 colGrade02">해당 없음</td>
+                  <td headers="rowG2 colGrade03">해당 없음</td>
+                  <td headers="rowG2 colGrade04">해당 없음</td>
+                  <td headers="rowG2 colGrade05">해당 없음</td>
+                </tr>
+                <tr>
+                  <th scope="row" id="rowG3">다소높은위험 3등급</th>
+                  <td headers="rowG3 colGrade01">가능</td>
+                  <td headers="rowG3 colGrade02">가능</td>
+                  <td headers="rowG3 colGrade03">해당 없음</td>
+                  <td headers="rowG3 colGrade04">해당 없음</td>
+                  <td headers="rowG3 colGrade05">해당 없음</td>
+                </tr>
+                <tr>
+                  <th scope="row" id="rowG4">보통위험 4등급</th>
+                  <td headers="rowG4 colGrade01">가능</td>
+                  <td headers="rowG4 colGrade02">가능</td>
+                  <td headers="rowG4 colGrade03">가능</td>
+                  <td headers="rowG4 colGrade04">해당 없음</td>
+                  <td headers="rowG4 colGrade05">해당 없음</td>
+                </tr>
+                <tr>
+                  <th scope="row" id="rowG5">낮은위험 5등급</th>
+                  <td headers="rowG5 colGrade01">가능</td>
+                  <td headers="rowG5 colGrade02">가능</td>
+                  <td headers="rowG5 colGrade03">가능</td>
+                  <td headers="rowG5 colGrade04">가능</td>
+                  <td headers="rowG5 colGrade05">해당 없음</td>
+                </tr>
+                <tr>
+                  <th scope="row" id="rowG6">매우낮은위험 6등급</th>
+                  <td headers="rowG6 colGrade01">가능</td>
+                  <td headers="rowG6 colGrade02">가능</td>
+                  <td headers="rowG6 colGrade03">가능</td>
+                  <td headers="rowG6 colGrade04">가능</td>
+                  <td headers="rowG6 colGrade05">가능</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- //[D] 스크린리더용 테이블 -->
+          </div>
+          <p class="img-desc">* 가입 상품에 대한 약관 및 투자설명서의 상품에 대한 위험 및 비용 등의  주요 내용을 확인하신 후 가입하시기 바랍니다.</p>
+        </div>
+      </div>
+      <!-- -------------------------------------- -->
+      <!-- [SECTION] 투자 유형 분류 기준 -->
+      <!-- -------------------------------------- -->
+      <div class="diagAcc" data-toggle="wrap">
+        <button type="button" class="analysisCate" aria-expanded="false" data-toggle="btn">
+          <h3 class="accValue">투자 유형 분류 기준</h3>
+          <span class="accBtn" aria-hidden="true"></span>
+        </button>
+        <div class="accCont" data-toggle="con" style="display: none;">
+          <div class="tblData1">
+            <table>
+              <caption>투자 유형 분류 기준</caption>
+              <colgroup>
+                <col style="width:16%">
+                <col style="width:23%">
+                <col style="width:16%">
+                <col style="width:16%">
+                <col style="width:29%">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th id="t_colGrade" scope="col" rowspan="2">위험등급<br>/구분</th>
+                  <th id="t_colAsset" scope="col" rowspan="2">투자자산 기준<br>(설정 후 3년 미만 펀드)</th>
+                  <th id="t_colVarGroup" scope="col" colspan="2"><sup>주4)</sup>수익률변동성 기준<br>(설정 후 3년 경과)</th>
+                  <th id="t_colExample" scope="col" rowspan="2">상품예시</th>
+                </tr>
+                <tr>
+                  <th id="t_colVar" headers="t_colVarGroup" scope="col"><sup>주5)</sup>97.5%<br>VaR</th>
+                  <th id="t_colStd" headers="t_colVarGroup" scope="col">표준편차</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th id="t_rowG1" headers="t_colGrade" scope="row" rowspan="2">1등급<br>(매우높은위험)</th>
+                  <td headers="t_rowG1 t_colAsset">레버리지 등 수익구조가 특수한 경우</td>
+                  <td headers="t_rowG1 t_colVarGroup t_colVar" rowspan="2">50% 초과</td>
+                  <td headers="t_rowG1 t_colVarGroup t_colStd" rowspan="2">25% 초과</td>
+                  <td headers="t_rowG1 t_colExample" rowspan="2">레버리지 펀드 등</td>
+                </tr>
+                <tr>
+                  <td headers="t_rowG1 t_colAsset">파생결합증권<br>(최대손실률 20% 초과)</td>
+                </tr>
+                <tr>
+                  <th id="t_rowG2" headers="t_colGrade" scope="row">2등급<br>(높은위험)</th>
+                  <td headers="t_rowG2 t_colAsset">고위험자산 80% 이상 투자</td>
+                  <td headers="t_rowG2 t_colVarGroup t_colVar">50% 이하</td>
+                  <td headers="t_rowG2 t_colVarGroup t_colStd">25% 이하</td>
+                  <td headers="t_rowG2 t_colExample">국내 및 해외주식형, 파생형, 인덱스형, 주식혼합형, 원금비보존형<br>ELF(DLF) 등</td>
+                </tr>
+                <tr>
+                  <th id="t_rowG3" headers="t_colGrade" scope="row" rowspan="2">3등급<br>(다소높은위험)</th>
+                  <td headers="t_rowG3 t_colAsset"><sup>주1)</sup>고위험자산 50% 미만 투자</td>
+                  <td headers="t_rowG3 t_colVarGroup t_colVar" rowspan="2">30% 이하</td>
+                  <td headers="t_rowG3 t_colVarGroup t_colStd" rowspan="2">15% 이하</td>
+                  <td headers="t_rowG3 t_colExample" rowspan="2">국내 및 해외주식형, 파생형, 인덱스형, 주식혼합형, 원금비보존형<br>ELF(DLF) 등</td>
+                </tr>
+                <tr>
+                  <td headers="t_rowG3 t_colAsset">파생결합증권<br>(최대손실률 20% 이하)</td>
+                </tr>
+                <tr>
+                  <th id="t_rowG4" headers="t_colGrade" scope="row">4등급<br>(보통위험)</th>
+                  <td headers="t_rowG4 t_colAsset">고위험자산 50% 미만 투자 <sup>주2)</sup>중위험자산 60% 이상 투자</td>
+                  <td headers="t_rowG4 t_colVarGroup t_colVar">20% 이하</td>
+                  <td headers="t_rowG4 t_colVarGroup t_colStd">10% 이하</td>
+                  <td headers="t_rowG4 t_colExample">채권(혼합)형, 원금부분보존추구형<br>ELF(DLF) 등</td>
+                </tr>
+                <tr>
+                  <th id="t_rowG5" headers="t_colGrade" scope="row" rowspan="2">5등급<br>(낮은위험)</th>
+                  <td headers="t_rowG5 t_colAsset"><sup>주3)</sup>저위험자산 60% 이상 투자</td>
+                  <td headers="t_rowG5 t_colVarGroup t_colVar" rowspan="2">10% 이하</td>
+                  <td headers="t_rowG5 t_colVarGroup t_colStd" rowspan="2">5% 이하</td>
+                  <td headers="t_rowG5 t_colExample" rowspan="2">채권형, 원금보존추구형<br>ELF(DLF) 등</td>
+                </tr>
+                <tr>
+                  <td headers="t_rowG5 t_colAsset">파생결합증권<br>(원금보존추구형)</td>
+                </tr>
+                <tr>
+                  <th id="t_rowG6" headers="t_colGrade" scope="row">6등급<br>(매우낮은위험)</th>
+                  <td headers="t_rowG6 t_colAsset">MMF, 단기국공채 등에 투자</td>
+                  <td headers="t_rowG6 t_colVarGroup t_colVar">1% 이하</td>
+                  <td headers="t_rowG6 t_colVarGroup t_colStd">0.5% 이하</td>
+                  <td headers="t_rowG6 t_colExample">국공채형,<br>MMF 등</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <ul class="tbl-desc">
+            <li>주1) 고위험자산 : 주식, 상품, REITs, 투기등급채권(BB+이하), 파생상품 및 이와 유사한 수준의 위험을 갖는 자산</li>
+            <li>주2) 중위험자산 : 채권(BBB-등급 이상), CP(A3등급 이상), 담보부 대출 및 대출채권 및 이와 유사한 수준의 위험을 갖는 자산</li>
+            <li>주3) 저위험자산 : 국공채, 지방채, 회사채(A-등급 이상), CP(A2-등급 이상), 현금성 자산 및 이와 유사한 수준의 위험을 갖는 자산</li>
+            <li>주4) 펀드 설정 후 3년이 경과한 집합투자기구에 대해 부여되는 위험등급은 재산정 시점에 따라‘97.5% VaR’또는‘수익률 변동성’을 토대로 산출됩니다.</li>
+            <li>주5) 97.5% VaR : 과거 3년 일간 수익률에서 2.5퍼센타일에 해당하는 손실률의 절대값에 연환산 보정계수(√250)를 곱해 산출</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- // ### ##### ### -->
+		</div>
+    <!-- -------------------------------------- -->
+    <!-- [SECTION] 버튼영역 -->
+    <!-- -------------------------------------- -->
+    <div class="popBtnWrap">
+			<div class="popBtn">
+				<a href="javascript:;" onclick="popClose(this);return false;" class="confirmBtn" role="button">확인</a>
+			</div>
+			<a href="javascript:;" onclick="popClose(this);return false;" class="popClose" title="해당 창을 닫습니다." role="button"><img src="../../images/common/btn_popClose.png" alt="닫기"></a>
+		</div>
+    <!-- -------------------------------------- -->
+	</div>
+</div>
+
+<!-- ###################################### -->
+<!-- ### [샘플] 스크립트 ### -->
+<!-- ###################################### -->
+<script>
+
+</script>
+<!-- ###################################### -->
+</body>
+</html>

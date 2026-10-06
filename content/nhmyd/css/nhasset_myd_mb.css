@@ -2352,6 +2352,58 @@ a{pointer-events:auto;touch-action:manipulation} /* 2025-12-05 롱프레스 제�
 /* [MD2607_074] 청년 재무상담 영업점 안내 화면 개발 */
 .nhasset .serviceVisual08{background:url('../images/makebetter/banner/img_service_visual_08.png') no-repeat right 15% bottom / cover;}
 
+/* [MD2607_083] 마이데이터 금융소득모니터링 고배당 기업 안내 */
+.nhasset .incomeBoxWrap + .incomeBoxWrap .incomeBox dt:before {background-color: #f1974b !important;}
+.nhasset .incomeBoxWrap + .incomeBoxWrap {margin-top: 4px;}
+.nhasset .incomeBoxWrap .incomeBoxList {display: grid; grid-template-columns: 1fr auto; row-gap: 2px; margin: 8px 0;}
+.nhasset .incomeBoxWrap .incomeBoxList.bulList {margin:12px 0;}
+.nhasset .incomeBoxWrap .incomeBoxList.bulList dt {position:relative; padding-left:11px; font-size: var(--fontSize13);}
+.nhasset .incomeBoxWrap .incomeBoxList.bulList dt:before {content:''; display:inline-block; position:absolute; left:0; top:8px; border-radius:50%; width:3px; height:3px; background:var(--gray-600);}
+.nhasset .incomeBoxWrap .incomeBoxList dt {color: var(--color4);}
+.nhasset .incomeBoxWrap .incomeBoxList dd {color: var(--color1); text-align:right;}
+.nhasset .btnIncome {display:inline-flex; align-items:center; height:30px; padding:0 12px; border: 1px solid var(--point1); background-color: #fff; color: var(--point1);border-radius:8px; margin-left:6px; font-size:13px; font-weight:400 !important; text-align:center;}
+.nhasset .toggleCont.bdT {padding-top:12px; margin-top:12px; border-top: 1px solid var(--gray-300);}
+.nhasset .incomeMonitorList.bdT {padding-top:24px; margin-top:24px; border-top: 1px solid var(--gray-200);}
+.nhasset .grayBanner.bdT {position:relative; margin-top:48px;}
+.nhasset .grayBanner.bdT:before {content:''; display:block; position:absolute; top:-24px; left:0; width:100%; height:1px; border-top: 1px solid var(--gray-300);}
+.nhasset .grayBanner .listBul.disc li {font-size:var(--fontSize13); color:var(--color4);}
+.nhasset .analysisCate.disc {padding-left: 11px;}
+.nhasset .analysisCate.disc:before {content:''; display:inline-block; position:absolute; left:0; top:8px; border-radius:50%; width:3px; height:3px; background:#666;}
+.nhasset .listBul.check li {position:relative; padding-left:26px; margin-top:8px; font-size:var(--fontSize15); color:var(--color1); font-weight:500}
+.nhasset .listBul.check li:before {content:''; display:inline-block; position:absolute; left:0; top:0px; width:24px; height:24px; background:url('../images/makebetter/icon/ico_check_fill_24.svg') no-repeat left top / 24px auto}
+.nhasset .dividendWrap {display:flex; align-items:stretch; justify-content:center; gap:10px; margin-top:9px;}
+.nhasset .dividendBox {display:flex; flex-direction:column; align-items:center; justify-content:flex-start; flex:1; border-radius:14px; padding:15px 10px; text-align:center;}
+.nhasset .dividendBox.-green {background:#f4fff1;}
+.nhasset .dividendBox.-blue {background:#f3f9ff;}
+.nhasset .dividendBox .num {width:53px; height:28px; font-size:0; text-indent:-9999px;}
+.nhasset .dividendBox.-green .num { background:url('../images/img_dividend_40.png') no-repeat left top / 100% auto;}
+.nhasset .dividendBox.-blue .num { background:url('../images/img_dividend_25.png') no-repeat left top / 100% auto;}
+.nhasset .dividendBox .desc {margin-top:4px; font-size:var(--fontSize12); font-weight:600;}
+.nhasset .dividendBox .desc span {font-size:var(--fontSize12);; font-weight:400;}
+.nhasset .dividendOr {display:flex; align-self:center; align-items:center; justify-content:center; flex:0 0 30px; width:30px; height:30px; border-radius:50%; background:#f5f5f5; font-size:var(--fontSize13); font-weight:600;}
+.nhasset .boxTypeWrap .coin {display:flex; align-items:center;}
+.nhasset .boxTypeWrap .coin:before {content:''; display:block; width:32px; height:32px; background:url('../images/img_dividend_coin.png') no-repeat left top / 100% auto;}
+.nhasset .survDesc.-star {padding-left:12px; text-indent: -6px;}
+.nhasset .survDesc.-star:before {content:'*'; display:inline-block; margin-right:5px;}
+.nhasset .toggleIncome .toggleWrap.active {border-color:var(--point1);}
+.t-com {display:inline-flex; align-items:center; height:32px; padding-left:40px; background:url('../images/ico_com_24.png') no-repeat left center / 32px auto;}
+.t-pin {display:inline-flex; align-items:center; height:24px; padding-left:32px; background:url('../images/ico_pin_24.png') no-repeat left top / 24px auto;}
+.t-ten {display:inline-flex; align-items:center; height:24px; padding-left:32px; background:url('../images/ico_ten_24.png') no-repeat left top / 24px auto;}
+.nhasset .survDesc.-reference {padding-left:12px; text-indent: -6px;}
+.nhasset .survDesc.-reference:before {content:'※'; display:inline-block; margin-right:5px;}
+.nhasset .survDesc.caption2 {font-size:var(--fontSize12) !important;}
+.nhasset .mbCiBox.gridMainSide dt .tooltipWrap .toolTipBtn {transform: translateY(2px);}
+.nhasset .boxTypeWrap.inTooltip {overflow:visible;}
+
+/* [MD2607_078] 마이데이터 금리인하요구권 관련 공공마이데이터 연계 */
+.nhasset .popBtnWrap .popBtn.multi > a {height:auto; padding:8px 0; line-height:24px;}
+.nhasset .areaBtnDefault.multi [class*="btnPress"] {height:auto; padding:8px 0; line-height:1.4; vertical-align: middle;}
+.nhasset .assetCancleWrap.failed {background:url('../images/img_call_failed.png') no-repeat center top; background-size: auto 130px;}
+.nhasset .assetCancleWrap.success {background:url('../images/img_call_success.png') no-repeat center top; background-size: auto 130px;} 
+
+/* [MD2607_077] PUSH를 통한 자산연결 1개기관 연결 유도 화면 개발 */
+.nhasset .assetCancleWrap.kakao {padding-top:100px; background:url('../images/logos/AAPC0000.png') no-repeat center top; background-size: auto 64px;}
+
 /*[MD2609_095] 구글 스토어 정책 변경에 따른 올원뱅크스마트뱅킹 앱 테스트 */
 @media screen and (min-width:400px) {
 	.nhasset .formHolder.check input[type='checkbox'] {transform:translateY(0);}

@@ -10,7 +10,7 @@
         <div class="wrapper nhasset nds">
             <div class="header bgcolor">
                 <a href="javascript:;" role="button" class="btnBack"><span class="blind">이전화면으로</span></a>
-                <h1>자산</h1>
+                <h1>자산 관리 포털</h1>
                 <a href="javascript:;" class="btnGoHome" role="button"><span class="blind">Home</span></a>
                 <a href="javascript:;" class="btnAll" role="button"><span class="blind">전체메뉴</span></a>
             </div>
@@ -543,7 +543,7 @@
                                                     </div>
                                                     <div class="loan-repay__row">
                                                         <dt>상환 잔여 회차</dt>
-                                                        <dd>354 / 360 회</dd>
+                                                        <dd><em>354</em> / 360 회</dd>
                                                     </div>
                                                     <div class="loan-repay__row">
                                                         <dt>월 예상 상환액</dt>
@@ -768,6 +768,51 @@
                                 김*협님의 포트폴리오는 국내주식 22%(반도체 직접보유 포함)로 상승 모멘텀 직접 수혜 구간에 있으나, 동시에 국내·해외채권 35%, 해외주식형 18%로 금리 상승 및 유가 변동성 노출도 상당합니다.
                             </p>
                             <button type="button" class="btn is-primary is-md is-full">브리핑 상세보기</button>
+                        </div>
+                        <!-- 로딩및 미연결 케이스  -->
+                        <br />
+                        <div class="md-card is-locked">
+                            <div class="accordion-gray">
+                                <p class="accordion-gray__date">2026.08.27일 기준</p>
+                                <div class="accordion-gray__item">
+                                    <button type="button" class="accordion-gray__button--with-icon" data-acc-toggle aria-expanded="true">
+                                        <span class="accordion-gray__icon is-sun" aria-hidden="true"></span>
+                                        <span class="accordion-gray__title-col">
+                                            <span class="accordion-gray__title">호재</span>
+                                            <span class="accordion-gray__sub">시장에 긍정적인 소식입니다</span>
+                                        </span>
+                                    </button>
+                                    <div class="accordion-gray__body">KOSPI, 5월 6일 종가 7,000선 첫 돌파, AI 데이터 센터 수요 폭증과 HBM 공급부족이 견인했습니다.</div>
+                                </div>
+                                <div class="accordion-gray__item">
+                                    <button type="button" class="accordion-gray__button--with-icon" data-acc-toggle aria-expanded="false">
+                                        <span class="accordion-gray__icon is-rain" aria-hidden="true"></span>
+                                        <span class="accordion-gray__title-col">
+                                            <span class="accordion-gray__title">주의</span>
+                                            <span class="accordion-gray__sub">위험요인이 되는 소식입니다</span>
+                                        </span>
+                                    </button>
+                                    <div class="accordion-gray__body" hidden>이번 주 별도의 위험 이슈는 확인되지 않았습니다.</div>
+                                </div>
+                            </div>
+                            <hr class="divider is-page is-space32" />
+                            <p class="briefing-notice">
+                                <span class="briefing-notice__icon" aria-hidden="true"></span>
+                                김*협님의 포트폴리오는 국내주식 22%(반도체 직접보유 포함)로 상승 모멘텀 직접 수혜 구간에 있으나, 동시에 국내·해외채권 35%, 해외주식형 18%로 금리 상승 및 유가 변동성 노출도 상당합니다.
+                            </p>
+                            <button type="button" class="btn is-primary is-md is-full">브리핑 상세보기</button>
+
+                            <div class="card-lock">
+                                <div class="card-lock__group">
+                                    <span class="lottie-anim" style="--lottie-size: 64px" data-lottie="lottieInsightAiLoader1" data-lottie-loop="true" data-lottie-path="ai-loader" aria-hidden="true"></span>
+                                    <p class="card-lock__tit mt16">AI가 뉴스를 준비중이에요</p>
+                                    <p class="card-lock__desc mt4">
+                                        개인화된 데일리 브리핑을 작성하고 있어요.
+                                        <br />
+                                        조금만 기다려 주세요.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                         <!-- 투자 자산 금액이 없고 에이전트 AI 분석 데이터 호출이 가능한 경우 -->
                         <br />

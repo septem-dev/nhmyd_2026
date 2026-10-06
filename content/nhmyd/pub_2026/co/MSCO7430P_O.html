@@ -1,0 +1,737 @@
+<!DOCTYPE html >
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-title" content="NH마이데이터">
+<meta http-equiv="imagetoolbar" content="no">
+<meta name="robots" content="no-index,follow">
+<meta name="title" content="">
+<meta name="author" content="">
+<meta name="content" content="">
+<meta name="keywords" content="NH마이데이터">
+<meta name="description" content="NH마이데이터">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<title>[P] 투자자성향 및 펀드 위험등급 안내</title>
+<script src="../pub-assets/js/head.js"></script> <!-- [수정 260803] [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 : head.js로 수정 -->
+<script>
+	$(document).ready(function() {
+		fullLayerPop();
+	});
+</script>
+</head>
+<body>
+<div class="wrapper nhasset"><!-- 바닥페이지 --></div>
+
+<!-- ###################################### -->
+<!-- ### [팝업] [P] 투자자성향 및 펀드 위험등급 안내 ### -->
+<!-- ###################################### -->
+<div class="nhasset popWrap fullLayerPop" role="dialog">
+	<div class="popInner mbType"> <!-- [수정 260803] [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 : class="mbType" 추가 -->
+		<h1>투자자성향 및 펀드 위험등급 안내</h1>
+		<div class="popCont">
+      <div class="fullyWrap">
+
+        <div class="diagTit mt0">
+          <h3>투자자성향별 가입 가능 펀드</h3>
+        </div>
+
+        <div class="formWrap diagWrap">
+          <!-- case: 공격투자형 -->
+          <div class="stList">
+            <a href="javascript:;" title="투자자성향별 가입 가능 펀드" aria-haspopup="true" role="button">
+              <span class="selectValue grade01">공격투자형</span>
+              <span class="selectBtn"></span>
+            </a>
+            <select name="" title="선택해주세요">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="gradeCont">
+            <ul>
+              <li>
+                <p class="gradeTit">고객성향</p>
+                <div class="gradeTxt">
+                  공격투자형
+                  <div class="tooltipWrap">
+                    <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">공격투자형 툴팁 열기</span></button>
+                    <div class="tooltipCont">
+                      <p><strong>공격투자형</strong></p>
+                      <p>시장 평균 수익률을 훨씬 넘어서는 높은 수준의 투자수익을 추구함. 이를 위해 자산가치의 변동에 따른 손실위험을 적극 받아들이고 투자자금 대부분을 주식, 주식형펀드 또는 파생상품 등의 위험자산에 투자할 의향이 있는 유형</p>
+                      <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <p class="gradeTit">진단 점수</p>
+                <div class="gradeTxt">82점~100점</div>
+              </li>
+              <li>
+                <p class="gradeTit">가입 가능 펀드</p>
+                <div class="gradeTxt">모든 펀드 등급</div>
+              </li>
+            </ul>
+          </div>
+          <!-- //case: 공격투자형 -->
+
+          <!-- case: 적극투자형 -->
+          <div class="stList">
+            <a href="javascript:;" title="투자자성향별 가입 가능 펀드" aria-haspopup="true" role="button">
+              <span class="selectValue grade02">적극투자형</span>
+              <span class="selectBtn"></span>
+            </a>
+            <select name="" title="선택해주세요">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="gradeCont">
+            <ul>
+              <li>
+                <p class="gradeTit">고객성향</p>
+                <div class="gradeTxt">
+                  적극투자형
+                  <div class="tooltipWrap">
+                    <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">적극투자형 툴팁 열기</span></button>
+                    <div class="tooltipCont">
+                      <p><strong>적극투자형</strong></p>
+                      <p>투자원금의 보전보다는 위험을 감내하더라도 높은 수준의 투자수익 실현을 추구함. 투자자금의 상당 부분을 주식, 주식형 펀드 또는 파생상품의 위험자산에 투자향 의향이 있는 유형</p>
+                      <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <p class="gradeTit">진단 점수</p>
+                <div class="gradeTxt">69점~81점</div>
+              </li>
+              <li>
+                <p class="gradeTit">가입 가능 펀드</p>
+                <div class="gradeTxt">
+                  <div class="tagGroup">
+                    <span class="tag warning-grade3">3등급</span>
+                    <span class="tag warning-grade4">4등급</span>
+                    <span class="tag warning-grade5">5등급</span>
+                    <span class="tag warning-grade6">6등급</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- //case: 적극투자형 -->
+
+          <!-- case: 위험중립형 -->
+          <div class="stList">
+            <a href="javascript:;" title="투자자성향별 가입 가능 펀드" aria-haspopup="true" role="button">
+              <span class="selectValue grade03">위험중립형</span>
+              <span class="selectBtn"></span>
+            </a>
+            <select name="" title="선택해주세요">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="gradeCont">
+            <ul>
+              <li>
+                <p class="gradeTit">고객성향</p>
+                <div class="gradeTxt">
+                  위험중립형
+                  <div class="tooltipWrap">
+                    <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">위험중립형 툴팁 열기</span></button>
+                    <div class="tooltipCont">
+                      <p><strong>위험중립형</strong></p>
+                      <p>투자에는 그에 상응하는 투자위험이 있음을 충분히 인식하고 있으며, 예ㆍ적금보다 높은 수익을 기대할 수 있다면 일정 수준의 손실 위험을 감수할 수 있는 유형</p>
+                      <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <p class="gradeTit">진단 점수</p>
+                <div class="gradeTxt">56점~68점</div>
+              </li>
+              <li>
+                <p class="gradeTit">가입 가능 펀드</p>
+                <div class="gradeTxt">
+                  <div class="tagGroup">
+                    <span class="tag warning-grade4">4등급</span>
+                    <span class="tag warning-grade5">5등급</span>
+                    <span class="tag warning-grade6">6등급</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- //case: 위험중립형 -->
+
+          <!-- case: 안정추구형 -->
+          <div class="stList">
+            <a href="javascript:;" title="투자자성향별 가입 가능 펀드" aria-haspopup="true" role="button">
+              <span class="selectValue grade04">안정추구형</span>
+              <span class="selectBtn"></span>
+            </a>
+            <select name="" title="선택해주세요">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="gradeCont">
+            <ul>
+              <li>
+                <p class="gradeTit">고객성향</p>
+                <div class="gradeTxt">
+                  안정추구형
+                  <div class="tooltipWrap">
+                    <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">안정추구형 툴팁 열기</span></button>
+                    <div class="tooltipCont">
+                      <p><strong>안정추구형</strong></p>
+                      <p>투자위험의 손실 위험은 최소화하고, 이자소득이나 배당소득 수준의 안정적인 투자를 목표로 함. 다만, 수익을 위해 단기적인 손실을 받아들일 수 있고, 예ㆍ적금보다 높은 수익을 위해 자산 중 일부를 변동성 높은 상품에 투자할 의향이 있는 유형</p>
+                      <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <p class="gradeTit">진단 점수</p>
+                <div class="gradeTxt">44점~55점</div>
+              </li>
+              <li>
+                <p class="gradeTit">가입 가능 펀드</p>
+                <div class="gradeTxt">
+                  <div class="tagGroup">
+                    <span class="tag warning-grade5">5등급</span>
+                    <span class="tag warning-grade6">6등급</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- //case: 안정추구형 -->
+
+          <!-- case: 안정형 -->
+          <div class="stList">
+            <a href="javascript:;" title="투자자성향별 가입 가능 펀드" aria-haspopup="true" role="button">
+              <span class="selectValue grade05">안정형</span>
+              <span class="selectBtn"></span>
+            </a>
+            <select name="" title="선택해주세요">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="gradeCont">
+            <ul>
+              <li>
+                <p class="gradeTit">고객성향</p>
+                <div class="gradeTxt">
+                  안정형
+                  <div class="tooltipWrap">
+                    <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">안정형 툴팁 열기</span></button>
+                    <div class="tooltipCont">
+                      <p><strong>안정형</strong></p>
+                      <p>예금 또는 적금 수준의 수익률을 기대하며, 투자원금을 보호하고 싶은 유형</p>
+                      <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <p class="gradeTit">진단 점수</p>
+                <div class="gradeTxt">0점~43점</div>
+              </li>
+              <li>
+                <p class="gradeTit">가입 가능 펀드</p>
+                <div class="gradeTxt">
+                  <div class="tagGroup">
+                    <span class="tag warning-grade6">6등급</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- //case: 안정형 -->
+        </div>
+
+        <div class="diagTit mt16">
+          <h3>상품 위험등급</h3>
+        </div>
+
+        <div class="formWrap diagWrap">
+          <!-- case: 1등급 -->
+          <div class="stList">
+            <a href="javascript:;" title="상품 위험등급" aria-haspopup="true" role="button">
+              <span class="selectValue warning01">1등급</span>
+              <span class="selectBtn"></span>
+            </a>
+            <select name="" title="선택해주세요">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="gradeCont">
+            <div class="tblData1">
+              <table>
+                <caption>상품 위험등급 - 1등급</caption>
+                <colgroup>
+                  <col style="width:50%">
+                  <col style="width:50%">
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <th scope="row">위험 등급/구분</th>
+                    <td>
+                      <div class="tagGroup">
+                        <span class="tag warning-grade1">1등급</span>
+                        <span class="tag warning-grade1">매우높은위험</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      투자자산 기준<br>(설정 후 3년 미만)
+                      <div class="tooltipWrap">
+                        <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">투자자산 기준(설정 후 3년 미만) 툴팁 열기</span></button>
+                        <div class="tooltipCont">
+                          <p><strong>고위험 자산</strong></p>
+                          <p>주식, 상품, REITs, 투기등급채권(BB+이하), 파생상품 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <p class="mt12"><strong>중위험 자산</strong></p>
+                          <p>채권(BBB-등급 이상), CP(A3등급 이상), 담보부 대출 및 대출채권 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <p class="mt12"><strong>저위험자산</strong></p>
+                          <p>국공채, 지방채, 회사채(A-등급 이상), CP(A2-등급 이상), 현금성 자산 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      <p class="bul">레버리지 등 수익구조가 특수한 경우</p>
+                      <p class="bul">파생결합증권 (최대손실률 20% 초과)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      수익률변동성 기준<br>(설정 후 3년 이상)
+                      <div class="tooltipWrap">
+                        <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">수익률변동성 기준(설정 후 3년 이상) 툴팁 열기</span></button>
+                        <div class="tooltipCont">
+                          <p>펀드 설정 후 3년이 경과한 집합투자기구에 대해 부여되는 위험등급은 재산정 시점에 따라 ‘97.5% VaR’또는‘수익률 변동성’을 토대로 산출됩니다.</p>
+                          <p class="mt12"><strong>* 97.5% VaR : </strong>과거 3년 일간 수익률에서 2.5퍼센타일에 해당하는 손실률의 절대값에 연환산 보정계수(&radic;250)를 곱해 산출</p>
+                          <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      <p class="bul">97.5% VaR : 50% 초과</p>
+                      <p class="bul">표준편차 : 25% 초과</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">상품 예시</th>
+                    <td>레버리지 펀드 등</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- //case: 1등급 -->
+
+          <!-- case: 2등급 -->
+          <div class="stList">
+            <a href="javascript:;" title="상품 위험등급" aria-haspopup="true" role="button">
+              <span class="selectValue warning02">2등급</span>
+              <span class="selectBtn"></span>
+            </a>
+            <select name="" title="선택해주세요">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="gradeCont">
+            <div class="tblData1">
+              <table>
+                <caption>상품 위험등급 - 2등급</caption>
+                <colgroup>
+                  <col style="width:50%">
+                  <col style="width:50%">
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <th scope="row">위험 등급/구분</th>
+                    <td>
+                      <div class="tagGroup">
+                        <span class="tag warning-grade2">2등급</span>
+                        <span class="tag warning-grade2">높은 위험</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      투자자산 기준<br>(설정 후 3년 미만)
+                      <div class="tooltipWrap">
+                        <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">투자자산 기준(설정 후 3년 미만) 툴팁 열기</span></button>
+                        <div class="tooltipCont">
+                          <p><strong>고위험 자산</strong></p>
+                          <p>주식, 상품, REITs, 투기등급채권(BB+이하), 파생상품 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <p class="mt12"><strong>중위험 자산</strong></p>
+                          <p>채권(BBB-등급 이상), CP(A3등급 이상), 담보부 대출 및 대출채권 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <p class="mt12"><strong>저위험자산</strong></p>
+                          <p>국공채, 지방채, 회사채(A-등급 이상), CP(A2-등급 이상), 현금성 자산 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                        </div>
+                      </div>
+                    </th>
+                    <td>고위험자산 80% 이상 투자</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      수익률변동성 기준<br>(설정 후 3년 이상)
+                      <div class="tooltipWrap">
+                        <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">수익률변동성 기준(설정 후 3년 이상) 툴팁 열기</span></button>
+                        <div class="tooltipCont">
+                          <p>펀드 설정 후 3년이 경과한 집합투자기구에 대해 부여되는 위험등급은 재산정 시점에 따라 ‘97.5% VaR’또는‘수익률 변동성’을 토대로 산출됩니다.</p>
+                          <p class="mt12"><strong>* 97.5% VaR : </strong>과거 3년 일간 수익률에서 2.5퍼센타일에 해당하는 손실률의 절대값에 연환산 보정계수(&radic;250)를 곱해 산출</p>
+                          <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      <p class="bul">97.5% VaR : 50% 이하</p>
+                      <p class="bul">표준편차 : 25% 이하</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">상품 예시</th>
+                    <td>국내 및 해외 주식형, 파생형, 인덱스형, 주식혼합형, 원금비보존형ELF(DLF) 등</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- //case: 2등급 -->
+
+          <!-- case: 3등급 -->
+          <div class="stList">
+            <a href="javascript:;" title="상품 위험등급" aria-haspopup="true" role="button">
+              <span class="selectValue warning03">3등급</span>
+              <span class="selectBtn"></span>
+            </a>
+            <select name="" title="선택해주세요">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="gradeCont">
+            <div class="tblData1">
+              <table>
+                <caption>상품 위험등급 - 3등급</caption>
+                <colgroup>
+                  <col style="width:50%">
+                  <col style="width:50%">
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <th scope="row">위험 등급/구분</th>
+                    <td>
+                      <div class="tagGroup">
+                        <span class="tag warning-grade3">3등급</span>
+                        <span class="tag warning-grade3">다소 높은 유형</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      투자자산 기준<br>(설정 후 3년 미만)
+                      <div class="tooltipWrap">
+                        <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">공격투자형 툴팁 열기</span></button>
+                        <div class="tooltipCont">
+                          <p><strong>고위험 자산</strong></p>
+                          <p>주식, 상품, REITs, 투기등급채권(BB+이하), 파생상품 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <p class="mt12"><strong>중위험 자산</strong></p>
+                          <p>채권(BBB-등급 이상), CP(A3등급 이상), 담보부 대출 및 대출채권 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <p class="mt12"><strong>저위험자산</strong></p>
+                          <p>국공채, 지방채, 회사채(A-등급 이상), CP(A2-등급 이상), 현금성 자산 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      <p class="bul">고위험자산 80% 미만 투자</p>
+                      <p class="bul">파생결합증권 (최대손실률 20% 이하)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      수익률변동성 기준<br>(설정 후 3년 이상)
+                      <div class="tooltipWrap">
+                        <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">수익률변동성 기준(설정 후 3년 이상) 툴팁 열기</span></button>
+                        <div class="tooltipCont">
+                          <p>펀드 설정 후 3년이 경과한 집합투자기구에 대해 부여되는 위험등급은 재산정 시점에 따라 ‘97.5% VaR’또는‘수익률 변동성’을 토대로 산출됩니다.</p>
+                          <p class="mt12"><strong>* 97.5% VaR : </strong>과거 3년 일간 수익률에서 2.5퍼센타일에 해당하는 손실률의 절대값에 연환산 보정계수(&radic;250)를 곱해 산출</p>
+                          <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      <p class="bul">97.5% VaR : 30% 이하</p>
+                      <p class="bul">표준편차 : 15% 이하</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">상품 예시</th>
+                    <td>국내 및 해외 주식형, 파생형, 인덱스형, 주식혼합형, 원금비보존형ELF(DLF) 등</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- //case: 3등급 -->
+
+          <!-- case: 4등급 -->
+          <div class="stList">
+            <a href="javascript:;" title="상품 위험등급" aria-haspopup="true" role="button">
+              <span class="selectValue warning04">4등급</span>
+              <span class="selectBtn"></span>
+            </a>
+            <select name="" title="선택해주세요">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="gradeCont">
+            <div class="tblData1">
+              <table>
+                <caption>상품 위험등급 - 4등급</caption>
+                <colgroup>
+                  <col style="width:50%">
+                  <col style="width:50%">
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <th scope="row">위험 등급/구분</th>
+                    <td>
+                      <div class="tagGroup">
+                        <span class="tag warning-grade4">4등급</span>
+                        <span class="tag warning-grade4">보통 위험</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      투자자산 기준<br>(설정 후 3년 미만)
+                      <div class="tooltipWrap">
+                        <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">공격투자형 툴팁 열기</span></button>
+                        <div class="tooltipCont">
+                          <p><strong>고위험 자산</strong></p>
+                          <p>주식, 상품, REITs, 투기등급채권(BB+이하), 파생상품 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <p class="mt12"><strong>중위험 자산</strong></p>
+                          <p>채권(BBB-등급 이상), CP(A3등급 이상), 담보부 대출 및 대출채권 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <p class="mt12"><strong>저위험자산</strong></p>
+                          <p>국공채, 지방채, 회사채(A-등급 이상), CP(A2-등급 이상), 현금성 자산 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      <p class="bul">고위험자산 50% 미만 투자</p>
+                      <p class="bul">중위험자산 60% 이상 투자</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      수익률변동성 기준<br>(설정 후 3년 이상)
+                      <div class="tooltipWrap">
+                        <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">수익률변동성 기준(설정 후 3년 이상) 툴팁 열기</span></button>
+                        <div class="tooltipCont">
+                          <p>펀드 설정 후 3년이 경과한 집합투자기구에 대해 부여되는 위험등급은 재산정 시점에 따라 ‘97.5% VaR’또는‘수익률 변동성’을 토대로 산출됩니다.</p>
+                          <p class="mt12"><strong>* 97.5% VaR : </strong>과거 3년 일간 수익률에서 2.5퍼센타일에 해당하는 손실률의 절대값에 연환산 보정계수(&radic;250)를 곱해 산출</p>
+                          <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      <p class="bul">97.5% VaR : 20% 이하</p>
+                      <p class="bul">표준편차 : 10% 이하</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">상품 예시</th>
+                    <td>채권(혼합)형, 원금부분보존추구형ELF(DLF) 등</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- //case: 4등급 -->
+
+          <!-- case: 5등급 -->
+          <div class="stList">
+            <a href="javascript:;" title="상품 위험등급" aria-haspopup="true" role="button">
+              <span class="selectValue warning05">5등급</span>
+              <span class="selectBtn"></span>
+            </a>
+            <select name="" title="선택해주세요">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="gradeCont">
+            <div class="tblData1">
+              <table>
+                <caption>상품 위험등급 - 5등급</caption>
+                <colgroup>
+                  <col style="width:50%">
+                  <col style="width:50%">
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <th scope="row">위험 등급/구분</th>
+                    <td>
+                      <div class="tagGroup">
+                        <span class="tag warning-grade5">5등급</span>
+                        <span class="tag warning-grade5">낮은 위험</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      투자자산 기준<br>(설정 후 3년 미만)
+                      <div class="tooltipWrap">
+                        <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">공격투자형 툴팁 열기</span></button>
+                        <div class="tooltipCont">
+                          <p><strong>고위험 자산</strong></p>
+                          <p>주식, 상품, REITs, 투기등급채권(BB+이하), 파생상품 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <p class="mt12"><strong>중위험 자산</strong></p>
+                          <p>채권(BBB-등급 이상), CP(A3등급 이상), 담보부 대출 및 대출채권 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <p class="mt12"><strong>저위험자산</strong></p>
+                          <p>국공채, 지방채, 회사채(A-등급 이상), CP(A2-등급 이상), 현금성 자산 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      <p class="bul">저위험자산 60% 이상 투자</p>
+                      <p class="bul">파생결합증권<br>(원금보존추구형)</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      수익률변동성 기준<br>(설정 후 3년 이상)
+                      <div class="tooltipWrap">
+                        <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">수익률변동성 기준(설정 후 3년 이상) 툴팁 열기</span></button>
+                        <div class="tooltipCont">
+                          <p>펀드 설정 후 3년이 경과한 집합투자기구에 대해 부여되는 위험등급은 재산정 시점에 따라 ‘97.5% VaR’또는‘수익률 변동성’을 토대로 산출됩니다.</p>
+                          <p class="mt12"><strong>* 97.5% VaR : </strong>과거 3년 일간 수익률에서 2.5퍼센타일에 해당하는 손실률의 절대값에 연환산 보정계수(&radic;250)를 곱해 산출</p>
+                          <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      <p class="bul">97.5% VaR : 10% 이하</p>
+                      <p class="bul">표준편차 : 5% 이하</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">상품 예시</th>
+                    <td>채권형, 원금보존추구형ELF(DLF) 등</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- //case: 5등급 -->
+
+          <!-- case: 6등급 -->
+          <div class="stList">
+            <a href="javascript:;" title="상품 위험등급" aria-haspopup="true" role="button">
+              <span class="selectValue warning06">6등급</span>
+              <span class="selectBtn"></span>
+            </a>
+            <select name="" title="선택해주세요">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="gradeCont">
+            <div class="tblData1">
+              <table>
+                <caption>상품 위험등급 - 6등급</caption>
+                <colgroup>
+                  <col style="width:50%">
+                  <col style="width:50%">
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <th scope="row">위험 등급/구분</th>
+                    <td>
+                      <div class="tagGroup">
+                        <span class="tag warning-grade6">6등급</span>
+                        <span class="tag warning-grade6">매우 낮은 위험</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      투자자산 기준<br>(설정 후 3년 미만)
+                      <div class="tooltipWrap">
+                        <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">공격투자형 툴팁 열기</span></button>
+                        <div class="tooltipCont">
+                          <p><strong>고위험 자산</strong></p>
+                          <p>주식, 상품, REITs, 투기등급채권(BB+이하), 파생상품 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <p class="mt12"><strong>중위험 자산</strong></p>
+                          <p>채권(BBB-등급 이상), CP(A3등급 이상), 담보부 대출 및 대출채권 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <p class="mt12"><strong>저위험자산</strong></p>
+                          <p>국공채, 지방채, 회사채(A-등급 이상), CP(A2-등급 이상), 현금성 자산 및 이와 유사한 수준의 위험을 갖는 자산</p>
+                          <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                        </div>
+                      </div>
+                    </th>
+                    <td>MMF, 단기 국공채 등에 투자</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      수익률변동성 기준<br>(설정 후 3년 이상)
+                      <div class="tooltipWrap">
+                        <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">수익률변동성 기준(설정 후 3년 이상) 툴팁 열기</span></button>
+                        <div class="tooltipCont">
+                          <p>펀드 설정 후 3년이 경과한 집합투자기구에 대해 부여되는 위험등급은 재산정 시점에 따라 ‘97.5% VaR’또는‘수익률 변동성’을 토대로 산출됩니다.</p>
+                          <p class="mt12"><strong>* 97.5% VaR : </strong>과거 3년 일간 수익률에서 2.5퍼센타일에 해당하는 손실률의 절대값에 연환산 보정계수(&radic;250)를 곱해 산출</p>
+                          <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      <p class="bul">97.5% VaR : 1% 초과</p>
+                      <p class="bul">표준편차 : 0.5% 초과</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">상품 예시</th>
+                    <td>국공채형, MMF 등</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- //case: 6등급 -->
+        </div>
+
+      </div>
+      <!-- // ### ##### ### -->
+		</div>
+    <!-- -------------------------------------- -->
+    <!-- [SECTION] 버튼영역 -->
+    <!-- -------------------------------------- -->
+    <div class="popBtnWrap">
+			<div class="popBtn">
+				<a href="javascript:;" onclick="popClose(this);return false;" class="confirmBtn" role="button">확인</a>
+			</div>
+			<a href="javascript:;" onclick="popClose(this);return false;" class="popClose" title="해당 창을 닫습니다." role="button"><img src="../../images/common/btn_popClose.png" alt="닫기"></a>
+		</div>
+    <!-- -------------------------------------- -->
+	</div>
+</div>
+
+<!-- ###################################### -->
+<!-- ### [샘플] 스크립트 ### -->
+<!-- ###################################### -->
+<script>
+
+</script>
+<!-- ###################################### -->
+</body>
+</html>

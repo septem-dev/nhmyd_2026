@@ -55,7 +55,7 @@
                         <hr class="divider is-dash-f0" />
     
                         <p class="text text--h5 text--font3">
-                            현재 선택된 자산대비
+                            현재 선택된 자산 대비
                             <br />
                             <em class="text--point-chart">{기대수익과 투자위험}이 조정됐어요.</em>
                         </p>
@@ -74,56 +74,6 @@
                         </div>
                         <p class="blind">기대수익과 투자위험의 관계를 나타낸 그래프입니다. 가로축은 투자위험이 낮음에서 높음으로, 세로축은 기대수익이 낮음에서 높음으로 올라갑니다. 기대수익이 가장 높은 곡선 위에 최적 위치가 있고, 제안 위치는 그보다 기대수익이 낮은 곡선 아래에 있습니다.</p>
                     </div>
-
-
-					<!-- 계좌 미연결의 경우 케이스 -->
-                    <div class="info-card ai is-locked">
-                        <div class="card-head tooltipWrap is-card">
-                            <h3 class="text--h4">내 투자성향 기대수익 제안 자산</h3>
-                            <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span class="blind">내 투자성향 기대수익 제안 자산 도움말</span></button>
-                            <div class="tooltipCont" style="display: none">
-                                <h3>안내사항</h3>
-                                <ul>
-                                    <li>그래프 내의 선은 위험이 같을 때 기대수익이 가장 높은 자산배분을 이은 선이에요. 두 점은 제안 포트폴리오와 최적 포트폴리오의 위치를 통해 얼만큼 서로 차이가 있는지 보여줘요.</li>
-                                </ul>
-                                <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
-                            </div>
-                        </div>
-    
-                        <p class="text--caption2 mt12">기대수익이 가장 높은 선 위에 내 투자성향 중 최적의 위치와 내 자산의 위치를 표시했어요.</p>
-    
-                        <hr class="divider is-dash-f0" />
-    
-                        <p class="text text--h5 text--font3">
-                            현재 선택된 자산대비
-                            <br />
-                            <em class="text--point-chart">{기대수익과 투자위험}이 조정됐어요.</em>
-                        </p>
-    
-                        <div class="curve-chart" aria-hidden="true">
-                            <p class="curve-chart__axis-name">기대수익</p>
-                            <p class="curve-chart__axis-top">높음</p>
-                            <div class="curve-chart__box"></div>
-                            <p class="curve-chart__axis-bottom">
-                                <span>낮음</span>
-                                <span>높음</span>
-                            </p>
-                            <p class="curve-chart__axis-name is-right">투자위험</p>
-                        </div>
-                        <p class="blind">기대수익과 투자위험의 관계를 나타낸 그래프입니다. 가로축은 투자위험이 낮음에서 높음으로, 세로축은 기대수익이 낮음에서 높음으로 올라갑니다. 기대수익이 가장 높은 곡선 위에 최적 위치가 있고, 제안 위치는 그보다 기대수익이 낮은 곡선 아래에 있습니다.</p>
-
-                        <div class="card-lock">
-                            <div class="card-lock__group">
-                                <p class="card-lock__tit">내 투자성향 기대수익 제안</p>
-                                <p class="card-lock__desc">
-                                    AI 포트폴리오 진단 받고, 수익을 높이는
-                                    <br />
-                                    인사이트 정보를 확인해보세요!
-                                </p>
-                            </div>
-                            <button type="button" class="card-btn">자산 연결하기</button>
-                        </div>
-                    </div>
                 </section>
 
                 <!-- 최적 포트폴리오 -->
@@ -132,9 +82,9 @@
                         <h3 class="text text--h4 ai-heading">최적 포트폴리오</h3>
     
                         <p class="text text--h5 text--font3 mt16">
-                            최적 포트폴리오에 맞춰 조종하려면
+                            최적 포트폴리오에 맞춰 조정하려면
                             <br />
-                            <em class="text--point-chart">{주식}을 늘리고 {현금·채권}을 줄여요.</em>
+                            <em class="text--point-chart">{주식}을 늘리고, {현금·채권}을 줄여요.</em>
                         </p>
     
                         <ul class="alloc-bar">
@@ -147,7 +97,7 @@
                                     <span class="alloc-bar__name">현금성 1%</span>
                                     <span class="alloc-bar__change">
                                         <em class="alloc-bar__down">-32% 줄여요</em>
-                                        (-115,200,000 원)
+                                        -115,200,000 원
                                     </span>
                                 </span>
                             </li>
@@ -160,20 +110,20 @@
                                     <span class="alloc-bar__name">국내채권 1%</span>
                                     <span class="alloc-bar__change">
                                         <em class="alloc-bar__down">-12% 줄여요</em>
-                                        (-43,200,000 원)
+                                        -43,200,000 원
                                     </span>
                                 </span>
                             </li>
                             <li class="alloc-bar__item">
                                 <span class="alloc-bar__bar" aria-hidden="true">
-                                    <i class="alloc-bar__base" style="width: 1.5%"></i>
-                                    <i class="alloc-bar__delta is-down" style="width: 4%"></i>
+                                    <i class="alloc-bar__base" style="width: 0%"></i>
+                                    <i class="alloc-bar__delta is-down" style="width: 0%"></i>
                                 </span>
                                 <span class="alloc-bar__row">
-                                    <span class="alloc-bar__name">해외채권 1%</span>
+                                    <span class="alloc-bar__name">해외채권 0%</span>
                                     <span class="alloc-bar__change">
-                                        <em class="alloc-bar__down">-5% 줄여요</em>
-                                        (-18,200,000 원)
+                                        <em class="alloc-bar__down">-</em>
+                                        0원
                                     </span>
                                 </span>
                             </li>
@@ -186,7 +136,7 @@
                                     <span class="alloc-bar__name">국내주식 48%</span>
                                     <span class="alloc-bar__change">
                                         <em class="alloc-bar__up">+17% 늘려요</em>
-                                        (+61,200,000 원)
+                                        +61,200,000 원
                                     </span>
                                 </span>
                             </li>
@@ -196,10 +146,10 @@
                                     <i class="alloc-bar__delta is-up" style="width: 16.2%"></i>
                                 </span>
                                 <span class="alloc-bar__row">
-                                    <span class="alloc-bar__name">해외선진국 34%</span>
+                                    <span class="alloc-bar__name">해외선진국주식 34%</span>
                                     <span class="alloc-bar__change">
                                         <em class="alloc-bar__up">+20% 늘려요</em>
-                                        (+72,000,000 원)
+                                        +72,000,000 원
                                     </span>
                                 </span>
                             </li>
@@ -209,10 +159,10 @@
                                     <i class="alloc-bar__delta is-up" style="width: 2.2%"></i>
                                 </span>
                                 <span class="alloc-bar__row">
-                                    <span class="alloc-bar__name">해외신흥국 15%</span>
+                                    <span class="alloc-bar__name">해외신흥국주식 15%</span>
                                     <span class="alloc-bar__change">
                                         <em class="alloc-bar__up">12% 늘려요</em>
-                                        (+43,200,000 원)
+                                        +43,200,000 원
                                     </span>
                                 </span>
                             </li>
@@ -223,7 +173,10 @@
                                 </span>
                                 <span class="alloc-bar__row">
                                     <span class="alloc-bar__name">대체자산 0%</span>
-                                    <span class="alloc-bar__change">0%(0원)</span>
+                                    <span class="alloc-bar__change">
+                                        <em>-</em>
+                                        0원
+                                    </span>
                                 </span>
                             </li>
                         </ul>
@@ -272,7 +225,8 @@
                             <div class="tooltipCont" style="display: none">
                                 <h3>안내사항</h3>
                                 <ul>
-                                    <li>기대수익은 1년 동안 기대할 수 있는 평균 수익률, 투자위험은 수익률이 흔들리는 정도(변동성)를 뜻해요. 현재와 최적 포트폴리오의 값을 나란히 비교해서 보여줘요.</li>
+                                    <li>기대수익은 1년 동안 기대할 수 있는 평균 수익률, 투자위험은 수익률이 오르내리는 폭이에요.</li>
+                                    <li>과거 시장 데이터로 계산한 추정치예요.</li>
                                 </ul>
                                 <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
                             </div>
@@ -281,7 +235,7 @@
                             <div class="perf-compare__group">
                                 <p class="perf-compare__name">
                                     기대수익
-                                    <em class="perf-compare__gap is-up">2.3%P</em>
+                                    <em class="perf-compare__gap is-up">2.3% 차이</em>
                                 </p>
                                 <p class="perf-compare__row">
                                     <span class="perf-compare__row-label">현재</span>
@@ -299,7 +253,7 @@
                             <div class="perf-compare__group">
                                 <p class="perf-compare__name">
                                     투자위험
-                                    <em class="perf-compare__gap is-down">2.3%P</em>
+                                    <em class="perf-compare__gap is-up">2.7% 차이</em>
                                 </p>
                                 <p class="perf-compare__row">
                                     <span class="perf-compare__row-label">현재</span>
@@ -329,7 +283,7 @@
                     </div>
                 </section>
 
-                <section class="ai-section">
+                <section class="ai-section" id="target">
                     <!-- AI 의견 -->
                     <div class="info-card">
                         <div class="card-head">
@@ -341,7 +295,8 @@
                     </div>
                 </section>
 
-                <section class="ai-section">
+                <!-- 의견 대기 -->
+                <section class="ai-section"><!--id="target" 추가해야 함 플로팅 버튼 보려고 제거 -->
                     <div class="info-card is-locked">
                         <div class="card-head">
                             <h3 class="text text--h4">AI 의견이 준비됐어요</h3>
@@ -352,9 +307,9 @@
                             <div class="card-lock__group">
                                 <span class="lottie-anim" style="--lottie-size: 64px" data-lottie="lottieInsightAiLoader1" data-lottie-loop="true" data-lottie-path="ai-loader" aria-hidden="true"></span>
                                 <p class="card-lock__desc mt4">
-                                    현재 자산과 부채를 기준으로 AI가 열심히 분석하
+                                    AI 의견을 준비하고 있어요.
                                     <br />
-                                    고 있어요. 조금만 기다려 주세요.
+                                    잠시만 기다려 주세요.
                                 </p>
                             </div>
                         </div>
@@ -377,9 +332,17 @@
             </div>
             <div class="areaBtnStatic">
                 <a href="javascript:;" role="button" class="btnPressDefault">다시선택</a>
-                <a href="javascript:;" role="button" class="btnPressPoint">포트폴리오 보기</a>
+                <a href="javascript:;" role="button" class="btnPressPoint">제안 보기</a>
             </div>
         </div>
+        <button type="button" class="btn-floating__circle">
+            <span>
+                AI
+                <br />
+                의견완료
+            </span>
+            <span class="btn-floating__icon" aria-hidden="true"></span>
+        </button>
         <script>
             (function () {
                 var canvas = document.getElementById('ai03ReturnChart');
@@ -455,6 +418,85 @@
                     plugins: [pointLabelPlugin]
                 });
             })();
+
+            (function() {
+                var floating = document.querySelector('.btn-floating__circle');
+                var targetSection = document.getElementById('target');
+                var lockSec = targetSection ? targetSection.querySelector('.info-card') : null;
+                if(!floating || !targetSection || !lockSec) return;
+
+                var startY = 0;
+                var isUserScrolling = false;
+
+                var STYLES = {
+                    show: {opacity: '1', visibility: 'visible', transform: 'translateY(0)'},
+                    hide: {opacity: '0', visibility: 'hidden', transform: 'translateY(20px)'}
+                }
+
+                var observer = new MutationObserver(function() {
+                    if(lockSec.className.indexOf('is-locked') === -1) {
+                        triggerShow();
+                    }
+                });
+                observer.observe(lockSec, {attributes: true, attributeFilter: ['class']})
+
+                if(lockSec.className.indexOf('is-locked') === -1) {
+                    triggerShow();
+                }
+
+                function triggerShow() {
+                    observer.disconnect();
+
+                    if (targetSection.getBoundingClientRect().top < window.innerHeight * 0.8) return;
+
+                    setTimeout(showBtn, 50);
+                }
+
+                function showBtn() {
+                    Object.assign(floating.style, STYLES.show);
+                    startY = window.pageXOffset || document.documentElement.scrollTop;
+                    
+                    window.addEventListener('wheel', function() {  isUserScrolling = true; }, {passive: true});
+                    window.addEventListener('touchmove', function() {  isUserScrolling = true; }, {passive: true});
+                    window.addEventListener('scroll', checkScroll);
+                }
+
+                floating.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                    destroy();
+                })
+
+                function checkScroll() {
+                    if (!isUserScrolling) return;
+
+                    var currentY = window.pageXOffset || document.documentElement.scrollTop;
+                    
+                    if(currentY > startY + 30) {
+                        var rect = targetSection.getBoundingClientRect();
+                        if(rect.top < window.innerHeight * 0.8) {
+                            destroy();
+                        }
+                    }
+                }
+
+                function destroy() {
+                    Object.assign(floating.style, STYLES.hide);
+                    window.addEventListener('scroll', checkScroll)
+                }
+            })();
+
+            $(document).ready(function () {
+                tostpop();//토스트 팝업 호출
+            })
+
+            function tostpop(){
+                var $tostCont = '<div class="toastPop nds" role="status" aria-live="polite"><p class="toast-basic">최적 포트폴리오의 투자 위험을 낮췄어요.</p></div>'
+                $('.container').after($tostCont);
+            }
         </script>
     </body>
 </html>

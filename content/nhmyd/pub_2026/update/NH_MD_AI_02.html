@@ -3,21 +3,21 @@
     <head>
         <meta charset="utf-8" />
         <script src="../pub-assets/js/head-mb-update.js"></script>
-        <title>AI 포트폴리오 진단</title>
+        <title>AI 포트폴리오</title>
     </head>
 
     <body class="bgcolor">
         <div class="wrapper nhasset nds">
             <div class="header bgcolor" role="banner">
                 <a href="javascript:;" role="button" class="btnBack"><span class="blind">이전화면으로</span></a>
-                <h1>AI 포트폴리오 진단</h1>
+                <h1>AI 포트폴리오</h1>
                 <a href="javascript:;" role="button" class="btnCancle" aria-label="취소"><span class="blind">취소</span></a>
             </div>
 
             <div class="container bgcolor pb32" role="main">
                 <div class="diag-step">
                     <span class="text text--body3-medium text--font3">제안 대상 선택</span>
-                    <span class="blind">전체 3단계 중 1단계</span>
+                    <!--<span class="blind">전체 3단계 중 1단계</span>
                     <span class="diag-step__progress" aria-hidden="true">
                         <span class="process-progress-number is-plain">
                             <span class="process-progress-number__current">STEP</span>
@@ -27,7 +27,7 @@
                             <span class="process-progress-number__divider"></span>
                             <span class="process-progress-number__total">03</span>
                         </span>
-                    </span>
+                    </span>-->
                 </div>
 
                 <section class="ai-section">
@@ -68,7 +68,7 @@
                             </div>
                         </div>
 
-                        <p class="card-desc">기대수익이 가장 높은 선 위에 내 투자성향 중 최적의 위치와 내 자산의 위치를 표시했어요.</p>
+                        <p class="text text--body4 mt12">기대수익이 가장 높은 선 위에 내 투자성향 중 최적의 위치와 내 자산의 위치를 표시했어요.</p>
 
                         <hr class="divider  is-dash-f0" />
 
@@ -96,7 +96,7 @@
                 <section class="ai-section">
                     <div class="info-card ai">
                         <div class="card-head tooltipWrap is-card">
-                            <h3 class="text text--h4 ai-heading">제안대상</h3>
+                            <h3 class="text text--h4 ai-heading">제안 대상</h3>
                             <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span class="blind">조정필요 표시 도움말</span></button>
                             <div class="tooltipCont" style="display: none">
                                 <h3>조정필요란?</h3>
@@ -109,7 +109,7 @@
 
                         <!-- prettier-ignore -->
                         <p class="text text--h5 text--font3 mt24" aria-live="polite">
-                            제안대상은 29개 계좌 중
+                            제안 대상은 29개 계좌 중
                             <br />
                             <em class="text--point-chart"><span data-ai02-count>29</span>개 <span data-ai02-amount>262,000,000</span>원이에요.</em>
                         </p>
@@ -118,25 +118,203 @@
                             <span class="card-note__icon" aria-hidden="true"></span>
                             <span class="card-note__text">선택한 계좌 기준으로 제안을 받아볼 수 있어요.</span>
                         </p>
-
-                        <div class="asset-pick" id="ai02PickArea" hidden>
+                        
+                        <div class="asset-pick mt24" id="ai02PickArea" hidden>
                             <div class="asset-pick__chips" role="group" aria-label="계좌 선택 방식">
                                 <button type="button" class="chip-single is-active" data-ai02-chip="all" aria-pressed="true">전체 선택</button>
-                                <button type="button" class="chip-single" data-ai02-chip="need" aria-pressed="false">조정필요 선택</button>
+                                <button type="button" class="chip-single" data-ai02-chip="need" aria-pressed="false">조정필요만 선택</button>
                             </div>
 
                             <hr class="divider is-page m0" />
 
                             <p class="text text--caption2">최소 한 개 이상의 계좌를 선택해 주세요.</p>
-
-                            <ul class="asset-list is-pick">
+                            <!---->
+                            <div class="info-card__list">
+                                <ul class="finance-product asset-list">
+                                    <li>
+                                        <div class="finance-head">
+                                            <div class="asset-list__pick">
+                                                <span class="label is-sm is-line is-skyblue">조정필요</span>
+                                                <label class="check-basic">
+                                                    <input type="checkbox" class="check-basic__input inputChecked" checked="">
+                                                    <span class="check-basic__icon" aria-hidden="true"></span>
+                                                </label>
+                                            </div>
+                                            <div class="finance-title">
+                                                <span class="finance-logo"><img src="../../images/logos/AADO0000.png" alt=""></span>
+                                                <div class="finance-col">
+                                                    <p class="finance-name">롯데캐피탈 엘론(일반신용대출)</p>
+                                                    <p class="finance-number">
+                                                        <span>롯데캐피탈</span>
+                                                        <span>123-45-678900</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="details-row">
+                                            <li>
+                                                <span class="details-label">잔액</span>
+                                                <span class="details-value">50,000,000원</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">만기일</span>
+                                                <span class="details-value">2030.12.31</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">원리금균등분할상환</span>
+                                                <span class="details-value">19.92%</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="finance-head">
+                                            <div class="asset-list__pick">
+                                                <label class="check-basic">
+                                                    <input type="checkbox" class="check-basic__input inputChecked" checked="">
+                                                    <span class="check-basic__icon" aria-hidden="true"></span>
+                                                </label>
+                                            </div>
+                                            <div class="finance-title">
+                                                <span class="finance-logo"><img src="../../images/logos/AACT0000.png" alt=""></span>
+                                                <div class="finance-col">
+                                                    <p class="finance-name">한국투자저축은행 파인로얄론</p>
+                                                    <p class="finance-number">
+                                                        <span>한국투자저축은행</span>
+                                                        <span>501-88-123456</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="details-row">
+                                            <li>
+                                                <span class="details-label">잔액</span>
+                                                <span class="details-value">50,000,000원</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">만기일</span>
+                                                <span class="details-value">2026.08.31</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">일시상환</span>
+                                                <span class="details-value">17.21%</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="finance-head">
+                                            <div class="asset-list__pick">
+                                                <label class="check-basic">
+                                                    <input type="checkbox" class="check-basic__input inputChecked" checked="">
+                                                    <span class="check-basic__icon" aria-hidden="true"></span>
+                                                </label>
+                                            </div>
+                                            <div class="finance-title">
+                                                <span class="finance-logo"><img src="../../images/logos/AAEV0000.png" alt=""></span>
+                                                <div class="finance-col">
+                                                    <p class="finance-name">삼성카드 카드론(장기카드대출)</p>
+                                                    <p class="finance-number">
+                                                        <span>삼성카드</span>
+                                                        <span>123456******1234</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="details-row">
+                                            <li>
+                                                <span class="details-label">잔액</span>
+                                                <span class="details-value">50,000,000원</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">만기일</span>
+                                                <span class="details-value">2030.12.31</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">원리금균등분할상환</span>
+                                                <span class="details-value">12.9%</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="finance-head">
+                                            <div class="asset-list__pick">
+                                                <span class="label is-sm is-line is-lightgray">만료</span>
+                                                <label class="check-basic">
+                                                    <input type="checkbox" class="check-basic__input inputChecked" checked="">
+                                                    <span class="check-basic__icon" aria-hidden="true"></span>
+                                                </label>
+                                            </div>
+                                            <div class="finance-title">
+                                                <span class="finance-logo"><img src="../../images/logos/AAOB0000.png" alt=""></span>
+                                                <div class="finance-col">
+                                                    <p class="finance-name">NH저축 중금리 생활안정대출</p>
+                                                    <p class="finance-number">
+                                                        <span>NH농협은행</span>
+                                                        <span>342-12534-5678-90</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="details-row">
+                                            <li>
+                                                <span class="details-label">잔액</span>
+                                                <span class="details-value">50,000,000원</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">만기일</span>
+                                                <span class="details-value">2030.12.31</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">원리금균등분할상환</span>
+                                                <span class="details-value">19.92%</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="finance-head">
+                                            <div class="asset-list__pick">
+                                                <label class="check-basic">
+                                                    <input type="checkbox" class="check-basic__input inputChecked" checked="">
+                                                    <span class="check-basic__icon" aria-hidden="true"></span>
+                                                </label>
+                                            </div>
+                                            <div class="finance-title">
+                                                <span class="finance-logo"><img src="../../images/logos/AAOB0000.png" alt=""></span>
+                                                <div class="finance-col">
+                                                    <p class="finance-name">NH멤버스론</p>
+                                                    <p class="finance-number">
+                                                        <span>NH농협은행</span>
+                                                        <span>342-12534-5678-90</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="details-row">
+                                            <li>
+                                                <span class="details-label">잔액</span>
+                                                <span class="details-value">15,000원</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">만기일</span>
+                                                <span class="details-value">2030.12.31</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">만기일시상환</span>
+                                                <span class="details-value">5.72%</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <button type="button" class="select-card__more">더보기(5/38)</button>
+                            </div>
+                            <!---->
+                            <ul class="asset-list is-pick" style="display:none">
                                 <li class="asset-list__item" data-ai02-need>
                                     <div class="asset-list__pick">
                                         <span class="label is-sm is-line is-skyblue">조정필요</span>
                                         <label class="check-basic">
                                             <input type="checkbox" class="check-basic__input" data-ai02-item data-ai02-amount-value="52000000" checked />
                                             <span class="check-basic__icon" aria-hidden="true"></span>
-                                            <span class="blind">농협은행 ISA 52,000,000원 제안대상으로 선택</span>
+                                            <span class="blind">농협은행 ISA 52,000,000원 제안 대상으로 선택</span>
                                         </label>
                                     </div>
                                     <div class="list-account is-sm">
@@ -164,7 +342,7 @@
                                         <label class="check-basic">
                                             <input type="checkbox" class="check-basic__input" data-ai02-item data-ai02-amount-value="11000000" checked />
                                             <span class="check-basic__icon" aria-hidden="true"></span>
-                                            <span class="blind">농협은행 ISA 11,000,000원 제안대상으로 선택</span>
+                                            <span class="blind">농협은행 ISA 11,000,000원 제안 대상으로 선택</span>
                                         </label>
                                     </div>
                                     <div class="list-account is-sm">
@@ -192,7 +370,7 @@
                                         <label class="check-basic">
                                             <input type="checkbox" class="check-basic__input" data-ai02-item data-ai02-amount-value="69230000" checked />
                                             <span class="check-basic__icon" aria-hidden="true"></span>
-                                            <span class="blind">농협은행 ISA 69,230,000원 제안대상으로 선택</span>
+                                            <span class="blind">농협은행 ISA 69,230,000원 제안 대상으로 선택</span>
                                         </label>
                                     </div>
                                     <div class="list-account is-sm">
@@ -219,7 +397,7 @@
                                         <label class="check-basic">
                                             <input type="checkbox" class="check-basic__input" data-ai02-item data-ai02-amount-value="69230000" checked />
                                             <span class="check-basic__icon" aria-hidden="true"></span>
-                                            <span class="blind">농협은행 ISA 69,230,000원 제안대상으로 선택</span>
+                                            <span class="blind">농협은행 ISA 69,230,000원 제안 대상으로 선택</span>
                                         </label>
                                     </div>
                                     <div class="list-account is-sm">
@@ -246,7 +424,7 @@
                                         <label class="check-basic">
                                             <input type="checkbox" class="check-basic__input" data-ai02-item data-ai02-amount-value="11000000" checked />
                                             <span class="check-basic__icon" aria-hidden="true"></span>
-                                            <span class="blind">농협은행 ISA 11,000,000원 제안대상으로 선택</span>
+                                            <span class="blind">농협은행 ISA 11,000,000원 제안 대상으로 선택</span>
                                         </label>
                                     </div>
                                     <div class="list-account is-sm">

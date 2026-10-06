@@ -31,33 +31,48 @@ $(function(){
 <div class="nhasset popWrap slidePopConfirm">
 	<div class="dim"></div>
 	<div class="popInner">
-		<h1>서비스 이용동의</h1>
+		<h1>금리인하요구 서비스 이용을 위해<br>약관에 동의해 주세요</h1> <!-- [수정 260824] [MD2607_078] 마이데이터 금리인하요구권 관련 공공마이데이터 연계 : 텍스트 수정 -->
 		<div class="popCont">
 			<div class="formWrap selectAll mt0 pt0">
 				<div class="total">
 					<div class="formHolder check">
-						<input type="checkbox" id="type_all01" checked="checked" class="chekTypeOther">
+						<input type="checkbox" id="type_all01" class="chekTypeOther">
 						<label class="check" for="type_all01">전체동의</label>
 					</div>
 				</div>
 				<div class="cont" >
-					<div class="formHolder check ">
-						<input type="checkbox" id="type01" checked="checked">
-						<label class="check" for="type01"><em>[필수]</em> 금리인하요구권 대행 서비스 신청을 위한 위임장</label>
-						<a href="javascript:;" class="btnView" role="button" title="[필수] 금리인하요구권 대행 서비스 신청을 위한 위임장 보기"></a>
-					</div>
 					<div class="formHolder check">
 						<input type="checkbox" id="type02" checked="checked">
 						<label class="check" for="type02"><em>[필수]</em> AI대출금리케어 서비스 이용약관</label>
 						<a href="javascript:;" class="btnView" role="button" title="[필수] AI대출금리케어 서비스 이용약관 보기"></a>
 					</div>
+					<div class="formHolder check ">
+						<input type="checkbox" id="type01" checked="checked">
+						<label class="check" for="type01"><em>[필수]</em> 금리인하요구권 대행 서비스 신청을 위한 위임장</label>
+						<a href="javascript:;" class="btnView" role="button" title="[필수] 금리인하요구권 대행 서비스 신청을 위한 위임장 보기"></a>
+					</div>
 				</div>
+
+				 <!-- [추가 260824] [MD2607_078] 마이데이터 금리인하요구권 관련 공공마이데이터 연계 -->
+				 <div class="total bdT0">
+					 <div class="formHolder">
+						 <h2>공공 마이데이터 서비스</h2>
+					 </div>
+				</div>
+				<div class="cont">
+					<div class="formHolder check ">
+						<input type="checkbox" id="type03">
+						<label class="check" for="type03">본인 행정정보 제공 요구서</label>
+						<a href="javascript:;" class="btnView" role="button" title="본인 행정정보 제공 요구서"></a>
+					</div>
+				</div>
+				<!-- //[추가 260824] [MD2607_078] 마이데이터 금리인하요구권 관련 공공마이데이터 연계 -->
 			</div>
 
 		</div>
 		<div class="popBtnWrap">
 			<div class="popBtn">
-				<a href="javascript:;" class="confirmBtn" onclick="popClose(this);return false;" role="button">다음</a>
+				<a href="javascript:;" class="confirmBtn disabled" onclick="popClose(this);return false;" role="button">다음</a>
 			</div>
 			<a href="javascript:;" onclick="popClose(this);return false;" class="popClose" title="해당 창을 닫습니다." role="button"><img src="../../images/makebetter/icon/ico_close16_24.svg" alt="닫기"></a>
 		</div>

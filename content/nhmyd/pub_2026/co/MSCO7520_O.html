@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-title" content="NH마이데이터" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="robots" content="no-index,follow" />
+<meta name="title" content="" />
+<meta name="author" content="" />
+<meta name="content" content="" />
+<meta name="keywords" content="NH마이데이터" />
+<meta name="description" content="NH마이데이터" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="-1" />
+<title>투자자성향진단 설문완료</title>
+<script src="../pub-assets/js/head.js"></script> <!-- [수정 260803] [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 : head.js로 수정 -->
+</head>
+<body>
+  <div class="wrapper nhasset">
+    <!-- ###################################### -->
+    <!-- ### [내용]투자자성향진단 설문완료 ### -->
+    <!-- ###################################### -->
+    <div class="container bgWhite typeO"> <!-- [수정 260803] [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 : class="bgWhite typeO" 추가 -->
+      <div class="diagFin">
+        <h1 class="-check -diag">투자자성향을 진단했어요</h1>
+      </div>
+
+      <div class="diagTit">
+        <h2><span class="name">$성명$</span>님의 투자자성향은 <br><span class="grade1 -diag">공격투자형</span> 입니다.</h2>  <!-- [D] 공격투자형 : grade1 / 적극투자형 : grade2 /  위험중립형 : grade3 / 안정추구형 : grade4 / 안정형 : grade5 -->
+        <p class="diagDesc">투자자성향 진단일 YYYY.MM.DD</p>
+      </div>
+
+      <div class="areaBodyBtnFlex -diag">
+        <button type="button" class="btnBodyLine -multi">투자자성향진단<br>결과 보기</button> <!-- [D] 버튼활성화시 class="green" 추가 -->
+        <button type="button" class="btnBodyLine -multi">투자자성향진단<br>다운로드</button> <!-- [D] 버튼활성화시 class="green" 추가 -->
+      </div>
+      
+      <div class="gradeInfo">
+        <div class="diagTit">
+          <h3>투자자성향에 적합한 상품 위험등급</h3>
+        </div>
+        <div class="tagGroup">
+          <span class="tag warning-grade1">1등급</span>
+          <span class="tag warning-grade2">2등급</span>
+          <span class="tag warning-grade3">3등급</span>
+          <span class="tag warning-grade4">4등급</span>
+          <span class="tag warning-grade5">5등급</span>
+          <span class="tag warning-grade6">6등급</span>
+        </div>
+        <div class="graphImg">
+          <img src="../../images/img_diag_graph01.png" alt="투자위험과 기대수익에 따른 5단계(안정형, 안정추구형, 위험중립형, 적극투자형, 공격투자형) 그래프. 고객님의 투자성향은 공격투자형입니다."> <!-- [D] 공격투자형 -->
+          <!-- <img src="../../images/img_diag_graph02.png" alt="투자위험과 기대수익에 따른 5단계(안정형, 안정추구형, 위험중립형, 적극투자형, 공격투자형) 그래프. 고객님의 투자성향은 적극투자형입니다."> --> <!-- [D] 적극투자형 -->
+          <!-- <img src="../../images/img_diag_graph03.png" alt="투자위험과 기대수익에 따른 5단계(안정형, 안정추구형, 위험중립형, 적극투자형, 공격투자형) 그래프. 고객님의 투자성향은 위협중립형입니다."> --> <!-- [D] 위협중립형 -->
+          <!-- <img src="../../images/img_diag_graph04.png" alt="투자위험과 기대수익에 따른 5단계(안정형, 안정추구형, 위험중립형, 적극투자형, 공격투자형) 그래프. 고객님의 투자성향은 안정추구형입니다."> --> <!-- [D] 안정추구형 -->
+          <!-- <img src="../../images/img_diag_graph05.png" alt="투자위험과 기대수익에 따른 5단계(안정형, 안정추구형, 위험중립형, 적극투자형, 공격투자형) 그래프. 고객님의 투자성향은 안정형입니다."> --> <!-- [D] 안정형 -->
+        </div>
+        <div class="rightBtn mt8">
+          <a href="#none" class="linkTxt2" role="button">투자자성향 및 펀드 위험등급 안내</a>
+        </div>
+      </div>
+      
+      <div class="diagBtnWrap">
+        <button type="button" class="btnBodyLine">성향진단 다시하기</button>
+        <p class="survDesc">투자자성향진단 사용 횟수 : 3회 중  <span>$사용횟수$</span>회 (금일 기준)</p>
+      </div>
+      
+      <hr class="divLine">
+
+      <div class="fullyWrap pt0 pb0">
+        <!-- -------------------------------------- -->
+        <!-- [SECTION] 알아두세요 -->
+        <!-- -------------------------------------- -->
+        <div class="info_area">
+          <a href="javascript:;" class="noticeBtn" data-target="#MSCO7520" aria-expanded="false" aria-controls="MSCO7520" id="MSCO7400_label">
+            <strong class="info_area_title">알아두세요<span style="display:none">펼치기</span></strong>
+          </a>
+          <ul class="listBul disc noticeCont" aria-labelledby="MSCO7400_label" role="region" id="MSCO7520" style="display:none">
+            <li>투자자성향진단은 고객님의 투자자성향을 파악해 적합한 상품을 안내해 드리기 위한 기초 자료로 활용됩니다.</li>
+            <li>고객님의 투자자성향보다 높은 등급의 상품은 가입할 수 없습니다.</li>
+            <li>투자자성향진단은 대면, 비대면 통합하여 1일 3회(대면은 1회) 할 수 있습니다.</li>
+            <li>투자자성향진단결과는 12개월 동안 이용할 수 있습니다.</li>
+            <li>투자자성향이 변경되지 않았다면 결과를 다시 이용할 수 있고, 투자자성향이 변경되었다면 투자자성향을 다시 진단해 주세요.</li>
+            <li>투자자성향진단 결과는 고객님의 연락처로 문자(LMS) 안내해드립니다. 문자메시지를 받지 못하신 경우 NH농협은행 고객행복센터(1661-3000)로 문의해 주세요.</li>
+          </ul>
+        </div>
+        <!-- -------------------------------------- -->
+      </div>
+      
+      <!-- -------------------------------------- -->
+      <!-- [SECTION] 하단버튼 -->
+      <!-- -------------------------------------- -->
+      <div class="areaBtnDefault mbType"> <!-- [수정 260803] [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 : class="mbType" 추가 -->
+        <a href="javascript:;" class="btnPressPoint" role="button">확인</a>
+      </div>
+      <!-- -------------------------------------- -->
+    </div>
+  </div>
+
+  <!-- ###################################### -->
+  <!-- ### [페이지] 스크립트 ### -->
+  <!-- ###################################### -->
+  <script>
+    /* [추가 260803]  [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 : 알아두세요 스크립트 추가 */
+     $(document).on('click', '.noticeBtn', function() {
+      const $toggleBtn = $(this);
+      const targetSelector = $toggleBtn.data('target');
+      const $targetContent = $(targetSelector);
+
+      // '.noticeCont'가 동적으로 생성될 수 있으므로, 클릭 시점에 tabindex를 부여
+      $targetContent.attr('tabindex', '-1');
+
+      const isExpanded = $toggleBtn.attr('aria-expanded') === 'true';
+
+      if (!isExpanded) {
+        $targetContent.slideDown(100, function() {
+            $('html, body').animate({
+                scrollTop: $targetContent.offset().top - 100
+            }, 600);
+            $targetContent.focus();
+        });
+        $toggleBtn.find('span').text('접기');
+        $toggleBtn.attr('aria-expanded', 'true');
+      } else {
+        $targetContent.slideUp(300);
+        $toggleBtn.find('span').text('펼치기');
+        $toggleBtn.attr('aria-expanded', 'false');
+        $toggleBtn.focus();
+      }
+    });
+  </script>
+</body>
+</html>

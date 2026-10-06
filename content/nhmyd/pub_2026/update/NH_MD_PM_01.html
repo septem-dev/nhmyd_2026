@@ -19,7 +19,7 @@
                 <section class="allowance-hero">
                     <div class="allowance-hero__top">
                         <button type="button" class="allowance-hero__month" onclick="location.href='NH_MD_PM_03.html'">
-                            <span class="allowance-hero__month-num">07월</span>
+                            <span class="text--h4">07월</span>
                             <span class="allowance-hero__month-range">07.02~08.02</span>
                             <span class="allowance-hero__month-arrow" aria-hidden="true"></span>
                         </button>
@@ -43,11 +43,7 @@
                         </div>
                     </div>
 
-                    <!--
-                        allowance-hero__card에 추가
-                        소비 주의 상태 : caution
-                        예산 초과 상태 : excess
-                    -->
+                    <!-- 자산 연결한 경우 + 소비 적은 상태 -->
                     <div class="allowance-hero__card">
                         <div class="allowance-hero__white">
                             <div class="allowance-hero__summary">
@@ -59,22 +55,6 @@
                                         썼어요!
                                     </p>
                                 </div>
-                                <!-- 소비 주의 상태
-                                <div class="allowance-hero__summary-text">
-                                    <p class="allowance-hero__summary-sub">소비가 많아요!</p>
-                                    <p class="allowance-hero__summary-main">
-                                        <strong>불필요한 지출</strong>
-                                        을 줄여보세요!
-                                    </p>
-                                </div> -->
-                                <!-- 예산 초과 상태
-                                <div class="allowance-hero__summary-text">
-                                    <p class="allowance-hero__summary-sub">비상! 예산 초과!</p>
-                                    <p class="allowance-hero__summary-main">
-                                        <strong>지출 많은 용돈 점검</strong>
-                                         필요해요!
-                                    </p>
-                                </div> -->
                             </div>
 
                             <div class="allowance-hero__mascot-wrap">
@@ -87,13 +67,8 @@
                             <div class="allowance-hero__glass">
                                 <p class="allowance-hero__glass-label">지금 내 용돈은</p>
                                 <p class="allowance-hero__glass-amount">
-                                    <strong>99,999,999,999</strong>
-                                    원 있어요!
+                                    <strong>99,999,999,999</strong>원 있어요!
                                 </p>
-                                <!-- 예산 초과 상태
-                                <p class="allowance-hero__glass-amount">
-                                    <strong>예산이 초과되었어요</strong>
-                                </p> -->
                                 <div class="allowance-hero__progress" role="img" aria-label="용돈 사용률 41%">
                                     <div class="allowance-hero__progress-fill" style="width:41%"></div>
                                 </div>
@@ -102,16 +77,14 @@
                                         <span class="allowance-hero__detail-icon is-in" aria-hidden="true"></span>
                                         <span class="allowance-hero__detail-label">들어온 돈</span>
                                         <span class="allowance-hero__detail-amount">
-                                            752,460
-                                            <em>원</em>
+                                            752,460<em>원</em>
                                         </span>
                                     </div>
                                     <div class="allowance-hero__detail-row">
                                         <span class="allowance-hero__detail-icon is-out" aria-hidden="true"></span>
                                         <span class="allowance-hero__detail-label">내가 쓴 돈</span>
-                                        <span class="allowance-hero__detail-amount is-excess">
-                                            752,460
-                                            <em>원</em>
+                                        <span class="allowance-hero__detail-amount">
+                                            752,460<em>원</em>
                                         </span>
                                     </div>
                                 </div>
@@ -124,9 +97,176 @@
                     </div>
                 </section>
 
+                <!-- 소비 주의 상태 -->
+                <section class="allowance-section">
+                    <div class="allowance-hero__card caution">
+                        <div class="allowance-hero__white">
+                            <div class="allowance-hero__summary">
+                                <span class="allowance-hero__summary-icon" aria-hidden="true"></span>
+                                <div class="allowance-hero__summary-text">
+                                    <p class="allowance-hero__summary-sub">소비가 많아요!</p>
+                                    <p class="allowance-hero__summary-main">
+                                        <strong>불필요한 지출</strong>
+                                        을 줄여보세요!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="allowance-hero__mascot-wrap">
+                                <a href="javascript:;" class="btn-arrow allowance-hero__glass-link">
+                                    <span>머니캘린더 바로가기</span>
+                                    <span class="btn-arrow__icon is-right" aria-hidden="true"></span>
+                                </a>
+                            </div>
+
+                            <div class="allowance-hero__glass">
+                                <p class="allowance-hero__glass-label">지금 내 용돈은</p>
+                                <p class="allowance-hero__glass-amount">
+                                    <strong>99,999,999,999</strong>원 있어요!
+                                </p>
+                                <div class="allowance-hero__progress" role="img" aria-label="용돈 사용률 71%">
+                                    <div class="allowance-hero__progress-fill" style="width:71%"></div>
+                                </div>
+                                <div class="allowance-hero__detail">
+                                    <div class="allowance-hero__detail-row">
+                                        <span class="allowance-hero__detail-icon is-in" aria-hidden="true"></span>
+                                        <span class="allowance-hero__detail-label">들어온 돈</span>
+                                        <span class="allowance-hero__detail-amount">
+                                            752,460<em>원</em>
+                                        </span>
+                                    </div>
+                                    <div class="allowance-hero__detail-row">
+                                        <span class="allowance-hero__detail-icon is-out" aria-hidden="true"></span>
+                                        <span class="allowance-hero__detail-label">내가 쓴 돈</span>
+                                        <span class="allowance-hero__detail-amount">
+                                            752,460<em>원</em>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="allowance-hero__cta" onclick="location.href='NH_MD_PM_03.html'">
+                            <span>나의 한달 기준 설정하기</span>
+                            <span class="btn-arrow__icon is-right" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- 예산 초과 상태 -->
+                <section class="allowance-section">
+                    <div class="allowance-hero__card excess">
+                        <div class="allowance-hero__white">
+                            <div class="allowance-hero__summary">
+                                <span class="allowance-hero__summary-icon" aria-hidden="true"></span>
+                                <div class="allowance-hero__summary-text">
+                                    <p class="allowance-hero__summary-sub">비상! 예산 초과!</p>
+                                    <p class="allowance-hero__summary-main">
+                                        <strong>지출 많은 용돈 점검</strong>
+                                         필요해요!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="allowance-hero__mascot-wrap">
+                                <a href="javascript:;" class="btn-arrow allowance-hero__glass-link">
+                                    <span>머니캘린더 바로가기</span>
+                                    <span class="btn-arrow__icon is-right" aria-hidden="true"></span>
+                                </a>
+                            </div>
+
+                            <div class="allowance-hero__glass">
+                                <p class="allowance-hero__glass-label">지금 내 용돈은</p>
+                                <p class="allowance-hero__glass-amount">
+                                    <strong>예산이 초과되었어요</strong>
+                                </p>
+                                
+                                <div class="allowance-hero__progress" role="img" aria-label="용돈 사용률 100%">
+                                    <div class="allowance-hero__progress-fill" style="width:100%"></div>
+                                </div>
+                                <div class="allowance-hero__detail">
+                                    <div class="allowance-hero__detail-row">
+                                        <span class="allowance-hero__detail-icon is-in" aria-hidden="true"></span>
+                                        <span class="allowance-hero__detail-label">들어온 돈</span>
+                                        <span class="allowance-hero__detail-amount">
+                                            752,460<em>원</em>
+                                        </span>
+                                    </div>
+                                    <div class="allowance-hero__detail-row">
+                                        <span class="allowance-hero__detail-icon is-out" aria-hidden="true"></span>
+                                        <span class="allowance-hero__detail-label">내가 쓴 돈</span>
+                                        <span class="allowance-hero__detail-amount is-excess">
+                                            752,460<em>원</em>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="allowance-hero__cta" onclick="location.href='NH_MD_PM_03.html'">
+                            <span>나의 한달 기준 설정하기</span>
+                            <span class="btn-arrow__icon is-right" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- 자산 미연결한 경우 -->
+                <section class="allowance-section">
+                    <div class="allowance-hero__card">
+                        <div class="allowance-hero__white">
+                            <div class="allowance-hero__summary">
+                                <span class="allowance-hero__summary-icon" aria-hidden="true"></span>
+                                <div class="allowance-hero__summary-text">
+                                    <p class="allowance-hero__summary-sub">마이데이터 연결하고</p>
+                                    <p class="allowance-hero__summary-main">
+                                        꼼꼼한 <strong>용돈 관리</strong>
+                                        해보세요!
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="allowance-hero__mascot-wrap">
+                                <a href="javascript:;" class="btn-arrow allowance-hero__glass-link">
+                                    <span>지금 연결하러 가기</span>
+                                    <span class="btn-arrow__icon is-right" aria-hidden="true"></span>
+                                </a>
+                            </div>
+
+                            <div class="allowance-hero__glass">
+                                <p class="allowance-hero__glass-label">지금 내 용돈은</p>
+                                <p class="allowance-hero__glass-amount">
+                                    <strong>0</strong>원 있어요!
+                                </p>
+                                <div class="allowance-hero__progress" role="img" aria-label="용돈 사용률 0%">
+                                    <div class="allowance-hero__progress-fill" style="width:0%"></div>
+                                </div>
+                                <div class="allowance-hero__detail">
+                                    <div class="allowance-hero__detail-row">
+                                        <span class="allowance-hero__detail-icon is-in" aria-hidden="true"></span>
+                                        <span class="allowance-hero__detail-label">들어온 돈</span>
+                                        <a href="#javascript:void(0)" class="allowance-hero__detail-amount is-link">
+                                            추가
+                                        </a>
+                                    </div>
+                                    <div class="allowance-hero__detail-row">
+                                        <span class="allowance-hero__detail-icon is-out" aria-hidden="true"></span>
+                                        <span class="allowance-hero__detail-label">내가 쓴 돈</span>
+                                        <a href="#javascript:void(0)" class="allowance-hero__detail-amount is-link">
+                                            추가
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="allowance-hero__cta" onclick="location.href='NH_MD_PM_03.html'">
+                            <span>마이데이터 연결하러 가기</span>
+                            <span class="btn-arrow__icon is-right" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </section>
+
                 <section class="allowance-section allowance-senders">
                     <h2 class="text--h5 mb20">누가 용돈을 보내줬을까요?</h2>
-                    <div class="allowance-senders__clip">
+                    <!-- 용돈 순위 확인하기 보려면 allowance-senders__clip에 is-locked 추가 -->
+                    <div class="allowance-senders__clip is-locked">
                         <div class="allowance-senders__swiper swiper-container" id="allowanceSenderSwiper">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide allowance-sender-card">
@@ -134,8 +274,7 @@
                                     <div class="allowance-sender-card__info">
                                         <p class="allowance-sender-card__name">엄마</p>
                                         <p class="allowance-sender-card__amount">
-                                            <em>250,000</em>
-                                            원
+                                            <em>99,999,999</em>원
                                         </p>
                                     </div>
                                 </div>
@@ -144,8 +283,7 @@
                                     <div class="allowance-sender-card__info">
                                         <p class="allowance-sender-card__name">아빠</p>
                                         <p class="allowance-sender-card__amount">
-                                            <em>175,000</em>
-                                            원
+                                            <em>175,000</em>원
                                         </p>
                                     </div>
                                 </div>
@@ -154,8 +292,7 @@
                                     <div class="allowance-sender-card__info">
                                         <p class="allowance-sender-card__name">할머니</p>
                                         <p class="allowance-sender-card__amount">
-                                            <em>150,000</em>
-                                            원
+                                            <em>150,000</em>원
                                         </p>
                                     </div>
                                 </div>
@@ -164,14 +301,23 @@
                                     <div class="allowance-sender-card__info">
                                         <p class="allowance-sender-card__name">할아버지</p>
                                         <p class="allowance-sender-card__amount">
-                                            <em>150,000</em>
-                                            원
+                                            <em>150,000</em>원
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="scroll__pagination swiper-pagination"></div>
+                        <div class="card-lock">
+                            <div class="card-lock__group">
+                                <p class="card-lock__desc">
+                                    내게 용돈을 가장 많이 준 분은?
+                                    <br />
+                                    용돈 순위를 확인해보세요!
+                                </p>
+                            </div>
+                            <button type="button" class="card-btn">용돈 순위 확인하기</button>
+                        </div> 
                     </div>
                 </section>
 
@@ -194,18 +340,17 @@
 
                 <section class="allowance-section allowance-spend">
                     <h2 class="text--h5 mb20">어디에 많이 썼을까요?</h2>
-                    <div class="allowance-spend__card is-locked">
+                    <!-- 자산 연결하기 보려면 allowance-spend__card에 is-locked 추가 -->
+                    <div class="allowance-spend__card">
                         <div class="allowance-spend__row">
                             <span class="allowance-spend__icon is-food" aria-hidden="true"></span>
                             <div class="allowance-spend__info">
                                 <div class="allowance-spend__head">
                                     <p class="allowance-spend__label">
-                                        식비
-                                        <span>42건</span>
+                                        식비<span>42건</span>
                                     </p>
                                     <p class="allowance-spend__amount">
-                                        164,170
-                                        <em>원</em>
+                                        164,170<em>원</em>
                                     </p>
                                 </div>
                                 <div class="allowance-spend__bar" role="img" aria-label="식비 지출 비중">
@@ -218,12 +363,10 @@
                             <div class="allowance-spend__info">
                                 <div class="allowance-spend__head">
                                     <p class="allowance-spend__label">
-                                        교육/문화
-                                        <span>14건</span>
+                                        교육/문화<span>14건</span>
                                     </p>
                                     <p class="allowance-spend__amount">
-                                        105,967
-                                        <em>원</em>
+                                        105,967<em>원</em>
                                     </p>
                                 </div>
                                 <div class="allowance-spend__bar" role="img" aria-label="교육/문화 지출 비중">
@@ -236,12 +379,10 @@
                             <div class="allowance-spend__info">
                                 <div class="allowance-spend__head">
                                     <p class="allowance-spend__label">
-                                        교통
-                                        <span>35건</span>
+                                        교통<span>35건</span>
                                     </p>
                                     <p class="allowance-spend__amount">
-                                        87,500
-                                        <em>원</em>
+                                        87,500<em>원</em>
                                     </p>
                                 </div>
                                 <div class="allowance-spend__bar" role="img" aria-label="교통 지출 비중">
@@ -257,7 +398,7 @@
                                     어디에 얼마나 썼는지 확인해 보세요!
                                 </p>
                             </div>
-                            <button type="button" class="card-btn">자산 연결하기</button>
+                            <button type="button" class="card-btn">지금 연결하기</button>
                         </div>
                     </div>
                 </section>
@@ -287,7 +428,7 @@
                                 <span class="btn-arrow__icon is-right" aria-hidden="true"></span>
                             </a>
                         </div>
-                        <img class="allowance-calendar-banner__img" src="../../images/update/img-ally-calendar.png" alt="" aria-hidden="true" />
+                        <img class="allowance-calendar-banner__img" src="../../images/banner/moneycalendar.png" alt="" aria-hidden="true" />
                     </div>
                 </section>
 
@@ -319,7 +460,7 @@
                 if (typeof Swiper === 'undefined') return;
                 new Swiper('#allowanceSenderSwiper', {
                     slidesPerView: 'auto',
-                    spaceBetween: 8,
+                    spaceBetween: 12,
                     freeMode: true,
                     watchOverflow: true,
                     pagination: {

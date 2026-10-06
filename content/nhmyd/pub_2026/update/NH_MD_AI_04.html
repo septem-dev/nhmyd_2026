@@ -3,14 +3,14 @@
     <head>
         <meta charset="utf-8" />
         <script src="../pub-assets/js/head-mb-update.js"></script>
-        <title>포트폴리오 제안</title>
+        <title>AI 포트폴리오</title>
     </head>
 
     <body>
         <div class="wrapper nhasset nds">
             <div class="header">
                 <a href="javascript:;" role="button" class="btnBack"><span class="blind">이전화면으로</span></a>
-                <h1>포트폴리오 제안</h1>
+                <h1>AI 포트폴리오</h1>
                 <a href="javascript:;" class="btnGoHome" role="button"><span class="blind">Home</span></a>
                 <a href="javascript:;" class="btnAll" role="button"><span class="blind">전체메뉴</span></a>
             </div>
@@ -18,7 +18,7 @@
             <div class="container pb32">
                 <div class="diag-step">
                     <span class="text text--body3-medium text--font3">제안</span>
-                    <span class="blind">전체 3단계 중 1단계</span>
+                    <!--<span class="blind">전체 3단계 중 1단계</span>
                     <span class="diag-step__progress" aria-hidden="true">
                         <span class="process-progress-number is-plain">
                             <span class="process-progress-number__current">STEP</span>
@@ -28,13 +28,13 @@
                             <span class="process-progress-number__divider"></span>
                             <span class="process-progress-number__total">03</span>
                         </span>
-                    </span>
+                    </span>-->
                 </div>
 
                 <section class="ai-section">
                     <!-- prettier-ignore -->
                     <h2 class="text text--h2 diag-lead tooltipWrap is-card">
-                        고객님이 선택한 <em class="text--point-chart">22개</em> 계좌중
+                        고객님이 선택한 <em class="text--point-chart">22개</em> 계좌 중
                         <br /><em class="text--point-chart">96,000,000원</em>을 대상으로
                         <br />제안을 진행했어요.
                         <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span class="blind">제안 대상 도움말</span></button>
@@ -47,12 +47,25 @@
                         </div>
                     </h2>
 
-                    <div class="info-card">
+
+
+                    <div class="info-card is-locked">
                         <div class="card-head">
-                            <h3 class="text text--h4 ai-heading">AI 의견이 준비됐어요</h3>
+                            <h3 class="text text--h4">AI 의견이 준비됐어요</h3>
                             <span class="ai-badge">에이전트 AI</span>
                         </div>
-                        <p class="ai-quote">진단에서 선택한 자산이 국내주식에 몰려 있어서, 비중을 해외로 분산하여 위험자산을 84%로 높이고, 기대수익은 8.3%, 투자위험은 14.2%로 제안했어요. 투자성향을 고려하여, 한 곳에 쏠린 위험도 분산됐어요.</p>
+                        <p class="ai-quote">진단에서 선택한 자산이 국내주식에 몰려 있어서, 비중을 해외로 분산하여 위험자산을 84%로 높이고,
+                            기대수익은 8.3%, 투자위험은 14.2%로 제안했어요. 투자성향을 고려하여, 한 곳에 쏠린 위험도 분산됐어요.</p>
+                        <div class="card-lock">
+                            <div class="card-lock__group">
+                                <span class="lottie-anim" style="--lottie-size: 64px" data-lottie="lottieInsightAiLoader1" data-lottie-loop="true" data-lottie-path="ai-loader" aria-hidden="true"></span>
+                                <p class="card-lock__desc mt4">
+                                    AI 의견을 준비하고 있어요.
+                                    <br>
+                                    잠시만 기다려 주세요.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -73,7 +86,7 @@
                         </div>
 
                         <ul class="blind">
-                            <li>해외채권 현재 33%, 제안 33%</li>
+                            <li>현금성 현재 33%, 제안 33%</li>
                             <li>국내채권 현재 13%, 제안 13%</li>
                             <li>해외채권 현재 5%, 제안 5%</li>
                             <li>국내주식 현재 31%, 제안 31%</li>
@@ -88,7 +101,7 @@
                                     <span class="diag-legend__value">33 %</span>
                                     <span class="diag-legend__name">
                                         <i class="diag-legend__swatch" style="background: #22d3ee"></i>
-                                        해외채권
+                                        현금성
                                     </span>
                                     <span class="diag-legend__value">33 %</span>
                                 </li>
@@ -186,7 +199,7 @@
                     <div class="info-card ai">
                         <h3 class="text text--h4 ai-heading">제안 포트폴리오</h3>
 
-                        <p class="text text--h5 text--font3 mt16">제안 포트폴리오에 맞춰 조종하려면</p>
+                        <p class="text text--h5 text--font3 mt16">제안 포트폴리오에 맞춰 조정하려면</p>
 
                         <ul class="alloc-bar">
                             <li class="alloc-bar__item">
@@ -198,7 +211,7 @@
                                     <span class="alloc-bar__name">현금성 1%</span>
                                     <span class="alloc-bar__change">
                                         <em class="alloc-bar__down">-32% 줄여요</em>
-                                        (-115,200,000 원)
+                                        -115,200,000 원
                                     </span>
                                 </span>
                             </li>
@@ -211,7 +224,7 @@
                                     <span class="alloc-bar__name">국내채권 1%</span>
                                     <span class="alloc-bar__change">
                                         <em class="alloc-bar__down">-12% 줄여요</em>
-                                        (-43,200,000 원)
+                                        -43,200,000 원
                                     </span>
                                 </span>
                             </li>
@@ -224,7 +237,7 @@
                                     <span class="alloc-bar__name">해외채권 1%</span>
                                     <span class="alloc-bar__change">
                                         <em class="alloc-bar__down">-5% 줄여요</em>
-                                        (-18,200,000 원)
+                                        -18,200,000 원
                                     </span>
                                 </span>
                             </li>
@@ -237,7 +250,7 @@
                                     <span class="alloc-bar__name">국내주식 48%</span>
                                     <span class="alloc-bar__change">
                                         <em class="alloc-bar__up">+17% 늘려요</em>
-                                        (+61,200,000 원)
+                                        +61,200,000 원
                                     </span>
                                 </span>
                             </li>
@@ -247,10 +260,10 @@
                                     <i class="alloc-bar__delta is-up" style="width: 16.2%"></i>
                                 </span>
                                 <span class="alloc-bar__row">
-                                    <span class="alloc-bar__name">해외선진국 34%</span>
+                                    <span class="alloc-bar__name">해외선진국주식 34%</span>
                                     <span class="alloc-bar__change">
                                         <em class="alloc-bar__up">+20% 늘려요</em>
-                                        (+72,000,000 원)
+                                        +72,000,000 원
                                     </span>
                                 </span>
                             </li>
@@ -260,10 +273,10 @@
                                     <i class="alloc-bar__delta is-up" style="width: 2.2%"></i>
                                 </span>
                                 <span class="alloc-bar__row">
-                                    <span class="alloc-bar__name">해외신흥국 15%</span>
+                                    <span class="alloc-bar__name">해외신흥국주식 15%</span>
                                     <span class="alloc-bar__change">
                                         <em class="alloc-bar__up">12% 늘려요</em>
-                                        (+43,200,000 원)
+                                        +43,200,000 원
                                     </span>
                                 </span>
                             </li>
@@ -299,7 +312,7 @@
                             <div class="perf-compare__group">
                                 <p class="perf-compare__name">
                                     기대수익
-                                    <em class="perf-compare__gap is-up">2.3%P</em>
+                                    <em class="perf-compare__gap is-up">2.3%차이</em>
                                 </p>
                                 <p class="perf-compare__row">
                                     <span class="perf-compare__row-label">현재</span>
@@ -316,7 +329,7 @@
                             <div class="perf-compare__group">
                                 <p class="perf-compare__name">
                                     투자위험
-                                    <em class="perf-compare__gap is-down">2.7%P</em>
+                                    <em class="perf-compare__gap is-down">2.7%차이</em>
                                 </p>
                                 <p class="perf-compare__row">
                                     <span class="perf-compare__row-label">현재</span>
@@ -336,7 +349,7 @@
                         <p class="card-note">
                             <span class="card-note__icon" aria-hidden="true"></span>
                             <span class="card-note__text">
-                                제안 투자곡선에 비교해서,
+                                제안 포트폴리오에 비교해서,
                                 <em class="card-note__strong">{기대수익, 투자위험}</em>
                                 이 낮아요.
                             </span>
@@ -388,110 +401,125 @@
                                 <strong class="asset-list__row-value is-total">170,000,000 원</strong>
                             </li>
                         </ul>
-
-                        <hr class="divider is-dash-e1" />
-
-                        <ul class="asset-list">
-                            <li class="asset-list__item">
-                                <span class="label is-sm is-line is-lightblue">부채진단</span>
-                                <div class="list-account">
-                                    <span class="list-account__logo"><img src="../../images/logos/AACQ0000.png" alt="" /></span>
-                                    <span class="list-account__text">
-                                        <span class="list-account__name">농협은행 직장인 신용대출</span>
-                                        <span class="list-account__number">
-                                            <span>농협은행</span>
-                                            <span>000333366999</span>
-                                        </span>
-                                    </span>
-                                </div>
-                                <ul class="asset-list__data">
-                                    <li class="asset-list__row">
-                                        <span class="asset-list__row-label">만기일</span>
-                                        <span class="asset-list__row-value">2027.01.23</span>
-                                    </li>
-                                    <li class="asset-list__row">
-                                        <span class="asset-list__row-label">원리금균등분할상환</span>
-                                        <span class="asset-list__row-value">연 19.9%</span>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="asset-list__item">
-                                <span class="label is-sm is-line is-lightblue">부채진단</span>
-                                <div class="list-account">
-                                    <span class="list-account__logo"><img src="../../images/logos/logo_null_06_capital.png" alt="" /></span>
-                                    <span class="list-account__text">
-                                        <span class="list-account__name">롯데캐피탈 엘론(일반신용대출)</span>
-                                        <span class="list-account__number">
-                                            <span>롯데캐피탈</span>
-                                            <span>000333366999</span>
-                                        </span>
-                                    </span>
-                                </div>
-                                <ul class="asset-list__data">
-                                    <li class="asset-list__row">
-                                        <span class="asset-list__row-label">만기일</span>
-                                        <span class="asset-list__row-value">2027.02.12</span>
-                                    </li>
-                                    <li class="asset-list__row">
-                                        <span class="asset-list__row-label">원리금균등분할상환</span>
-                                        <span class="asset-list__row-value">연 19.9%</span>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="asset-list__item">
-                                <span class="label is-sm is-line is-lightblue">부채진단</span>
-                                <div class="list-account">
-                                    <span class="list-account__logo"><img src="../../images/logos/AACT0000.png" alt="" /></span>
-                                    <span class="list-account__text">
-                                        <span class="list-account__name">한국투자저축은행 파인로얄론</span>
-                                        <span class="list-account__number">
-                                            <span>한국투자저축은행</span>
-                                            <span>2222444455556</span>
-                                        </span>
-                                    </span>
-                                </div>
-                                <ul class="asset-list__data">
-                                    <li class="asset-list__row">
-                                        <span class="asset-list__row-label">만기일</span>
-                                        <span class="asset-list__row-value">2028.06.27</span>
-                                    </li>
-                                    <li class="asset-list__row">
-                                        <span class="asset-list__row-label">일시상환</span>
-                                        <span class="asset-list__row-value">연 17.21%</span>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="asset-list__item">
-                                <div class="list-account">
-                                    <span class="list-account__logo"><img src="../../images/logos/AAAZ0000.png" alt="" /></span>
-                                    <span class="list-account__text">
-                                        <span class="list-account__name">전세자금대출</span>
-                                        <span class="list-account__number">
-                                            <span>농축협은행</span>
-                                            <span>2222444455556</span>
-                                        </span>
-                                    </span>
-                                </div>
-                                <ul class="asset-list__data">
-                                    <li class="asset-list__row">
-                                        <span class="asset-list__row-label">만기일</span>
-                                        <span class="asset-list__row-value">2028.04.12</span>
-                                    </li>
-                                    <li class="asset-list__row">
-                                        <span class="asset-list__row-label">원리금균등분할상환</span>
-                                        <span class="asset-list__row-value">연 9.21%</span>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <hr class="divider is-dash-e1 mt16 mb16" />
+                        <!--데이터 없을때-->
+                        <div class="no-data">
+                            <P class="text text-body3">투자 상품 추천을 하기 위해<br />추가 동의가 필요합니다.</P>
+                            <button type="button" class="card-btn">약관 동의하기</button>
+                        </div>
+                        <!--데이터 있을때-->
+                        <div class="info-card__list full">
+                            <ul class="finance-product asset-list">
+                                <li>
+                                    <div class="finance-head">
+                                        <span class="label is-sm is-line is-gray">만료</span>
+                                        <div class="finance-title">
+                                            <span class="finance-logo"><img src="../../images/logos/AACQ0000.png" alt=""></span>
+                                            <div class="finance-col">
+                                                <p class="finance-name">농협은행 직장인 신용대출</p>
+                                                <p class="finance-number">
+                                                    <span>농협은행</span>
+                                                    <span>000333366999</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="details-row">
+                                        <li>
+                                            <span class="details-label">만기일</span>
+                                            <span class="details-value">2027.01.23</span>
+                                        </li>
+                                        <li>
+                                            <span class="details-label">원리금균등분할상환</span>
+                                            <span class="details-value">연 19.9%</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="finance-head">
+                                        <span class="label is-sm is-line is-lightblue">부채진단</span>
+                                        <div class="finance-title">
+                                            <span class="finance-logo"><img src="../../images/logos/logo_null_06_capital.png" alt=""></span>
+                                            <div class="finance-col">
+                                                <p class="finance-name">롯데캐피탈 엘론(일반신용대출)</p>
+                                                <p class="finance-number">
+                                                    <span>롯데캐피탈</span>
+                                                    <span>000333366999</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="details-row">
+                                        <li>
+                                            <span class="details-label">만기일</span>
+                                            <span class="details-value">2027.02.12</span>
+                                        </li>
+                                        <li>
+                                            <span class="details-label">원리금균등분할상환</span>
+                                            <span class="details-value">연 19.9%</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="finance-head">
+                                        <span class="label is-sm is-line is-lightblue">부채진단</span>
+                                        <div class="finance-title">
+                                            <span class="finance-logo"><img src="../../images/logos/AACT0000.png" alt=""></span>
+                                            <div class="finance-col">
+                                                <p class="finance-name">한국투자저축은행 파인로얄론</p>
+                                                <p class="finance-number">
+                                                    <span>한국투자저축은행</span>
+                                                    <span>2222444455556</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="details-row">
+                                        <li>
+                                            <span class="details-label">만기일</span>
+                                            <span class="details-value">2028.06.27</span>
+                                        </li>
+                                        <li>
+                                            <span class="details-label">일시상환</span>
+                                            <span class="details-value">연 17.21%</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="finance-head">
+                                        <div class="finance-title">
+                                            <span class="finance-logo"><img src="../../images/logos/AAAZ0000.png" alt=""></span>
+                                            <div class="finance-col">
+                                                <p class="finance-name">전세자금대출</p>
+                                                <p class="finance-number">
+                                                    <span>농축협은행</span>
+                                                    <span>2222444455556</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="details-row">
+                                        <li>
+                                            <span class="details-label">만기일</span>
+                                            <span class="details-value">2028.04.12</span>
+                                        </li>
+                                        <li>
+                                            <span class="details-label">원리금균등분할상환</span>
+                                            <span class="details-value">연 9.21%</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                              
+                            </ul>
+                        </div>
                     </div>
                 </section>
 
                 <section class="ai-section">
                     <div class="info-card ai">
                         <div class="card-head tooltipWrap is-card">
-                            <h3 class="text text--h4 ai-heading">일반 투자 상품 추천</h3>
-                            <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span class="blind">일반 투자 상품 추천 도움말</span></button>
+                            <h3 class="text text--h4 ai-heading">연금 상품 추천</h3>
+                            <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span class="blind">연금 상품 추천 도움말</span></button>
                             <div class="tooltipCont" style="display: none">
                                 <h3>안내사항</h3>
                                 <ul>
@@ -507,102 +535,117 @@
                                 <strong class="asset-list__row-value is-total">170,000,000 원</strong>
                             </li>
                         </ul>
-
-                        <hr class="divider is-dash-e1" />
-
-                        <ul class="asset-list">
-                            <li class="asset-list__item">
-                                <span class="label is-sm is-line is-lightblue">부채진단</span>
-                                <div class="list-account">
-                                    <span class="list-account__logo"><img src="../../images/logos/AACQ0000.png" alt="" /></span>
-                                    <span class="list-account__text">
-                                        <span class="list-account__name">농협은행 직장인 신용대출</span>
-                                        <span class="list-account__number">
-                                            <span>농협은행</span>
-                                            <span>000333366999</span>
-                                        </span>
-                                    </span>
-                                </div>
-                                <ul class="asset-list__data">
-                                    <li class="asset-list__row">
-                                        <span class="asset-list__row-label">만기일</span>
-                                        <span class="asset-list__row-value">2027.01.23</span>
-                                    </li>
-                                    <li class="asset-list__row">
-                                        <span class="asset-list__row-label">원리금균등분할상환</span>
-                                        <span class="asset-list__row-value">연 19.9%</span>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="asset-list__item">
-                                <span class="label is-sm is-line is-lightblue">부채진단</span>
-                                <div class="list-account">
-                                    <span class="list-account__logo"><img src="../../images/logos/logo_null_06_capital.png" alt="" /></span>
-                                    <span class="list-account__text">
-                                        <span class="list-account__name">롯데캐피탈 엘론(일반신용대출)</span>
-                                        <span class="list-account__number">
-                                            <span>롯데캐피탈</span>
-                                            <span>000333366999</span>
-                                        </span>
-                                    </span>
-                                </div>
-                                <ul class="asset-list__data">
-                                    <li class="asset-list__row">
-                                        <span class="asset-list__row-label">만기일</span>
-                                        <span class="asset-list__row-value">2027.02.12</span>
-                                    </li>
-                                    <li class="asset-list__row">
-                                        <span class="asset-list__row-label">원리금균등분할상환</span>
-                                        <span class="asset-list__row-value">연 19.9%</span>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="asset-list__item">
-                                <span class="label is-sm is-line is-lightblue">부채진단</span>
-                                <div class="list-account">
-                                    <span class="list-account__logo"><img src="../../images/logos/AACT0000.png" alt="" /></span>
-                                    <span class="list-account__text">
-                                        <span class="list-account__name">한국투자저축은행 파인로얄론</span>
-                                        <span class="list-account__number">
-                                            <span>한국투자저축은행</span>
-                                            <span>2222444455556</span>
-                                        </span>
-                                    </span>
-                                </div>
-                                <ul class="asset-list__data">
-                                    <li class="asset-list__row">
-                                        <span class="asset-list__row-label">만기일</span>
-                                        <span class="asset-list__row-value">2028.06.27</span>
-                                    </li>
-                                    <li class="asset-list__row">
-                                        <span class="asset-list__row-label">일시상환</span>
-                                        <span class="asset-list__row-value">연 17.21%</span>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="asset-list__item">
-                                <div class="list-account">
-                                    <span class="list-account__logo"><img src="../../images/logos/AAAZ0000.png" alt="" /></span>
-                                    <span class="list-account__text">
-                                        <span class="list-account__name">전세자금대출</span>
-                                        <span class="list-account__number">
-                                            <span>농축협은행</span>
-                                            <span>2222444455556</span>
-                                        </span>
-                                    </span>
-                                </div>
-                                <ul class="asset-list__data">
-                                    <li class="asset-list__row">
-                                        <span class="asset-list__row-label">만기일</span>
-                                        <span class="asset-list__row-value">2028.04.12</span>
-                                    </li>
-                                    <li class="asset-list__row">
-                                        <span class="asset-list__row-label">원리금균등분할상환</span>
-                                        <span class="asset-list__row-value">연 9.21%</span>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <hr class="divider is-dash-e1 mt16 mb16" />
+                        <!--데이터 없을때-->
+                        <div class="no-data">
+                            <P class="text text-body3">연금 상품 추천을 하기 위해<br />추가 동의가 필요합니다.</P>
+                            <button type="button" class="card-btn">약관 동의하기</button>
+                        </div>
+                        <!--데이터 있을때-->
+                        <div class="info-card__list full">
+                            <ul class="finance-product asset-list">
+                                <li>
+                                    <div class="finance-head">
+                                        <span class="label is-sm is-line is-gray">만료</span>
+                                        <div class="finance-title">
+                                            <span class="finance-logo"><img src="../../images/logos/AACQ0000.png" alt=""></span>
+                                            <div class="finance-col">
+                                                <p class="finance-name">농협은행 직장인 신용대출</p>
+                                                <p class="finance-number">
+                                                    <span>농협은행</span>
+                                                    <span>000333366999</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="details-row">
+                                        <li>
+                                            <span class="details-label">만기일</span>
+                                            <span class="details-value">2027.01.23</span>
+                                        </li>
+                                        <li>
+                                            <span class="details-label">원리금균등분할상환</span>
+                                            <span class="details-value">연 19.9%</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="finance-head">
+                                        <span class="label is-sm is-line is-lightblue">부채진단</span>
+                                        <div class="finance-title">
+                                            <span class="finance-logo"><img src="../../images/logos/logo_null_06_capital.png" alt=""></span>
+                                            <div class="finance-col">
+                                                <p class="finance-name">롯데캐피탈 엘론(일반신용대출)</p>
+                                                <p class="finance-number">
+                                                    <span>롯데캐피탈</span>
+                                                    <span>000333366999</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="details-row">
+                                        <li>
+                                            <span class="details-label">만기일</span>
+                                            <span class="details-value">2027.02.12</span>
+                                        </li>
+                                        <li>
+                                            <span class="details-label">원리금균등분할상환</span>
+                                            <span class="details-value">연 19.9%</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="finance-head">
+                                        <span class="label is-sm is-line is-lightblue">부채진단</span>
+                                        <div class="finance-title">
+                                            <span class="finance-logo"><img src="../../images/logos/AACT0000.png" alt=""></span>
+                                            <div class="finance-col">
+                                                <p class="finance-name">한국투자저축은행 파인로얄론</p>
+                                                <p class="finance-number">
+                                                    <span>한국투자저축은행</span>
+                                                    <span>2222444455556</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="details-row">
+                                        <li>
+                                            <span class="details-label">만기일</span>
+                                            <span class="details-value">2028.06.27</span>
+                                        </li>
+                                        <li>
+                                            <span class="details-label">일시상환</span>
+                                            <span class="details-value">연 17.21%</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="finance-head">
+                                        <div class="finance-title">
+                                            <span class="finance-logo"><img src="../../images/logos/AAAZ0000.png" alt=""></span>
+                                            <div class="finance-col">
+                                                <p class="finance-name">전세자금대출</p>
+                                                <p class="finance-number">
+                                                    <span>농축협은행</span>
+                                                    <span>2222444455556</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="details-row">
+                                        <li>
+                                            <span class="details-label">만기일</span>
+                                            <span class="details-value">2028.04.12</span>
+                                        </li>
+                                        <li>
+                                            <span class="details-label">원리금균등분할상환</span>
+                                            <span class="details-value">연 9.21%</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                              
+                            </ul>
+                        </div>
                     </div>
                 </section>
 
@@ -621,16 +664,16 @@
                         <div class="notice-bullet">
                             <ul class="bullet is-dot--body3">
                                 <li class="bullet__item">언제든지 목적에 맞게 출금이 가능하도록, 파킹 통장 위주로 운용해요.</li>
-                                <li class="bullet__item">다른 상품으로 갈아탈 때는, 해지 수수료를 고려해야해요.</li>
+                                <li class="bullet__item">다른 상품으로 갈아탈 때는, 해지 수수료를 고려해야 해요.</li>
                             </ul>
                         </div>
 
-                        <hr class="divider is-line-f0" />
+                        <hr class="divider is-dash-e1 mb32">
 
                         <ul class="fund-list">
                             <li class="fund-item">
                                 <p class="fund-item__labels">
-                                    <span class="label is-sm is-fill is-red">다소높은위험</span>
+                                    <span class="label is-sm is-fill is-red">다소 높은 위험</span>
                                     <span class="label is-sm is-line is-gray">중기이상</span>
                                     <span class="label is-sm is-line is-gray">해외</span>
                                     <span class="label is-sm is-line is-gray">펀드</span>
@@ -660,7 +703,7 @@
 
                             <li class="fund-item">
                                 <p class="fund-item__labels">
-                                    <span class="label is-sm is-fill is-green">낮음위험</span>
+                                    <span class="label is-sm is-fill is-green">낮음 위험</span>
                                     <span class="label is-sm is-line is-gray">중기이상</span>
                                     <span class="label is-sm is-line is-gray">국내</span>
                                     <span class="label is-sm is-line is-gray">펀드</span>
@@ -715,7 +758,7 @@
             (function () {
                 if (typeof Chart === 'undefined') return;
 
-                var LABELS = ['해외채권', '국내채권', '해외채권', '국내주식', '해외선진국주식', '해외신흥국주식', '대체자산'];
+                var LABELS = ['현금성', '국내채권', '해외채권', '국내주식', '해외선진국주식', '해외신흥국주식', '대체자산'];
                 var COLORS = ['#22d3ee', '#a3e635', '#f472b6', '#facc15', '#f5a623', '#4c6ce0', '#d7d7d7'];
 
                 function drawDonut(id, data) {

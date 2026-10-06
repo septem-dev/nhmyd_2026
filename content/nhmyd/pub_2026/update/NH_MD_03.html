@@ -10,7 +10,7 @@
         <div class="wrapper nhasset nds">
             <div class="header bgcolor">
                 <a href="javascript:;" role="button" class="btnBack"><span class="blind">이전화면으로</span></a>
-                <h1>자산</h1>
+                <h1>자산 관리 포털</h1>
                 <a href="javascript:;" class="btnGoHome" role="button"><span class="blind">Home</span></a>
                 <a href="javascript:;" class="btnAll" role="button"><span class="blind">전체메뉴</span></a>
             </div>
@@ -548,7 +548,7 @@
                                                     </div>
                                                     <div class="loan-repay__row">
                                                         <dt>상환 잔여 회차</dt>
-                                                        <dd>354 / 360 회</dd>
+                                                        <dd><em>354</em> / 360 회</dd>
                                                     </div>
                                                     <div class="loan-repay__row">
                                                         <dt>월 예상 상환액</dt>
@@ -914,7 +914,7 @@
                     </section>
 
                     <section class="md-section">
-                        <h2 class="md-section__title">조기 은퇴 진단</h2>
+                        <h2 class="md-section__title">조기은퇴 진단</h2>
                         <div class="md-card retire-check">
                             <p class="retire-check__headline">
                                 <!-- prettier-ignore -->
@@ -931,6 +931,38 @@
                                 <div class="retire-check__bar" role="img" aria-label="은퇴준비율 32%">
                                     <div class="retire-check__bar-fill" style="width:36%"></div>
                                 </div>
+                            </div>
+                        </div>
+                        <!-- 계좌 미연결의 경우 케이스 -->
+                        <br />
+                        <div class="md-card retire-check is-locked">
+                            <p class="retire-check__headline">
+                                <!-- prettier-ignore -->
+                                <strong>김농협</strong>
+                                님의 은퇴준비율은
+                                <br />
+                                <strong class="retire-check__percent">32%</strong>
+                                입니다.
+                            </p>
+                            <div class="retire-check__track">
+                                <span class="retire-check__bubble">아직은 열심히 일할 때예요!</span>
+                                <img class="retire-check__mascot" src="../../images/update/img-oney-suitcase.png" alt="" aria-hidden="true" />
+                                <span class="retire-check__flag" aria-hidden="true"></span>
+                                <div class="retire-check__bar" role="img" aria-label="은퇴준비율 32%">
+                                    <div class="retire-check__bar-fill" style="width:36%"></div>
+                                </div>
+                            </div>
+
+                            <div class="card-lock">
+                                <div class="card-lock__group">
+                                    <p class="card-lock__tit">조기은퇴진단</p>
+                                    <p class="card-lock__desc">
+                                        나도 파이어족이 될 수 있을까?
+                                        <br />
+                                        조기은퇴 진단으로 확인해 보세요!
+                                    </p>
+                                </div>
+                                <button type="button" class="card-btn">조기은퇴 진단하기</button>
                             </div>
                         </div>
                     </section>

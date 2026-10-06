@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-title" content="NH마이데이터">
+<meta http-equiv="imagetoolbar" content="no">
+<meta name="robots" content="no-index,follow">
+<meta name="title" content="">
+<meta name="author" content="">
+<meta name="content" content="">
+<meta name="keywords" content="NH마이데이터">
+<meta name="description" content="NH마이데이터">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<title>대출/신용관리 | AI대출금리케어 | 서비스 신청 | 이용동의</title>
+<script src="../pub-assets/js/head-mb.js"></script>
+<script>
+  $(document).ready(function () {
+    fullLayerPop();
+  });
+</script>
+</head>
+<body>
+  <div class="wrapper nhasset"><!-- 바닥페이지 --></div>
+
+  <div class="nhasset popWrap fullLayerPop">
+    <div class="popInner">
+      <h1>본인 행정정보 제공 요구서</h1>
+
+      <div class="popCont pb40">
+        <div class="term_cont">
+          <h3 class="popTemrsTit">정보주체에 관한 사항</h3>
+          <div class="wrapTblDefault blue">
+            <table>
+              <caption>정보주체에 관한 사항</caption>
+              <colgroup>
+                <col style="width:30%">
+                <col style="width:auto">
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th scope="row">성명</th>
+                  <td>$성명$</td>
+                </tr>
+                <tr>
+                  <th scope="row">생년월일</th>
+                  <td>$YYYY.MM.DD$</td>
+                </tr>
+                <tr>
+                  <th scope="row">연락처</th>
+                  <td>$010-1234-5678$</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="popTemrsTit">본인정보 제공·이용에 관한 사항</h3>
+          <div class="wrapTblDefault blue">
+            <table>
+              <caption>본인정보 제공·이용에 관한 사항</caption>
+              <colgroup>
+                <col style="width:30%">
+                <col style="width:auto">
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th scope="row">이용기관</th>
+                  <td>$대출 금융회사명$</td>
+                </tr>
+                <tr>
+                  <th scope="row">묶음정보 서비스명</th>
+                  <td>NH농협은행_금리인하(마이데이터 연계) 서비스</td>
+                </tr>
+                <tr>
+                  <th scope="row">묶음정보의 이용목적</th>
+                  <td>금리인하심사</td>
+                </tr>
+                <tr>
+                  <th scope="row">제공 유형</th>
+                  <td>정기적 제공 (주기:월 1회 / 종료시점 : 2년)</td>
+                </tr>
+                <tr>
+                  <th scope="row">보관·저장 및 이용 기한</th>
+                  <td>거래종료일로부터 5년</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="popTemrsTit">본인정보에 관한 사항</h3>
+          <div class="wrapTblDefault blue">
+            <table>
+              <caption>본인정보에 관한 사항</caption>
+              <colgroup>
+                <col style="width:15%">
+                <col style="width:auto">
+                <col style="width:auto">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th id="col-no" scope="col" rowspan="2" class="ac">연번</th>
+                  <th id="col-org" scope="col" class="ac">보유기관<br>(보유기관명)</th>
+                  <th id="col-info" scope="col" class="ac">본인정보 명칭<br>(필요 행정정보명)</th>
+                </tr>
+                <tr>
+                  <th id="col-detail" scope="colgroup" colspan="2" class="ac bdL">상세항목 (항목값)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th id="row1" scope="row" rowspan="2" class="ac">1</th>
+                  <td headers="row1 col-org" class="cell-bg bdL">국민건강보험공단</td>
+                  <td headers="row1 col-info" class="cell-bg">건강보험자격득실확인서</td>
+                </tr>
+
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL" class="bdL">
+                    <ul>
+                      <li>1. 발급항목 - 발급일자, 발급기관장</li>
+                      <li>2. 확인청구자정보 - 성명, 주민등록번호_전체</li>
+                      <li>3. 자격득실확인정보 - 가입자구분, 사업자명칭, 자격취득일, 자격상실일</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th id="row2" scope="row" rowspan="2" class="ac">2</th>
+                  <td headers="row2 col-org" class="cell-bg bdL">국민건강보험공단</td>
+                  <td headers="row2 col-info" class="cell-bg">건강·장기요양 보험료 납부확인서(지역가입자)</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 발급항목 - 보험구분, 발급일자</li>
+                      <li>2. 가입자정보 - 성명, 증번호</li>
+                      <li>3. 가입자정보 주민등록번호 - 앞번호, 뒷번호</li>
+                      <li>4. 확인년도</li>
+                      <li>5. 납부내역 - 고지월, 고지금액_건강보험료, 고지금액_장기요양보험료, 납부금액_건강보험료, 납부금액_장기요양보험료</li>
+                      <li>6. 사용목적</li>
+                      <li>7. 신청자정보 - 신청일자, 신청자성명</li>
+                    </ul>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <th id="row3" scope="row" rowspan="2" class="ac">3</th>
+                  <td headers="row3 col-org" class="cell-bg bdL">국민건강보험공단</td>
+                  <td headers="row3 col-info" class="cell-bg">건강·장기요양 보험료 납부확인서(직장가입자)</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 발급항목 - 보험구분, 발급일자</li>
+                      <li>2. 가입자정보 - 성명, 증번호, 사업장명칭, 사업자등록번호</li>
+                      <li>3. 가입자정보 주민등록번호 - 앞번호, 뒷번호</li>
+                      <li>4. 확인년도</li>
+                      <li>5. 납부내역 - 직장_고지월, 직장_고지금액_건강보험료, 직장_고지금액_장기요양보험료, 직장_납부금액_건강보험료, 직장_납부금액_장기요양보험료, 소득_고지월, 소득_고지금액_건강보험료, 소득_고지금액_장기요양보험료, 소득_납부금액_건강보험료, 소득_납부금액_장기요양보험료</li>
+                      <li>6. 연말정산 - 연말정산_건강보험료, 연말정산_장기요양보험</li>
+                      <li>7. 사용목적</li>
+                      <li>8. 신청자정보 - 신청일자, 신청자성명</li>
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th id="row4" scope="row" rowspan="2" class="ac">4</th>
+                  <td headers="row4 col-org" class="cell-bg bdL">국세청</td>
+                  <td headers="row4 col-info" class="cell-bg">소득금액증명</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 접수정보 - 민원접수번호, 민원접수일시, 민원접수청서, 과세기간시작년월, 과세기간종료년월</li>
+                      <li>2. 발급정보 - 발급번호, 발급일자</li>
+                      <li>3. 발급정보(발급세무서) - 발급세무서명</li>
+                      <li>4. 발급정보(담당정보) - 부서명, 성명, 전화번호, 세적부서명, 세적성명, 세적전화번호</li>
+                      <li>5. 민원인정보 - 성명, 민원인주민등록번호, 도로명주소, 법정동주소</li>
+                      <li>6. 부가정보 - 모범납세자여부, 모범납세자내용, 세무대리인내용</li>
+                      <li>7. 증명내용(출력정보) - 과세년도, 자료유형</li>
+                      <li>8. 증명내용(소득증명) - 과세년도</li>
+                      <li>9. 증명내용(소득증명_종합소득세) - 총결정세액</li>
+                      <li>10. 증명내용(소득증명_종합소득세_수입금액) - 이자, 배당, 사업, 근로, 연금, 기타, 합계, 분리과세</li>
+                      <li>11. 증명내용(소득증명_종합소득세_소득금액) - 이자, 배당, 사업, 근로, 연금, 기타, 합계, 분리과세</li>
+                      <li>12. 증명내용(연말정산) - 귀속년도, 구분, 상호명, 정산사업자등록번호, 지급받은총액, 정산소득금액, 총결정세액, 비고</li>
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th id="row5" scope="row" rowspan="2" class="ac">5</th>
+                  <td headers="row5 col-org" class="cell-bg bdL">국세청</td>
+                  <td headers="row5 col-info" class="cell-bg">부가가치세과세표준증명</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 신청정보 - 과세기간시작년월, 과세기간종료년월</li>
+                      <li>2. 발급정보 - 발급번호, 발급일자, 발급세무서코드, 발급세무서</li>
+                      <li>3. 민원인정보 - 민원인성명, 민원인주민등록번호, 상호, 사업자등록번호, 업태, 종목</li>
+                      <li>4. 증명내용 부가가치세과세표준 - 과세기간시작년월일, 과세기간종료년월일, 계, 과세분, 면세분, 납부세액</li>
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th id="row6" scope="row" rowspan="2" class="ac">6</th>
+                  <td headers="row6 col-org" class="cell-bg bdL">국세청</td>
+                  <td headers="row6 col-info" class="cell-bg">부가가치세면세사업자 수입금액증명</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 발급정보 - 발급번호, 발급일자, 발급세무서코드, 발급세무서</li>
+                      <li>2. 민원인정보 - 민원인성명, 민원인주민등록번호, 상호, 사업자등록번호, 업태, 종목</li>
+                      <li>3. 증명내용 부가가치세면세사업자 수입금액 - 과세기간시작년월일, 과세기간종료년월일, 수입금액</li>
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th id="row7" scope="row" rowspan="2" class="ac">7</th>
+                  <td headers="row7 col-org" class="cell-bg bdL">국세청</td>
+                  <td headers="row7 col-info" class="cell-bg">표준재무제표증명(개인)</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 신청정보 - 과세기간시작년월, 과세기간종료년월</li>
+                      <li>2. 발급정보 - 발급번호, 발급일자, 발급세무서코드, 발급세무서</li>
+                      <li>3. 민원인정보 - 민원인성명, 민원인주민등록번호, 상호, 사업자등록번호, 업태, 종목</li>
+                      <li>4. 증명내용 표지정보 - 주소, 사업연도, 신고구분, 신고일, 첨부서류</li>
+                      <li>5. 증명내용 표준대차대조표 표준대차대조표개인 개인1 - 계정과목 코드, 계정과목, 금액</li>
+                      <li>6. 증명내용 표준대차대조표 표준대차대조표개인 개인2 - 계정과목 코드, 계정과목, 금액</li>
+                      <li>7. 증명내용 표준손익계산서 표준손익계산서개인 개인1 - 계정과목 코드, 계정과목, 금액</li>
+                      <li>8. 증명내용 표준손익계산서 표준손익계산서개인 개인2 - 계정과목 코드, 계정과목, 금액</li>
+                      <li>9. 증명내용 표준원가명세서 제조원가명세서좌 - 계정과목 코드, 계정과목, 금액</li>
+                      <li>10. 증명내용 표준원가명세서 공사원가명세서좌 - 계정과목 코드, 계정과목, 금액</li>
+                      <li>11. 증명내용 표준원가명세서 분양원가명세서좌 - 계정과목 코드, 계정과목, 금액</li>
+                      <li>12. 증명내용 표준원가명세서 기타원가명세서좌 - 계정과목 코드, 계정과목, 금액</li>
+                      <li>13. 증명내용 표준원가명세서 제조원가명세서우 - 계정과목 코드, 계정과목, 금액</li>
+                      <li>14. 증명내용 표준원가명세서 공사원가명세서우 - 계정과목 코드, 계정과목, 금액</li>
+                      <li>15. 증명내용 표준원가명세서 분양원가명세서우 - 계정과목 코드, 계정과목, 금액</li>
+                      <li>16. 증명내용 표준원가명세서 기타원가명세서우 - 계정과목 코드, 계정과목, 금액</li>
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th id="row8" scope="row" rowspan="2" class="ac">8</th>
+                  <td headers="row8 col-org" class="cell-bg bdL">국세청</td>
+                  <td headers="row8 col-info" class="cell-bg">사업자등록증명</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 과세유형</li>
+                      <li>2. 납세자정보 - 상호-법인명, 사업자등록번호, 성명, 주민등록번호, 사업장소재지</li>
+                      <li>3. 개업일자</li>
+                      <li>4. 사업자등록일자</li>
+                      <li>5. 업태</li>
+                      <li>6. 종목</li>
+                      <li>7. 발급일자 - 년, 월, 일</li>
+                      <li>8. 공동사업자 - 성명</li>
+                      <li>9. 사업자상태 코드</li>
+                      <li>10. 사업자상태</li>
+                      <li>11. 발급번호</li>
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th id="row9" scope="row" rowspan="2" class="ac">9</th>
+                  <td headers="row9 col-org" class="cell-bg bdL">국세청</td>
+                  <td headers="row9 col-info" class="cell-bg">폐업사실증명</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 납세자정보 - 상호-법인명, 사업자등록번호, 성명, 주민등록번호, 사업장소재지</li> <!-- [수정260903] [MD2607_078] 마이데이터 금리인하요구권 관련 공공마이데이터 연계 : 텍스트 수정 -->
+                      <li>2. 업태</li>
+                      <li>3. 종목</li>
+                      <li>4. 개업일자</li>
+                      <li>5. 폐업일자</li>
+                      <li>6. 폐업구분</li>
+                      <li>7. 발급일자 - 년, 월, 일</li>
+                      <li>8. 공동사업자 - 성명</li>
+                      <li>9. 사업자상태 코드</li>
+                      <li>10. 사업자상태</li>
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th id="row10" scope="row" rowspan="2" class="ac">10</th>
+                  <td headers="row10 col-org" class="cell-bg bdL">국세청</td>
+                  <td headers="row10 col-info" class="cell-bg">휴업사실증명</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 납세자정보 - 상호-법인명, 사업자등록번호, 성명, 주민등록번호, 사업장소재지</li> <!-- [수정260903] [MD2607_078] 마이데이터 금리인하요구권 관련 공공마이데이터 연계 : 텍스트 수정 -->
+                      <li>2. 업태</li>
+                      <li>3. 종목</li>
+                      <li>4. 개업일자</li>
+                      <li>5. 휴업기간</li>
+                      <li>6. 발급일자 - 년, 월, 일</li>
+                      <li>7. 공동사업자 - 성명</li>
+                      <li>8. 사업자상태 - 사업자상태 코드, 사업자상태</li>
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th id="row11" scope="row" rowspan="2" class="ac">11</th>
+                  <td headers="row11 col-org" class="cell-bg bdL">국세청</td>
+                  <td headers="row11 col-info" class="cell-bg">(국세)납세증명서</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 납세자 구분</li>
+                      <li>2. 납세자 개인정보 - 성명, 주민등록번호번호1, 주민등록번호번호2</li> <!-- [수정260903] [MD2607_078] 마이데이터 금리인하요구권 관련 공공마이데이터 연계 : 텍스트 수정 -->
+                      <li>3. 납세자 사업자정보 - 상호, 성명, 사업자등록번호번호1, 사업자등록번호번호2, 사업자등록번호번호3</li>
+                      <li>4. 발급번호</li>
+                      <li>5. 발급일자 - 년, 월, 일</li>
+                      <li>6. 발급세무서명 - 발급세무서명 코드, 발급세무서명</li>
+                      <li>7. 증명내용 유예내역 - 유예종류, 유예기간, 과세연도, 세목, 납부기한, 세액, 가산금</li>
+                      <li>8. 증명내용 물적납세의무체납내역 - 위탁자양도담보설정자, 과세연도, 세목, 납부기한, 세액, 가산금</li>
+                      <li>9. 유효기간 기한 - 년, 월, 일</li>
+                      <li>10. 유효기간 사유 - 사유 코드, 사유</li>
+                      <li>11. 처리결과 - 처리결과코드, 처리결과</li>
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th id="row12" scope="row" rowspan="2" class="ac">12</th>
+                  <td headers="row12 col-org" class="cell-bg bdL">국민연금공단</td>
+                  <td headers="row12 col-info" class="cell-bg">국민연금가입자가입증명</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">1. 국민연금가입정보 - 가입자명, 생년월일, 사업장명칭, 최종취득일자, 최종상실일자, 발급일자</td>
+                </tr>
+
+                <tr>
+                  <th id="row13" scope="row" rowspan="2" class="ac">13</th>
+                  <td headers="row13 col-org" class="cell-bg bdL">국민연금공단</td>
+                  <td headers="row13 col-info" class="cell-bg">연금산정용 가입내역확인서</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 발급정보 - 발급번호, 발급일자, 발급기관장</li>
+                      <li>2. 납부인정보 - 성명, 주민등록번호_전체</li>
+                      <li>3. 기간정보 - 보험료납부기간, 총가입기간</li>
+                      <li>4. 상세내역 - 기간시작년월, 기간종료년월</li>
+                      <li>5. 상세내역(납부내역) - 기간, 기준소득월액, 구분, 종별, 사업장명칭, 납부할월수, 납부할금액, 납부한월수, 납부한금액, 납부하지않은월수, 납부하지않은금액</li>
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th id="row14" scope="row" rowspan="2" class="ac">14</th>
+                  <td headers="row14 col-org" class="cell-bg bdL">국민연금공단</td>
+                  <td headers="row14 col-info" class="cell-bg">국민연금수급증명</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 수급권자 - 성명, 주민등록번호</li>
+                      <li>2. 연금지급내역 - 연금종류, 수급증서번호, 지급사유발생일, 지급시작년월,지급종료년월</li>
+                      <li>3. 연금지급내역(부양가족대상자수) - 배우자, 자녀, 부모</li>
+                      <li>4. 연금지급내역(연금지급액) - 실지급연금금액, 실지급연금합계금액, 부양가족연금액, 지급연금합계금액, 실이체금액</li>
+                      <li>5. 연금지급내역(월별연금지급상세내역) - 지급일자, 해당월분, 금액, 수급계좌번호, 은행</li>
+                      <li>6. 연금지급내역(년별연금지급상세내역) - 년도, 금액</li>
+                      <li>7. 발급항목 - 제증명신청번호, 발급일자, 최종작업시간, 담당자명, 담당자안내전화번호, 신청자명, 결재자1, 결재자2, 구분명</li> <!-- [수정260903] [MD2607_078] 마이데이터 금리인하요구권 관련 공공마이데이터 연계 : 텍스트 수정 -->
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th id="row15" scope="row" rowspan="2" class="ac">15</th>
+                  <td headers="row15 col-org" class="cell-bg bdL">교직원연금공단</td>
+                  <td headers="row15 col-info" class="cell-bg">공무원연금내역서</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 인적사항 - 소속, 임명일, 성명, 주민번호</li>
+                      <li>2. 재직기간 - 기본기간, 사병기간, 합산기간, 소급통산기간, 급여재직기간, 퇴직수당재직기간</li>
+                      <li>3. 적용보수 - 보수월액-일시금, 보수월액-연금, 보수월액-퇴직수당, 기준소득월액-일시금, 기준소득월액- 연금, 기준소득월액-퇴직수당</li>
+                      <li>4. 퇴직급여계산액 - (개정전)퇴직급여재직기간, (개정후)퇴직급여재직기간, (개정전)퇴직수당재직기간, (개정후)퇴직수당재직기간, (개정전)퇴직일시금선택시-퇴직일시금, (개정후)퇴직일시금선택시-퇴직일시금, (개정전)퇴직일시금선택시-퇴직수당, (개정후)퇴직일시금선택시-퇴직수당, (개정전)퇴직연금선택시-연금월액, (개정후)퇴직연금선택시-연금월액, (개정전)퇴직연금선택시-퇴직수당, (개정후)퇴직연금선택시-퇴직수당, 퇴직연금공제일시금선택시-연금월액기간, 퇴직연금공제일시금선택시-공제일시금기간, (개정전)퇴직연금공제일시금선택시-연금월액, (개정후)퇴직연금공제일시금선택시-연급월액, (개정전)퇴직연금공제일시금선택시-공제일시금, (개정후)퇴직연금공제일시금선택시-공제일시금, (개정전)퇴직연금공제일시금선택시-퇴직수당, (개정후)퇴직연금공제일시금선택시-퇴직수당</li> <!-- [수정260903] [MD2607_078] 마이데이터 금리인하요구권 관련 공공마이데이터 연계 : 텍스트 수정 -->
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th id="row16" scope="row" rowspan="2" class="ac">16</th>
+                  <td headers="row16 col-org" class="cell-bg bdL">사립학교교직원연금공단</td>
+                  <td headers="row16 col-info" class="cell-bg">사립학교교직원연금내역정보</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 발급정보(수령자정보) - 성명, 주민등록번호</li>
+                      <li>2. 발급정보(기본내역) - 증서번호, 급여종류, 퇴직일, 재직월, 연금신청월, 지급율, 수급자주민번호, 수급자성명, 교직원관계, 수령자주민번호, 수령자성명, 수급자관계</li>
+                      <li>3. 발급정보(연금내역) - 최초개시월, 최종지급월, 평균보수월액, 연금지급율, 연금월액, 연금제한율, 총지급회수, 총지급금액, 분할지급율, 분할지급일, 타연금수급인원, 형벌제한율, 형벌제한일, 기타제한구분, 기타제한일, 현연금월액, 소득감액, 실지급액, 종료구분, 종료일, 전년도과세대상연금액, 연금명</li> <!-- [수정260903] [MD2607_078] 마이데이터 금리인하요구권 관련 공공마이데이터 연계 : 텍스트 수정 -->
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th id="row17" scope="row" rowspan="2" class="ac">17</th>
+                  <td headers="row17 col-org" class="cell-bg bdL">사립학교교직원연금공단</td>
+                  <td headers="row17 col-info" class="cell-bg">교직원연금 가입정보 및 수급정보</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">1. 발급항목 - 연계정보요청일자, 주민등록번호, 재직연금구분코드, 응답일자, 송신순번, 성명, 존재여부, 재직상태내용, 임용일자, 퇴직일자, 기본재직기간, 가산기간, 소급통산시작일자, 소급통산종료일자, 소급통산기간, 사병기간, 합산기간, 총재직기간, 기관명, 급여종류명, 수급사유발생일자, 수급사유종료일자, 동순위여부</td>
+                </tr>
+
+                <tr>
+                  <th id="row18" scope="row" rowspan="2" class="ac">18</th>
+                  <td headers="row18 col-org" class="cell-bg bdL">보건복지부</td>
+                  <td headers="row18 col-info" class="cell-bg">장애인증명서</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 장애인정보 - 성명, 주소</li>
+                      <li>2. 장애인정보 주민등록번호 - 앞번호, 뒷번호</li>
+                      <li>3. 보호자 - 성명, 보호자와의관계</li>
+                      <li>4. 장애등록일 - 년, 월, 일</li>
+                      <li>5. 장애정보 - 장애종별, 장애등급, 부장애종별, 부장애등급, 종합장애등급, 종합장애정도명, 장애유형및등급, 최초취득일자, 재취득일자</li>
+                      <li>6. 등록번호</li>
+                      <li>7. 장애인등록여부</li>
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th id="row19" scope="row" rowspan="2" class="ac">19</th>
+                  <td headers="row19 col-org" class="cell-bg bdL">보건복지부</td>
+                  <td headers="row19 col-info" class="cell-bg">국민기초생활수급자증명서</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 수급자내역 수급자 - 성명</li>
+                      <li>2. 수급자내역 수급자 주민등록번호 - 앞번호, 뒷번호</li>
+                      <li>3. 수급자내역 - 주소, 세대주및시설명, 세대주와의관계</li>
+                      <li>4. 수급자구분</li>
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th id="row20" scope="row" rowspan="2" class="ac">20</th>
+                  <td headers="row20 col-org" class="cell-bg bdL">행정안전부</td>
+                  <td headers="row20 col-info" class="cell-bg">지방세납세증명서</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 주민등록번호</li>
+                      <li>2. 과세정보 - 번호, 성명, 체납세목, 체납금액</li>
+                      <li>3. 과세정보 과세관청 - 상위관청, 하위관청</li>
+                      <li>4. 과세정보 과세년월 - 년, 월</li>
+                      <li>5. 발급일자 - 년, 월, 일</li>
+                    </ul>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th id="row21" scope="row" rowspan="2" class="ac">21</th>
+                  <td headers="row21 col-org" class="cell-bg bdL">행정안전부</td>
+                  <td headers="row21 col-info" class="cell-bg">주민등록표 등∙초본</td>
+                </tr>
+                <tr>
+                  <td colspan="2" headers="row1 col-detail" class="bdL">
+                    <ul>
+                      <li>1. 열람대상자정보 - 성명, 주민등록번호, 주민등록상태, 세대주의, 현주소, 도로명주소-현재</li>
+                      <li>2. 세대주정보 - 성명, 등록상태, 구성일, 구성사유, 전입일, 변동일, 변동사유</li>
+                      <li>3. 세대원 정보 - 성명, 세대주관계, 세대편입일, 변동일, 변동사유</li>
+                      <li>4. 발급일자 - 년, 월, 일</li>
+                      <li>5. 주민번호정정이력 - 정정이전주민번호, 정정이후주민번호, 주민번호정정일자, 주민정정사유</li>
+                      <li>6. 성명정정이력 - 정정이전성명, 정정이후성명, 성명정정일자, 성명정정사유</li>
+                      <li>7. 주소이력 - 전입일, 변동일, 변동사유, 주소, 도로명주소-이력</li> <!-- [수정260903] [MD2607_078] 마이데이터 금리인하요구권 관련 공공마이데이터 연계 : 텍스트 수정 -->
+                      <li>8. 전입일자</li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="popTermsTxt mt20">「전자정부법」 제43조의2제1항 및 「본인에 관한 행정정보의 제공 등에 관한 고시」 제24조에 따라 본인에 관한 행정정보를 위와 같이 제공 요구합니다.</p>
+          <p class="popTermsTxt mt20 ar">YYYY년 MM월 DD일</p>
+          <p class="popTermsTxt mt20">본인 행정정보 보유기관 귀하</p>
+          <p class="popTermsTxt mt20">정보주체 유의사항 <br>※ 정보주체(본인)가 위 사항에 대해 제공 요구를 하지 않아도 불이익은 없습니다. 다만, 제공 요구를 하지 않은 경우, 본인정보 제공 목적에 따른 처리를 위해 본인이 해당 구비서류 등을 제출하여야 합니다.</p>
+        </div>
+      </div>
+
+      <div class="popBtnWrap">
+        <div class="popBtn half multi">
+          <a href="javascript:;" class="" role="button">제공 요구<br>하지 않음</a>
+          <a href="javascript:;" class="confirmBtn" role="button">제공 요구</a>
+        </div>
+        <a href="javascript:;" onclick="popClose(this);return false;" class="popClose" title="해당 창을 닫습니다." role="button" >
+          <img src="../../images/common/btn_popClose.png" alt="닫기">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ###################################### -->
+  <!-- ### [샘플] 스크립트 ### -->
+  <!-- ###################################### -->
+  <script>
+    const accBtns = document.querySelectorAll('.acco_btn');
+
+    accBtns.forEach((btn) => {
+      btn.addEventListener('click', function() {
+        const accSpan = this.querySelector('.acco_btn span');
+        const hipen = this.parentElement;
+        const accoTxt = hipen.nextElementSibling;
+
+        if(accSpan.textContent === '펼침') {
+          accSpan.textContent = '닫힘';
+          this.setAttribute('aria-expanded', 'true');
+          accoTxt.classList.add('on');
+        }
+        else {
+          accSpan.textContent = '펼침';
+          this.setAttribute('aria-expanded', 'false');
+          accoTxt.classList.remove('on');
+        }
+        this.classList.toggle('active');
+      })
+    })
+  </script>
+  <!-- ###################################### -->
+</body>
+</html>

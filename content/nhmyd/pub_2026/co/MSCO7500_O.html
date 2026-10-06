@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-title" content="NH마이데이터" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta name="robots" content="no-index,follow" />
+<meta name="title" content="" />
+<meta name="author" content="" />
+<meta name="content" content="" />
+<meta name="keywords" content="NH마이데이터" />
+<meta name="description" content="NH마이데이터" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="-1" />
+<title>투자자성향진단 설문</title>
+<script src="../pub-assets/js/head.js"></script> <!-- [수정 260803] [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 : head.js로 수정 -->
+</head>
+<body>
+  <div class="wrapper nhasset">
+    <!-- header -->
+    <div class="header">
+      <a href="javascript:;" class="btnBack"><span class="blind">이전화면으로</span></a>
+      <h1>투자자성향진단</h1>
+      <a href="javascript:;" class="btnCancle"><span class="blind">취소</span></a>
+    </div>
+    <!-- //header -->
+    <!-- ###################################### -->
+    <!-- ### [내용]투자자성향진단 설문 ### -->
+    <!-- ###################################### -->
+    <div class="container bgWhite typeO"> <!-- [수정 260803] [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 : class="bgWhite typeO" 추가 -->
+      <div class="diagTit">
+        <h2>투자자성향진단 설문을 진행해 주세요</h2>
+      </div>
+      <div class="diagSurvWarp">
+        <ul class="survNoti">
+          <li class="bul -diag">고객님의 투자자성향을 파악하기 위한 설문입니다.</li>
+          <li class="bul -diag">투자자 정보 확인 시 투자자 본인의 상황에 부합하거나 가장 가까운 항목을 정확히 선택하여야 합니다.</li>
+          <li class="bul -diag">본인의 투자자성향진단 결과에 대하여 인정하고 수용하여야 합니다.</li>
+          <li class="bul -diag">설문 항목에 대한 답변 시 일관성이 있어야 합니다.</li>
+          <li class="bul -diag">투자자성향진단 설문지는 향후 분쟁 또는 소송이 발생하는 경우 귀하의 권리구제에 불리하게 사용될 수 있으므로 신중하게 선택할 필요가 있습니다.</li>
+        </ul>
+
+        <div class="diagGroup">
+          <p class="survQ"><span class="num">01</span><span class="txt">고객님께 해당하는 항목을 선택해 주세요.</span></p>
+
+          <p class="survQ"><span class="num">1-1</span><span class="txt">고객님의 연령대를 선택해 주세요.</span></p>
+          <div class="survA -box"><p>고객님의 연령대는 실명번호 기준으로 자동 확인됩니다.</p></div>
+          <!-- //1-1 -->
+
+          <p class="survQ"><span class="num">1-2</span><span class="txt">고객님의 월소득을 선택해 주세요.</span></p>
+          <div class="survA boxRadio rowType -img">
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0102" id="diag010201">
+                <label for="diag010201">
+                  <img src="../../images/diag_survA_01_2_01.png" alt="">
+                  <span>400만원 이상</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0102" id="diag010202">
+                <label for="diag010202">
+                  <img src="../../images/diag_survA_01_2_02.png" alt="">
+                  <span>200만원 이상 ~ 400만원 미만</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0102" id="diag010203">
+                <label for="diag010203">
+                  <img src="../../images/diag_survA_01_2_03.png" alt="">
+                  <span>200만원 미만</span>
+                </label>
+              </span>
+            </div>
+          </div>
+          <!-- //1-2 -->
+
+          <p class="survQ"><span class="num">1-3</span><span class="txt">고객님의 수입원을 가장 잘 나타내는 것을 선택해 주세요.</span></p>
+          <div class="survA boxRadio rowType -img">
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0103" id="diag010301">
+                <label for="diag010301">
+                  <img src="../../images/diag_survA_01_3_01.png" alt="">
+                  <span>현재 수입이 일정하며, 앞으로 현재의 수준을 유지하거나 증가할 것으로 예상</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0103" id="diag010302">
+                <label for="diag010302">
+                  <img src="../../images/diag_survA_01_3_02.png" alt="">
+                  <span>현재 수입이 일정하지만, 앞으로 감소하거나 불안정할 것으로 예상</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0103" id="diag010303">
+                <label for="diag010303">
+                  <img src="../../images/diag_survA_01_3_03.png" alt="">
+                  <span>현재 일정한 수입이 없거나, 연금 등이 주요 수입원</span>
+                </label>
+              </span>
+            </div>
+          </div>
+          <!-- //1-3 -->
+        </div>
+  
+        <div class="diagGroup">
+          <p class="survQ"><span class="num">02</span><span class="txt">고객님께 해당하는 항목을 선택해 주세요.</span></p>
+
+          <p class="survQ"><span class="num">2-1</span><span class="txt">고객님의 재산 상황을 선택해 주세요.</span></p>
+          <div class="survA boxRadio rowType -img">
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0201" id="diag020101">
+                <label for="diag020101">
+                  <img src="../../images/diag_survA_02_1_01.png" alt="">
+                  <span>5천만원 이하</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0201" id="diag020102">
+                <label for="diag020102">
+                  <img src="../../images/diag_survA_02_1_02.png" alt="">
+                  <span>5천만원 초과 ~ 1억원 이하</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0201" id="diag020103">
+                <label for="diag020103">
+                  <img src="../../images/diag_survA_02_1_03.png" alt="">
+                  <span>1억원 초과 ~ 5억원 이하</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0201" id="diag020104">
+                <label for="diag020104">
+                  <img src="../../images/diag_survA_02_1_04.png" alt="">
+                  <span>5억원 초과 ~ 10억원 이하</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0201" id="diag020105">
+                <label for="diag020105">
+                  <img src="../../images/diag_survA_02_1_05.png" alt="">
+                  <span>10억원 초과</span>
+                </label>
+              </span>
+            </div>
+          </div>
+          <p class="survDesc">재산상황 : 부채를 포함한 자산, 법인은 매출액 기준</p>
+          <!-- //2-1 -->
+
+          <p class="survQ"><span class="num">2-2</span><span class="txt">고객님의 총 자산 대비 금융자산의 비중을 선택해 주세요.</span></p>
+          <div class="survA boxRadio rowType -img">
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0202" id="diag020201">
+                <label for="diag020201">
+                  <img src="../../images/diag_survA_02_2_01.png" alt="">
+                  <span>30% 미만</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0202" id="diag020202">
+                <label for="diag020202">
+                  <img src="../../images/diag_survA_02_2_02.png" alt="">
+                  <span>30% 이상 ~ 50% 미만</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0202" id="diag020203">
+                <label for="diag020203">
+                  <img src="../../images/diag_survA_02_2_03.png" alt="">
+                  <span>50% 이상 ~ 80% 미만</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0202" id="diag020204">
+                <label for="diag020204">
+                  <img src="../../images/diag_survA_02_2_04.png" alt="">
+                  <span>80% 이상</span>
+                </label>
+              </span>
+            </div>
+          </div>
+          <!-- //2-2 -->
+
+          <p class="survQ"><span class="num">2-3</span><span class="txt">보유한 금융자산(전체 금융기관 내) 중 투자성 상품의 비중에 해당하는 것을 선택해 주세요.</span></p>
+          <div class="survA boxRadio rowType -img">
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0203" id="diag020301">
+                <label for="diag020301">
+                  <img src="../../images/diag_survA_02_3_01.png" alt="">
+                  <span>투자성 상품 미보유 또는 20% 미만</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0203" id="diag020302">
+                <label for="diag020302">
+                  <img src="../../images/diag_survA_02_3_02.png" alt="">
+                  <span>20% 이상 ~ 40% 미만</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0203" id="diag020303">
+                <label for="diag020303">
+                  <img src="../../images/diag_survA_02_3_03.png" alt="">
+                  <span>40% 이상 ~ 80% 미만</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0203" id="diag020304">
+                <label for="diag020304">
+                  <img src="../../images/diag_survA_02_3_04.png" alt="">
+                  <span>80% 이상</span>
+                </label>
+              </span>
+            </div>
+          </div>
+          <p class="survDesc">투자성 상품 : 주식, 채권, 펀드, 변액보험 등</p>
+          <!-- //2-3 -->
+        </div>
+
+        <div class="diagGroup">
+          <p class="survQ"><span class="num">03</span><span class="txt">금융상품에 대한 지식 수준에 해당하는 것을 선택해 주세요.</span></p>
+          <div class="rightDesc">
+            <span class="survDesc">금융상품지식수준 안내</span>
+            <div class="tooltipWrap">
+              <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">금융상품지식수준 안내 툴팁 열기</span></button>
+              <div class="tooltipCont">
+                <ul>
+                  <li class="bul -diag">매우 높은 수준 : 파생상품·파생결합증권을 비롯하여 모든 투자대상 상품의 차이를 이해할 수 있는 정도</li>
+                  <li class="bul -diag">높은 수준 : 투자할 수 있는 대부분의 금융상품 차이를 구별할 수 있는 정도</li>
+                  <li class="bul -diag">낮은 수준 : 주식과 채권의 차이를 구별할 수 있는 정도</li>
+                  <li class="bul -diag">매우 낮은 수준 : 금융상품 중 예·적금에 대해서만 알고 있는 정도</li>
+                </ul>
+                <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="survA boxRadio rowType -img">
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag03" id="diag0301">
+                <label for="diag0301">
+                  <img src="../../images/diag_survA_03_01.png" alt="">
+                  <span>매우 높은 수준</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag03" id="diag0302">
+                <label for="diag0302">
+                  <img src="../../images/diag_survA_03_02.png" alt="">
+                  <span>높은 수준</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag03" id="diag0303">
+                <label for="diag0303">
+                  <img src="../../images/diag_survA_03_03.png" alt="">
+                  <span>낮은 수준</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag03" id="diag0304">
+                <label for="diag0304">
+                  <img src="../../images/diag_survA_03_04.png" alt="">
+                  <span>매우 낮은 수준</span>
+                </label>
+              </span>
+            </div>
+          </div>
+          <!-- //03 -->
+        </div>
+
+        <div class="diagGroup">
+          <p class="survQ"><span class="num">04</span><span class="txt">아래의 설명을 읽고 맞다고 생각하는 답변을 선택해 주세요.</span></p>
+
+          <p class="survQ"><span class="num">4-1</span><span class="txt">펀드, 신탁 상품 등 투자성 상품은 원금보장이 되는 상품이다.</span></p>
+          <div class="survA boxRadio wrapType2 -ox">
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0401" id="diag040101">
+                <label for="diag040101"><span class="o">O(예)</span></label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0401" id="diag040102">
+                <label for="diag040102"><span class="x">X(아니오)</span></label>
+              </span>
+            </div>
+          </div>
+          <!-- //4-1 -->
+
+          <p class="survQ"><span class="num">4-2</span><span class="txt">펀드, 신탁상품 등 투자성 상품에서 수익이 발생하면 일부 비과세 대상을 제외하고 세금이 부과된다.</span></p>
+          <div class="survA boxRadio wrapType2 -ox">
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0402" id="diag040201">
+                <label for="diag040201"><span class="o">O(예)</span></label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0402" id="diag040202">
+                <label for="diag040202"><span class="x">X(아니오)</span></label>
+              </span>
+            </div>
+          </div>
+          <!-- //4-2 -->
+
+          <p class="survQ"><span class="num">4-3</span><span class="txt">은행에서 가입한 모든 펀드, 신탁상품 등 투자성 상품은 예·적금과 동일하게 예금자 보호가 된다.</span></p>
+          <div class="survA boxRadio wrapType2 -ox">
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0403" id="diag040301">
+                <label for="diag040301"><span class="o">O(예)</span></label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag0403" id="diag040302">
+                <label for="diag040302"><span class="x">X(아니오)</span></label>
+              </span>
+            </div>
+          </div>
+          <!-- //4-3 -->
+        </div>
+
+        <div class="diagGroup">
+          <p class="survQ"><span class="num">05</span><span class="txt">감내할 수 있는 손실 감수 수준에 해당하는 것을 선택해 주세요.</span></p>
+          <div class="survA boxRadio rowType -img">
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag05" id="diag0501">
+                <label for="diag0501">
+                  <img src="../../images/diag_survA_05_01.png" alt="">
+                  <span>기대 수익이 높다면 위험이 높아도 상관 없음</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag05" id="diag0502">
+                <label for="diag0502">
+                  <img src="../../images/diag_survA_05_02.png" alt="">
+                  <span>70% 미만까지는 손실을 감수할 수 있음</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag05" id="diag0503">
+                <label for="diag0503">
+                  <img src="../../images/diag_survA_05_03.png" alt="">
+                  <span>50% 미만까지는 손실을 감수할 수 있음</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag05" id="diag0504">
+                <label for="diag0504">
+                  <img src="../../images/diag_survA_05_04.png" alt="">
+                  <span>20% 미만까지는 손실을 감수할 수 있음</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag05" id="diag0505">
+                <label for="diag0505">
+                  <img src="../../images/diag_survA_05_05.png" alt="">
+                  <span>10% 미만까지는 손실을 감수할 수 있음</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag05" id="diag0506">
+                <label for="diag0506">
+                  <img src="../../images/diag_survA_05_06.png" alt="">
+                  <span>투자원금 보존을 추구</span>
+                </label>
+              </span>
+            </div>
+          </div>
+          <!-- //05 -->
+        </div>
+
+        <div class="diagGroup">
+          <p class="survQ"><span class="num">06</span><span class="txt">투자 상품의 일반적인 투자기간을 선택해 주세요.</span></p>
+          <div class="survA boxRadio rowType -img">
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag06" id="diag0601">
+                <label for="diag0601">
+                  <img src="../../images/diag_survA_06_01.png" alt="">
+                  <span>3년 이상</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag06" id="diag0602">
+                <label for="diag0602">
+                  <img src="../../images/diag_survA_06_02.png" alt="">
+                  <span>2년 이상 ~ 3년 미만</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag06" id="diag0603">
+                <label for="diag0603">
+                  <img src="../../images/diag_survA_06_03.png" alt="">
+                  <span>1년 이상 ~ 2년 미만</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag06" id="diag0604">
+                <label for="diag0604">
+                  <img src="../../images/diag_survA_06_04.png" alt="">
+                  <span>6개월 이상 ~ 1년 미만</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag06" id="diag0605">
+                <label for="diag0605">
+                  <img src="../../images/diag_survA_06_05.png" alt="">
+                  <span>6개월 이내</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag06" id="diag0606">
+                <label for="diag0606">
+                  <img src="../../images/diag_survA_06_06.png" alt="">
+                  <span>투자기간 상관 없이 특정 만기일까지 보유(ELF, DLF, ELT, 목표전환형, 위드밸류형 신탁 등)</span>
+                </label>
+              </span>
+            </div>
+          </div>
+          <!-- //06 -->
+        </div>
+
+        <div class="diagGroup">
+          <p class="survQ"><span class="num">07</span><span class="txt">투자 경험이 있는 금융투자상품 항목을 모두 선택해 주세요.(중복 선택 가능)</span></p>
+          <div class="survA boxRadio rowType -img">
+            <div class="boxRadioInn">
+              <span>
+                <input type="checkbox" name="diag07" id="diag0701">
+                <label for="diag0701">
+                  <img src="../../images/diag_survA_07_01.png" alt="">
+                  <span>은행 예·적금, 국채, 지방세, 보증채, MMF, CMA 등</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="checkbox" name="diag07" id="diag0702">
+                <label for="diag0702">
+                  <img src="../../images/diag_survA_07_02.png" alt="">
+                  <span>금융채, 신용도가 높은 회사채, 채권형 펀드, 원금보장형 ELF(ELS), ELD 등</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="checkbox" name="diag07" id="diag0703">
+                <label for="diag0703">
+                  <img src="../../images/diag_survA_07_03.png" alt="">
+                  <span>신용도 중간 등급의 회사채, 원금의 일부만 보장되는 ELF(ELS), 혼합형 펀드 등</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="checkbox" name="diag07" id="diag0704">
+                <label for="diag0704">
+                  <img src="../../images/diag_survA_07_04.png" alt="">
+                  <span>신용도가 낮은 회사채, 주식, 원금이 보장되지 않는 ELF(ELS), 시장수익률 수준의 수익을 추구하는 주식형 펀드</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="checkbox" name="diag07" id="diag0705">
+                <label for="diag0705">
+                  <img src="../../images/diag_survA_07_05.png" alt="">
+                  <span>ELW, 선물옵션, 시장수익률 이상의 수익을 추구하는 주식형 펀드, 파생상품에 투자하는 펀드, 주식 신용거래 등</span>
+                </label>
+              </span>
+            </div>
+          </div>
+          <!-- //07 -->
+
+          <div class="diagBtnWrap mt24">
+            <button type="button" class="btnBodyLine" disabled>다음</button> <!-- [D] 활성화시 class="green" 추가 -->
+          </div>
+        </div>
+
+        <div class="diagGroup">
+          <p class="survQ"><span class="num">08</span><span class="txt">과거 가입한 투자성 상품을 해지한 목적을 가장 잘 나타낸 것을 선택해 주세요.(중복 선택 가능)</span></p>
+          <div class="survA boxRadio rowType -img">
+            <div class="boxRadioInn">
+              <span>
+                <input type="checkbox" name="diag08" id="diag0801">
+                <label for="diag0801">
+                  <img src="../../images/diag_survA_08_01.png" alt="">
+                  <span>사전에 설정했던 목표수익률에 도달하여 수익실현을 목적으로 해지하였음</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="checkbox" name="diag08" id="diag0802">
+                <label for="diag0802">
+                  <img src="../../images/diag_survA_08_02.png" alt="">
+                  <span>가입한 투자상품의 수익률이 지속적으로 저조하여 해지하였음</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="checkbox" name="diag08" id="diag0803">
+                <label for="diag0803">
+                  <img src="../../images/diag_survA_08_03.png" alt="">
+                  <span>학자금, 전세금, 결혼자금, 노후자금 등 단기간 내에 사용처가 확실한 자금을 투자하여 수익이나 손실발생 여부와 관계없이 사용 시점에 해지하였음</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="checkbox" name="diag08" id="diag0804">
+                <label for="diag0804">
+                  <img src="../../images/diag_survA_08_04.png" alt="">
+                  <span>투자경험 없음</span>
+                </label>
+              </span>
+            </div>
+          </div>
+          <!-- //08 -->
+
+          <div class="diagBtnWrap mt24">
+            <button type="button" class="btnBodyLine" disabled>다음</button> <!-- [D] 활성화시 class="green" 추가 -->
+          </div>
+        </div>
+
+        <div class="diagGroup">
+          <p class="survQ"><span class="num">09</span><span class="txt">파생결합증권 또는 파생상품에 투자한 경험이 있다면, 투자기간은 얼마나 되세요?</span></p>
+          <div class="survA boxRadio rowType -img">
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag09" id="diag0901">
+                <label for="diag0901">
+                  <img src="../../images/diag_survA_09_01.png" alt="">
+                  <span>투자경험 없음</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag09" id="diag0902">
+                <label for="diag0902">
+                  <img src="../../images/diag_survA_09_02.png" alt="">
+                  <span>1년 미만</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag09" id="diag0903">
+                <label for="diag0903">
+                  <img src="../../images/diag_survA_09_03.png" alt="">
+                  <span>1년 이상 ~ 3년 미만</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag09" id="diag0904">
+                <label for="diag0904">
+                  <img src="../../images/diag_survA_09_04.png" alt="">
+                  <span>3년 이상</span>
+                </label>
+              </span>
+            </div>
+          </div>
+          <!-- //09 -->
+        </div>
+
+        <div class="diagGroup">
+          <p class="survQ"><span class="num">10</span><span class="txt">본인의 투자자성향과 맞다고 생각하는 투자자성향을 선택해 주세요.</span></p>
+          <div class="rightDesc">
+            <span class="survDesc">투자자성향 안내</span>
+            <div class="tooltipWrap">
+              <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this))"><span class="blind">투자자성향 안내 툴팁 열기</span></button>
+              <div class="tooltipCont">
+                <ul>
+                  <li class="bul -diag">공격투자형 : 시장 평균 수익률을 훨씬 넘어서는 높은 수준의 투자수익을 추구. 자산가치의 변동에 따른 손실위험을 적극 수용. 투자자금 대부분을 주식, 주식형 펀드 또는 파생상품 등의 위험자산에 투자할 의향이 있음.</li>
+                  <li class="bul -diag">적극투자형 : 투자원금의 보전 보다는 위험을 감내하더라도 높은 수준의 투자수익을 추구. 투자자금의 상당 부분을 주식, 주식형 펀드 또는 파생상품 등의 위험자산에 투자할 의향이 있음.</li>
+                  <li class="bul -diag">위험중립형 : 투자에는 그에 상응하는 투자위험이 있음을 충분히 인식하고 있으며, 예·적금 보다 높은 수익을 기대할 수 있다면 일정 수준의 손실위험을 감수.</li>
+                  <li class="bul -diag">안정추구형 : 투자원금의 손실위험은 최소화하고, 이자소득이나 배당소득 수준의 안정적인 투자를 목표로 함. 다만, 수익을 위해 단기적인 손실을 수용할 수 있으며, 예·적금보다 높은 수익을 위해 자산 중 일부를 변동성 높은 상품에 투자할 의향이 있음.</li>
+                  <li class="bul -diag">안정형 : 예금 또는 적금 수준의 수익률을 기대하며, 투자원금에 손실이 발생하는 것을 원하지 않음.</li>
+                </ul>
+                <button type="button" class="close" onclick="tooltipClose($(this))"><span class="blind">툴팁 닫기</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="survA boxRadio rowType -img">
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag10" id="diag1001">
+                <label for="diag1001">
+                  <img src="../../images/diag_survA_10_01.png" alt="">
+                  <span>공격투자형</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag10" id="diag1002">
+                <label for="diag1002">
+                  <img src="../../images/diag_survA_10_02.png" alt="">
+                  <span>적극투자형</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag10" id="diag1003">
+                <label for="diag1003">
+                  <img src="../../images/diag_survA_10_03.png" alt="">
+                  <span>위험중립형</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag10" id="diag1004">
+                <label for="diag1004">
+                  <img src="../../images/diag_survA_10_04.png" alt="">
+                  <span>안정추구형</span>
+                </label>
+              </span>
+            </div>
+            <div class="boxRadioInn">
+              <span>
+                <input type="radio" name="diag10" id="diag1005">
+                <label for="diag1005">
+                  <img src="../../images/diag_survA_10_05.png" alt="">
+                  <span>안정형</span>
+                </label>
+              </span>
+            </div>
+          </div>
+          <!-- //10 -->
+        </div>
+
+        <div class="survChk">
+          <input type="checkbox" id="agreeChk" class="chekTypeOther">
+          <label class="check" for="agreeChk">투자자 유의사항에 대해 설명들었으며 이해하고 확인하였습니다.</label>
+        </div>
+
+      </div>
+
+      <hr class="divLine">
+
+      <div class="fullyWrap pt0 pb0">
+        <!-- -------------------------------------- -->
+        <!-- [SECTION] 알아두세요 -->
+        <!-- -------------------------------------- -->
+        <div class="info_area">
+          <a href="javascript:;" class="noticeBtn" data-target="#MSCO7500" aria-expanded="false" aria-controls="MSCO7500" id="MSCO7500_label">
+            <strong class="info_area_title">알아두세요<span style="display:none">펼치기</span></strong>
+          </a>
+          <ul class="listBul disc noticeCont" aria-labelledby="MSCO7500_label" role="region" id="MSCO7500" style="display:none">
+            <li>투자자성향진단은 고객님의 투자자성향을 파악하여 적합한 상품을 드리기 위한 기초 자료로 활용됩니다.</li>
+            <li>고객님의 투자자성향보다 높은 위험등급의 상품은 가입할 수 없습니다.</li>
+            <li>투자자성향진단은 대면, 비대면 통합하여 1일 3회(대면은 1회) 할 수 있습니다.</li>
+            <li>투자자성향진단 결과는 12개월 동안 이용할 수 있습니다.</li>
+            <li>최근 12개월 이내 투자자성향 관련 정보가 변경되지 않았다면, 투자자성향진단 결과를 다시 이용할 수 있습니다.</li>
+            <li>투자자성향진단 결과는 고객님의 연락처로 문자(LMS) 안내해드립니다. 문자메시지를 받지 못하신 경우 NH농협은행 고객행복센터(1661-3000)로 문의해 주시기 바랍니다.</li>
+          </ul>
+        </div>
+        <!-- -------------------------------------- -->
+      </div>
+      
+      <!-- -------------------------------------- -->
+      <!-- [SECTION] 하단버튼 -->
+      <!-- -------------------------------------- -->
+      <div class="areaBtnDefault mbType"> <!-- [수정 260803] [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 : class="mbType" 추가 -->
+        <a href="javascript:;" class="btnPressPoint disabled" role="button" aria-disabled="true">결과 확인</a> <!-- [D] 비활성화시 class="disabled" aria-disabled="true" 추가 -->
+      </div>
+      <!-- -------------------------------------- -->
+    </div>
+    </div>
+  </div>
+
+  <!-- ###################################### -->
+  <!-- ### [페이지] 스크립트 ### -->
+  <!-- ###################################### -->
+  <script>
+    /* [추가 260803]  [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 : 알아두세요 스크립트 추가 */
+     $(document).on('click', '.noticeBtn', function() {
+      const $toggleBtn = $(this);
+      const targetSelector = $toggleBtn.data('target');
+      const $targetContent = $(targetSelector);
+
+      // '.noticeCont'가 동적으로 생성될 수 있으므로, 클릭 시점에 tabindex를 부여
+      $targetContent.attr('tabindex', '-1');
+
+      const isExpanded = $toggleBtn.attr('aria-expanded') === 'true';
+
+      if (!isExpanded) {
+        $targetContent.slideDown(100, function() {
+            $('html, body').animate({
+                scrollTop: $targetContent.offset().top - 100
+            }, 600);
+            $targetContent.focus();
+        });
+        $toggleBtn.find('span').text('접기');
+        $toggleBtn.attr('aria-expanded', 'true');
+      } else {
+        $targetContent.slideUp(300);
+        $toggleBtn.find('span').text('펼치기');
+        $toggleBtn.attr('aria-expanded', 'false');
+        $toggleBtn.focus();
+      }
+    });
+  </script>
+</body>
+</html>

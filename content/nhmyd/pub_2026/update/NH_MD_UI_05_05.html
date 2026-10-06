@@ -7,6 +7,9 @@
         <script>
             $(document).ready(function () {
             	slidePopConfirm();
+                setTimeout(function () {
+                    popCenter();calendarAlign();
+                }, 100);
             })
         </script>
     </head>
@@ -14,7 +17,7 @@
     <body>
         <div class="wrapper nhasset nds"><!-- 바닥페이지 --></div>
 
-        <div class="nhasset popWrap nds slidePopConfirm">
+        <!--<div class="nhasset popWrap nds slidePopConfirm">
             <div class="dim"></div>
             <div class="popInner">
                 <h1>조회 기간 선택</h1>
@@ -52,7 +55,7 @@
                     <a href="javascript:;" onclick="popClose(this);return false;" class="popClose" title="해당 창을 닫습니다." role="button"><img src="../../images/common/btn_popClose.png" alt="닫기" /></a>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <div class="nhasset popWrap nds centerLayer">
             <div class="dim"></div>

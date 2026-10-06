@@ -6,7 +6,7 @@
         <title>자산&middot;부채 통합분석</title>
     </head>
 
-    <!--
+    <!---
         피그마 node 2770:17073(Container)에 "부채/자산 보유 여부 × 세부 조건"에 따른 케이스 19종이
         한 프레임 안에 전부 나열되어 있습니다. 실제 화면에서는 API 응답(연결된 자산/부채 유무, 개수,
         진단 가능 부채 존재 여부 등)에 따라 그 중 하나만 노출되지만, 퍼블 확인용으로 19개 케이스를
@@ -33,44 +33,330 @@
                     </section>
                     <!--나의 자산-->
                     <section class="analysis-section">
-                        <!--모든 데이터 연결이 안 되어 있는 경우-->
-                        <h2 class="text text--h4">아직 연결된 자산이 없어요</h2>
-                        <div class="info-card info-card__nodate">
-                            <p class="text--body2-medium">
-                                자산을 등록하시면 내 자산 현황을 기반으로 <em>부채를 알뜰하게 줄일 수 있는 방법을 AI가 추천</em>해드려요.
-                            </p>
-                            <button type="button" class="card-btn">내 자산 연결하러 가기</button>
+
+                        <!-- 모든 데이터 연결x,부채만 연결o -->
+                        <div class="analysis-title tooltipWrap">
+                            <h2 class="text text--h4">
+                                나의 자산
+                                <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span class="blind">나의 자산 안내</span></button>
+                            </h2>
+                            <!--나의 자산안내 툴팁-->
+                            <div class="tooltip-card tooltipCont" style="display:none">
+                                <div class="tooltip-card__header">
+                                    <strong class="tooltip-card__title">나의 자산 안내</strong>
+                                    <button type="button" class="tooltip-card__close" onclick="tooltipClose($(this));return false;"><span class="blind">닫기</span></button>
+                                </div>
+                                <ul class="tooltip-card__list">
+                                    <li class="tooltip-card__item">퇴직연금DC와 보험은 자산에서 제외됩니다.</li>
+                                    <li class="tooltip-card__item">예적금 담보대출이 있으면 자산 금액에서 차감됩니다.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="info-card is-group is-locked">
+                            <div class="info-card__head">
+                                <p>
+                                    <span class="info-card__head-title">총 금액</span>
+                                    <span class="info-card__head-data">100,000,000원</span>
+                                </p>
+                            </div>
+                            <div class="info-card__list">
+                                <ul>
+                                    <li>
+                                        <div class="asset-group__head">
+                                            <span class="asset-group__icon item01" aria-hidden="true"></span> <span class="info-card__list-tit">현금</span>
+                                            <p class="info-card__list-data">
+                                                <a class="link">100,000,000원</a>
+                                            </p>
+                                        </div>
+                                        <ul class="average-list">
+                                            <li>
+                                                <span class="average-list__title">평균 금리</span>
+                                                <span class="average-list__data">3.04%</span>
+                                            </li>
+                                            <li class="info-card__average--big">
+                                                <span class="average-list__title">예적금 담보대출</span>
+                                                <span class="average-list__data positive">-1,000,000원</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!--투자-->
+                                    <li>
+                                        <div class="asset-group__head">
+                                            <span class="asset-group__icon item02" aria-hidden="true"></span>
+                                            <span class="info-card__list-tit">투자</span>
+                                            <p class="info-card__list-data">
+                                                <a class="link">53,000,000원</a>
+                                                <a class="link normal">추가</a>
+                                            </p>
+                                        </div>
+                                        <ul class="average-list">
+                                            <li class="tooltipWrap">
+                                                <span class="average-list__title">
+                                                    평균 수익율
+                                                    <button type="button" class="toolTipBtn is-w20 gray-50" onclick="tooltipOpen($(this));return false;"><span class="blind">평균 수익율 안내</span></button>
+                                                </span>
+                                                <span class="average-list__data positive">-5.11%</span>
+                                                <!--투자 평균 수익율 툴팁-->
+                                                <div class="tooltip-card tooltipCont" style="display:none">
+                                                    <div class="tooltip-card__header">
+                                                        <strong class="tooltip-card__title">평균 수익률 안내</strong>
+                                                        <button type="button" class="tooltip-card__close" onclick="tooltipClose($(this));return false;"><span class="blind">닫기</span></button>
+                                                    </div>
+                                                    <p class="tooltip-card__body">평균 수익률은 현재 보유 중인 투자 또는 연금의 평가 금액과 매입 금액을 비교하여 발생한 예상 손익을 가중평균한 전체 수익률입니다.</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!--연금-->
+                                    <li>
+                                        <div class="asset-group__head">
+                                            <span class="asset-group__icon item03" aria-hidden="true"></span>
+                                            <span class="info-card__list-title">연금</span>
+                                            <p class="info-card__list-data">
+                                                <a class="link">53,000,000원</a>
+                                            </p>
+                                        </div>
+                                        <ul class="average-list">
+                                            <li class="tooltipWrap">
+                                                <span class="average-list__title">
+                                                    평균 수익율
+                                                    <button type="button" class="toolTipBtn is-w20 gray-50" onclick="tooltipOpen($(this));return false;"><span class="blind">평균 수익율 안내</span></button>
+                                                </span>
+                                                <span class="average-list__data negative">+7.52%</span>
+                                                <!--연금 평균 수익율 툴팁-->
+                                                <div class="tooltip-card tooltipCont" style="display:none">
+                                                    <div class="tooltip-card__header">
+                                                        <strong class="tooltip-card__title">평균 수익률 안내</strong>
+                                                        <button type="button" class="tooltip-card__close" onclick="tooltipClose($(this));return false;"><span class="blind">닫기</span></button>
+                                                    </div>
+                                                    <p class="tooltip-card__body">평균 수익률은 현재 보유 중인 투자 또는 연금의 평가 금액과 매입 금액을 비교하여 발생한 예상 손익을 가중평균한 전체 수익률입니다.</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-lock">
+                                <div class="card-lock__group">
+                                    <p class="card-lock__tit">아직 연결된 자산이 없어요</p>
+                                    <p class="card-lock__desc">
+                                        자산을 등록하시면 내 자산을 바탕으로 부채를 줄
+                                        <br />
+                                        이는 방법을 AI가 추천해드려요.
+                                    </p>
+                                </div>
+                                <button type="button" class="card-btn">자산 연결하기</button>
+                            </div>
                         </div>
 
-                        <!--데이터 연결은 했으나 데이터 값이 0인 경우-->
-                        <h2 class="text text--h4">연결된 자산이 0원이에요</h2>
-                        <div class="info-card info-card__nodate">
-                            <p class="text--body2-medium">
-                                <em>분석을 시작하려면 자산이 필요해요.</em>혹시 다른 계좌가 있다면 연결하고 맞춤 서비스를 받아보세요.
-                            </p>
-                            <button type="button" class="card-btn">내 자산 연결하러 가기</button>
+                        <!-- 나의 자산이 0원 -->
+                        <div class="analysis-title tooltipWrap">
+                            <h2 class="text text--h4">
+                                나의 자산
+                                <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span class="blind">나의 자산 안내</span></button>
+                            </h2>
+                            <!--나의 자산안내 툴팁-->
+                            <div class="tooltip-card tooltipCont" style="display:none">
+                                <div class="tooltip-card__header">
+                                    <strong class="tooltip-card__title">나의 자산 안내</strong>
+                                    <button type="button" class="tooltip-card__close" onclick="tooltipClose($(this));return false;"><span class="blind">닫기</span></button>
+                                </div>
+                                <ul class="tooltip-card__list">
+                                    <li class="tooltip-card__item">퇴직연금DC와 보험은 자산에서 제외됩니다.</li>
+                                    <li class="tooltip-card__item">예적금 담보대출이 있으면 자산 금액에서 차감됩니다.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="info-card is-group">
+                            <div class="info-card__head">
+                                <p>
+                                    <span class="info-card__head-title">총 금액</span>
+                                    <span class="info-card__head-data">0원</span>
+                                </p>
+                            </div>
+                            <div class="info-card__list">
+                                <ul>
+                                    <li>
+                                        <div class="asset-group__head">
+                                            <span class="asset-group__icon item01" aria-hidden="true"></span> <span class="info-card__list-tit">현금</span>
+                                            <p class="info-card__list-data">
+                                                0원
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <!--투자-->
+                                    <li>
+                                        <div class="asset-group__head">
+                                            <span class="asset-group__icon item02" aria-hidden="true"></span>
+                                            <span class="info-card__list-tit">투자</span>
+                                            <p class="info-card__list-data">
+                                                0원
+                                            </p>
+                                        </div>
+                                        <ul class="average-list">
+                                            <li class="tooltipWrap">
+                                                <span class="average-list__title">
+                                                    평균 수익율
+                                                    <button type="button" class="toolTipBtn is-w20 gray-50" onclick="tooltipOpen($(this));return false;"><span class="blind">평균 수익율 안내</span></button>
+                                                </span>
+                                                <span class="average-list__data">0%</span>
+                                                <!--투자 평균 수익율 툴팁-->
+                                                <div class="tooltip-card tooltipCont" style="display:none">
+                                                    <div class="tooltip-card__header">
+                                                        <strong class="tooltip-card__title">평균 수익률 안내</strong>
+                                                        <button type="button" class="tooltip-card__close" onclick="tooltipClose($(this));return false;"><span class="blind">닫기</span></button>
+                                                    </div>
+                                                    <p class="tooltip-card__body">평균 수익률은 현재 보유 중인 투자 또는 연금의 평가 금액과 매입 금액을 비교하여 발생한 예상 손익을 가중평균한 전체 수익률입니다.</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!--연금-->
+                                    <li>
+                                        <div class="asset-group__head">
+                                            <span class="asset-group__icon item03" aria-hidden="true"></span>
+                                            <span class="info-card__list-tit">연금</span>
+                                            <p class="info-card__list-data">
+                                                0원
+                                            </p>
+                                        </div>
+                                        <ul class="average-list">
+                                            <li class="tooltipWrap">
+                                                <span class="average-list__title">
+                                                    평균 수익율
+                                                    <button type="button" class="toolTipBtn is-w20 gray-50" onclick="tooltipOpen($(this));return false;"><span class="blind">평균 수익율 안내</span></button>
+                                                </span>
+                                                <span class="average-list__data">0%</span>
+                                                <!--연금 평균 수익율 툴팁-->
+                                                <div class="tooltip-card tooltipCont" style="display:none">
+                                                    <div class="tooltip-card__header">
+                                                        <strong class="tooltip-card__title">평균 수익률 안내</strong>
+                                                        <button type="button" class="tooltip-card__close" onclick="tooltipClose($(this));return false;"><span class="blind">닫기</span></button>
+                                                    </div>
+                                                    <p class="tooltip-card__body">평균 수익률은 현재 보유 중인 투자 또는 연금의 평가 금액과 매입 금액을 비교하여 발생한 예상 손익을 가중평균한 전체 수익률입니다.</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <button type="button" class="card-btn">자산 연결하기</button>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </section>
                     <!--나의 부채-->
                     <section class="analysis-section">
                         <!-- 부채 = 미연결 -->
-                        <h2 class="text text--h4">부채 내역이 조회되지 않아요</h2>
-                        <div class="info-card info-card__nodate">
-                            <p class="text--body2-medium">
-                                부채를 연결하시면 <em>AI가 내 상황에 꼭 맞는 부채 관리법</em>을 찾아드려요. 
-                            </p>
-                            <button type="button" class="card-btn">내 부채 연결하러 가기</button>
+                        <h2 class="text text--h4">나의 부채</h2>
+                        <div class="info-card is-group is-locked">
+                            <div class="info-card__head">
+                                <p>
+                                    <span class="info-card__head-title">총 금액</span>
+                                    <span class="info-card__head-data">130,000원</span>
+                                </p>
+                            </div>
+                            <div class="info-card__list">
+                                <ul>
+                                    <li class="info-card__graph">
+                                        <div class="info-card__stats">
+                                            <span class="info-card__stat-label text--font4">부채 비율</span>
+                                            <span class="info-card__stat-value negative">999%</span>
+                                        </div>
+                                        <div class="info-card__graph-bar">
+                                            <span class="info-card__graph-bar-fill" style="width:999%"></span>f
+                                        </div>
+                                    </li>
+                                    <li class="tooltipWrap">
+                                        <div class="info-card__amount">
+                                            <span class="info-card__amount-title">
+                                                월 예상 상환액
+                                                <button type="button" class="toolTipBtn is-w20" onclick="tooltipOpen($(this));return false;"><span class="blind">월 예상 상환액</span></button>
+                                            </span>
+                                            <span class="amount-data">65만원</span>
+                                        </div>
+                                        <!--이번 달 예상 상환액 안내 툴팁-->
+                                        <div class="tooltip-card tooltipCont" style="display:none">
+                                            <div class="tooltip-card__header">
+                                                <strong class="tooltip-card__title">이번 달 예상 상환액 안내</strong>
+                                                <button type="button" class="tooltip-card__close" onclick="tooltipClose($(this));return false;"><span class="blind">닫기</span></button>
+                                            </div>
+                                            <ul class="tooltip-card__list">
+                                                <li class="tooltip-card__item text--point-h2">이번 달 상환 예정 금액은 추정치로, 실제 청구 금액과 차이가 있을 수 있습니다.</li>
+                                                <li class="tooltip-card__item">대출 중도 상환, 자동이체 휴일 출금일 지정 등 해당기관 개별 설정에 따라 내용이 변동될 수 있습니다.</li>
+                                                <li class="tooltip-card__item">타금융기관 대출상품은 원금균등, 원리금균등, 만기예정일시 상환방식에 한하여 제공하며 상환금액 및 상환일은 차이가 있을 수 있습니다.</li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>  
+                            <!-- 모든 데이터 연결x, 자산만 연결o -->
+                            <div class="card-lock">
+                                <div class="card-lock__group">
+                                    <p class="card-lock__desc">
+                                        부채를 연결하시면 AI가 내 상황에 꼭 맞는 부
+                                        <br />
+                                        채 관리법을 찾아드려요.
+                                    </p>
+                                </div>
+                                <button type="button" class="card-btn">부채 연결하기</button>
+                            </div> 
                         </div>
                         <!-- 부채 = 0 -->
-                        <h2 class="text text--h4">현재 남아있는 부채가 없어요</h2>
-                        <div class="info-card info-card__nodate">
-                            <p class="text--body2-medium">
-                            <em>이용 중인 대출이 있어야 분석을 진행할 수 있어요.</em>
-                            다른 금융사에 남아있는 대출이 있는지 확인해 보세요. 
-                            </p>
-                            <button type="button" class="card-btn">내 부채 연결하러 가기</button>
+                        <h2 class="text text--h4">나의 부채</h2>
+                        <div class="info-card is-group is-locked">
+                            <div class="info-card__head">
+                                <p>
+                                    <span class="info-card__head-title">총 금액</span>
+                                    <span class="info-card__head-data">130,000원</span>
+                                </p>
+                            </div>
+                            <div class="info-card__list">
+                                <ul>
+                                    <li class="info-card__graph">
+                                        <div class="info-card__stats">
+                                            <span class="info-card__stat-label text--font4">부채 비율</span>
+                                            <span class="info-card__stat-value negative">999%</span>
+                                        </div>
+                                        <div class="info-card__graph-bar">
+                                            <span class="info-card__graph-bar-fill" style="width:999%"></span>f
+                                        </div>
+                                    </li>
+                                    <li class="pt0 tooltipWrap">
+                                        <div class="info-card__amount">
+                                            <span class="info-card__amount-title">
+                                                월 예상 상환액
+                                                <button type="button" class="toolTipBtn is-w20" onclick="tooltipOpen($(this));return false;"><span class="blind">월 예상 상환액</span></button>
+                                            </span>
+                                            <span class="amount-data">65만원</span>
+                                        </div>
+                                        <!--이번 달 예상 상환액 안내 툴팁-->
+                                        <div class="tooltip-card tooltipCont" style="display:none">
+                                            <div class="tooltip-card__header">
+                                                <strong class="tooltip-card__title">이번 달 예상 상환액 안내</strong>
+                                                <button type="button" class="tooltip-card__close" onclick="tooltipClose($(this));return false;"><span class="blind">닫기</span></button>
+                                            </div>
+                                            <ul class="tooltip-card__list">
+                                                <li class="tooltip-card__item text--point-h2">이번 달 상환 예정 금액은 추정치로, 실제 청구 금액과 차이가 있을 수 있습니다.</li>
+                                                <li class="tooltip-card__item">대출 중도 상환, 자동이체 휴일 출금일 지정 등 해당기관 개별 설정에 따라 내용이 변동될 수 있습니다.</li>
+                                                <li class="tooltip-card__item">타금융기관 대출상품은 원금균등, 원리금균등, 만기예정일시 상환방식에 한하여 제공하며 상환금액 및 상환일은 차이가 있을 수 있습니다.</li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- 데이터 연결o, 데이터 값이 0 -->
+                            <div class="card-lock">
+                                <div class="card-lock__group">
+                                    <p class="card-lock__desc">
+                                        대출이 있어야 분석할 수 있어요.
+                                        <br />
+                                        다른 금융사에 대출이 있는지 확인해 보세요.
+                                    </p>
+                                </div>
+                                <button type="button" class="card-btn">부채 연결하기</button>
+                            </div>
                         </div>
                     </section>
+
                     <section class="analysis-section mt16">
                         <div class="connect-nudge">
                             <p class="connect-nudge__text">자산을 연결하고 맞춤 리포트를 완성하세요</p>

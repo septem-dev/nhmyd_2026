@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="text-stack">
-                    <p class="text text--body2 text--font3">NH마이데이터 서비스 가입 전 신중히 고민하고 필요한 서비스만 가입해주세요. 언제든지 해지할 수 있어요.</p>
+                    <p class="text text--body3 text--font3">NH마이데이터 서비스 가입 전 신중히 고민하고 필요한 서비스만 가입해주세요. 언제든지 해지할 수 있어요.</p>
                     <button type="button" class="btn-arrow" onclick="location.href='MSPS3120.html'">
                         <span>마이데이터 가입현황 확인</span>
                         <span class="btn-arrow__icon is-right" aria-hidden="true"></span>
@@ -37,6 +37,16 @@
 
                 <div class="text-stack mt32 mb0">
                     <div class="terms-card">
+                        <div class="terms-card__header">
+                            <div class="terms-card__check">
+                                <label class="check-basic">
+                                    <input type="checkbox" class="check-basic__input" />
+                                    <span class="check-basic__icon" aria-hidden="true"></span>
+                                    <span class="terms-card__title">[필수] 전체 동의</span>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="terms-card__divider" />
                         <div class="terms-card__list">
                             <div class="terms-link">
                                 <div class="terms-link__check">
@@ -80,29 +90,23 @@
         </div>
 
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var checkboxes = [document.getElementById('agreeTerms1'), document.getElementById('agreeTerms2')];
-                var joinBtn = document.getElementById('btnTermsConfirm');
+            $(function () {
+                var $requiredCard = $('.terms-card').eq(0);
+                var $requiredChecks = $requiredCard.find('.terms-card__list .check-basic__input');
+                var $requiredMaster = $requiredCard.find('.terms-card__header .check-basic__input');
+                var $confirmBtn = $('.areaBtnStatic .btnPressPoint');
 
-                function syncJoinButton() {
-                    if (!joinBtn) return;
-                    var allChecked = checkboxes.every(function (c) { return c && c.checked; });
-                    joinBtn.classList.toggle('disabled', !allChecked);
-                    if (allChecked) {
-                        joinBtn.removeAttribute('aria-disabled');
-                    } else {
-                        joinBtn.setAttribute('aria-disabled', 'true');
-                    }
+                function syncConfirmBtn() {
+                    var enabled = $requiredChecks.length > 0 && $requiredChecks.filter(':checked').length === $requiredChecks.length;
+                    $confirmBtn.toggleClass('disabled', !enabled);
+                    if (enabled) { $confirmBtn.removeAttr('aria-disabled'); } else { $confirmBtn.attr('aria-disabled', 'true'); }
                 }
 
-                joinBtn && joinBtn.addEventListener('click', function (e) {
-                    if (joinBtn.classList.contains('disabled')) e.preventDefault();
+                $requiredChecks.add($requiredMaster).on('change', function () {
+                    setTimeout(syncConfirmBtn, 0);
                 });
 
-                checkboxes.forEach(function (c) {
-                    if (c) c.addEventListener('change', syncJoinButton);
-                });
-                syncJoinButton();
+                syncConfirmBtn();
             });
         </script>
     </body>

@@ -27,16 +27,16 @@
                     <section class="ai-section">
                         <div class="info-card">
                             <div class="card-head tooltipWrap is-card">
-                                <h2 class="text text--h4">기간별 성과예측을 살펴볼까요?</h2>
+                                <h2 class="text text--h4">기간별 성과 예측을 살펴볼까요?</h2>
                                 <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span
                                         class="blind">기간별 성과예측 도움말</span></button>
                                 <div class="tooltip-card tooltipCont" style="display: none">
 
                                     <div class="tooltip-card__header">
-                                        <strong class="tooltip-card__title">성과예측 안내사항</strong>
+                                        <strong class="tooltip-card__title">성과 예측 안내사항</strong>
                                         <button type="button" class="tooltip-card__close" onclick="tooltipClose($(this));return false;"><span class="blind">닫기</span></button>
                                     </div>
-                                    <p class="tooltip-card__body">성향기준 시나리오로 실제 성향·제안 변경 아닙니다.</p>
+                                    <p class="tooltip-card__body">시장 상황을 가정한 예측이에요. 실제 수익을 보장하지 않아요.</p>
                                 </div>
                             </div>
     
@@ -99,22 +99,18 @@
                             <ul class="predict-legend" aria-hidden="true">
                                 <li>
                                     <i class="predict-legend__swatch is-good"></i>
-                                    좋을 때
+                                    좋음
                                 </li>
                                 <li>
                                     <i class="predict-legend__swatch is-avg"></i>
-                                    평균
+                                    보통
                                 </li>
                                 <li>
                                     <i class="predict-legend__swatch is-bad"></i>
-                                    나쁠때
-                                </li>
-                                <li>
-                                    <i class="predict-legend__swatch is-now"></i>
-                                    현재
+                                    나쁨
                                 </li>
                             </ul>
-                            <p class="blind">기간에 따른 예상 평가금액을 나타낸 꺾은선 그래프입니다. 시장이 좋을 때·평균·나쁠 때와 현재 유지 시를 비교해 보여주며, 자세한 금액은 아래
+                            <p class="blind">기간에 따른 예상 평가금액을 나타낸 꺾은선 그래프입니다. 시장이 좋음·보통·나쁨을 비교해 보여주며, 자세한 금액은 아래
                                 예상 성과 목록에 있습니다.</p>
     
                             <hr class="divider is-dash-e1" />
@@ -124,20 +120,16 @@
                             <h3 class="text--h5 text--font3"><span data-ai0301-years>10</span>년 후 예상 성과는 다음과 같아요.</h3>
                             <ul class="predict-result">
                                 <li class="predict-result__row">
-                                    <span class="predict-result__label">현재 유지 시</span>
+                                    <span class="predict-result__label">시장이 좋았을 때</span>
                                     <strong class="predict-result__value">90,000,000 원</strong>
                                 </li>
                                 <li class="predict-result__row">
-                                    <span class="predict-result__label">시장이 좋을 시</span>
+                                    <span class="predict-result__label">시장이 보통이었을 때</span>
                                     <strong class="predict-result__value">138,000,000 원</strong>
                                 </li>
                                 <li class="predict-result__row">
-                                    <span class="predict-result__label">시장이 보통 시</span>
+                                    <span class="predict-result__label">시장이 나빴을 때</span>
                                     <strong class="predict-result__value">100,000,000 원</strong>
-                                </li>
-                                <li class="predict-result__row">
-                                    <span class="predict-result__label">시장이 나쁠 시</span>
-                                    <strong class="predict-result__value">70,000,000 원</strong>
                                 </li>
                             </ul>
                             <hr class="divider is-list1 mt12 mb12" />
@@ -164,12 +156,11 @@
             if (!canvas || typeof Chart === 'undefined') return;
 
             var START = 3000;
-            var TARGET = { good: 13800, avg: 10000, bad: 7000, now: 9000 };
+            var TARGET = { good: 13800, avg: 10000, bad: 7000 };
             var SERIES = [
                 { key: 'good', color: '#38e784' },
                 { key: 'avg', color: '#09b2c5' },
-                { key: 'bad', color: '#ff7e7e' },
-                { key: 'now', color: '#c8d2e4' }
+                { key: 'bad', color: '#ff7e7e' }
             ];
 
             var years = 10;
@@ -186,7 +177,7 @@
                 var step = Math.pow(10, String(Math.round(v / 4)).length - 1);
                 return Math.ceil(v / (4 * step)) * 4 * step;
             }
-            var yMax = niceMax(Math.max(TARGET.good, TARGET.avg, TARGET.bad, TARGET.now));
+            var yMax = niceMax(Math.max(TARGET.good, TARGET.avg, TARGET.bad));
 
             for (var i = 0; i < yLabelEls.length; i++) {
                 yLabelEls[i].textContent = Math.round((yMax * (4 - i)) / 4).toLocaleString('ko-KR');

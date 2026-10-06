@@ -2860,8 +2860,6 @@ html {--footer-pading-top:0px}
 .nhasset [class^="wrapTbl"] td {border-bottom:1px solid #ebebeb;}
 [class^="wrapTbl"] .cell-bg {background: #f8f8f8; border-bottom:1px solid #ebebeb;}
 [class^="wrapTbl"].blue .cell-bg {background-color: #249EC3; color: #fff;}
-.nhasset .popBtnWrap .popBtn.multi > a, .nhasset .popBtnWrap .popBtn.multi > a:hover, .nhasset .popBtnWrap .popBtn.multi > a:active, .nhasset .popBtnWrap .popBtn.multi > a:link,
-.nhasset .areaBtnDefault.multi [class*='btn'] {padding-top:10px; padding-bottom:10px; line-height:1.6; vertical-align:middle;}
 
 /*[MD2609_095] 구글 스토어 정책 변경에 따른 올원뱅크스마트뱅킹 앱 테스트 */
 @media screen and (min-width:400px) {
@@ -2923,7 +2921,7 @@ html {--footer-pading-top:0px}
 	.nhasset .csChartWrap .boxTypeWrap {height:clamp(320px,32rem,480px);}
 
 	/* MSFP4100 버튼 텍스트 두줄로 떨어짐 */
-	.nhasset .accontfpList .contBtn01 {line-height:inherit;}
+	.nhasset .accontfpList .contBtn01 {line-height:inherit; width: auto !important;}
 
 	/* MSAE9110 슬라이드 내 이미지 비율 */
 	.nhasset .texSavingBanner .swiper-slide {max-width:260px; height:186px;}

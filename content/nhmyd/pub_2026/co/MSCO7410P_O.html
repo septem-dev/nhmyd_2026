@@ -1,0 +1,296 @@
+<!DOCTYPE html >
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-title" content="NH마이데이터">
+<meta http-equiv="imagetoolbar" content="no">
+<meta name="robots" content="no-index,follow">
+<meta name="title" content="">
+<meta name="author" content="">
+<meta name="content" content="">
+<meta name="keywords" content="NH마이데이터">
+<meta name="description" content="NH마이데이터">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<title>[P] 투자자성향진단 결과 보기</title>
+<script src="../pub-assets/js/head.js"></script> <!-- [수정 260803] [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 : head.js로 수정 -->
+<script>
+	$(document).ready(function() {
+		fullLayerPop();
+	});
+</script>
+</head>
+<body>
+<div class="wrapper nhasset"><!-- 바닥페이지 --></div>
+
+<!-- ###################################### -->
+<!-- ### [팝업] [P] 투자자성향진단 결과 보기 ### -->
+<!-- ###################################### -->
+<div class="nhasset popWrap fullLayerPop" role="dialog">
+	<div class="popInner mbType"> <!-- [수정 260803] [MD2605_047] 마이데이터 펀드 권유 프로세스 개선 : class="mbType" 추가 -->
+		<h1>투자자성향진단 결과 보기</h1>
+		<div class="popCont">
+      <div class="fullyWrap">
+
+        <div class="diagTit mt0">
+          <h2><span class="name">$성명$</span>님의 투자자성향은 <br><span class="grade1 -diag">공격투자형(진단점수 94점)</span>입니다.</h2>  <!-- [D] 공격투자형 : grade1 / 적극투자형 : grade2 /  위험중립형 : grade3 / 안정추구형 : grade4 / 안정형 : grade5 -->
+          <p class="diagDesc">투자자성향 진단일 (YYYY.MM.DD 진단 결과)</p>
+        </div>
+
+        <div class="gradeInfo">
+          <div class="diagTit">
+            <h3>투자자성향에 적합한 상품 위험등급</h3>
+          </div>
+          <div class="tagGroup">
+            <span class="tag warning-grade1">1등급</span>
+            <span class="tag warning-grade2">2등급</span>
+            <span class="tag warning-grade3">3등급</span>
+            <span class="tag warning-grade4">4등급</span>
+            <span class="tag warning-grade5">5등급</span>
+            <span class="tag warning-grade6">6등급</span>
+          </div>
+          <div class="graphImg">
+            <img src="../../images/img_diag_graph01.png" alt="투자위험과 기대수익에 따른 5단계(안정형, 안정추구형, 위험중립형, 적극투자형, 공격투자형) 그래프. 고객님의 투자성향은 공격투자형입니다."> <!-- [D] 공격투자형 -->
+            <!-- <img src="../../images/img_diag_graph02.png" alt="투자위험과 기대수익에 따른 5단계(안정형, 안정추구형, 위험중립형, 적극투자형, 공격투자형) 그래프. 고객님의 투자성향은 적극투자형입니다."> --> <!-- [D] 적극투자형 -->
+            <!-- <img src="../../images/img_diag_graph03.png" alt="투자위험과 기대수익에 따른 5단계(안정형, 안정추구형, 위험중립형, 적극투자형, 공격투자형) 그래프. 고객님의 투자성향은 위협중립형입니다."> --> <!-- [D] 위협중립형 -->
+            <!-- <img src="../../images/img_diag_graph04.png" alt="투자위험과 기대수익에 따른 5단계(안정형, 안정추구형, 위험중립형, 적극투자형, 공격투자형) 그래프. 고객님의 투자성향은 안정추구형입니다."> --> <!-- [D] 안정추구형 -->
+            <!-- <img src="../../images/img_diag_graph05.png" alt="투자위험과 기대수익에 따른 5단계(안정형, 안정추구형, 위험중립형, 적극투자형, 공격투자형) 그래프. 고객님의 투자성향은 안정형입니다."> --> <!-- [D] 안정형 -->
+          </div>
+        </div>
+
+        <div class="diagSurvWarp">
+          <div class="diagGroup">
+            <p class="survQ"><span class="num">01</span><span class="txt">고객님께 해당하는 항목을 선택해 주세요.</span></p>
+            <p class="survQ"><span class="num">1-1</span><span class="txt">고객님의 연령대를 선택해 주세요.</span></p>
+            <div class="survA -box"><p>19세 이하</p></div>
+            <p class="survQ"><span class="num">1-2</span><span class="txt">고객님의 월소득을 선택해 주세요.</span></p>
+            <div class="survA -img"><p><img src="../../images/diag_survA_01_2_01.png" alt=""><span>400만원 이상</span></p></div>
+            <p class="survQ"><span class="num">1-3</span><span class="txt">고객님의 수입원을 가장 잘 나타내는 것을 선택해 주세요.</span></p>
+            <div class="survA -img"><p><img src="../../images/diag_survA_01_3_02.png" alt=""><span>현재 수입이 일정하지만, 앞으로 감소하거나 불안정할 것으로 예상</span></p></div>
+          </div>
+
+          <div class="diagGroup">
+            <p class="survQ"><span class="num">02</span><span class="txt">고객님께 해당하는 항목을 선택해 주세요.</span></p>
+            <p class="survQ"><span class="num">2-1</span><span class="txt">고객님의 재산 상황을 선택해 주세요.</span></p>
+            <div class="survA -img"><p><img src="../../images/diag_survA_02_1_05.png" alt=""><span>10억원 초과</span></p></div>
+            <p class="survQ"><span class="num">2-2</span><span class="txt">고객님의 총 자산 대비 금융자산의 비중을 선택해 주세요.</span></p>
+            <div class="survA -img"><p><img src="../../images/diag_survA_02_2_03.png" alt=""><span>50%</span></p></div>
+            <p class="survQ"><span class="num">2-3</span><span class="txt">보유한 금융자산(전체 금융기관 내) 중 투자성 상품의 비중에 해당하는 것을 선택해 주세요.</span></p>
+            <div class="survA -img"><p><img src="../../images/diag_survA_02_3_03.png" alt=""><span>40% 이상 ~ 80% 미만</span></p></div>
+          </div>
+
+          <div class="diagGroup">
+            <p class="survQ"><span class="num">03</span><span class="txt">금융상품에 대한 지식 수준에 해당하는 것을 선택해 주세요.</span></p>
+            <div class="survA -img"><p><img src="../../images/diag_survA_03_01.png" alt=""><span>매우 높은 수준</span></p></div>
+          </div>
+
+          <div class="diagGroup">
+            <p class="survQ"><span class="num">04</span><span class="txt">아래의 설명을 읽고 맞다고 생각하는 답변을 선택해 주세요.</span></p>
+            <p class="survQ"><span class="num">4-1</span><span class="txt">펀드, 신탁 상품 등 투자성 상품은 원금보장이 되는 상품이다.</span></p>
+            <div class="survA -ox"><p class="x">X(아니오)</p></div>
+            <p class="survQ"><span class="num">4-2</span><span class="txt">펀드, 신탁 상품 등 투자성 상품에서 수익이 발생하면 일부 비과세 대상을 제외하고 세금이 부과된다.</span></p>
+            <div class="survA -ox"><p class="o">O(예)</p></div>
+            <p class="survQ"><span class="num">4-3</span><span class="txt">은행에서 가입한 모든 펀드, 신탁상품 등 투자성 상품은 예·적금과 동일하게 예금자 보호가 된다.</span></p>
+            <div class="survA -ox"><p class="x">X(아니오)</p></div>
+          </div>
+
+          <div class="diagGroup">
+            <p class="survQ"><span class="num">05</span><span class="txt">감내할 수 있는 손실 감수 수준에 해당하는 것을 선택해 주세요.</span></p>
+            <div class="survA -img"><p><img src="../../images/diag_survA_05_01.png" alt=""><span>기대 수익이 높다면 위험이 높아도 상관 없음</span></p></div>
+          </div>
+
+          <div class="diagGroup">
+            <p class="survQ"><span class="num">06</span><span class="txt">투자 상품의 일반적인 투자기간을 선택해 주세요.</span></p>
+            <div class="survA -img"><p><img src="../../images/diag_survA_06_05.png" alt=""><span>6개월 이내</span></p></div>
+          </div>
+
+          <div class="diagGroup">
+            <p class="survQ"><span class="num">07</span><span class="txt">투자 경험이 있는 금융투자상품 항목을 모두 선택해 주세요.(중복 선택)</span></p>
+            <div class="survA -img"><p><img src="../../images/diag_survA_07_01.png" alt=""><span>은행 예·적금, 국채, 지방세, 보증채, MMF, CMA 등</span></p></div>
+            <div class="survA -img"><p><img src="../../images/diag_survA_07_05.png" alt=""><span>ELW, 선물옵션, 시장수익률 이상의 수익을 추구하는 주식형 펀드, 파생상품에 투자하는 펀드, 주식 신용거래 등</span></p></div>
+          </div>
+
+          <div class="diagGroup">
+            <p class="survQ"><span class="num">08</span><span class="txt">과거 가입한 투자성 상품을 해지한 목적을 가장 잘 나타낸 것을 선택해 주세요.(중복 선택)</span></p>
+            <div class="survA -img"><p><img src="../../images/diag_survA_08_02.png" alt=""><span>가입한 투자상품의 수익률이 지속적으로 저조하여 해지하였음</span></p></div>
+          </div>
+
+          <div class="diagGroup">
+            <p class="survQ"><span class="num">09</span><span class="txt">파생결합증권 또는 파생 상품에 투자한 경험이 있다면, 투자기간은 얼마나 되세요?</span></p>
+            <div class="survA -img"><p><img src="../../images/diag_survA_09_04.png" alt=""><span>3년 이상</span></p></div>
+          </div>
+          
+          <div class="diagGroup">
+            <p class="survQ"><span class="num">10</span><span class="txt">본인의 투자자성향과 맞다고 생각하는 투자자성향을 선택해 주세요.</span></p>
+            <div class="survA -img"><p><img src="../../images/diag_survA_10_01.png" alt=""><span>공격투자형</span></p></div>
+          </div>
+        </div>
+
+        <div class="gradeInfo">
+          <div class="diagTit">
+            <h3>투자자성향별 적합 상품 분류</h3>
+          </div>
+          <div class="matrixWrap -diag mt16">
+            <div class="chartArea" aria-hidden="true">
+              <div class="chartAxisY">
+                <span class="axisLabel">매우높은위험<br>1등급</span>
+                <span class="axisLabel">높은위험<br>2등급</span>
+                <span class="axisLabel">다소높은위험<br>3등급</span>
+                <span class="axisLabel">보통위험<br>4등급</span>
+                <span class="axisLabel">낮은위험<br>5등급</span>
+                <span class="axisLabel">매우낮은위험<br>6등급</span>
+              </div>
+              <div class="chartPlot">
+                <div class="plotRow">
+                  <div class="plotCell"><span class="chk g1"></span></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                </div>
+                <div class="plotRow">
+                  <div class="plotCell"><span class="chk g1"></span></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                </div>
+                <div class="plotRow">
+                  <div class="plotCell"><span class="chk g1"></span></div>
+                  <div class="plotCell"><span class="chk g2"></span></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                </div>
+                <div class="plotRow">
+                  <div class="plotCell"><span class="chk g1"></span></div>
+                  <div class="plotCell"><span class="chk g2"></span></div>
+                  <div class="plotCell"><span class="chk g3"></span></div>
+                  <div class="plotCell"></div>
+                  <div class="plotCell"></div>
+                </div>
+                <div class="plotRow">
+                  <div class="plotCell"><span class="chk g1"></span></div>
+                  <div class="plotCell"><span class="chk g2"></span></div>
+                  <div class="plotCell"><span class="chk g3"></span></div>
+                  <div class="plotCell"><span class="chk g4"></span></div>
+                  <div class="plotCell"></div>
+                </div>
+                <div class="plotRow">
+                  <div class="plotCell"><span class="chk g1"></span></div>
+                  <div class="plotCell"><span class="chk g2"></span></div>
+                  <div class="plotCell"><span class="chk g3"></span></div>
+                  <div class="plotCell"><span class="chk g4"></span></div>
+                  <div class="plotCell"><span class="chk g5"></span></div>
+                </div>
+              </div>
+            </div>
+            <div class="chartAxisX" aria-hidden="true">
+              <span class="axisLabel">공격투자형</span>
+              <span class="axisLabel">적극투자형</span>
+              <span class="axisLabel">위험중립형</span>
+              <span class="axisLabel">안정추구형</span>
+              <span class="axisLabel">안정형</span>
+            </div>
+
+            <!-- [D] 스크린리더용 테이블 -->
+            <table class="blind">
+              <caption>위험등급별로 가입 가능한 투자자성향을 나타낸 표</caption>
+              <thead>
+                <tr>
+                  <th scope="col" id="colGrade">위험등급</th>
+                  <th scope="col" id="colGrade01">공격투자형</th>
+                  <th scope="col" id="colGrade02">적극투자형</th>
+                  <th scope="col" id="colGrade03">위험중립형</th>
+                  <th scope="col" id="colGrade04">안정추구형</th>
+                  <th scope="col" id="colGrade05">안정형</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row" id="rowG1">매우높은위험 1등급</th>
+                  <td headers="rowG1 colGrade01">가능</td>
+                  <td headers="rowG1 colGrade02">해당 없음</td>
+                  <td headers="rowG1 colGrade03">해당 없음</td>
+                  <td headers="rowG1 colGrade04">해당 없음</td>
+                  <td headers="rowG1 colGrade05">해당 없음</td>
+                </tr>
+                <tr>
+                  <th scope="row" id="rowG2">높은위험 2등급</th>
+                  <td headers="rowG2 colGrade01">가능</td>
+                  <td headers="rowG2 colGrade02">해당 없음</td>
+                  <td headers="rowG2 colGrade03">해당 없음</td>
+                  <td headers="rowG2 colGrade04">해당 없음</td>
+                  <td headers="rowG2 colGrade05">해당 없음</td>
+                </tr>
+                <tr>
+                  <th scope="row" id="rowG3">다소높은위험 3등급</th>
+                  <td headers="rowG3 colGrade01">가능</td>
+                  <td headers="rowG3 colGrade02">가능</td>
+                  <td headers="rowG3 colGrade03">해당 없음</td>
+                  <td headers="rowG3 colGrade04">해당 없음</td>
+                  <td headers="rowG3 colGrade05">해당 없음</td>
+                </tr>
+                <tr>
+                  <th scope="row" id="rowG4">보통위험 4등급</th>
+                  <td headers="rowG4 colGrade01">가능</td>
+                  <td headers="rowG4 colGrade02">가능</td>
+                  <td headers="rowG4 colGrade03">가능</td>
+                  <td headers="rowG4 colGrade04">해당 없음</td>
+                  <td headers="rowG4 colGrade05">해당 없음</td>
+                </tr>
+                <tr>
+                  <th scope="row" id="rowG5">낮은위험 5등급</th>
+                  <td headers="rowG5 colGrade01">가능</td>
+                  <td headers="rowG5 colGrade02">가능</td>
+                  <td headers="rowG5 colGrade03">가능</td>
+                  <td headers="rowG5 colGrade04">가능</td>
+                  <td headers="rowG5 colGrade05">해당 없음</td>
+                </tr>
+                <tr>
+                  <th scope="row" id="rowG6">매우낮은위험 6등급</th>
+                  <td headers="rowG6 colGrade01">가능</td>
+                  <td headers="rowG6 colGrade02">가능</td>
+                  <td headers="rowG6 colGrade03">가능</td>
+                  <td headers="rowG6 colGrade04">가능</td>
+                  <td headers="rowG6 colGrade05">가능</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- //[D] 스크린리더용 테이블 -->
+          </div>
+        </div>
+        
+        <div class="diagBtnWrap mb0">
+          <button type="button" class="btnBodyLine">투자자성향진단 결과 다운로드</button>
+        </div>
+
+      </div>
+      <!-- // ### ##### ### -->
+		</div>
+    <!-- -------------------------------------- -->
+    <!-- [SECTION] 버튼영역 -->
+    <!-- -------------------------------------- -->
+    <div class="popBtnWrap">
+			<div class="popBtn">
+				<a href="javascript:;" onclick="popClose(this);return false;" class="confirmBtn" role="button">확인</a>
+			</div>
+			<a href="javascript:;" onclick="popClose(this);return false;" class="popClose" title="해당 창을 닫습니다." role="button"><img src="../../images/common/btn_popClose.png" alt="닫기"></a>
+		</div>
+    <!-- -------------------------------------- -->
+	</div>
+</div>
+
+<!-- ###################################### -->
+<!-- ### [샘플] 스크립트 ### -->
+<!-- ###################################### -->
+<script>
+
+</script>
+<!-- ###################################### -->
+</body>
+</html>

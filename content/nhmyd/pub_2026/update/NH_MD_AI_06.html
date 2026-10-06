@@ -3,37 +3,26 @@
     <head>
         <meta charset="utf-8" />
         <script src="../pub-assets/js/head-mb-update.js"></script>
-        <title>AI 포트폴리오 진단</title>
+        <title>AI 포트폴리오</title>
     </head>
 
     <body class="bgcolor">
         <div class="wrapper nhasset nds">
             <div class="header bgcolor" role="banner">
                 <a href="javascript:;" role="button" class="btnBack"><span class="blind">이전화면으로</span></a>
-                <h1>AI 포트폴리오 진단</h1>
+                <h1>AI 포트폴리오</h1>
                 <a href="javascript:;" role="button" class="btnCancle" aria-label="취소"><span class="blind">취소</span></a>
             </div>
 
             <div class="container bgcolor" role="main">
                 <div class="diag-step">
                     <span class="text text--body3-medium text--font3">안전자산확보</span>
-                    <span class="blind">전체 3단계 중 1단계</span>
-                    <span class="diag-step__progress" aria-hidden="true">
-                        <span class="process-progress-number is-plain">
-                            <span class="process-progress-number__current">STEP</span>
-                        </span>
-                        <span class="process-progress-number is-plain">
-                            <span class="process-progress-number__current">01</span>
-                            <span class="process-progress-number__divider"></span>
-                            <span class="process-progress-number__total">03</span>
-                        </span>
-                    </span>
                 </div>
 
                 <section class="ai-section">
                     <div class="card-head is-top tooltipWrap is-card">
                         <!-- prettier-ignore -->
-                        <h2 class="text text--h2 ai-heading">안전자산 확보 사용가능 금액이<br /><em>96,000,000원</em>이 있어요.</h2>
+                        <h2 class="text text--h2 ai-heading">안전자산 확보 사용가능 금액이<br /><em class="text--point-chart">96,000,000원</em>이 있어요.</h2>
                         <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span class="blind">안전자산 확보 사용가능 금액 도움말</span></button>
                         <div class="tooltipCont" style="display: none">
                             <h3>안내사항</h3>
@@ -44,27 +33,27 @@
                             <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
                         </div>
                     </div>
-                    <!-- 만기 예정 대출 -->
+                    <!-- 안전자산 확보 -->
                     <div class="info-card safe-card">
                         <div class="card-head tooltipWrap is-card">
-                            <h3 class="text text--h4 ai-heading">만기 예정 대출</h3>
+                            <h3 class="text text--h4 ai-heading">안전자산 확보</h3>
                             <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span class="blind">만기 예정 대출 도움말</span></button>
                             <div class="tooltipCont" style="display: none">
                                 <h3>만기 예정 대출 안내</h3>
-                                <p class="tooltip-card__body">설정한 안전자산 만큼을 제외한 나머지 금액을 투자에 활용합니다.</p>
+                                <p class="tooltip-card__body">확보한 안전자산은 투자에 넣지 않고, 필요할 때 바로 꺼내 쓸 수 있게 준비해요.</p>
                                 <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
                             </div>
                         </div>
     
                         <p class="text text--h5 text--font3 mt24">
-                            만기가 예정되어 있는 대출이
+                            <em class="text--point-chart">{만기가 예정되어 있는 대출}</em>이
                             <br />
-                            <em class="text--point-chart">58,800,000원이 있어요.</em>
+                            <em class="text--point-chart">{58,800,000원}이 있어요.</em>
                         </p>
     
                         <p class="notice-box mt24">
                             <span class="notice-box__icon" aria-hidden="true"></span>
-                            <span class="notice-box__text">안전자산(현금성)을 얼만큼 확보하실래요?</span>
+                            <span class="notice-box__text">안전자산을 얼마나 확보하시겠어요?</span>
                         </p>
     
                         <div class="amount-slider mt24" data-amount-slider>
@@ -80,23 +69,17 @@
                                     <input type="range" class="amount-slider__input" id="ai06AmountRange" min="0" max="96000000" step="100000" value="58800000" aria-labelledby="ai06AmountLabel" aria-valuetext="58,800,000원" data-amount-slider-input />
                                 </div>
                             </div>
-                            <p class="amount-slider__foot">
-                                <span class="amount-slider__foot-label">확보가능 금액</span>
-                                <strong class="amount-slider__foot-value" data-amount-slider-rest>37,200,000원</strong>
-                            </p>
+                            <ul class="amount-slider__foot">
+                                <li>
+                                    <span class="text--body3-medium text--font1">0원</span>
+                                    <span class="text--body3-medium text--font1" >96,000,000원</strong>
+                                </li>
+                                <li>
+                                    <span class="text--caption2">투자에 활용할 금액</span>
+                                    <span class="text--caption2 text--font2" data-amount-slider-rest>37,200,000원</strong>
+                                </li>
+                            </ul>
                         </div>
-    
-                        <hr class="divider is-page" />
-    
-                        <p class="card-note">
-                            <span class="card-note__icon" aria-hidden="true"></span>
-                            <span class="card-note__text">나머지 금액은 투자에 활용됩니다.</span>
-                        </p>
-						<!-- 0원일 경우 출력 메세지
-						<p class="card-note">
-                            <span class="card-note__icon" aria-hidden="true"></span>
-                            <span class="card-note__text">전체금액을 투자에 활용하며, 안전자산을 확보하지 않아요.</span>
-                        </p> -->
                     </div>
                 </section>
 
@@ -121,7 +104,7 @@
                             <ul class="finance-product asset-list">
                                 <li>
                                     <div class="finance-head">
-                                        <span class="label is-sm is-line is-gray">만료</span>
+                                        <span class="label is-sm is-line is-lightgray">만료</span>
                                         <div class="finance-title">
                                             <span class="finance-logo"><img src="../../images/logos/AAOB0000.png" alt=""></span>
                                             <div class="finance-col">
@@ -244,6 +227,7 @@
                                 </li>
                             </ul>
                             <p class="asset-list__more">
+                                <img src="">
                                 <!-- prettier-ignore -->
                                 <button type="button" class="btn-arrow" data-ai06-more><span>더보기(<span data-ai06-shown>5</span>/6)</span><span class="btn-arrow__icon is-plus" aria-hidden="true"></span></button>
                             </p>
@@ -257,7 +241,7 @@
                 </section>
 
                 <div class="areaBtnDefault bgcolor">
-                    <a href="javascript:;" class="btnPressPoint" role="button">제안 보기</a>
+                    <a href="javascript:;" class="btnPressPoint" role="button">다음</a>
                 </div>
             </div>
         </div>
@@ -269,6 +253,7 @@
                 var valueEl = wrap.querySelector('[data-amount-slider-value]');
                 var popEl = wrap.querySelector('[data-amount-slider-popover]');
                 var restEl = wrap.querySelector('[data-amount-slider-rest]');
+                var investEl = wrap.querySelector('[data-amount-slider-invest]');
                 var total = Number(input.max) || 0;
 
                 function won(n) {

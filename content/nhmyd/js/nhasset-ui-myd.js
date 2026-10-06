@@ -1106,23 +1106,41 @@ function pzTouchFix() {
 // [MD2609_095] 구글 스토어 정책 변경에 따른 올원뱅크스마트뱅킹 앱 테스트
 document.addEventListener('DOMContentLoaded',function(){
 	fullLayerHeight2 = function() {
-		var $winH = $(window).height();
-		var fullTit = $(".fullLayerPop .popInner h1").length > 0 ? $(".fullLayerPop .popInner h1").outerHeight() : $(".fullLayerPop .popInner h2").outerHeight();
-		var fullBtnAra = $(".fullLayerPop .popBtnWrap .popBtn").length > 0 ? $(".fullLayerPop .popBtnWrap .popBtn").outerHeight() : 0;
-		$(".fullLayerPop .popInner .popCont").css({height:$winH - fullTit - fullBtnAra});
+		$(".fullLayerPop").each(function(){
+			var $pop = $(this);
+			var $cont = $pop.find(".popInner .popCont");
+			$cont.css("height","auto");
+
+			var $winH = window.innerHeight;
+			var fullTit = $pop.find(".popInner h1").length > 0 ? $pop.find(".popInner h1").outerHeight() : $pop.find(".popInner h2").outerHeight();
+			var fullBtnAra = $pop.find(".popBtnWrap .popBtn").length > 0 ? $pop.find(".popBtnWrap .popBtn").outerHeight() : 0;
+			$pop.find(".popInner .popCont").css({height:$winH - fullTit - fullBtnAra});
+		});
 	};
 	fullLayerHeight2();
+	slidePopConfirm2 = function() {
+		$(".slidePopConfirm").each(function(){
+			var confirmPop = $(this);
+			var $inner = confirmPop.find(".popInner");
+			$inner.stop(true).css("height","auto");
+
+			var confirmTit = confirmPop.find(".popInner h1").length > 0 ? confirmPop.find(".popInner h1").outerHeight() : confirmPop.find(".popInner h2").outerHeight();
+			var confirmBtnAra = confirmPop.find(".popBtnWrap .popBtn").length > 0 ? confirmPop.find(".popBtnWrap").outerHeight() : 0;
+			var confirmH = confirmPop.find(".popCont").outerHeight();
+			$inner.animate({height:confirmH + confirmBtnAra + confirmTit}, 100);
+		})
+	};
 });
 var popResizeTimer;
-$(window).on('resize', function(){
+$(window).on('resize orientationchange', function(){
 	clearTimeout(popResizeTimer);
 	popResizeTimer = setTimeout(function(){
 		if($('.fullLayerPop').length) {
-			fullLayerPop();
 			fullLayerHeight2();
+			setTimeout(fullLayerHeight2,100);
 		}
 		if($('.slidePopConfirm').length) {
-			slidePopConfirm();
+			slidePopConfirm2();
 		}
 	}, 100);
 });

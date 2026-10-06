@@ -3,14 +3,14 @@
     <head>
         <meta charset="utf-8" />
         <script src="../pub-assets/js/head-mb-update.js"></script>
-        <title>AI 포트폴리오 진단</title>
+        <title>AI 포트폴리오</title>
     </head>
 
     <body class="bgcolor">
         <div class="wrapper nhasset nds">
             <div class="header bgcolor" role="banner">
                 <a href="javascript:;" role="button" class="btnBack"><span class="blind">이전화면으로</span></a>
-                <h1>AI 포트폴리오 진단</h1>
+                <h1>AI 포트폴리오</h1>
                 <a href="javascript:;" role="button" class="btnCancle" aria-label="취소"><span class="blind">취소</span></a>
             </div>
 
@@ -32,7 +32,7 @@
                 <!-- 진단 대상 전체자산 -->
                 <section class="ai-section">
                     <h2 class="text text--h2 diag-lead">
-                        내 자산의 구성상품까지 고려하여,
+                        내 자산의 구성 상품까지 고려하여,
                         <br />
                         진단을 진행해요.
                     </h2>
@@ -47,7 +47,7 @@
                         <div class="diag-total">
                             <div class="diag-total__group">
                                 <p class="diag-total__base">
-                                    2026.08.24 마이데이터 기준
+                                    2026.08.24 09:21 마이데이터 기준
                                     <button type="button" class="diag-total__refresh"><span class="blind">최신 정보로 새로고침</span></button>
                                 </p>
                                 <div class="diag-total__sum">
@@ -68,7 +68,7 @@
                             <canvas id="diagDonutChart" aria-hidden="true"></canvas>
                         </div>
                         <ul class="blind">
-                            <li>해외채권 33%, 120,000,000원</li>
+                            <li>현금성 33%, 120,000,000원</li>
                             <li>국내채권 13%, 46,000,000원</li>
                             <li>해외채권 5%, 20,000,000원</li>
                             <li>국내주식 31%, 112,000,000원</li>
@@ -82,7 +82,7 @@
                                 <li class="diag-legend__row">
                                     <span class="diag-legend__name">
                                         <i class="diag-legend__swatch" style="background:#22d3ee"></i>
-                                        해외채권
+                                        현금성
                                     </span>
                                     <span class="diag-legend__value" data-ratio="33 %" data-amount="120,000,000 원">33 %</span>
                                 </li>
@@ -142,9 +142,8 @@
 					<!-- 0원/미연결의 경우 케이스 -->
 					<div class="info-card diag-card">
                         <h3 class="diag-card__title">
-                            <button type="button" class="diag-card__head">
+                            <button type="button" class="diag-card__head" disabled>
                                 <span class="text text--h4">진단 대상 전체자산이에요</span>
-                                <span class="diag-card__head-arrow" aria-hidden="true"></span>
                             </button>
                         </h3>
 
@@ -168,11 +167,68 @@
 
                 <!-- 나의 투자성향 -->
                 <section class="ai-section">
+                     <!--공격 투자형-->
+                     <div class="info-card diag-type">
+                        <p class="diag-type__row item01">
+                            <span class="diag-type__badge" aria-hidden="true"></span>
+                            <span class="diag-type__label">나의 투자성향</span>
+                            <strong class="diag-type__value">공격 투자형</strong>
+                        </p>
+                        <p class="diag-type__more">
+                            <button type="button" class="btn-arrow is-caption">
+                                투자성향 진단 다시하기
+                                <span class="btn-arrow__icon is-right" aria-hidden="true"></span>
+                            </button>
+                        </p>
+                    </div>
+                    <!--적극 투자형-->
                     <div class="info-card diag-type">
-                        <p class="diag-type__row">
+                        <p class="diag-type__row item02">
                             <span class="diag-type__badge" aria-hidden="true"></span>
                             <span class="diag-type__label">나의 투자성향</span>
                             <strong class="diag-type__value">적극 투자형</strong>
+                        </p>
+                        <p class="diag-type__more">
+                            <button type="button" class="btn-arrow is-caption">
+                                투자성향 진단 다시하기
+                                <span class="btn-arrow__icon is-right" aria-hidden="true"></span>
+                            </button>
+                        </p>
+                    </div>
+                    <!--위험 중립형-->
+                    <div class="info-card diag-type">
+                        <p class="diag-type__row item03">
+                            <span class="diag-type__badge" aria-hidden="true"></span>
+                            <span class="diag-type__label">나의 투자성향</span>
+                            <strong class="diag-type__value">위험 중립형</strong>
+                        </p>
+                        <p class="diag-type__more">
+                            <button type="button" class="btn-arrow is-caption">
+                                투자성향 진단 다시하기
+                                <span class="btn-arrow__icon is-right" aria-hidden="true"></span>
+                            </button>
+                        </p>
+                    </div>
+                     <!--안정 추구형-->
+                     <div class="info-card diag-type">
+                        <p class="diag-type__row item04">
+                            <span class="diag-type__badge" aria-hidden="true"></span>
+                            <span class="diag-type__label">나의 투자성향</span>
+                            <strong class="diag-type__value">안정 추구형</strong>
+                        </p>
+                        <p class="diag-type__more">
+                            <button type="button" class="btn-arrow is-caption">
+                                투자성향 진단 다시하기
+                                <span class="btn-arrow__icon is-right" aria-hidden="true"></span>
+                            </button>
+                        </p>
+                    </div>
+                    <!--안정형-->
+                    <div class="info-card diag-type">
+                        <p class="diag-type__row item05">
+                            <span class="diag-type__badge" aria-hidden="true"></span>
+                            <span class="diag-type__label">나의 투자성향</span>
+                            <strong class="diag-type__value">안정형</strong>
                         </p>
                         <p class="diag-type__more">
                             <button type="button" class="btn-arrow is-caption">
@@ -189,7 +245,7 @@
                         <h3 class="text text--h4">진단 포트폴리오 구성</h3>
                         <div class="diag-portfolio__body">
                             <div class="diag-portfolio__field">
-                                <p class="text--body2-medium" id="diagPortfolioQuestion">진단포트폴리오를 어떤 기준으로 구성할까요?</p>
+                                <p class="text--body2-medium" id="diagPortfolioQuestion">진단 포트폴리오를 어떤 기준으로 구성할까요?</p>
                                 <div class="radio-box-row" role="radiogroup" aria-labelledby="diagPortfolioQuestion">
                                     <label>
                                         <input type="radio" name="diagPortfolioType" class="radio-hidden-input radio-box-input" value="종합형" checked />
@@ -226,7 +282,7 @@
                 </section>
 
                 <div class="areaBtnDefault bgcolor">
-                    <a href="javascript:;" class="btnPressPoint" role="button">진단 대상 확인</a>
+                    <a href="javascript:;" class="btnPressPoint" role="button">진단할 자산 선택하기</a>
                 </div>
             </div>
         </div>
@@ -239,7 +295,7 @@
                     new Chart(canvas.getContext('2d'), {
                         type: 'doughnut',
                         data: {
-                            labels: ['해외채권', '국내채권', '해외채권', '국내주식', '해외선진국주식', '해외신흥국주식', '대체자산'],
+                            labels: ['현금성', '국내채권', '해외채권', '국내주식', '해외선진국주식', '해외신흥국주식', '대체자산'],
                             datasets: [
                                 {
                                     data: [120000000, 46000000, 20000000, 112000000, 49600000, 12400000, 4000000],
@@ -276,8 +332,8 @@
 
                 var NOTE_TEXT = {
                     종합형: '종합형은 국내·해외 6개 자산군 전체를 말해요. 한쪽으로 치우치지 않게 포트폴리오를 제안할 수 있어요.',
-                    국내형: '국내형은 국내 자산군만으로 구성해요. 환율 변동의 영향을 덜 받는 포트폴리오를 제안할 수 있어요.',
-                    해외형: '해외형은 해외 자산군만으로 구성해요. 국내 시장에 치우치지 않게 분산된 포트폴리오를 제안할 수 있어요.'
+                    국내형: '국내자산은 국내주식, 국내채권을 말해요. 국내자산을 위주로 투자 포트폴리오를 제안 받을 수 있어요',
+                    해외형: '해외자산은 해외선진국주식, 해외신흥국주식 해외채권을 말해요. 해외자산을 위주로 투자 포트폴리오를 제안 받을 수 있어요'
                 };
                 var noteEl = document.querySelector('[data-diag-note]');
                 var typeInputs = Array.prototype.slice.call(document.querySelectorAll('input[name="diagPortfolioType"]'));
