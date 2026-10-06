@@ -1,0 +1,1547 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <!-- [nochart] 검토용 사본: 공통 head(head-mb-update.js)에서 chart.js 한 줄만 뺀 내용을 인라인 + nochart.css/js 추가 -->
+        <script>
+            /**
+             * Head include
+             * ------------------
+             * css & script 공통 include
+             */
+
+            (function () {
+                var str =
+                    "" +
+                    '<meta http-equiv="Content-Script-Type" content="text/javascript">' +
+                    '<meta http-equiv="Content-Style-Type" content="text/css">' +
+                    '<meta http-equiv="X-UA-Compatible" content="IE=edge">' +
+                    '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">' +
+                    '<meta name="apple-mobile-web-app-title" content="NH마이데이터">' +
+                    '<meta http-equiv="imagetoolbar" content="no">' +
+                    '<meta name="robots" content="no-index,follow">' +
+                    '<meta name="title" content="">' +
+                    '<meta name="author" content="">' +
+                    '<meta name="content" content="">' +
+                    '<meta name="keywords" content="NH마이데이터">' +
+                    '<meta name="description" content="NH마이데이터">' +
+                    '<meta http-equiv="Pragma" content="no-cache">' +
+                    '<meta http-equiv="Expires" content="-1">' +
+                    // title은 공통 include에 넣지 않음 — 각 html 파일에서 <title>로 직접 지정
+
+                    '<link type="text/css" rel="stylesheet" href="../../css/swiper.min.css">' +
+                    '<link type="text/css" rel="stylesheet" href="../../css/nh_base.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nh_layout.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nh_comm.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_logos.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_com.css" id="changeCom">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_cont.css" id="changeCont">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd.css">' + //2023 마이데이터 고도화
+                    '<link type="text/css" rel="stylesheet" href="../../css/ms_allone.css">' +
+                    '<link type="text/css" rel="stylesheet" href="../../css/ms_pay.css">' + //NH-Pay
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd_mb.css?20250912">' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                    //'<link rel="stylesheet" type="text/css" href="../../css/update.css">' + //2026 NH농협은행 nds 적용
+                    // OF는 실 단말 하이브리드 웹뷰에서만 주입되는 네이티브 브릿지 전역객체라, pub 폴더를 브라우저로 단독
+                    // 열람하는 이 환경에는 존재하지 않음. nhasset-ui.js의 popOpenRun()이 OF.exeStatus를 가드 없이
+                    // 참조하고 있어서(레거시 원본 소스는 수정하지 않음) 여기서 빈 객체로 미리 정의해 ReferenceError를
+                    // 막는다. 실제 단말에서는 OF가 먼저 주입되어 있으므로 이 줄은 아무 영향을 주지 않는다.
+                    "<script>window.OF = window.OF || {};<\/script>" +
+                    '<script src="../../js/jquery-1.9.1.min.js"><\/script>' +
+                    '<script src="../../js/jquery-ui.min.js"><\/script>' +
+                    '<script src="../../js/jquery.ui.touch-punch.min.js"><\/script>' +
+                    '<script src="../../js/swiper.7.4.1.min.js"><\/script>' +
+                    '<script src="../../js/common_ui.js"><\/script>' +
+                    '<script src="../../js/nhasset-ui.js"><\/script>' +
+                    '<script src="../../js/nhasset-ui-myd.js"><\/script>' + //2023 마이데이터 고도화
+                    '<script src="../../js/nhasset-ui-myd-mb.js"><\/script>' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                    '<script src="../../js/update-ui.js"><\/script>' + '<link rel="stylesheet" type="text/css" href="./nochart.css">' + '<script src="./nochart.js"><\/script>'; //2026 NH농협은행 nds 적용 화면 UI 스크립트
+                //    '<link type="text/css" rel="stylesheet" href="../pub-assets/css/guide.css">'; //가이드용 css 실제 서비스에는 불필요
+                // +'<script src="../pub-assets/js/guide.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요
+                // +'<script src="../pub-assets/js/guide-mb.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요 //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                document.write(str);
+            })();
+        </script>
+        <title>자산관리 포털 메인-일반인 | 마이데이터</title>
+    </head>
+
+    <body class="bgcolor">
+        <div class="wrapper nhasset nds">
+            <div class="header bgcolor">
+                <a href="javascript:;" role="button" class="btnBack"><span class="blind">이전화면으로</span></a>
+                <h1>자산 관리 포털</h1>
+                <a href="javascript:;" class="btnGoHome" role="button"><span class="blind">Home</span></a>
+                <a href="javascript:;" class="btnAll" role="button"><span class="blind">전체메뉴</span></a>
+            </div>
+
+            <div class="container bgcolor">
+                <!-- 자산 카테고리 탭 -->
+                <div class="tab-line">
+                    <div class="tab-line__list" role="tablist" aria-label="자산 카테고리" id="assetTabList">
+                        <button type="button" id="assetTab-liquidity" class="tab-line__item" role="tab" aria-selected="false" tabindex="-1">예금</button>
+                        <button type="button" id="assetTab-invest" class="tab-line__item" role="tab" aria-selected="false" tabindex="-1">투자</button>
+                        <button type="button" id="assetTab-pension" class="tab-line__item is-active" role="tab" aria-selected="true" tabindex="0">연금</button>
+                        <button type="button" id="assetTab-loan" class="tab-line__item" role="tab" aria-selected="false" tabindex="-1">대출</button>
+                    </div>
+                </div>
+                <p class="blind" id="assetHeroAnnounce" aria-live="polite"></p>
+
+                <div class="asset-hero-swiper-clip">
+                    <div class="asset-hero-swiper swiper-container" id="assetHeroSwiper">
+                        <div class="swiper-wrapper">
+                            <!-- 예금 -->
+                            <div class="swiper-slide" data-category-label="예금" aria-hidden="true">
+                                <div class="hero">
+                                    <div class="hero__flip">
+                                        <div class="hero__face is-front is-redesign">
+                                            <div class="hc-top">
+                                                <p class="hc-title">자산 현황</p>
+                                                <p class="hc-date">
+                                                    2027.07.13일 기준
+                                                    <button type="button" class="hc-date__icon" data-refresh-date>
+                                                        <span class="blind">최신 정보로 새로고침</span>
+                                                    </button>
+                                                </p>
+                                                <div class="hc-amount tooltipWrap">
+                                                    1,090,548,000
+                                                    <span>원</span>
+                                                    <a href="javascript:;" class="toolTipBtn" onclick="tooltipOpen($(this));return false;" role="button"><span class="blind">예금 자산 안내 보기</span></a>
+                                                    <div class="tooltipCont" style="display: none">
+                                                        <h3>예금 자산 안내</h3>
+                                                        <ul>
+                                                            <li>외화 계좌는 전일 환율을 반영하여, 자산 금액이 다를 수 있습니다.</li>
+                                                        </ul>
+                                                        <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
+                                                    </div>
+                                                </div>
+                                                <div class="hc-notice is-compare">
+                                                    <p class="hc-notice__label">2025.11.07대비</p>
+                                                    <p class="hc-notice__value">
+                                                        <span class="hc-change__icon is-up" aria-hidden="true"><span class="blind">상승</span></span>
+                                                        1,540,545원(+10%)
+                                                    </p>
+                                                </div>
+                                                <div class="hero__chart-box">
+                                                    <!-- [nochart] CSS 누적 막대: flex-grow = 항목 비중(%), 양끝 최소 폭 22px·가운데 최소 0.6% -->
+                                                    <span class="nc-stack is-play" data-chart-canvas="liquidity" aria-hidden="true"><i class="nc-stack__seg is-edge" style="flex-grow:85.51;background:#f4ff3f"></i><i class="nc-stack__seg" style="flex-grow:6.44;background:#ff7e7e"></i><i class="nc-stack__seg" style="flex-grow:7.97;background:#49d8ff"></i><i class="nc-stack__seg is-edge" style="flex-grow:0.07;background:#ffa856"></i></span>
+                                                </div>
+                                                <ul class="hero__legend" style="margin-top: 12px;">
+                                                    <li>
+                                                        <span class="hero__legend-label">
+                                                            <span class="hero__dot" style="background: #f4ff3f;"></span>
+                                                            입출금
+                                                        </span>
+                                                        <b>590,500,000원</b>
+                                                    </li>
+                                                    <li>
+                                                        <span class="hero__legend-label">
+                                                            <span class="hero__dot" style="background: #ff7e7e;"></span>
+                                                            예적금
+                                                        </span>
+                                                        <b>44,500,000원</b>
+                                                    </li>
+                                                    <li>
+                                                        <span class="hero__legend-label">
+                                                            <span class="hero__dot" style="background: #49d8ff;"></span>
+                                                            외화
+                                                        </span>
+                                                        <b>55,048,000원</b>
+                                                    </li>
+                                                    <li>
+                                                        <span class="hero__legend-label">
+                                                            <span class="hero__dot" style="background: #ffa856;"></span>
+                                                            기타
+                                                        </span>
+                                                        <b>500,000원</b>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="hc-bottom">
+                                                <div class="hc-cta">
+                                                    <span class="hc-cta__left">
+                                                        <span class="hc-cta__icon" aria-hidden="true"><span class="hc-cta__icon-glyph"></span></span>
+                                                        <span class="hc-cta__label">전월 비교 보기</span>
+                                                    </span>
+                                                    <button type="button" class="hc-cta__flip" data-flip-toggle aria-pressed="false"><span class="hc-cta__flip-glyph"></span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="hero__face is-back is-back-redesign" aria-hidden="true">
+                                            <div class="hcb-head">
+                                                <p class="hcb-title">이전 자산 비교</p>
+                                                <button type="button" class="hcb-flip" data-flip-toggle aria-pressed="true" tabindex="-1">
+                                                    <span class="hcb-flip-glyph" aria-hidden="true"></span>
+                                                    <span class="blind">자산 현황 보기</span>
+                                                </button>
+                                            </div>
+                                            <div class="hcb-chart-box is-compare" style="--compare-rows:4">
+                                                <div class="hcb-chart-meta">
+                                                    <span class="hcb-chart-meta__date">2026.08.26 기준</span>
+                                                    <span class="hcb-chart-meta__unit">단위:만원</span>
+                                                </div>
+                                                <div class="hcb-chart-canvas-wrap">
+                                                    <!-- [nochart] 정적 증감 비교 막대(접근성: 항목별 버튼 + 이전·현재·증감액 낭독): 축 최대값(60,000만원)·막대 길이·증감 금액은 데이터 연동 시 개발에서 계산 -->
+                                                    <div class="nc-cmp" data-insight-chart="liquidity" role="group" aria-label="이전·현재 자산 비교 차트. 항목을 선택하면 증감액을 보여줘요."><div class="nc-cmp__labels" aria-hidden="true"><span>입출금</span><span>예적금</span><span>외화</span><span>기타</span></div><div class="nc-cmp__plot"><button type="button" class="nc-cmp__row" data-label="입출금" data-diff="+30,500,000원" aria-label="입출금, 이전 560,000,000원, 현재 590,500,000원, 30,500,000원 증가"><i class="nc-cmp__bar is-prev" style="width:46.67%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:49.21%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="예적금" data-diff="+2,500,000원" aria-label="예적금, 이전 42,000,000원, 현재 44,500,000원, 2,500,000원 증가"><i class="nc-cmp__bar is-prev" style="width:3.5%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:3.71%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="외화" data-diff="+3,048,000원" aria-label="외화, 이전 52,000,000원, 현재 55,048,000원, 3,048,000원 증가"><i class="nc-cmp__bar is-prev" style="width:4.33%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:4.59%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="기타" data-diff="+50,000원" aria-label="기타, 이전 450,000원, 현재 500,000원, 50,000원 증가"><i class="nc-cmp__bar is-prev" style="width:0.04%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:0.04%" aria-hidden="true"></i></button></div><div class="nc-cmp__axis" aria-hidden="true"><span>60,000</span><span>0</span><span>60,000</span></div></div>
+                                                </div>
+                                                <div class="hcb-legend is-compare">
+                                                    <span class="hcb-legend__item">
+                                                        <i style="background: #c8d2e4;"></i>
+                                                        이전 예금 자산
+                                                    </span>
+                                                    <span class="hcb-legend__item">
+                                                        <i style="background: #a1f069;"></i>
+                                                        현재 예금 자산
+                                                    </span>
+                                                </div>
+                                                <p class="hcb-notice">
+                                                    <span class="hcb-notice__icon" aria-hidden="true"></span>
+                                                    예금 유형을 터치하시면 증감액을 확인하실 수 있어요.
+                                                </p>
+                                            </div>
+                                            <div class="hcb-actions">
+                                                <a href="javascript:;" class="hcb-report-btn" role="button">월간 보고서 보기</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 투자 -->
+                            <div class="swiper-slide" data-category-label="투자" aria-hidden="true">
+                                <div class="hero">
+                                    <div class="hero__flip">
+                                        <div class="hero__face is-front is-redesign">
+                                            <div class="hc-top">
+                                                <p class="hc-title">자산 현황</p>
+                                                <p class="hc-date">
+                                                    2027.07.13일 기준
+                                                    <button type="button" class="hc-date__icon" data-refresh-date>
+                                                        <span class="blind">최신 정보로 새로고침</span>
+                                                    </button>
+                                                </p>
+                                                <div class="hc-amount tooltipWrap">
+                                                    18,950,450
+                                                    <span>원</span>
+                                                    <a href="javascript:;" class="toolTipBtn" onclick="tooltipOpen($(this));return false;" role="button"><span class="blind">투자 자산 안내 보기</span></a>
+                                                    <div class="tooltipCont" style="display: none">
+                                                        <h3>투자 자산 안내</h3>
+                                                        <ul>
+                                                            <li>평가금액은 증시 전일 종가를 반영하여, 자산금액이 다를 수 있습니다.</li>
+                                                        </ul>
+                                                        <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
+                                                    </div>
+                                                </div>
+                                                <div class="hc-notice is-compare">
+                                                    <p class="hc-notice__label">2025.11.07대비</p>
+                                                    <p class="hc-notice__value">
+                                                        <span class="hc-change__icon is-up" aria-hidden="true"><span class="blind">상승</span></span>
+                                                        50,000원(-2.4%)
+                                                    </p>
+                                                </div>
+                                                <div class="hero__chart-box">
+                                                    <!-- [nochart] CSS 누적 막대: flex-grow = 항목 비중(%), 양끝 최소 폭 22px·가운데 최소 0.6% -->
+                                                    <span class="nc-stack is-play" data-chart-canvas="invest" aria-hidden="true"><i class="nc-stack__seg is-edge" style="flex-grow:37.47;background:#f4ff3f"></i><i class="nc-stack__seg" style="flex-grow:12.49;background:#ff7e7e"></i><i class="nc-stack__seg" style="flex-grow:0.02;background:#49d8ff"></i><i class="nc-stack__seg" style="flex-grow:0.02;background:#ffa856"></i><i class="nc-stack__seg" style="flex-grow:0.02;background:#38e784"></i><i class="nc-stack__seg is-edge" style="flex-grow:49.96;background:#c8d2e4"></i></span>
+                                                </div>
+                                                <ul class="hero__legend mt12">
+                                                    <li>
+                                                        <span class="hero__legend-label">
+                                                            <span class="hero__dot" style="background: #f4ff3f;"></span>
+                                                            국내주식
+                                                        </span>
+                                                        <b>1,500,000원</b>
+                                                    </li>
+                                                    <li>
+                                                        <span class="hero__legend-label">
+                                                            <span class="hero__dot" style="background: #ff7e7e;"></span>
+                                                            해외주식
+                                                        </span>
+                                                        <b>500,000원</b>
+                                                    </li>
+                                                    <li>
+                                                        <span class="hero__legend-label">
+                                                            <span class="hero__dot" style="background: #49d8ff;"></span>
+                                                            채권
+                                                        </span>
+                                                        <b>1,000원</b>
+                                                    </li>
+                                                    <li>
+                                                        <span class="hero__legend-label">
+                                                            <span class="hero__dot" style="background: #ffa856;"></span>
+                                                            펀드
+                                                        </span>
+                                                        <b>1,000원</b>
+                                                    </li>
+                                                    <li>
+                                                        <span class="hero__legend-label">
+                                                            <span class="hero__dot" style="background: #38e784;"></span>
+                                                            예수금
+                                                        </span>
+                                                        <b>1,000원</b>
+                                                    </li>
+                                                    <li>
+                                                        <span class="hero__legend-label">
+                                                            <span class="hero__dot" style="background: #c8d2e4;"></span>
+                                                            기타
+                                                        </span>
+                                                        <b>2,000,000원</b>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="hc-bottom">
+                                                <div class="hc-cta">
+                                                    <span class="hc-cta__left">
+                                                        <span class="hc-cta__icon" aria-hidden="true"><span class="hc-cta__icon-glyph"></span></span>
+                                                        <span class="hc-cta__label">투자 자산 변화 보기</span>
+                                                    </span>
+                                                    <button type="button" class="hc-cta__flip" data-flip-toggle aria-pressed="false"><span class="hc-cta__flip-glyph"></span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="hero__face is-back is-back-redesign" aria-hidden="true">
+                                            <div class="hcb-head">
+                                                <p class="hcb-title">이전 자산 비교</p>
+                                                <button type="button" class="hcb-flip" data-flip-toggle aria-pressed="true" tabindex="-1">
+                                                    <span class="hcb-flip-glyph" aria-hidden="true"></span>
+                                                    <span class="blind">내 투자 자산 보기</span>
+                                                </button>
+                                            </div>
+                                            <div class="hcb-chart-box is-compare" style="--compare-rows:6">
+                                                <div class="hcb-chart-meta">
+                                                    <span class="hcb-chart-meta__date">2026.08.26 기준</span>
+                                                    <span class="hcb-chart-meta__unit">단위:만원</span>
+                                                </div>
+                                                <div class="hcb-chart-canvas-wrap">
+                                                    <!-- [nochart] 정적 증감 비교 막대(접근성: 항목별 버튼 + 이전·현재·증감액 낭독): 축 최대값(250만원)·막대 길이·증감 금액은 데이터 연동 시 개발에서 계산 -->
+                                                    <div class="nc-cmp" data-insight-chart="invest" role="group" aria-label="이전·현재 자산 비교 차트. 항목을 선택하면 증감액을 보여줘요."><div class="nc-cmp__labels" aria-hidden="true"><span>국내주식</span><span>해외주식</span><span>채권</span><span>펀드</span><span>예수금</span><span>기타</span></div><div class="nc-cmp__plot"><button type="button" class="nc-cmp__row" data-label="국내주식" data-diff="-75,000원" aria-label="국내주식, 이전 1,575,000원, 현재 1,500,000원, 75,000원 감소"><i class="nc-cmp__bar is-prev" style="width:31.5%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:30%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="해외주식" data-diff="-25,000원" aria-label="해외주식, 이전 525,000원, 현재 500,000원, 25,000원 감소"><i class="nc-cmp__bar is-prev" style="width:10.5%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:10%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="채권" data-diff="-50원" aria-label="채권, 이전 1,050원, 현재 1,000원, 50원 감소"><i class="nc-cmp__bar is-prev" style="width:0.02%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:0.02%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="펀드" data-diff="-50원" aria-label="펀드, 이전 1,050원, 현재 1,000원, 50원 감소"><i class="nc-cmp__bar is-prev" style="width:0.02%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:0.02%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="예수금" data-diff="-50원" aria-label="예수금, 이전 1,050원, 현재 1,000원, 50원 감소"><i class="nc-cmp__bar is-prev" style="width:0.02%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:0.02%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="기타" data-diff="-100,000원" aria-label="기타, 이전 2,100,000원, 현재 2,000,000원, 100,000원 감소"><i class="nc-cmp__bar is-prev" style="width:42%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:40%" aria-hidden="true"></i></button></div><div class="nc-cmp__axis" aria-hidden="true"><span>250</span><span>0</span><span>250</span></div></div>
+                                                </div>
+                                                <div class="hcb-legend is-compare">
+                                                    <span class="hcb-legend__item">
+                                                        <i style="background: #c8d2e4;"></i>
+                                                        이전 투자 자산
+                                                    </span>
+                                                    <span class="hcb-legend__item">
+                                                        <i style="background: #a1f069;"></i>
+                                                        현재 투자 자산
+                                                    </span>
+                                                </div>
+                                                <p class="hcb-notice">
+                                                    <span class="hcb-notice__icon" aria-hidden="true"></span>
+                                                    투자 유형을 터치하시면 증감액을 확인하실 수 있어요.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 연금 -->
+                            <div class="swiper-slide" data-category-label="연금" aria-hidden="false">
+                                <div class="hero">
+                                    <div class="hero__flip">
+                                        <div class="hero__face is-front is-redesign">
+                                            <div class="hc-top">
+                                                <p class="hc-title">자산 현황</p>
+                                                <p class="hc-date">
+                                                    2027.07.13일 기준
+                                                    <button type="button" class="hc-date__icon" data-refresh-date>
+                                                        <span class="blind">최신 정보로 새로고침</span>
+                                                    </button>
+                                                </p>
+                                                <div class="hc-amount tooltipWrap">
+                                                    7,654,328
+                                                    <span>원</span>
+                                                    <a href="javascript:;" class="toolTipBtn" onclick="tooltipOpen($(this));return false;" role="button"><span class="blind">연금 자산 안내 보기</span></a>
+                                                    <div class="tooltipCont" style="display: none">
+                                                        <h3>연금 자산 안내</h3>
+                                                        <ul>
+                                                            <li>연금금액은 증시 전일 종가를 반영하여, 자산금액이 다를 수 있습니다.</li>
+                                                        </ul>
+                                                        <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
+                                                    </div>
+                                                </div>
+                                                <div class="hc-notice is-compare">
+                                                    <p class="hc-notice__label">2025.11.07대비</p>
+                                                    <p class="hc-notice__value">
+                                                        <span class="hc-change__icon is-down" aria-hidden="true"><span class="blind">하락</span></span>
+                                                        843,545원(+11.43%)
+                                                    </p>
+                                                </div>
+                                                <div class="hero__chart-box">
+                                                    <!-- [nochart] CSS 누적 막대: flex-grow = 항목 비중(%), 양끝 최소 폭 22px·가운데 최소 0.6% -->
+                                                    <span class="nc-stack is-play" data-chart-canvas="pension" aria-hidden="true"><i class="nc-stack__seg is-edge" style="flex-grow:86.82;background:#f4ff3f"></i><i class="nc-stack__seg" style="flex-grow:13.05;background:#ff7e7e"></i><i class="nc-stack__seg is-edge" style="flex-grow:0.13;background:#49d8ff"></i></span>
+                                                </div>
+                                                <ul class="hero__legend" style="margin-top: 12px;">
+                                                    <li>
+                                                        <span class="hero__legend-label">
+                                                            <span class="hero__dot" style="background: #f4ff3f;"></span>
+                                                            개인연금
+                                                        </span>
+                                                        <b>6,654,328원</b>
+                                                    </li>
+                                                    <li>
+                                                        <span class="hero__legend-label">
+                                                            <span class="hero__dot" style="background: #ff7e7e;"></span>
+                                                            퇴직연금
+                                                        </span>
+                                                        <b>1,000,000원</b>
+                                                    </li>
+                                                    <li>
+                                                        <span class="hero__legend-label">
+                                                            <span class="hero__dot" style="background: #49d8ff;"></span>
+                                                            공적연금
+                                                        </span>
+                                                        <b>0원</b>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="hc-bottom">
+                                                <div class="hc-cta">
+                                                    <span class="hc-cta__left">
+                                                        <span class="hc-cta__icon" aria-hidden="true"><span class="hc-cta__icon-glyph"></span></span>
+                                                        <span class="hc-cta__label">연금 자산 변화 보기</span>
+                                                    </span>
+                                                    <button type="button" class="hc-cta__flip" data-flip-toggle aria-pressed="false"><span class="hc-cta__flip-glyph"></span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="hero__face is-back is-back-redesign" aria-hidden="true">
+                                            <div class="hcb-head">
+                                                <p class="hcb-title">이전 자산 비교</p>
+                                                <button type="button" class="hcb-flip" data-flip-toggle aria-pressed="true" tabindex="-1">
+                                                    <span class="hcb-flip-glyph" aria-hidden="true"></span>
+                                                    <span class="blind">내 연금 자산 보기</span>
+                                                </button>
+                                            </div>
+                                            <div class="hcb-chart-box is-compare" style="--compare-rows:3">
+                                                <div class="hcb-chart-meta">
+                                                    <span class="hcb-chart-meta__date">2026.08.26 기준</span>
+                                                    <span class="hcb-chart-meta__unit">단위:만원</span>
+                                                </div>
+                                                <div class="hcb-chart-canvas-wrap">
+                                                    <!-- [nochart] 정적 증감 비교 막대(접근성: 항목별 버튼 + 이전·현재·증감액 낭독): 축 최대값(700만원)·막대 길이·증감 금액은 데이터 연동 시 개발에서 계산 -->
+                                                    <div class="nc-cmp" data-insight-chart="pension" role="group" aria-label="이전·현재 자산 비교 차트. 항목을 선택하면 증감액을 보여줘요."><div class="nc-cmp__labels" aria-hidden="true"><span>개인연금</span><span>퇴직연금</span><span>공적연금</span></div><div class="nc-cmp__plot"><button type="button" class="nc-cmp__row" data-label="개인연금" data-diff="+354,328원" aria-label="개인연금, 이전 6,300,000원, 현재 6,654,328원, 354,328원 증가"><i class="nc-cmp__bar is-prev" style="width:45%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:47.53%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="퇴직연금" data-diff="+50,000원" aria-label="퇴직연금, 이전 950,000원, 현재 1,000,000원, 50,000원 증가"><i class="nc-cmp__bar is-prev" style="width:6.79%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:7.14%" aria-hidden="true"></i></button><button type="button" class="nc-cmp__row" data-label="공적연금" data-diff="+10,000원" aria-label="공적연금, 이전 0원, 현재 10,000원, 10,000원 증가"><i class="nc-cmp__bar is-prev" style="width:0%" aria-hidden="true"></i><i class="nc-cmp__bar is-now" style="width:0.07%" aria-hidden="true"></i></button></div><div class="nc-cmp__axis" aria-hidden="true"><span>700</span><span>0</span><span>700</span></div></div>
+                                                </div>
+                                                <div class="hcb-legend is-compare">
+                                                    <span class="hcb-legend__item">
+                                                        <i style="background: #c8d2e4;"></i>
+                                                        이전 연금 자산
+                                                    </span>
+                                                    <span class="hcb-legend__item">
+                                                        <i style="background: #a1f069;"></i>
+                                                        현재 연금 자산
+                                                    </span>
+                                                </div>
+                                                <p class="hcb-notice">
+                                                    <span class="hcb-notice__icon" aria-hidden="true"></span>
+                                                    연금 유형을 터치하시면 증감액을 확인하실 수 있어요.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 대출 -->
+                            <div class="swiper-slide" data-category-label="대출" aria-hidden="true">
+                                <div class="hero">
+                                    <div class="hero__flip">
+                                        <div class="hero__face is-front is-redesign">
+                                            <div class="hc-top is-loan">
+                                                <p class="hc-title">대출 현황</p>
+                                                <p class="hc-date">
+                                                    2027.07.13일 기준
+                                                    <button type="button" class="hc-date__icon" data-refresh-date>
+                                                        <span class="blind">최신 정보로 새로고침</span>
+                                                    </button>
+                                                </p>
+                                                <div class="hc-amount tooltipWrap">
+                                                    390,654,328
+                                                    <span>원</span>
+                                                    <a href="javascript:;" class="toolTipBtn" onclick="tooltipOpen($(this));return false;" role="button"><span class="blind">대출 현황 안내 보기</span></a>
+                                                    <div class="tooltipCont" style="display: none">
+                                                        <h3>대출 현황 안내</h3>
+                                                        <ul>
+                                                            <li>
+                                                                이번 달 상환 예정 금액은 추정치로, 실제 청구 금액과 차이가 있을 수 있습니다.
+                                                                <br />
+                                                                대출 중도 상환, 자동이체 휴일 출금일 지정 등 해당기관 개별 설정에 따라 내용이 변동될 수 있습니다.
+                                                                <br />
+                                                                타금융기관 대출상품은 원금균등, 원리금균등, 만기예정일시 상환방식에 한하여 제공하며 상환금액 및 상환일은 차이가 있을 수 있습니다.
+                                                            </li>
+                                                        </ul>
+                                                        <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
+                                                    </div>
+                                                </div>
+                                                <div class="hc-notice is-compare">
+                                                    <p class="hc-notice__label">2025.11.07대비</p>
+                                                    <p class="hc-notice__value">
+                                                        <span class="hc-change__icon is-up" aria-hidden="true"><span class="blind">상승</span></span>
+                                                        1,058,000원(-16.54%)
+                                                    </p>
+                                                </div>
+                                                <div class="hc-stats">
+                                                    <div class="hc-stats__row">
+                                                        <div class="hc-stats__item">
+                                                            <p class="hc-stats__label">보유 대출 계좌</p>
+                                                            <p class="hc-stats__value">2 건</p>
+                                                        </div>
+                                                        <div class="hc-stats__item">
+                                                            <div class="hc-stats__label tooltipWrap">
+                                                                월 예상 상환액
+                                                                <a href="javascript:;" class="toolTipBtn" onclick="tooltipOpen($(this));return false;" role="button"><span class="blind">대출 현황 안내 보기</span></a>
+                                                                <div class="tooltipCont" style="display: none">
+                                                                    <h3>월 예상 상환액 안내</h3>
+                                                                    <ul>
+                                                                        <li>상환액은 마이데이터 기반 지난 대출 거래내역을 통해 추정한 금액으로 실제 금액과 다를 수 있습니다.</li>
+                                                                        <li>대출 상환 방법 및 중도상환금액, 연체 등은 반영되지 않을 수 있어 정확한 대출 정보는 대출받은 기관을 통해 다시 한번 확인하시기 바랍니다.</li>
+                                                                    </ul>
+                                                                    <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
+                                                                </div>
+                                                            </div>
+                                                            <p class="hc-stats__value">3,840,316 원</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hc-stats__row">
+                                                        <div class="hc-stats__item">
+                                                            <p class="hc-stats__label">대출 최대 상환 기간</p>
+                                                            <p class="hc-stats__value">178 개월</p>
+                                                        </div>
+                                                        <div class="hc-stats__item">
+                                                            <div class="hc-stats__label tooltipWrap">
+                                                                대출 평균 금리
+                                                                <a href="javascript:;" class="toolTipBtn" onclick="tooltipOpen($(this));return false;" role="button"><span class="blind">대출 현황 안내 보기</span></a>
+                                                                <div class="tooltipCont" style="display: none">
+                                                                    <h3>대출 평균 금리 안내</h3>
+                                                                    <ul>
+                                                                        <li>평균금리는 마이데이터 기반 대출 계좌별 신청 시 명시된 기본 금리를 기준으로 합산 금액을 계좌 건수로 나누어 평균 금리를 추정한 이율로 실제 금리와 다를 수 있습니다.</li>
+                                                                    </ul>
+                                                                    <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
+                                                                </div>
+                                                            </div>
+                                                            <p class="hc-stats__value">6.30 %</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="hc-bottom is-loan">
+                                                <div class="hc-cta">
+                                                    <span class="hc-cta__left">
+                                                        <span class="hc-cta__icon is-loan" aria-hidden="true"><span class="hc-cta__icon-glyph"></span></span>
+                                                        <span class="hc-cta__label">계좌별 상환 현황 보기</span>
+                                                    </span>
+                                                    <button type="button" class="hc-cta__flip" data-flip-toggle aria-pressed="false"><span class="hc-cta__flip-glyph"></span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="hero__face is-back is-back-redesign" aria-hidden="true">
+                                            <div class="hcb-head">
+                                                <p class="hcb-title">계좌별 상환 현황</p>
+                                                <button type="button" class="hcb-flip" data-flip-toggle aria-pressed="true" tabindex="-1">
+                                                    <span class="hcb-flip-glyph" aria-hidden="true"></span>
+                                                    <span class="blind">대출 잔액 보기</span>
+                                                </button>
+                                            </div>
+                                            <div class="loan-repay">
+                                                <button type="button" class="loan-repay__select" data-loan-account-trigger aria-haspopup="listbox" aria-expanded="false">
+                                                    <span class="loan-repay__select-text">신한 MY CAR 신차대출</span>
+                                                    <span class="loan-repay__select-arrow" aria-hidden="true"></span>
+                                                </button>
+                                                <p class="loan-repay__help">계좌를 선택하시면 상환현황을 확인하실 수 있어요</p>
+
+                                                <div class="loan-repay__meta">
+                                                    <span>2026.08.26 기준</span>
+                                                    <!-- <span>단위:만원</span> -->
+                                                </div>
+
+                                                <div class="loan-repay__bar">
+                                                    <span class="loan-repay__bar-fill" style="width: 57.8%"></span>
+                                                </div>
+
+                                                <div class="loan-repay__total">
+                                                    <span class="loan-repay__total-label">대출금액</span>
+                                                    <span class="loan-repay__total-value">200,000,000 원</span>
+                                                </div>
+
+                                                <dl class="loan-repay__amounts">
+                                                    <div class="loan-repay__row">
+                                                        <dt>
+                                                            <i style="background: #38e784;"></i>
+                                                            갚은 금액
+                                                        </dt>
+                                                        <dd>3,043,036 원</dd>
+                                                    </div>
+                                                    <div class="loan-repay__row">
+                                                        <dt>
+                                                            <i style="background: #c8d2e4;"></i>
+                                                            남은 금액
+                                                        </dt>
+                                                        <dd>196,956,964 원</dd>
+                                                    </div>
+                                                </dl>
+
+                                                <dl class="loan-repay__detail">
+                                                    <div class="loan-repay__row">
+                                                        <dt>상환방식</dt>
+                                                        <dd>원리금 균등상환</dd>
+                                                    </div>
+                                                    <div class="loan-repay__row">
+                                                        <dt>금리</dt>
+                                                        <dd>3.56 %</dd>
+                                                    </div>
+                                                    <div class="loan-repay__row">
+                                                        <dt>상환 잔여 회차</dt>
+                                                        <dd><em>354</em> / 360 회</dd>
+                                                    </div>
+                                                    <div class="loan-repay__row">
+                                                        <dt>월 예상 상환액</dt>
+                                                        <dd>1,020,518 원</dd>
+                                                    </div>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- [예금] -->
+                <div class="asset-tab-panel" data-tab-panel="liquidity" hidden>
+                    <section class="md-section">
+                        <h2 class="md-section__title">인사이트</h2>
+                        <div class="md-card insight-list">
+                            <div class="insight-list__item">
+                                <button type="button" class="insight-list__row" data-acc-toggle aria-expanded="true">
+                                    <span class="insight-hero__status-icon is-blue" aria-hidden="true">
+                                        <span class="lottie-anim" style="--lottie-size: 40px" data-lottie="lottieInsightSunny1" data-lottie-loop="true" data-lottie-path="sunny"></span>
+                                    </span>
+                                    <span class="insight-hero__status-body">
+                                        <p class="insight-hero__status-title">잘 모으고 있어요</p>
+                                        <p class="insight-hero__status-desc">AI진단으로 수익을 높여보세요</p>
+                                    </span>
+                                    <span class="insight-list__arrow" aria-hidden="true"></span>
+                                </button>
+                                <div class="insight-list__body">
+                                    <p>어쨌든 매우매우 좋아서 매우매우 좋아서어쨌든 매우매우 좋아서 매우매우 좋아서어쨌든 매우매우 좋아서 매우매우 좋아서 좋아요.</p>
+                                    <button type="button" class="card-btn">연금진단 하기</button>
+                                </div>
+                            </div>
+                            <hr class="divider is-page" />
+                            <div class="insight-list__item">
+                                <button type="button" class="insight-list__row" data-acc-toggle aria-expanded="false">
+                                    <span class="insight-hero__status-icon is-mint" aria-hidden="true">
+                                        <span class="lottie-anim" style="--lottie-size: 40px" data-lottie="lottieInsightWindyTree1" data-lottie-loop="true" data-lottie-path="windy-tree"></span>
+                                    </span>
+                                    <span class="insight-hero__status-body">
+                                        <p class="insight-hero__status-title">투자를 잘하고 있어요!</p>
+                                        <p class="insight-hero__status-desc">포트폴리오 계획을 세워보세요</p>
+                                    </span>
+                                    <span class="insight-list__arrow" aria-hidden="true"></span>
+                                </button>
+                                <div class="insight-list__body" hidden>
+                                    <p>투자 성향에 맞는 포트폴리오를 꾸준히 잘 유지하고 있어요.</p>
+                                    <button type="button" class="card-btn">연금진단 하기</button>
+                                </div>
+                            </div>
+                            <hr class="divider is-page" />
+                            <div class="insight-list__item">
+                                <button type="button" class="insight-list__row" data-acc-toggle aria-expanded="false">
+                                    <span class="insight-hero__status-icon is-pink" aria-hidden="true">
+                                        <span class="lottie-anim" style="--lottie-size: 40px" data-lottie="lottieInsightRainUmbrella1" data-lottie-loop="true" data-lottie-path="rain-umbrella"></span>
+                                    </span>
+                                    <span class="insight-hero__status-body">
+                                        <p class="insight-hero__status-title">자산이 위험해요!</p>
+                                        <p class="insight-hero__status-desc">투자자산 비율을 줄이세요</p>
+                                    </span>
+                                    <span class="insight-list__arrow" aria-hidden="true"></span>
+                                </button>
+                                <div class="insight-list__body" hidden>
+                                    <p>투자자산 비중이 높아지고 있어요. 목표 비중에 맞게 조정해보세요.</p>
+                                    <button type="button" class="card-btn">연금진단 하기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="md-section">
+                        <div class="deposit-promo-banner" style="background:#E3F3F2">
+                            <p class="deposit-promo-banner__sub">현재 나의 여유자금은 얼마나 있을까?</p>
+                            <p class="deposit-promo-banner__title">자산진단에서 확인해보세요!</p>
+                            <img class="deposit-promo-banner__img" src="../../images/update/img-3d-money-bag.png" alt="" aria-hidden="true" />
+                        </div>
+                        <div class="deposit-promo-banner mt12" style="background:#F8EAE1">
+                            <p class="deposit-promo-banner__sub">나만의 목표를 위해 목돈 만들기</p>
+                            <p class="deposit-promo-banner__title">목표설정을 해보세요!</p>
+                            <img class="deposit-promo-banner__img" src="../../images/update/img-3d-target-goal.png" alt="" aria-hidden="true" />
+                        </div>
+
+                        <div class="promo-carousel mt32">
+                            <div class="promo-carousel__track swiper-container" id="liquiditySubPromoSwiper">
+                                <div class="swiper-wrapper">
+                                    <div class="promo-carousel__slide swiper-slide">
+                                        <p class="promo-carousel__title">
+                                            머니포용 게임으로 청년금융
+                                            <br />
+                                            생활을 미리 체험해보세요
+                                        </p>
+                                        <p class="promo-carousel__tags">
+                                            <span>#머니포용</span>
+                                            <span>#서민금융진흥원</span>
+                                        </p>
+                                        <img class="promo-carousel__illust" src="../../images/update/img-elephant-welcome.png" alt="" aria-hidden="true" />
+                                    </div>
+                                    <div class="promo-carousel__slide swiper-slide">
+                                        <p class="promo-carousel__title">청년 자금지원을 위한 햇살론 유스를 확인해보세요!</p>
+                                        <p class="promo-carousel__tags">
+                                            <span>#청년자금지원</span>
+                                            <span>#서민금융진흥원</span>
+                                        </p>
+                                        <img class="promo-carousel__illust" src="../../images/update/img-elephant-welcome.png" alt="" aria-hidden="true" />
+                                    </div>
+                                </div>
+                                <div class="indicator-number">
+                                    <div class="indicator-number__paging">
+                                        <button type="button" class="indicator-number__arrow" aria-label="이전"></button>
+                                        <span class="indicator-number__count">
+                                            <span class="indicator-number__current">1</span>
+                                            <span class="indicator-number__dash" aria-hidden="true"></span>
+                                            <span class="indicator-number__total">2</span>
+                                        </span>
+                                        <button type="button" class="indicator-number__arrow" aria-label="다음"></button>
+                                    </div>
+                                    <button type="button" class="indicator-number__control" aria-label="일시정지"></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="thin-link-banner mt32">
+                            내 자산을 지키는 든든한 알림서비스
+                            <span class="thin-link-banner__arrow" aria-hidden="true"></span>
+                        </button>
+                    </section>
+                </div>
+
+                <!-- [투자] -->
+                <div class="asset-tab-panel" data-tab-panel="invest" hidden>
+                    <section class="md-section">
+                        <h2 class="md-section__title">인사이트</h2>
+                        <div class="md-card insight-list">
+                            <div class="insight-list__item">
+                                <button type="button" class="insight-list__row" data-acc-toggle aria-expanded="true">
+                                    <span class="insight-hero__status-icon is-blue" aria-hidden="true">
+                                        <span class="lottie-anim" style="--lottie-size: 40px" data-lottie="lottieInsightSunny2" data-lottie-loop="true" data-lottie-path="sunny"></span>
+                                    </span>
+                                    <span class="insight-hero__status-body">
+                                        <p class="insight-hero__status-title">잘 모으고 있어요</p>
+                                        <p class="insight-hero__status-desc">AI진단으로 수익을 높여보세요</p>
+                                    </span>
+                                    <span class="insight-list__arrow" aria-hidden="true"></span>
+                                </button>
+                                <div class="insight-list__body">
+                                    <p>어쨌든 매우매우 좋아서 매우매우 좋아서어쨌든 매우매우 좋아서 매우매우 좋아서어쨌든 매우매우 좋아서 매우매우 좋아서 좋아요.</p>
+                                    <button type="button" class="card-btn">연금진단 하기</button>
+                                </div>
+                            </div>
+                            <hr class="divider is-page" />
+                            <div class="insight-list__item">
+                                <button type="button" class="insight-list__row" data-acc-toggle aria-expanded="false">
+                                    <span class="insight-hero__status-icon is-mint" aria-hidden="true">
+                                        <span class="lottie-anim" style="--lottie-size: 40px" data-lottie="lottieInsightWindyTree2" data-lottie-loop="true" data-lottie-path="windy-tree"></span>
+                                    </span>
+                                    <span class="insight-hero__status-body">
+                                        <p class="insight-hero__status-title">투자를 잘하고 있어요!</p>
+                                        <p class="insight-hero__status-desc">포트폴리오 계획을 세워보세요</p>
+                                    </span>
+                                    <span class="insight-list__arrow" aria-hidden="true"></span>
+                                </button>
+                                <div class="insight-list__body" hidden>
+                                    <p>투자 성향에 맞는 포트폴리오를 꾸준히 잘 유지하고 있어요.</p>
+                                    <button type="button" class="card-btn">연금진단 하기</button>
+                                </div>
+                            </div>
+                            <hr class="divider is-page" />
+                            <div class="insight-list__item">
+                                <button type="button" class="insight-list__row" data-acc-toggle aria-expanded="false">
+                                    <span class="insight-hero__status-icon is-pink" aria-hidden="true">
+                                        <span class="lottie-anim" style="--lottie-size: 40px" data-lottie="lottieInsightRainUmbrella2" data-lottie-loop="true" data-lottie-path="rain-umbrella"></span>
+                                    </span>
+                                    <span class="insight-hero__status-body">
+                                        <p class="insight-hero__status-title">자산이 위험해요!</p>
+                                        <p class="insight-hero__status-desc">투자자산 비율을 줄이세요</p>
+                                    </span>
+                                    <span class="insight-list__arrow" aria-hidden="true"></span>
+                                </button>
+                                <div class="insight-list__body" hidden>
+                                    <p>투자자산 비중이 높아지고 있어요. 목표 비중에 맞게 조정해보세요.</p>
+                                    <button type="button" class="card-btn">연금진단 하기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="md-section">
+                        <div class="md-section__title-row">
+                            <h2 class="md-section__title">데일리 브리핑</h2>
+                            <span class="ai-badge">에이전트 AI</span>
+                        </div>
+                        <div class="md-card">
+                            <div class="accordion-gray">
+                                <p class="accordion-gray__date">2026.08.27일 기준</p>
+                                <div class="accordion-gray__item">
+                                    <button type="button" class="accordion-gray__button--with-icon" data-acc-toggle aria-expanded="true">
+                                        <span class="accordion-gray__icon is-sun" aria-hidden="true"></span>
+                                        <span class="accordion-gray__title-col">
+                                            <span class="accordion-gray__title">호재</span>
+                                            <span class="accordion-gray__sub">시장에 긍정적인 소식입니다</span>
+                                        </span>
+                                    </button>
+                                    <div class="accordion-gray__body">KOSPI, 5월 6일 종가 7,000선 첫 돌파, AI 데이터 센터 수요 폭증과 HBM 공급부족이 견인했습니다.</div>
+                                </div>
+                                <div class="accordion-gray__item">
+                                    <button type="button" class="accordion-gray__button--with-icon" data-acc-toggle aria-expanded="false">
+                                        <span class="accordion-gray__icon is-rain" aria-hidden="true"></span>
+                                        <span class="accordion-gray__title-col">
+                                            <span class="accordion-gray__title">주의</span>
+                                            <span class="accordion-gray__sub">위험요인이 되는 소식입니다</span>
+                                        </span>
+                                    </button>
+                                    <div class="accordion-gray__body" hidden>이번 주 별도의 위험 이슈는 확인되지 않았습니다.</div>
+                                </div>
+                            </div>
+                            <hr class="divider is-page is-space32" />
+                            <p class="briefing-notice">
+                                <span class="briefing-notice__icon" aria-hidden="true"></span>
+                                김*협님의 포트폴리오는 국내주식 22%(반도체 직접보유 포함)로 상승 모멘텀 직접 수혜 구간에 있으나, 동시에 국내·해외채권 35%, 해외주식형 18%로 금리 상승 및 유가 변동성 노출도 상당합니다.
+                            </p>
+                            <button type="button" class="btn is-primary is-md is-full">브리핑 상세보기</button>
+                        </div>
+                        <!-- 투자 자산 금액이 없고 에이전트 AI 분석 데이터 호출이 가능한 경우 -->
+                        <br />
+                        <div class="md-card">
+                            <div class="text-stack">
+                                <p class="text text--h5">KOSPI 7,000선 첫 돌파와 미 · 이란 갈등 격화가동시에 작용한 한주 였어요.</p>
+                                <p class="text text--body3">
+                                    코스닥이 6%대 상승으로 매수 사이드카까지 나오면서 시장의 시선이 중소형주로 확 쏠렸어요.
+                                    <br />
+                                    외국인과 기관이 코스닥에서 함께 순매수로 잡아주면서 매수세가 더 빠르게 붙은 영향이 커요.
+                                </p>
+                            </div>
+                            <hr class="divider is-page is-space32" />
+                            <p class="briefing-notice">
+                                <span class="briefing-notice__icon" aria-hidden="true"></span>
+                                현재 보유하신 투자 자산이 없습니다. 투자 자산을 보유하시면 개인화 데일리 브리핑을 확인하실 수 있어요.
+                            </p>
+                        </div>
+                        <!-- 투자 자산 미연결 고객일 경우 -->
+                        <br />
+                        <div class="md-card">
+                            <div class="text-stack">
+                                <p class="text text--h5">KOSPI 7,000선 첫 돌파와 미 · 이란 갈등 격화가 동시에 작용한 한주 였어요.</p>
+                                <p class="text text--body3">
+                                    코스닥이 6%대 상승으로 매수 사이드카까지 나오면서 시장의 시선이 중소형주로 확 쏠렸어요.
+                                    <br />
+                                    외국인과 기관이 코스닥에서 함께 순매수로 잡아주면서 매수세가 더 빠르게 붙은 영향이 커요.
+                                </p>
+                            </div>
+                            <hr class="divider is-page is-space32" />
+                            <p class="briefing-notice">
+                                <span class="briefing-notice__icon" aria-hidden="true"></span>
+                                자산을 연결하시면 개인화 데일리 브리핑을 확인하실 수 있어요.
+                            </p>
+                            <button type="button" class="btn is-primary is-md is-full">자산 연결하기</button>
+                        </div>
+                    </section>
+
+                    <section class="md-section">
+                        <h2 class="md-section__title">자산진단</h2>
+                        <div class="md-card style-diag">
+                            <div class="style-diag__top">
+                                <div class="style-diag__q">
+                                    <p class="style-diag__q-title">나의 투자 스타일은?</p>
+                                    <p class="style-diag__q-desc">
+                                        전문가가 분석한 내 투자스타일을
+                                        <br />
+                                        알려드려요!
+                                    </p>
+                                </div>
+                                <img class="style-diag__mascot" src="../../images/update/img-ally-question.png" alt="" aria-hidden="true" />
+                            </div>
+                            <p class="style-diag__result">천진난만한 활동가</p>
+                            <div class="style-diag__tags">
+                                <span>#신중한</span>
+                                <span>#긍정적으로 바라보는</span>
+                                <span class="style-diag__tag--accent">#수익을 끝없이 갈망하는</span>
+                                <span>#장기적인 투자혜안</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="md-section">
+                        <div class="deposit-promo-banner" style="background:#E3F3F2">
+                            <p class="deposit-promo-banner__sub">나의 투자 수익률은 어떨까?</p>
+                            <p class="deposit-promo-banner__title">자산진단에서 확인해보세요!</p>
+                            <img class="deposit-promo-banner__img" src="../../images/update/img-3d-money-bag.png" alt="" aria-hidden="true" />
+                        </div>
+
+                        <div class="deposit-promo-banner mt12" style="background:#EBEFF6">
+                            <p class="deposit-promo-banner__sub">또래와 비교한 나의 투자자산을 알아보세요</p>
+                            <p class="deposit-promo-banner__title">또래비교 내 투자 자산은?</p>
+                            <img class="deposit-promo-banner__img" src="../../images/update/img-3d-balance.png" alt="" aria-hidden="true" />
+                        </div>
+
+                        <button type="button" class="thin-link-banner mt32">
+                            해외주식 거래를 위한 양도소득세 계산기
+                            <span class="thin-link-banner__arrow" aria-hidden="true"></span>
+                        </button>
+                    </section>
+                </div>
+
+                <!-- [연금] -->
+                <div class="asset-tab-panel" data-tab-panel="pension">
+                    <section class="md-section pension">
+                        <h2 class="md-section__title">인사이트</h2>
+                        <div class="md-card insight-list">
+                            <div class="insight-list__item">
+                                <button type="button" class="insight-list__row" data-acc-toggle aria-expanded="true">
+                                    <span class="insight-hero__status-icon is-blue" aria-hidden="true">
+                                        <span class="lottie-anim" style="--lottie-size: 40px" data-lottie="lottieInsightSunny3" data-lottie-loop="true" data-lottie-path="sunny"></span>
+                                    </span>
+                                    <span class="insight-hero__status-body">
+                                        <p class="insight-hero__status-title">잘 모으고 있어요</p>
+                                        <p class="insight-hero__status-desc">AI진단으로 수익을 높여보세요</p>
+                                    </span>
+                                    <span class="insight-list__arrow" aria-hidden="true"></span>
+                                </button>
+                                <div class="insight-list__body">
+                                    <p>어쨌든 매우매우 좋아서 매우매우 좋아서어쨌든 매우매우 좋아서 매우매우 좋아서어쨌든 매우매우 좋아서 매우매우 좋아서 좋아요.</p>
+                                    <button type="button" class="card-btn">연금진단 하기</button>
+                                </div>
+                            </div>
+                            <hr class="divider is-page" />
+                            <div class="insight-list__item">
+                                <button type="button" class="insight-list__row" data-acc-toggle aria-expanded="false">
+                                    <span class="insight-hero__status-icon is-mint" aria-hidden="true">
+                                        <span class="lottie-anim" style="--lottie-size: 40px" data-lottie="lottieInsightWindyTree3" data-lottie-loop="true" data-lottie-path="windy-tree"></span>
+                                    </span>
+                                    <span class="insight-hero__status-body">
+                                        <p class="insight-hero__status-title">투자를 잘하고 있어요!</p>
+                                        <p class="insight-hero__status-desc">포트폴리오 계획을 세워보세요</p>
+                                    </span>
+                                    <span class="insight-list__arrow" aria-hidden="true"></span>
+                                </button>
+                                <div class="insight-list__body" hidden>
+                                    <p>투자 성향에 맞는 포트폴리오를 꾸준히 잘 유지하고 있어요.</p>
+                                    <button type="button" class="card-btn">연금진단 하기</button>
+                                </div>
+                            </div>
+                            <hr class="divider is-page" />
+                            <div class="insight-list__item">
+                                <button type="button" class="insight-list__row" data-acc-toggle aria-expanded="false">
+                                    <span class="insight-hero__status-icon is-pink" aria-hidden="true">
+                                        <span class="lottie-anim" style="--lottie-size: 40px" data-lottie="lottieInsightRainUmbrella3" data-lottie-loop="true" data-lottie-path="rain-umbrella"></span>
+                                    </span>
+                                    <span class="insight-hero__status-body">
+                                        <p class="insight-hero__status-title">자산이 위험해요!</p>
+                                        <p class="insight-hero__status-desc">투자자산 비율을 줄이세요</p>
+                                    </span>
+                                    <span class="insight-list__arrow" aria-hidden="true"></span>
+                                </button>
+                                <div class="insight-list__body" hidden>
+                                    <p>투자자산 비중이 높아지고 있어요. 목표 비중에 맞게 조정해보세요.</p>
+                                    <button type="button" class="card-btn">연금진단 하기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="md-section">
+                        <h2 class="md-section__title">조기은퇴 진단</h2>
+                        <div class="md-card retire-check">
+                            <p class="retire-check__headline">
+                                <!-- prettier-ignore -->
+                                <strong>김농협</strong>
+                                님의 은퇴준비율은
+                                <br />
+                                <strong class="retire-check__percent">32%</strong>
+                                입니다.
+                            </p>
+                            <div class="retire-check__track">
+                                <span class="retire-check__bubble">아직은 열심히 일할 때예요!</span>
+                                <img class="retire-check__mascot" src="../../images/update/img-oney-suitcase.png" alt="" aria-hidden="true" />
+                                <span class="retire-check__flag" aria-hidden="true"></span>
+                                <div class="retire-check__bar" role="img" aria-label="은퇴준비율 32%">
+                                    <div class="retire-check__bar-fill" style="width:36%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 계좌 미연결의 경우 케이스 -->
+                        <br />
+                        <div class="md-card retire-check is-locked">
+                            <p class="retire-check__headline">
+                                <!-- prettier-ignore -->
+                                <strong>김농협</strong>
+                                님의 은퇴준비율은
+                                <br />
+                                <strong class="retire-check__percent">32%</strong>
+                                입니다.
+                            </p>
+                            <div class="retire-check__track">
+                                <span class="retire-check__bubble">아직은 열심히 일할 때예요!</span>
+                                <img class="retire-check__mascot" src="../../images/update/img-oney-suitcase.png" alt="" aria-hidden="true" />
+                                <span class="retire-check__flag" aria-hidden="true"></span>
+                                <div class="retire-check__bar" role="img" aria-label="은퇴준비율 32%">
+                                    <div class="retire-check__bar-fill" style="width:36%"></div>
+                                </div>
+                            </div>
+
+                            <div class="card-lock">
+                                <div class="card-lock__group">
+                                    <p class="card-lock__tit">조기은퇴진단</p>
+                                    <p class="card-lock__desc">
+                                        나도 파이어족이 될 수 있을까?
+                                        <br />
+                                        조기은퇴 진단으로 확인해 보세요!
+                                    </p>
+                                </div>
+                                <button type="button" class="card-btn">조기은퇴 진단하기</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="md-section">
+                        <div class="deposit-promo-banner type" style="background:#E1E8F8">
+                            <p class="deposit-promo-banner__title">청년 맞춤 재무상담</p>
+                            <p class="deposit-promo-banner__sub mb20">
+                                국민연금공단 청년 맞춤형
+                                <br />
+                                재무상담 서비스를 받아보세요!
+                            </p>
+                            <img class="deposit-promo-banner__img vertical" src="../../images/update/img-3d-contract.png" alt="" aria-hidden="true" />
+                        </div>
+                    </section>
+                </div>
+
+                <!-- [대출자산] -->
+                <div class="asset-tab-panel" data-tab-panel="loan" hidden>
+                    <section class="md-section">
+                        <h2 class="md-section__title">인사이트</h2>
+                        <div class="md-card insight-list">
+                            <div class="insight-list__item">
+                                <button type="button" class="insight-list__row" data-acc-toggle aria-expanded="true">
+                                    <span class="insight-hero__status-icon is-blue" aria-hidden="true">
+                                        <span class="lottie-anim" style="--lottie-size: 40px" data-lottie="lottieInsightSunny4" data-lottie-loop="true" data-lottie-path="sunny"></span>
+                                    </span>
+                                    <span class="insight-hero__status-body">
+                                        <p class="insight-hero__status-title">잘 모으고 있어요</p>
+                                        <p class="insight-hero__status-desc">AI진단으로 수익을 높여보세요</p>
+                                    </span>
+                                    <span class="insight-list__arrow" aria-hidden="true"></span>
+                                </button>
+                                <div class="insight-list__body">
+                                    <p>어쨌든 매우매우 좋아서 매우매우 좋아서어쨌든 매우매우 좋아서 매우매우 좋아서어쨌든 매우매우 좋아서 매우매우 좋아서 좋아요.</p>
+                                    <button type="button" class="card-btn">연금진단 하기</button>
+                                </div>
+                            </div>
+                            <hr class="divider is-page" />
+                            <div class="insight-list__item">
+                                <button type="button" class="insight-list__row" data-acc-toggle aria-expanded="false">
+                                    <span class="insight-hero__status-icon is-mint" aria-hidden="true">
+                                        <span class="lottie-anim" style="--lottie-size: 40px" data-lottie="lottieInsightWindyTree4" data-lottie-loop="true" data-lottie-path="windy-tree"></span>
+                                    </span>
+                                    <span class="insight-hero__status-body">
+                                        <p class="insight-hero__status-title">투자를 잘하고 있어요!</p>
+                                        <p class="insight-hero__status-desc">포트폴리오 계획을 세워보세요</p>
+                                    </span>
+                                    <span class="insight-list__arrow" aria-hidden="true"></span>
+                                </button>
+                                <div class="insight-list__body" hidden>
+                                    <p>투자 성향에 맞는 포트폴리오를 꾸준히 잘 유지하고 있어요.</p>
+                                    <button type="button" class="card-btn">연금진단 하기</button>
+                                </div>
+                            </div>
+                            <hr class="divider is-page" />
+                            <div class="insight-list__item">
+                                <button type="button" class="insight-list__row" data-acc-toggle aria-expanded="false">
+                                    <span class="insight-hero__status-icon is-pink" aria-hidden="true">
+                                        <span class="lottie-anim" style="--lottie-size: 40px" data-lottie="lottieInsightRainUmbrella4" data-lottie-loop="true" data-lottie-path="rain-umbrella"></span>
+                                    </span>
+                                    <span class="insight-hero__status-body">
+                                        <p class="insight-hero__status-title">자산이 위험해요!</p>
+                                        <p class="insight-hero__status-desc">투자자산 비율을 줄이세요</p>
+                                    </span>
+                                    <span class="insight-list__arrow" aria-hidden="true"></span>
+                                </button>
+                                <div class="insight-list__body" hidden>
+                                    <p>투자자산 비중이 높아지고 있어요. 목표 비중에 맞게 조정해보세요.</p>
+                                    <button type="button" class="card-btn">연금진단 하기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="md-section">
+                        <div class="deposit-promo-banner" style="background:#F8EAE1">
+                            <p class="deposit-promo-banner__sub">대출금리가 부담이 되신다면</p>
+                            <p class="deposit-promo-banner__title">AI 대출금리케어 받기</p>
+                            <img class="deposit-promo-banner__img" src="../../images/update/img-bot-doc.png" alt="" aria-hidden="true" />
+                        </div>
+
+                        <div class="deposit-promo-banner mt12" style="background:#E3F3F2">
+                            <p class="deposit-promo-banner__sub">더 좋은 조건의 대출이 있는지 알고싶다면?</p>
+                            <p class="deposit-promo-banner__title">나에게 맞는 대출 찾기</p>
+                            <img class="deposit-promo-banner__img" src="../../images/update/img-3d-money-bag.png" alt="" aria-hidden="true" />
+                        </div>
+
+                        <div class="deposit-promo-banner mt12" style="background:#DFE3F4">
+                            <p class="deposit-promo-banner__sub">상환할 대출 선택하고</p>
+                            <p class="deposit-promo-banner__title">대출을 줄여나가는 목표등록하기</p>
+                            <img class="deposit-promo-banner__img" src="../../images/update/img-3d-target-goal.png" alt="" aria-hidden="true" />
+                        </div>
+
+                        <div class="promo-carousel mt32">
+                            <div class="promo-carousel__track swiper-container" id="liquiditySubPromoSwiper">
+                                <div class="swiper-wrapper">
+                                    <div class="promo-carousel__slide swiper-slide">
+                                        <p class="promo-carousel__title">
+                                            머니포용 게임으로 청년금융
+                                            <br />
+                                            생활을 미리 체험해보세요
+                                        </p>
+                                        <p class="promo-carousel__tags">
+                                            <span>#머니포용</span>
+                                            <span>#서민금융진흥원</span>
+                                        </p>
+                                        <img class="promo-carousel__illust" src="../../images/update/img-elephant-welcome.png" alt="" aria-hidden="true" />
+                                    </div>
+                                    <div class="promo-carousel__slide swiper-slide">
+                                        <p class="promo-carousel__title">청년 자금지원을 위한 햇살론 유스를 확인해보세요!</p>
+                                        <p class="promo-carousel__tags">
+                                            <span>#청년자금지원</span>
+                                            <span>#서민금융진흥원</span>
+                                        </p>
+                                        <img class="promo-carousel__illust" src="../../images/update/img-elephant-welcome.png" alt="" aria-hidden="true" />
+                                    </div>
+                                </div>
+                                <div class="indicator-number">
+                                    <div class="indicator-number__paging">
+                                        <button type="button" class="indicator-number__arrow" aria-label="이전"></button>
+                                        <span class="indicator-number__count">
+                                            <span class="indicator-number__current">1</span>
+                                            <span class="indicator-number__dash" aria-hidden="true"></span>
+                                            <span class="indicator-number__total">2</span>
+                                        </span>
+                                        <button type="button" class="indicator-number__arrow" aria-label="다음"></button>
+                                    </div>
+                                    <button type="button" class="indicator-number__control" aria-label="일시정지"></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="thin-link-banner mt32">
+                            대출 계획시 유용한, DSR계산기
+                            <span class="thin-link-banner__arrow" aria-hidden="true"></span>
+                        </button>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <div class="nhasset popWrap nds slidePopConfirm" id="loanAccountSheet" style="display: none">
+            <div class="dim"></div>
+            <div class="popInner">
+                <h1>대출 계좌 선택</h1>
+                <div class="popCont">
+                    <div class="popCont__inner">
+                        <div class="bottomsheet-list" data-loan-account-list>
+                            <button type="button" class="bottomsheet-list__item" aria-pressed="false"><span>NH직장인 대출 V</span></button>
+                            <button type="button" class="bottomsheet-list__item is-selected" aria-pressed="true"><span>NH주택담보대출_변동</span></button>
+                            <button type="button" class="bottomsheet-list__item" aria-pressed="false"><span>신한 MY CAR 신차 대출</span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="popBtnWrap">
+                    <a href="javascript:;" onclick="popClose(this);return false;" class="popClose" title="해당 창을 닫습니다." role="button">
+                        <img src="../../images/common/btn_popClose.png" alt="닫기" />
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            (function () {
+                var container = document.getElementById('assetHeroSwiper') || document;
+                var turningFlips = new WeakSet();
+
+                function syncFlipStateToSiblingSlides(flipEl, flipped) {
+                    var slideEl = flipEl.closest('.swiper-slide');
+                    var swiperEl = document.getElementById('assetHeroSwiper');
+                    if (!slideEl || !swiperEl) return;
+                    var label = slideEl.getAttribute('data-category-label');
+                    if (!label) return;
+                    var realSlideEl = swiperEl.querySelector('.swiper-slide:not(.swiper-slide-duplicate)[data-category-label="' + label + '"]');
+                    var siblingSlides = swiperEl.querySelectorAll('.swiper-slide[data-category-label="' + label + '"]');
+                    siblingSlides.forEach(function (otherSlideEl) {
+                        if (otherSlideEl === slideEl) return;
+                        var otherFlip = otherSlideEl.querySelector('.hero__flip');
+                        if (!otherFlip) return;
+                        var oFront = otherFlip.querySelector('.hero__face.is-front');
+                        var oBack = otherFlip.querySelector('.hero__face.is-back');
+                        otherFlip.classList.toggle('is-flipped', flipped);
+                        oFront.setAttribute('aria-hidden', flipped ? 'true' : 'false');
+                        oBack.setAttribute('aria-hidden', flipped ? 'false' : 'true');
+                        otherFlip.querySelectorAll('[data-flip-toggle]').forEach(function (btn) {
+                            var onVisibleFace = flipped ? oBack.contains(btn) : oFront.contains(btn);
+                            btn.setAttribute('aria-pressed', flipped ? 'true' : 'false');
+                            btn.tabIndex = onVisibleFace ? 0 : -1;
+                        });
+
+                        /* [nochart] 캔버스 복사 불필요 (DOM 차트) */
+                    });
+                }
+
+                function setFlipped(flipEl, front, back, toggles, flipped) {
+                    flipEl.classList.toggle('is-flipped', flipped);
+                    var hidingEl = flipped ? front : back;
+                    var showingEl = flipped ? back : front;
+                    var focusWasInsideHidingEl = hidingEl.contains(document.activeElement);
+                    if (focusWasInsideHidingEl) {
+                        document.activeElement.blur();
+                    }
+                    front.setAttribute('aria-hidden', flipped ? 'true' : 'false');
+                    back.setAttribute('aria-hidden', flipped ? 'false' : 'true');
+                    toggles.forEach(function (btn) {
+                        var onVisibleFace = flipped ? back.contains(btn) : front.contains(btn);
+                        btn.setAttribute('aria-pressed', flipped ? 'true' : 'false');
+                        btn.tabIndex = onVisibleFace ? 0 : -1;
+                    });
+                    if (focusWasInsideHidingEl) {
+                        var newToggle = showingEl.querySelector('[data-flip-toggle]');
+                        if (newToggle) newToggle.focus();
+                    }
+                    syncFlipStateToSiblingSlides(flipEl, flipped);
+                }
+
+                function playFlip(flipEl) {
+                    if (turningFlips.has(flipEl)) return;
+                    turningFlips.add(flipEl);
+
+                    var front = flipEl.querySelector('.hero__face.is-front');
+                    var back = flipEl.querySelector('.hero__face.is-back');
+                    var toggles = flipEl.querySelectorAll('[data-flip-toggle]');
+                    var nextFlipped = !flipEl.classList.contains('is-flipped');
+                    flipEl.classList.add('is-turning');
+                    window.setTimeout(function () {
+                        setFlipped(flipEl, front, back, toggles, nextFlipped);
+                        flipEl.classList.remove('is-turning');
+                        window.setTimeout(function () {
+                            turningFlips.delete(flipEl);
+                        }, 220);
+                    }, 220);
+                }
+
+                container.addEventListener('click', function (e) {
+                    var toggleBtn = e.target.closest && e.target.closest('[data-flip-toggle]');
+                    if (!toggleBtn) return;
+                    var flipEl = toggleBtn.closest('.hero__flip');
+                    if (!flipEl) return;
+                    playFlip(flipEl);
+                });
+            })();
+
+            (function () {
+                var container = document.getElementById('assetHeroSwiper') || document;
+                container.addEventListener('click', function (e) {
+                    var btn = e.target.closest && e.target.closest('[data-refresh-date]');
+                    if (!btn) return;
+                    var flipEl = btn.closest('.hero__flip');
+                    var canvas = flipEl && flipEl.querySelector('[data-chart-canvas]');
+                    var categoryKey = canvas && canvas.getAttribute('data-chart-canvas');
+                    if (categoryKey && typeof window.replayHeroBarChart === 'function') {
+                        window.replayHeroBarChart(categoryKey);
+                    }
+
+                    btn.classList.remove('is-refreshing');
+                    void btn.offsetWidth;
+                    btn.classList.add('is-refreshing');
+                });
+                container.addEventListener('animationend', function (e) {
+                    if (e.target && e.target.classList && e.target.classList.contains('hc-date__icon')) {
+                        e.target.classList.remove('is-refreshing');
+                    }
+                });
+            })();
+
+            (function () {
+                var tablist = document.getElementById('assetTabList');
+                var swiperEl = document.getElementById('assetHeroSwiper');
+                var announceEl = document.getElementById('assetHeroAnnounce');
+                if (!tablist || !swiperEl || typeof Swiper === 'undefined') return;
+
+                var tabs = Array.prototype.slice.call(tablist.querySelectorAll('[role="tab"]'));
+                if (!tabs.length) return;
+
+                var initialTabIndex = 0;
+                tabs.forEach(function (t, i) {
+                    if (t.classList.contains('is-active') || t.getAttribute('aria-selected') === 'true') {
+                        initialTabIndex = i;
+                    }
+                });
+
+                var categoryKeys = ['liquidity', 'invest', 'pension', 'loan'];
+                var syncingFromSwiper = false;
+                var lastReplayedRealIndex = null;
+
+                var panelMap = { invest: 'invest', liquidity: 'liquidity', pension: 'pension', loan: 'loan' };
+                var assetPanels = Array.prototype.slice.call(document.querySelectorAll('.asset-tab-panel'));
+                function updateAssetTabPanels(categoryKey) {
+                    if (!assetPanels.length) return;
+                    var target = panelMap[categoryKey] || 'generic';
+                    assetPanels.forEach(function (panel) {
+                        panel.hidden = panel.getAttribute('data-tab-panel') !== target;
+                    });
+                }
+
+                function setActiveTab(index, moveFocus) {
+                    tabs.forEach(function (t, i) {
+                        var selected = i === index;
+                        t.setAttribute('aria-selected', selected ? 'true' : 'false');
+                        t.setAttribute('tabindex', selected ? '0' : '-1');
+                        t.classList.toggle('is-active', selected);
+                    });
+                    updateAssetTabPanels(categoryKeys[index]);
+                    if (moveFocus) tabs[index].focus();
+                }
+
+                tabs.forEach(function (tab, i) {
+                    tab.addEventListener('click', function () {
+                        if (swiper) swiper.slideToLoop(i);
+                    });
+                    tab.addEventListener('keydown', function (e) {
+                        var targetIndex = null;
+                        if (e.key === 'ArrowRight') {
+                            targetIndex = Math.min(i + 1, tabs.length - 1);
+                        } else if (e.key === 'ArrowLeft') {
+                            targetIndex = Math.max(i - 1, 0);
+                        } else if (e.key === 'Home') {
+                            targetIndex = 0;
+                        } else if (e.key === 'End') {
+                            targetIndex = tabs.length - 1;
+                        } else {
+                            return;
+                        }
+                        e.preventDefault();
+                        if (swiper) swiper.slideToLoop(targetIndex);
+                        tabs[targetIndex].focus();
+                    });
+                });
+
+                var swiper = new Swiper('#assetHeroSwiper', {
+                    slidesPerView: 1.08,
+                    spaceBetween: 12,
+                    centeredSlides: true,
+                    initialSlide: initialTabIndex,
+                    loop: false,
+                    a11y: false,
+                    on: {
+                        init: function () {
+                            setActiveTab(this.realIndex, false);
+                            syncSlideVisibility(this);
+                            syncCardHeight();
+                        },
+
+                        slideChange: function () {
+                            setActiveTab(this.realIndex, false);
+                            syncSlideVisibility(this);
+                            syncCardHeight();
+                            if (announceEl) {
+                                var current = this.slides[this.activeIndex];
+                                var label = current ? current.getAttribute('data-category-label') : '';
+                                if (label) announceEl.textContent = label + ' 카테고리로 이동했습니다.';
+                            }
+                            if (this.realIndex !== lastReplayedRealIndex) {
+                                lastReplayedRealIndex = this.realIndex;
+                                if (typeof window.replayHeroBarChart === 'function') {
+                                    window.replayHeroBarChart(categoryKeys[this.realIndex]);
+                                }
+                            }
+                        }
+                    }
+                });
+
+                function syncSlideVisibility(sw) {
+                    sw.slides.forEach(function (slideEl) {
+                        var isActive = slideEl.classList.contains('swiper-slide-active');
+                        if (!isActive && slideEl.contains(document.activeElement)) {
+                            document.activeElement.blur();
+                        }
+                        slideEl.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+                    });
+                }
+
+                var slideClassObserver = new MutationObserver(function () {
+                    syncSlideVisibility(swiper);
+                });
+                Array.prototype.forEach.call(swiperEl.querySelectorAll('.swiper-slide'), function (slideEl) {
+                    slideClassObserver.observe(slideEl, { attributes: true, attributeFilter: ['class'] });
+                });
+
+                function syncCardHeight() {
+                    var realSlides = swiperEl.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate)');
+                    if (!realSlides.length) return;
+                    swiperEl.style.height = 'auto';
+                    var maxHeight = 0;
+                    realSlides.forEach(function (slideEl) {
+                        var heroEl = slideEl.querySelector('.hero');
+                        var flipEl = slideEl.querySelector('.hero__flip');
+                        var slideH = slideEl.scrollHeight;
+                        if (heroEl && flipEl) {
+                            var faces = flipEl.querySelectorAll('.hero__face');
+                            var flipPrevH = flipEl.style.height;
+                            flipEl.style.height = 'auto';
+                            var need = 0;
+                            for (var i = 0; i < faces.length; i++) {
+                                var saved = [];
+                                for (var j = 0; j < faces.length; j++) {
+                                    saved.push(faces[j].style.display);
+                                    if (j !== i) faces[j].style.display = 'none';
+                                }
+                                need = Math.max(need, faces[i].offsetHeight);
+                                for (var k = 0; k < faces.length; k++) faces[k].style.display = saved[k];
+                            }
+                            flipEl.style.height = flipPrevH;
+                            var heroCS = window.getComputedStyle(heroEl);
+                            slideH = need + (parseFloat(heroCS.marginTop) || 0) + (parseFloat(heroCS.marginBottom) || 0);
+                        }
+                        maxHeight = Math.max(maxHeight, slideH);
+                    });
+                    if (maxHeight) {
+                        swiperEl.style.height = maxHeight + 'px';
+                        var peekShrinkPx = 84;
+                        var cardHeight = maxHeight - 24;
+                        var peekScaleY = cardHeight > peekShrinkPx ? (cardHeight - peekShrinkPx) / cardHeight : 0.8;
+                        swiperEl.style.setProperty('--hero-peek-scale-y', peekScaleY.toFixed(4));
+                    }
+                    if (swiper && !swiper.destroyed && typeof swiper.update === 'function') {
+                        swiper.update();
+                    }
+                }
+
+                if (document.fonts && document.fonts.ready && typeof document.fonts.ready.then === 'function') {
+                    document.fonts.ready.then(function () {
+                        syncCardHeight();
+                    });
+                }
+                var resizeSyncTimer = null;
+                window.addEventListener('resize', function () {
+                    window.clearTimeout(resizeSyncTimer);
+                    resizeSyncTimer = window.setTimeout(syncCardHeight, 150);
+                });
+
+                window.addEventListener('load', function () {
+                    syncCardHeight();
+                });
+            })();
+
+            /* [nochart] Chart.js 막대 생성 스크립트 제거 → 누적 막대는 CSS, 비교 막대는 정적 마크업. 재생·툴팁은 nochart.js */
+
+            (function () {
+                var sheet = document.getElementById('loanAccountSheet');
+                if (!sheet) return;
+                var list = sheet.querySelector('[data-loan-account-list]');
+
+                document.addEventListener('click', function (e) {
+                    var trigger = e.target.closest && e.target.closest('[data-loan-account-trigger]');
+                    if (!trigger) return;
+                    if (typeof window.slidePopConfirm === 'function') window.slidePopConfirm();
+                    trigger.setAttribute('aria-expanded', 'true');
+                });
+
+                if (list) {
+                    list.addEventListener('click', function (e) {
+                        var item = e.target.closest && e.target.closest('.bottomsheet-list__item');
+                        if (!item) return;
+                        var label = item.textContent.trim();
+                        document.querySelectorAll('[data-loan-account-trigger]').forEach(function (btn) {
+                            var textEl = btn.querySelector('.loan-repay__select-text');
+                            if (textEl) textEl.textContent = label;
+                            btn.setAttribute('aria-expanded', 'false');
+                        });
+                        var closeBtn = sheet.querySelector('.popClose');
+                        if (closeBtn && typeof window.popClose === 'function') window.popClose(closeBtn);
+                    });
+                }
+            })();
+
+            (function () {
+                var track = document.getElementById('loanPromoTrack');
+                if (!track) return;
+                var dots = Array.prototype.slice.call(document.querySelectorAll('#loanPromoDots .promo-carousel__dot'));
+                track.addEventListener(
+                    'scroll',
+                    function () {
+                        var index = Math.round(track.scrollLeft / track.clientWidth);
+                        dots.forEach(function (d, i) {
+                            d.classList.toggle('is-active', i === index);
+                        });
+                    },
+                    { passive: true }
+                );
+            })();
+
+            if (typeof Swiper !== 'undefined') {
+                var subPromoTrack = document.getElementById('liquiditySubPromoSwiper');
+                if (subPromoTrack) {
+                    var subIndicatorEl = subPromoTrack.querySelector('.indicator-number');
+                    var subCurrentEl = subIndicatorEl ? subIndicatorEl.querySelector('.indicator-number__current') : null;
+                    var subPrevBtn = subIndicatorEl ? subIndicatorEl.querySelector('.indicator-number__arrow[aria-label="이전"]') : null;
+                    var subNextBtn = subIndicatorEl ? subIndicatorEl.querySelector('.indicator-number__arrow[aria-label="다음"]') : null;
+                    var subPauseBtn = subIndicatorEl ? subIndicatorEl.querySelector('.indicator-number__control') : null;
+
+                    var syncSubPromoIndicator = function () {
+                        if (!subCurrentEl) return;
+                        var activeSlide = subPromoTrack.querySelector('.swiper-slide-active');
+                        if (!activeSlide) return;
+                        var dataIdx = activeSlide.getAttribute('data-swiper-slide-index');
+                        var idx = dataIdx !== null ? parseInt(dataIdx, 10) : -1;
+                        if (isNaN(idx) || idx < 0) {
+                            var originals = Array.prototype.slice.call(subPromoTrack.querySelectorAll('.swiper-wrapper > .swiper-slide:not(.swiper-slide-duplicate)'));
+                            idx = originals.indexOf(activeSlide);
+                        }
+                        if (idx > -1) subCurrentEl.textContent = idx + 1;
+                    };
+
+                    var subPromoSwiper = new Swiper('#liquiditySubPromoSwiper', {
+                        slidesPerView: 1,
+                        spaceBetween: 0,
+                        loop: false,
+                        rewind: true,
+                        a11y: false,
+                        autoplay: { delay: 4000, disableOnInteraction: false },
+                        on: {
+                            init: syncSubPromoIndicator,
+                            slideChange: syncSubPromoIndicator,
+                            slideChangeTransitionEnd: syncSubPromoIndicator
+                        }
+                    });
+
+                    if (subPrevBtn) subPrevBtn.addEventListener('click', function () { subPromoSwiper.slidePrev(); syncSubPromoIndicator(); });
+                    if (subNextBtn) subNextBtn.addEventListener('click', function () { subPromoSwiper.slideNext(); syncSubPromoIndicator(); });
+                    if (subPauseBtn) {
+                        subPauseBtn.addEventListener('click', function () {
+                            if (subPauseBtn.getAttribute('aria-label') === '재생') {
+                                subPromoSwiper.autoplay.start();
+                                subPauseBtn.setAttribute('aria-label', '일시정지');
+                            } else {
+                                subPromoSwiper.autoplay.stop();
+                                subPauseBtn.setAttribute('aria-label', '재생');
+                            }
+                        });
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

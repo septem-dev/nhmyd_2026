@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <!-- [nochart] 검토용 사본: 공통 head(head-mb-update.js)에서 chart.js 한 줄만 뺀 내용을 인라인 + nochart.css/js 추가 -->
+        <script>
+            /**
+             * Head include
+             * ------------------
+             * css & script 공통 include
+             */
+
+            (function () {
+                var str =
+                    "" +
+                    '<meta http-equiv="Content-Script-Type" content="text/javascript">' +
+                    '<meta http-equiv="Content-Style-Type" content="text/css">' +
+                    '<meta http-equiv="X-UA-Compatible" content="IE=edge">' +
+                    '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">' +
+                    '<meta name="apple-mobile-web-app-title" content="NH마이데이터">' +
+                    '<meta http-equiv="imagetoolbar" content="no">' +
+                    '<meta name="robots" content="no-index,follow">' +
+                    '<meta name="title" content="">' +
+                    '<meta name="author" content="">' +
+                    '<meta name="content" content="">' +
+                    '<meta name="keywords" content="NH마이데이터">' +
+                    '<meta name="description" content="NH마이데이터">' +
+                    '<meta http-equiv="Pragma" content="no-cache">' +
+                    '<meta http-equiv="Expires" content="-1">' +
+                    // title은 공통 include에 넣지 않음 — 각 html 파일에서 <title>로 직접 지정
+
+                    '<link type="text/css" rel="stylesheet" href="../../css/swiper.min.css">' +
+                    '<link type="text/css" rel="stylesheet" href="../../css/nh_base.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nh_layout.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nh_comm.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_logos.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_com.css" id="changeCom">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_cont.css" id="changeCont">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd.css">' + //2023 마이데이터 고도화
+                    '<link type="text/css" rel="stylesheet" href="../../css/ms_allone.css">' +
+                    '<link type="text/css" rel="stylesheet" href="../../css/ms_pay.css">' + //NH-Pay
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd_mb.css?20250912">' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                    //'<link rel="stylesheet" type="text/css" href="../../css/update.css">' + //2026 NH농협은행 nds 적용
+                    // OF는 실 단말 하이브리드 웹뷰에서만 주입되는 네이티브 브릿지 전역객체라, pub 폴더를 브라우저로 단독
+                    // 열람하는 이 환경에는 존재하지 않음. nhasset-ui.js의 popOpenRun()이 OF.exeStatus를 가드 없이
+                    // 참조하고 있어서(레거시 원본 소스는 수정하지 않음) 여기서 빈 객체로 미리 정의해 ReferenceError를
+                    // 막는다. 실제 단말에서는 OF가 먼저 주입되어 있으므로 이 줄은 아무 영향을 주지 않는다.
+                    "<script>window.OF = window.OF || {};<\/script>" +
+                    '<script src="../../js/jquery-1.9.1.min.js"><\/script>' +
+                    '<script src="../../js/jquery-ui.min.js"><\/script>' +
+                    '<script src="../../js/jquery.ui.touch-punch.min.js"><\/script>' +
+                    '<script src="../../js/swiper.7.4.1.min.js"><\/script>' +
+                    '<script src="../../js/common_ui.js"><\/script>' +
+                    '<script src="../../js/nhasset-ui.js"><\/script>' +
+                    '<script src="../../js/nhasset-ui-myd.js"><\/script>' + //2023 마이데이터 고도화
+                    '<script src="../../js/nhasset-ui-myd-mb.js"><\/script>' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                    '<script src="../../js/update-ui.js"><\/script>' + '<link rel="stylesheet" type="text/css" href="./nochart.css">' + '<script src="./nochart.js"><\/script>'; //2026 NH농협은행 nds 적용 화면 UI 스크립트
+                //    '<link type="text/css" rel="stylesheet" href="../pub-assets/css/guide.css">'; //가이드용 css 실제 서비스에는 불필요
+                // +'<script src="../pub-assets/js/guide.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요
+                // +'<script src="../pub-assets/js/guide-mb.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요 //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                document.write(str);
+            })();
+        </script>
+        <title>AI 포트폴리오</title>
+    </head>
+
+    <body class="bgcolor">
+        <div class="wrapper nhasset nds">
+            <div class="header bgcolor" role="banner">
+                <a href="javascript:;" role="button" class="btnBack"><span class="blind">이전화면으로</span></a>
+                <h1>AI 포트폴리오</h1>
+                <a href="javascript:;" role="button" class="btnCancle" aria-label="취소"><span class="blind">취소</span></a>
+            </div>
+
+            <div class="container bgcolor pb32" role="main">
+                <div class="diag-step">
+                    <span class="text text--body3-medium text--font3">제안 대상 선택</span>
+                    <!--<span class="blind">전체 3단계 중 1단계</span>
+                    <span class="diag-step__progress" aria-hidden="true">
+                        <span class="process-progress-number is-plain">
+                            <span class="process-progress-number__current">STEP</span>
+                        </span>
+                        <span class="process-progress-number is-plain">
+                            <span class="process-progress-number__current">01</span>
+                            <span class="process-progress-number__divider"></span>
+                            <span class="process-progress-number__total">03</span>
+                        </span>
+                    </span>-->
+                </div>
+
+                <section class="ai-section">
+                    <h2 class="text text--h2 diag-lead">
+                        내 계좌 전체를 제안 받아요.
+                        <br />
+                        제안 대상을 변경 할 수 있어요.
+                    </h2>
+
+                    <div class="info-card">
+                        <ul class="asset-list__data">
+                            <li class="asset-list__row">
+                                <span class="asset-list__row-label">나의 투자성향</span>
+                                <strong class="asset-list__row-value is-grade">
+                                    <span class="diag-type__badge is-sm" aria-hidden="true"></span>
+                                    적극 투자형
+                                </strong>
+                            </li>
+                            <li class="asset-list__row">
+                                <span class="asset-list__row-label">구성</span>
+                                <strong class="asset-list__row-value">종합형</strong>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="ai-section">
+                    <div class="info-card ai">
+                        <div class="card-head tooltipWrap is-card">
+                            <h3 class="text text--h4 ai-heading">내 투자성향 기대수익 제안 자산</h3>
+                            <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span class="blind">내 투자성향 기대수익 제안 자산 도움말</span></button>
+                            <div class="tooltipCont" style="display: none">
+                                <h3>안내사항</h3>
+                                <ul>
+                                    <li>그래프 내의 선은 위험이 같을 때 기대수익이 가장 높은 자산배분을 이은 선이에요. 두 점은 제안 포트폴리오와 최적 포트폴리오의 위치를 통해 얼만큼 서로 차이가 있는지 보여줘요.</li>
+                                </ul>
+                                <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
+                            </div>
+                        </div>
+
+                        <p class="text text--body4 mt12">기대수익이 가장 높은 선 위에 내 투자성향 중 최적의 위치와 내 자산의 위치를 표시했어요.</p>
+
+                        <hr class="divider  is-dash-f0" />
+
+                        <p class="text text--h5 text--font3">
+                            최적 대비
+                            <em class="text--point-chart">{기대수익과 투자위험}이 낮아요</em>
+                        </p>
+
+                        <div class="curve-chart" aria-hidden="true">
+                            <p class="curve-chart__axis-name">기대수익</p>
+                            <p class="curve-chart__axis-top">높음</p>
+                            <div class="curve-chart__box">
+                                <!-- [nochart] 정적 SVG: 곡선은 화면 폭에 맞춰 늘어나고(선 두께 유지), 점·라벨은 % 좌표로 배치. 데이터 연동 시 좌표 계산은 개발 -->
+                                <span class="nc-plot" style="--nc-base:85.37%"><svg class="nc-line" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M58.82 847.87C58.82 847.87 69.41 847.2 76.47 846.65C83.53 846.04 87.06 845.73 94.12 845.06C101.18 844.39 104.71 844.02 111.76 843.23C118.82 842.38 122.35 841.95 129.41 840.91C136.47 839.94 140 839.39 147.06 838.17C154.12 836.95 157.65 836.34 164.71 834.82C171.76 833.35 175.29 832.56 182.35 830.79C189.41 829.02 192.98 828.11 200 825.98C207.1 823.78 210.62 822.68 217.65 820.12C224.74 817.56 228.27 816.16 235.29 813.11C242.39 810 245.92 808.41 252.94 804.76C260.04 801.1 263.6 799.15 270.59 794.82C277.72 790.43 281.25 788.11 288.24 783.11C295.37 777.93 298.93 775.18 305.88 769.33C313.05 763.29 316.62 760.12 323.53 753.35C330.74 746.28 334.26 742.62 341.18 734.82C348.38 726.77 351.91 722.5 358.82 713.72C366.03 704.57 369.56 699.76 376.47 689.94C383.68 679.63 387.21 674.33 394.12 663.41C401.32 652.07 404.85 646.22 411.76 634.39C418.97 622.07 422.46 615.73 429.41 603.05C436.58 589.88 440.07 583.23 447.06 569.82C454.19 556.1 457.68 549.15 464.71 535.24C471.8 521.22 475.29 514.09 482.35 500C489.41 485.91 492.9 478.78 500 464.76C507.02 450.85 510.51 443.9 517.65 430.18C524.63 416.77 528.13 410.12 535.29 396.95C542.24 384.27 545.74 377.93 552.94 365.61C559.85 353.78 563.38 347.93 570.59 336.59C577.5 325.67 581.03 320.37 588.24 310.06C595.15 300.24 598.68 295.43 605.88 286.28C612.79 277.5 616.32 273.23 623.53 265.18C630.44 257.38 633.97 253.72 641.18 246.65C648.09 239.88 651.65 236.71 658.82 230.67C665.77 224.82 669.34 222.07 676.47 216.89C683.46 211.89 686.99 209.57 694.12 205.18C701.1 200.85 704.67 198.9 711.76 195.24C718.79 191.59 722.32 190 729.41 186.89C736.43 183.84 739.96 182.44 747.06 179.88C754.08 177.32 757.61 176.22 764.71 174.02C771.73 171.89 775.29 170.98 782.35 169.21C789.41 167.44 792.94 166.65 800 165.18C807.06 163.66 810.59 163.05 817.65 161.83C824.71 160.61 828.24 160.06 835.29 159.09C842.35 158.05 845.88 157.62 852.94 156.77C860 155.98 863.53 155.61 870.59 154.94C877.65 154.27 881.18 153.96 888.24 153.35C895.29 152.8 898.82 152.56 905.88 152.13C912.94 151.65 916.47 151.46 923.53 151.1C930.59 150.67 941.18 150.24 941.18 150.24" fill="none" stroke="#ff7e7e" stroke-width="2" vector-effect="non-scaling-stroke"/></svg><span class="nc-point" style="left:80.88%;top:16.05%;background:#ff7e7e"><span class="nc-point__label">최적</span></span><span class="nc-point" style="left:61.47%;top:55.66%;background:#707070"><span class="nc-point__label">제안</span></span></span>
+                            </div>
+                            <p class="curve-chart__axis-bottom">
+                                <span>낮음</span>
+                                <span>높음</span>
+                            </p>
+                            <p class="curve-chart__axis-name is-right">투자위험</p>
+                        </div>
+                        <p class="blind">기대수익과 투자위험의 관계를 나타낸 그래프입니다. 가로축은 투자위험이 낮음에서 높음으로, 세로축은 기대수익이 낮음에서 높음으로 올라갑니다. 기대수익이 가장 높은 곡선 위에 최적 위치가 있고, 제안 위치는 그보다 기대수익이 낮은 곡선 아래에 있습니다.</p>
+                    </div>
+                </section>
+
+                <section class="ai-section">
+                    <div class="info-card ai">
+                        <div class="card-head tooltipWrap is-card">
+                            <h3 class="text text--h4 ai-heading">제안 대상</h3>
+                            <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span class="blind">조정필요 표시 도움말</span></button>
+                            <div class="tooltipCont" style="display: none">
+                                <h3>조정필요란?</h3>
+                                <ul>
+                                    <li>목표 포트폴리오와 비교해 차이가 큰 계좌에 표시해요.</li>
+                                </ul>
+                                <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
+                            </div>
+                        </div>
+
+                        <!-- prettier-ignore -->
+                        <p class="text text--h5 text--font3 mt24" aria-live="polite">
+                            제안 대상은 29개 계좌 중
+                            <br />
+                            <em class="text--point-chart"><span data-ai02-count>29</span>개 <span data-ai02-amount>262,000,000</span>원이에요.</em>
+                        </p>
+
+                        <p class="card-note mt16">
+                            <span class="card-note__icon" aria-hidden="true"></span>
+                            <span class="card-note__text">선택한 계좌 기준으로 제안을 받아볼 수 있어요.</span>
+                        </p>
+                        
+                        <div class="asset-pick mt24" id="ai02PickArea" hidden>
+                            <div class="asset-pick__chips" role="group" aria-label="계좌 선택 방식">
+                                <button type="button" class="chip-single is-active" data-ai02-chip="all" aria-pressed="true">전체 선택</button>
+                                <button type="button" class="chip-single" data-ai02-chip="need" aria-pressed="false">조정필요만 선택</button>
+                            </div>
+
+                            <hr class="divider is-page m0" />
+
+                            <p class="text text--caption2">최소 한 개 이상의 계좌를 선택해 주세요.</p>
+                            <!---->
+                            <div class="info-card__list">
+                                <ul class="finance-product asset-list">
+                                    <li>
+                                        <div class="finance-head">
+                                            <div class="asset-list__pick">
+                                                <span class="label is-sm is-line is-skyblue">조정필요</span>
+                                                <label class="check-basic">
+                                                    <input type="checkbox" class="check-basic__input inputChecked" checked="">
+                                                    <span class="check-basic__icon" aria-hidden="true"></span>
+                                                </label>
+                                            </div>
+                                            <div class="finance-title">
+                                                <span class="finance-logo"><img src="../../images/logos/AADO0000.png" alt=""></span>
+                                                <div class="finance-col">
+                                                    <p class="finance-name">롯데캐피탈 엘론(일반신용대출)</p>
+                                                    <p class="finance-number">
+                                                        <span>롯데캐피탈</span>
+                                                        <span>123-45-678900</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="details-row">
+                                            <li>
+                                                <span class="details-label">잔액</span>
+                                                <span class="details-value">50,000,000원</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">만기일</span>
+                                                <span class="details-value">2030.12.31</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">원리금균등분할상환</span>
+                                                <span class="details-value">19.92%</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="finance-head">
+                                            <div class="asset-list__pick">
+                                                <label class="check-basic">
+                                                    <input type="checkbox" class="check-basic__input inputChecked" checked="">
+                                                    <span class="check-basic__icon" aria-hidden="true"></span>
+                                                </label>
+                                            </div>
+                                            <div class="finance-title">
+                                                <span class="finance-logo"><img src="../../images/logos/AACT0000.png" alt=""></span>
+                                                <div class="finance-col">
+                                                    <p class="finance-name">한국투자저축은행 파인로얄론</p>
+                                                    <p class="finance-number">
+                                                        <span>한국투자저축은행</span>
+                                                        <span>501-88-123456</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="details-row">
+                                            <li>
+                                                <span class="details-label">잔액</span>
+                                                <span class="details-value">50,000,000원</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">만기일</span>
+                                                <span class="details-value">2026.08.31</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">일시상환</span>
+                                                <span class="details-value">17.21%</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="finance-head">
+                                            <div class="asset-list__pick">
+                                                <label class="check-basic">
+                                                    <input type="checkbox" class="check-basic__input inputChecked" checked="">
+                                                    <span class="check-basic__icon" aria-hidden="true"></span>
+                                                </label>
+                                            </div>
+                                            <div class="finance-title">
+                                                <span class="finance-logo"><img src="../../images/logos/AAEV0000.png" alt=""></span>
+                                                <div class="finance-col">
+                                                    <p class="finance-name">삼성카드 카드론(장기카드대출)</p>
+                                                    <p class="finance-number">
+                                                        <span>삼성카드</span>
+                                                        <span>123456******1234</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="details-row">
+                                            <li>
+                                                <span class="details-label">잔액</span>
+                                                <span class="details-value">50,000,000원</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">만기일</span>
+                                                <span class="details-value">2030.12.31</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">원리금균등분할상환</span>
+                                                <span class="details-value">12.9%</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="finance-head">
+                                            <div class="asset-list__pick">
+                                                <span class="label is-sm is-line is-lightgray">만료</span>
+                                                <label class="check-basic">
+                                                    <input type="checkbox" class="check-basic__input inputChecked" checked="">
+                                                    <span class="check-basic__icon" aria-hidden="true"></span>
+                                                </label>
+                                            </div>
+                                            <div class="finance-title">
+                                                <span class="finance-logo"><img src="../../images/logos/AAOB0000.png" alt=""></span>
+                                                <div class="finance-col">
+                                                    <p class="finance-name">NH저축 중금리 생활안정대출</p>
+                                                    <p class="finance-number">
+                                                        <span>NH농협은행</span>
+                                                        <span>342-12534-5678-90</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="details-row">
+                                            <li>
+                                                <span class="details-label">잔액</span>
+                                                <span class="details-value">50,000,000원</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">만기일</span>
+                                                <span class="details-value">2030.12.31</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">원리금균등분할상환</span>
+                                                <span class="details-value">19.92%</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="finance-head">
+                                            <div class="asset-list__pick">
+                                                <label class="check-basic">
+                                                    <input type="checkbox" class="check-basic__input inputChecked" checked="">
+                                                    <span class="check-basic__icon" aria-hidden="true"></span>
+                                                </label>
+                                            </div>
+                                            <div class="finance-title">
+                                                <span class="finance-logo"><img src="../../images/logos/AAOB0000.png" alt=""></span>
+                                                <div class="finance-col">
+                                                    <p class="finance-name">NH멤버스론</p>
+                                                    <p class="finance-number">
+                                                        <span>NH농협은행</span>
+                                                        <span>342-12534-5678-90</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="details-row">
+                                            <li>
+                                                <span class="details-label">잔액</span>
+                                                <span class="details-value">15,000원</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">만기일</span>
+                                                <span class="details-value">2030.12.31</span>
+                                            </li>
+                                            <li>
+                                                <span class="details-label">만기일시상환</span>
+                                                <span class="details-value">5.72%</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <button type="button" class="select-card__more">더보기(5/38)</button>
+                            </div>
+                            <!---->
+                            <ul class="asset-list is-pick" style="display:none">
+                                <li class="asset-list__item" data-ai02-need>
+                                    <div class="asset-list__pick">
+                                        <span class="label is-sm is-line is-skyblue">조정필요</span>
+                                        <label class="check-basic">
+                                            <input type="checkbox" class="check-basic__input" data-ai02-item data-ai02-amount-value="52000000" checked />
+                                            <span class="check-basic__icon" aria-hidden="true"></span>
+                                            <span class="blind">농협은행 ISA 52,000,000원 제안 대상으로 선택</span>
+                                        </label>
+                                    </div>
+                                    <div class="list-account is-sm">
+                                        <span class="list-account__logo"><img src="../../images/logos/AACQ0000.png" alt="" /></span>
+                                        <span class="list-account__text">
+                                            <span class="list-account__name">농협은행 ISA</span>
+                                        </span>
+                                    </div>
+                                    <ul class="asset-list__data is-sm">
+                                        <li class="asset-list__row">
+                                            <span class="asset-list__row-label">평가금액</span>
+                                            <span class="asset-list__row-value">52,000,000원</span>
+                                        </li>
+                                        <li class="asset-list__row">
+                                            <span class="asset-list__row-label">수익률</span>
+                                            <span class="asset-list__row-value is-up">+2,769,230원(+4.00%)</span>
+                                        </li>
+                                    </ul>
+                                    <button type="button" class="card-btn">자세히 보기</button>
+                                </li>
+
+                                <li class="asset-list__item" data-ai02-need>
+                                    <div class="asset-list__pick">
+                                        <span class="label is-sm is-line is-skyblue">조정필요</span>
+                                        <label class="check-basic">
+                                            <input type="checkbox" class="check-basic__input" data-ai02-item data-ai02-amount-value="11000000" checked />
+                                            <span class="check-basic__icon" aria-hidden="true"></span>
+                                            <span class="blind">농협은행 ISA 11,000,000원 제안 대상으로 선택</span>
+                                        </label>
+                                    </div>
+                                    <div class="list-account is-sm">
+                                        <span class="list-account__logo"><img src="../../images/logos/AACQ0000.png" alt="" /></span>
+                                        <span class="list-account__text">
+                                            <span class="list-account__name">농협은행 ISA</span>
+                                        </span>
+                                    </div>
+                                    <ul class="asset-list__data is-sm">
+                                        <li class="asset-list__row">
+                                            <span class="asset-list__row-label">평가금액</span>
+                                            <span class="asset-list__row-value">11,000,000원</span>
+                                        </li>
+                                        <li class="asset-list__row">
+                                            <span class="asset-list__row-label">수익률</span>
+                                            <span class="asset-list__row-value is-down">-485,540원(-4.24%)</span>
+                                        </li>
+                                    </ul>
+                                    <button type="button" class="card-btn">자세히 보기</button>
+                                </li>
+
+                                <li class="asset-list__item" data-ai02-need>
+                                    <div class="asset-list__pick">
+                                        <span class="label is-sm is-line is-skyblue">조정필요</span>
+                                        <label class="check-basic">
+                                            <input type="checkbox" class="check-basic__input" data-ai02-item data-ai02-amount-value="69230000" checked />
+                                            <span class="check-basic__icon" aria-hidden="true"></span>
+                                            <span class="blind">농협은행 ISA 69,230,000원 제안 대상으로 선택</span>
+                                        </label>
+                                    </div>
+                                    <div class="list-account is-sm">
+                                        <span class="list-account__logo"><img src="../../images/logos/AACQ0000.png" alt="" /></span>
+                                        <span class="list-account__text">
+                                            <span class="list-account__name">농협은행 ISA</span>
+                                        </span>
+                                    </div>
+                                    <ul class="asset-list__data is-sm">
+                                        <li class="asset-list__row">
+                                            <span class="asset-list__row-label">평가금액</span>
+                                            <span class="asset-list__row-value">69,230,000원</span>
+                                        </li>
+                                        <li class="asset-list__row">
+                                            <span class="asset-list__row-label">수익률</span>
+                                            <span class="asset-list__row-value is-up">+2,769,230원(+4.00%)</span>
+                                        </li>
+                                    </ul>
+                                    <button type="button" class="card-btn">자세히 보기</button>
+                                </li>
+
+                                <li class="asset-list__item">
+                                    <div class="asset-list__pick">
+                                        <label class="check-basic">
+                                            <input type="checkbox" class="check-basic__input" data-ai02-item data-ai02-amount-value="69230000" checked />
+                                            <span class="check-basic__icon" aria-hidden="true"></span>
+                                            <span class="blind">농협은행 ISA 69,230,000원 제안 대상으로 선택</span>
+                                        </label>
+                                    </div>
+                                    <div class="list-account is-sm">
+                                        <span class="list-account__logo"><img src="../../images/logos/AACQ0000.png" alt="" /></span>
+                                        <span class="list-account__text">
+                                            <span class="list-account__name">농협은행 ISA</span>
+                                        </span>
+                                    </div>
+                                    <ul class="asset-list__data is-sm">
+                                        <li class="asset-list__row">
+                                            <span class="asset-list__row-label">평가금액</span>
+                                            <span class="asset-list__row-value">69,230,000원</span>
+                                        </li>
+                                        <li class="asset-list__row">
+                                            <span class="asset-list__row-label">수익률</span>
+                                            <span class="asset-list__row-value is-up">+2,769,230원(+4.00%)</span>
+                                        </li>
+                                    </ul>
+                                    <button type="button" class="card-btn">자세히 보기</button>
+                                </li>
+
+                                <li class="asset-list__item">
+                                    <div class="asset-list__pick">
+                                        <label class="check-basic">
+                                            <input type="checkbox" class="check-basic__input" data-ai02-item data-ai02-amount-value="11000000" checked />
+                                            <span class="check-basic__icon" aria-hidden="true"></span>
+                                            <span class="blind">농협은행 ISA 11,000,000원 제안 대상으로 선택</span>
+                                        </label>
+                                    </div>
+                                    <div class="list-account is-sm">
+                                        <span class="list-account__logo"><img src="../../images/logos/AACQ0000.png" alt="" /></span>
+                                        <span class="list-account__text">
+                                            <span class="list-account__name">농협은행 ISA</span>
+                                        </span>
+                                    </div>
+                                    <ul class="asset-list__data is-sm">
+                                        <li class="asset-list__row">
+                                            <span class="asset-list__row-label">평가금액</span>
+                                            <span class="asset-list__row-value">11,000,000원</span>
+                                        </li>
+                                        <li class="asset-list__row">
+                                            <span class="asset-list__row-label">수익률</span>
+                                            <span class="asset-list__row-value is-down">-485,540원(-4.24%)</span>
+                                        </li>
+                                    </ul>
+                                    <button type="button" class="card-btn">자세히 보기</button>
+                                </li>
+                            </ul>
+
+                            <p class="asset-list__more">
+                                <!-- prettier-ignore -->
+                                <button type="button" class="btn-arrow" data-ai02-more><span>더보기(<span data-ai02-shown>5</span>/29)</span><span class="btn-arrow__icon is-plus" aria-hidden="true"></span></button>
+                            </p>
+                        </div>
+
+                        <button type="button" class="card-btn is-line" data-ai02-fold aria-expanded="false" aria-controls="ai02PickArea">
+                            <span data-ai02-fold-label>펼치기</span>
+                            <span class="btn-arrow__icon is-chevron-down" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </section>
+            </div>
+
+            <div class="accordion-notice">
+                <div class="accordion-notice__item">
+                    <button type="button" aria-expanded="true" data-acc-toggle>
+                        <span class="accordion-notice__title">알아두세요</span>
+                    </button>
+                    <div class="accordion-notice__body">
+                        <ul class="bullet is-dot--body3">
+                            <li class="bullet__item">내 자산 및 최적 포트폴리오에서 제시된 기대수익률 범위는 NH농협은행 WM시스템의 기대수익률과 투자위험 정보를 바탕으로 재구성되었습니다.</li>
+                            <li class="bullet__item">NH농협은행은 현금, 국내주식, 국내채권, 해외선진국주식, 해외신흥국주식, 해외채권 등 6개의 기초자산에 대해 최적 포트폴리오를 제시하며 대체투자, 실물투자, 보험 등은 최적 포트폴리오 프로세스에서 제외합니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="areaBtnDefault">
+                <a href="javascript:;" role="button" class="btnPressPoint">제안 대상 자산 진단</a>
+            </div>
+        </div>
+
+        <script>
+            /* [nochart] 기대수익 곡선은 정적 SVG로 대체 */
+
+            (function () {
+                var area = document.getElementById('ai02PickArea');
+                var foldBtn = document.querySelector('[data-ai02-fold]');
+                if (!area || !foldBtn) return;
+
+                var foldLabel = foldBtn.querySelector('[data-ai02-fold-label]');
+                var foldIcon = foldBtn.querySelector('.btn-arrow__icon');
+                var items = [].slice.call(area.querySelectorAll('[data-ai02-item]'));
+                var chips = [].slice.call(area.querySelectorAll('[data-ai02-chip]'));
+                var countEl = document.querySelector('[data-ai02-count]');
+                var amountEl = document.querySelector('[data-ai02-amount]');
+                var cta = document.querySelector('.areaBtnDefault .btnPressPoint');
+
+                var REST_COUNT = 24;
+                var REST_AMOUNT = 49540000;
+
+                function sync() {
+                    var count = REST_COUNT;
+                    var amount = REST_AMOUNT;
+                    items.forEach(function (input) {
+                        if (!input.checked) return;
+                        count += 1;
+                        amount += Number(input.getAttribute('data-ai02-amount-value')) || 0;
+                    });
+                    if (countEl) countEl.textContent = count;
+                    if (amountEl) amountEl.textContent = amount.toLocaleString('ko-KR');
+
+                    var allOn = items.every(function (i) {
+                        return i.checked;
+                    });
+                    var needOn = items.every(function (i) {
+                        return i.checked === !!i.closest('[data-ai02-need]');
+                    });
+                    setChip('all', allOn);
+                    setChip('need', !allOn && needOn);
+
+                    if (cta) {
+                        cta.classList.toggle('disabled', count === 0);
+                        if (count === 0) cta.setAttribute('aria-disabled', 'true');
+                        else cta.removeAttribute('aria-disabled');
+                    }
+                }
+
+                function setChip(name, on) {
+                    chips.forEach(function (chip) {
+                        if (chip.getAttribute('data-ai02-chip') !== name) return;
+                        chip.classList.toggle('is-active', on);
+                        chip.setAttribute('aria-pressed', on ? 'true' : 'false');
+                    });
+                }
+
+                foldBtn.addEventListener('click', function () {
+                    var open = foldBtn.getAttribute('aria-expanded') !== 'true';
+                    foldBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    area.hidden = !open;
+                    if (foldLabel) foldLabel.textContent = open ? '접기' : '펼치기';
+                    if (foldIcon) {
+                        foldIcon.classList.toggle('is-chevron-up', open);
+                        foldIcon.classList.toggle('is-chevron-down', !open);
+                    }
+                });
+
+                chips.forEach(function (chip) {
+                    chip.addEventListener('click', function () {
+                        var onlyNeed = chip.getAttribute('data-ai02-chip') === 'need';
+                        items.forEach(function (input) {
+                            input.checked = onlyNeed ? !!input.closest('[data-ai02-need]') : true;
+                        });
+                        sync();
+                    });
+                });
+
+                items.forEach(function (input) {
+                    input.addEventListener('change', sync);
+                });
+
+                sync();
+            })();
+        </script>
+    </body>
+</html>

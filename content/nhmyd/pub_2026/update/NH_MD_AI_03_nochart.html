@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <!-- [nochart] 검토용 사본: 공통 head(head-mb-update.js)에서 chart.js 한 줄만 뺀 내용을 인라인 + nochart.css/js 추가 -->
+        <script>
+            /**
+             * Head include
+             * ------------------
+             * css & script 공통 include
+             */
+
+            (function () {
+                var str =
+                    "" +
+                    '<meta http-equiv="Content-Script-Type" content="text/javascript">' +
+                    '<meta http-equiv="Content-Style-Type" content="text/css">' +
+                    '<meta http-equiv="X-UA-Compatible" content="IE=edge">' +
+                    '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">' +
+                    '<meta name="apple-mobile-web-app-title" content="NH마이데이터">' +
+                    '<meta http-equiv="imagetoolbar" content="no">' +
+                    '<meta name="robots" content="no-index,follow">' +
+                    '<meta name="title" content="">' +
+                    '<meta name="author" content="">' +
+                    '<meta name="content" content="">' +
+                    '<meta name="keywords" content="NH마이데이터">' +
+                    '<meta name="description" content="NH마이데이터">' +
+                    '<meta http-equiv="Pragma" content="no-cache">' +
+                    '<meta http-equiv="Expires" content="-1">' +
+                    // title은 공통 include에 넣지 않음 — 각 html 파일에서 <title>로 직접 지정
+
+                    '<link type="text/css" rel="stylesheet" href="../../css/swiper.min.css">' +
+                    '<link type="text/css" rel="stylesheet" href="../../css/nh_base.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nh_layout.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nh_comm.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_logos.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_com.css" id="changeCom">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_cont.css" id="changeCont">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd.css">' + //2023 마이데이터 고도화
+                    '<link type="text/css" rel="stylesheet" href="../../css/ms_allone.css">' +
+                    '<link type="text/css" rel="stylesheet" href="../../css/ms_pay.css">' + //NH-Pay
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd_mb.css?20250912">' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                    //'<link rel="stylesheet" type="text/css" href="../../css/update.css">' + //2026 NH농협은행 nds 적용
+                    // OF는 실 단말 하이브리드 웹뷰에서만 주입되는 네이티브 브릿지 전역객체라, pub 폴더를 브라우저로 단독
+                    // 열람하는 이 환경에는 존재하지 않음. nhasset-ui.js의 popOpenRun()이 OF.exeStatus를 가드 없이
+                    // 참조하고 있어서(레거시 원본 소스는 수정하지 않음) 여기서 빈 객체로 미리 정의해 ReferenceError를
+                    // 막는다. 실제 단말에서는 OF가 먼저 주입되어 있으므로 이 줄은 아무 영향을 주지 않는다.
+                    "<script>window.OF = window.OF || {};<\/script>" +
+                    '<script src="../../js/jquery-1.9.1.min.js"><\/script>' +
+                    '<script src="../../js/jquery-ui.min.js"><\/script>' +
+                    '<script src="../../js/jquery.ui.touch-punch.min.js"><\/script>' +
+                    '<script src="../../js/swiper.7.4.1.min.js"><\/script>' +
+                    '<script src="../../js/common_ui.js"><\/script>' +
+                    '<script src="../../js/nhasset-ui.js"><\/script>' +
+                    '<script src="../../js/nhasset-ui-myd.js"><\/script>' + //2023 마이데이터 고도화
+                    '<script src="../../js/nhasset-ui-myd-mb.js"><\/script>' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                    '<script src="../../js/update-ui.js"><\/script>' + '<link rel="stylesheet" type="text/css" href="./nochart.css">' + '<script src="./nochart.js"><\/script>'; //2026 NH농협은행 nds 적용 화면 UI 스크립트
+                //    '<link type="text/css" rel="stylesheet" href="../pub-assets/css/guide.css">'; //가이드용 css 실제 서비스에는 불필요
+                // +'<script src="../pub-assets/js/guide.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요
+                // +'<script src="../pub-assets/js/guide-mb.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요 //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                document.write(str);
+            })();
+        </script>
+        <title>AI 포트폴리오 진단</title>
+    </head>
+
+    <body class="bgcolor">
+        <div class="wrapper nhasset nds">
+            <div class="header bgcolor" role="banner">
+                <a href="javascript:;" role="button" class="btnBack"><span class="blind">이전화면으로</span></a>
+                <h1>AI 포트폴리오 진단</h1>
+                <a href="javascript:;" role="button" class="btnCancle" aria-label="취소"><span class="blind">취소</span></a>
+            </div>
+
+            <div class="container bgcolor pb32" role="main">
+                <div class="diag-step">
+                    <span class="text text--body3-medium text--font3">제안 대상 진단</span>
+                    <span class="blind">전체 3단계 중 2단계</span>
+                    <span class="diag-step__progress" aria-hidden="true">
+                        <span class="process-progress-number is-plain">
+                            <span class="process-progress-number__current">STEP</span>
+                        </span>
+                        <span class="process-progress-number is-plain">
+                            <span class="process-progress-number__current">02</span>
+                            <span class="process-progress-number__divider"></span>
+                            <span class="process-progress-number__total">03</span>
+                        </span>
+                    </span>
+                </div>
+                <!-- 내 투자성향 기대수익 제안 자산 -->
+                <section class="ai-section">
+                    <h2 class="text--h2">
+                        제안 대상계좌의 현재 포트폴리오를
+                        <br />
+                        최적 포트폴리오와 비교했어요.
+                    </h2>
+    
+                    <div class="info-card">
+                        <div class="card-head tooltipWrap is-card">
+                            <h3 class="text--h4">내 투자성향 기대수익 제안 자산</h3>
+                            <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span class="blind">내 투자성향 기대수익 제안 자산 도움말</span></button>
+                            <div class="tooltipCont" style="display: none">
+                                <h3>안내사항</h3>
+                                <ul>
+                                    <li>그래프 내의 선은 위험이 같을 때 기대수익이 가장 높은 자산배분을 이은 선이에요. 두 점은 제안 포트폴리오와 최적 포트폴리오의 위치를 통해 얼만큼 서로 차이가 있는지 보여줘요.</li>
+                                </ul>
+                                <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
+                            </div>
+                        </div>
+    
+                        <p class="text--caption2 mt12">기대수익이 가장 높은 선 위에 내 투자성향 중 최적의 위치와 내 자산의 위치를 표시했어요.</p>
+    
+                        <hr class="divider is-dash-f0" />
+    
+                        <p class="text text--h5 text--font3">
+                            현재 선택된 자산 대비
+                            <br />
+                            <em class="text--point-chart">{기대수익과 투자위험}이 조정됐어요.</em>
+                        </p>
+    
+                        <div class="curve-chart" aria-hidden="true">
+                            <p class="curve-chart__axis-name">기대수익</p>
+                            <p class="curve-chart__axis-top">높음</p>
+                            <div class="curve-chart__box">
+                                <!-- [nochart] 정적 SVG: 곡선은 화면 폭에 맞춰 늘어나고(선 두께 유지), 점·라벨은 % 좌표로 배치. 데이터 연동 시 좌표 계산은 개발 -->
+                                <span class="nc-plot" style="--nc-base:85.37%"><svg class="nc-line" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M58.82 847.87C58.82 847.87 69.41 847.2 76.47 846.65C83.53 846.04 87.06 845.73 94.12 845.06C101.18 844.39 104.71 844.02 111.76 843.23C118.82 842.38 122.35 841.95 129.41 840.91C136.47 839.94 140 839.39 147.06 838.17C154.12 836.95 157.65 836.34 164.71 834.82C171.76 833.35 175.29 832.56 182.35 830.79C189.41 829.02 192.98 828.11 200 825.98C207.1 823.78 210.62 822.68 217.65 820.12C224.74 817.56 228.27 816.16 235.29 813.11C242.39 810 245.92 808.41 252.94 804.76C260.04 801.1 263.6 799.15 270.59 794.82C277.72 790.43 281.25 788.11 288.24 783.11C295.37 777.93 298.93 775.18 305.88 769.33C313.05 763.29 316.62 760.12 323.53 753.35C330.74 746.28 334.26 742.62 341.18 734.82C348.38 726.77 351.91 722.5 358.82 713.72C366.03 704.57 369.56 699.76 376.47 689.94C383.68 679.63 387.21 674.33 394.12 663.41C401.32 652.07 404.85 646.22 411.76 634.39C418.97 622.07 422.46 615.73 429.41 603.05C436.58 589.88 440.07 583.23 447.06 569.82C454.19 556.1 457.68 549.15 464.71 535.24C471.8 521.22 475.29 514.09 482.35 500C489.41 485.91 492.9 478.78 500 464.76C507.02 450.85 510.51 443.9 517.65 430.18C524.63 416.77 528.13 410.12 535.29 396.95C542.24 384.27 545.74 377.93 552.94 365.61C559.85 353.78 563.38 347.93 570.59 336.59C577.5 325.67 581.03 320.37 588.24 310.06C595.15 300.24 598.68 295.43 605.88 286.28C612.79 277.5 616.32 273.23 623.53 265.18C630.44 257.38 633.97 253.72 641.18 246.65C648.09 239.88 651.65 236.71 658.82 230.67C665.77 224.82 669.34 222.07 676.47 216.89C683.46 211.89 686.99 209.57 694.12 205.18C701.1 200.85 704.67 198.9 711.76 195.24C718.79 191.59 722.32 190 729.41 186.89C736.43 183.84 739.96 182.44 747.06 179.88C754.08 177.32 757.61 176.22 764.71 174.02C771.73 171.89 775.29 170.98 782.35 169.21C789.41 167.44 792.94 166.65 800 165.18C807.06 163.66 810.59 163.05 817.65 161.83C824.71 160.61 828.24 160.06 835.29 159.09C842.35 158.05 845.88 157.62 852.94 156.77C860 155.98 863.53 155.61 870.59 154.94C877.65 154.27 881.18 153.96 888.24 153.35C895.29 152.8 898.82 152.56 905.88 152.13C912.94 151.65 916.47 151.46 923.53 151.1C930.59 150.67 941.18 150.24 941.18 150.24" fill="none" stroke="#ff7e7e" stroke-width="2" vector-effect="non-scaling-stroke"/></svg><span class="nc-point" style="left:80.88%;top:16.05%;background:#ff7e7e"><span class="nc-point__label">최적</span></span><span class="nc-point" style="left:61.47%;top:55.66%;background:#707070"><span class="nc-point__label">제안</span></span></span>
+                            </div>
+                            <p class="curve-chart__axis-bottom">
+                                <span>낮음</span>
+                                <span>높음</span>
+                            </p>
+                            <p class="curve-chart__axis-name is-right">투자위험</p>
+                        </div>
+                        <p class="blind">기대수익과 투자위험의 관계를 나타낸 그래프입니다. 가로축은 투자위험이 낮음에서 높음으로, 세로축은 기대수익이 낮음에서 높음으로 올라갑니다. 기대수익이 가장 높은 곡선 위에 최적 위치가 있고, 제안 위치는 그보다 기대수익이 낮은 곡선 아래에 있습니다.</p>
+                    </div>
+                </section>
+
+                <!-- 최적 포트폴리오 -->
+                <section class="ai-section">
+                    <div class="info-card ai">
+                        <h3 class="text text--h4 ai-heading">최적 포트폴리오</h3>
+    
+                        <p class="text text--h5 text--font3 mt16">
+                            최적 포트폴리오에 맞춰 조정하려면
+                            <br />
+                            <em class="text--point-chart">{주식}을 늘리고, {현금·채권}을 줄여요.</em>
+                        </p>
+    
+                        <ul class="alloc-bar">
+                            <li class="alloc-bar__item">
+                                <span class="alloc-bar__bar" aria-hidden="true">
+                                    <i class="alloc-bar__base" style="width: 1.5%"></i>
+                                    <i class="alloc-bar__delta is-down" style="width: 24.3%"></i>
+                                </span>
+                                <span class="alloc-bar__row">
+                                    <span class="alloc-bar__name">현금성 1%</span>
+                                    <span class="alloc-bar__change">
+                                        <em class="alloc-bar__down">-32% 줄여요</em>
+                                        -115,200,000 원
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="alloc-bar__item">
+                                <span class="alloc-bar__bar" aria-hidden="true">
+                                    <i class="alloc-bar__base" style="width: 1.5%"></i>
+                                    <i class="alloc-bar__delta is-down" style="width: 9.2%"></i>
+                                </span>
+                                <span class="alloc-bar__row">
+                                    <span class="alloc-bar__name">국내채권 1%</span>
+                                    <span class="alloc-bar__change">
+                                        <em class="alloc-bar__down">-12% 줄여요</em>
+                                        -43,200,000 원
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="alloc-bar__item">
+                                <span class="alloc-bar__bar" aria-hidden="true">
+                                    <i class="alloc-bar__base" style="width: 0%"></i>
+                                    <i class="alloc-bar__delta is-down" style="width: 0%"></i>
+                                </span>
+                                <span class="alloc-bar__row">
+                                    <span class="alloc-bar__name">해외채권 0%</span>
+                                    <span class="alloc-bar__change">
+                                        <em class="alloc-bar__down">-</em>
+                                        0원
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="alloc-bar__item">
+                                <span class="alloc-bar__bar" aria-hidden="true">
+                                    <i class="alloc-bar__base" style="width: 34.9%"></i>
+                                    <i class="alloc-bar__delta is-up" style="width: 9.2%"></i>
+                                </span>
+                                <span class="alloc-bar__row">
+                                    <span class="alloc-bar__name">국내주식 48%</span>
+                                    <span class="alloc-bar__change">
+                                        <em class="alloc-bar__up">+17% 늘려요</em>
+                                        +61,200,000 원
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="alloc-bar__item">
+                                <span class="alloc-bar__bar" aria-hidden="true">
+                                    <i class="alloc-bar__base" style="width: 9.2%"></i>
+                                    <i class="alloc-bar__delta is-up" style="width: 16.2%"></i>
+                                </span>
+                                <span class="alloc-bar__row">
+                                    <span class="alloc-bar__name">해외선진국주식 34%</span>
+                                    <span class="alloc-bar__change">
+                                        <em class="alloc-bar__up">+20% 늘려요</em>
+                                        +72,000,000 원
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="alloc-bar__item">
+                                <span class="alloc-bar__bar" aria-hidden="true">
+                                    <i class="alloc-bar__base" style="width: 2.9%"></i>
+                                    <i class="alloc-bar__delta is-up" style="width: 2.2%"></i>
+                                </span>
+                                <span class="alloc-bar__row">
+                                    <span class="alloc-bar__name">해외신흥국주식 15%</span>
+                                    <span class="alloc-bar__change">
+                                        <em class="alloc-bar__up">12% 늘려요</em>
+                                        +43,200,000 원
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="alloc-bar__item">
+                                <span class="alloc-bar__bar" aria-hidden="true">
+                                    <i class="alloc-bar__base" style="width: 0%"></i>
+                                    <i class="alloc-bar__delta" style="width: 0%"></i>
+                                </span>
+                                <span class="alloc-bar__row">
+                                    <span class="alloc-bar__name">대체자산 0%</span>
+                                    <span class="alloc-bar__change">
+                                        <em>-</em>
+                                        0원
+                                    </span>
+                                </span>
+                            </li>
+                        </ul>
+    
+                        <hr class="divider is-dash-e1" />
+    
+                        <p class="text text--h5 text--font3 mt16">
+                            최적 포트폴리오에 비교했을 때,
+                            <br />
+                            <em class="text--point-chart">{위험자산}이 더 필요해요.</em>
+                        </p>
+    
+                        <div class="risk-bar">
+                            <div class="risk-bar__item">
+                                <p class="risk-bar__label">현재 포트폴리오</p>
+                                <span class="risk-bar__bar" aria-hidden="true">
+                                    <i class="risk-bar__safe" style="width: 51.7%"></i>
+                                    <i class="risk-bar__danger"></i>
+                                </span>
+                                <p class="risk-bar__legend">
+                                    <span class="risk-bar__safe-text">안전 51.7%</span>
+                                    <span class="risk-bar__danger-text">위험 48.3%</span>
+                                </p>
+                            </div>
+                            <div class="risk-bar__item">
+                                <p class="risk-bar__label">최적 포트폴리오</p>
+                                <span class="risk-bar__bar" aria-hidden="true">
+                                    <i class="risk-bar__safe" style="width: 3%"></i>
+                                    <i class="risk-bar__danger"></i>
+                                </span>
+                                <p class="risk-bar__legend">
+                                    <span class="risk-bar__safe-text">안전 3.0%</span>
+                                    <span class="risk-bar__danger-text">위험 97.0%</span>
+                                </p>
+                            </div>
+                        </div>
+    
+                        <hr class="divider is-dash-e1" />
+    
+                        <div class="card-head tooltipWrap is-card">
+                            <h4 class="perf-compare__title">
+                                성과지표 비교
+                                <button type="button" class="toolTipBtn is-w16" onclick="tooltipOpen($(this));return false;"><span class="blind">성과지표 비교 도움말</span></button>
+                            </h4>
+                            <span class="perf-compare__unit">(년 기준, %)</span>
+                            <div class="tooltipCont" style="display: none">
+                                <h3>안내사항</h3>
+                                <ul>
+                                    <li>기대수익은 1년 동안 기대할 수 있는 평균 수익률, 투자위험은 수익률이 오르내리는 폭이에요.</li>
+                                    <li>과거 시장 데이터로 계산한 추정치예요.</li>
+                                </ul>
+                                <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
+                            </div>
+                        </div>
+                        <div class="perf-compare">
+                            <div class="perf-compare__group">
+                                <p class="perf-compare__name">
+                                    기대수익
+                                    <em class="perf-compare__gap is-up">2.3% 차이</em>
+                                </p>
+                                <p class="perf-compare__row">
+                                    <span class="perf-compare__row-label">현재</span>
+                                    <span class="perf-compare__row-bar" aria-hidden="true"><i class="perf-compare__fill" style="width: 44.3%"></i></span>
+                                    <span class="perf-compare__row-value">6.6%</span>
+                                </p>
+                                <p class="perf-compare__row">
+                                    <span class="perf-compare__row-label">최적</span>
+                                    <span class="perf-compare__row-bar" aria-hidden="true"><i class="perf-compare__fill is-opt"
+                                            style="width: 59.7%"></i></span>
+                                    <span class="perf-compare__row-value">8.9%</span>
+                                </p>
+                            </div>
+                            
+                            <div class="perf-compare__group">
+                                <p class="perf-compare__name">
+                                    투자위험
+                                    <em class="perf-compare__gap is-up">2.7% 차이</em>
+                                </p>
+                                <p class="perf-compare__row">
+                                    <span class="perf-compare__row-label">현재</span>
+                                    <span class="perf-compare__row-bar" aria-hidden="true"><i class="perf-compare__fill" style="width: 81.9%"></i></span>
+                                    <span class="perf-compare__row-value">12.2%</span>
+                                </p>
+                                <p class="perf-compare__row">
+                                    <span class="perf-compare__row-label">최적</span>
+                                    <span class="perf-compare__row-bar" aria-hidden="true"><i class="perf-compare__fill is-opt"
+                                            style="width: 100%"></i></span>
+                                    <span class="perf-compare__row-value">14.9%</span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr class="divider is-line-f0" />
+                        
+                        <p class="diag-note">
+                            <span class="diag-note__icon" aria-hidden="true"></span>
+                            <span class="diag-note__text">
+                                최적 포트폴리오에 비교해서,
+                                <em class="card-note__strong">{기대수익, 투자위험}</em>
+                                이 낮아요.
+                            </span>
+                        </p>
+                        <button type="button" class="card-btn">기간별 성과 예측</button>
+                            
+                    </div>
+                </section>
+
+                <section class="ai-section" id="target">
+                    <!-- AI 의견 -->
+                    <div class="info-card">
+                        <div class="card-head">
+                            <h3 class="text text--h4 ai-heading">AI 의견이 준비됐어요</h3>
+                            <span class="ai-badge">에이전트 AI</span>
+                        </div>
+                        <p class="ai-quote">지금은 현금성 33%·국내주식 31%로 현금과 국내 
+                        자산에 몰려 있어요. 해외 비중을 늘리면 최적 포트폴리오에 더 가까워지고, 한곳에 쏠린 위험도 조정됩니다.</p>
+                    </div>
+                </section>
+
+                <!-- 의견 대기 -->
+                <section class="ai-section"><!--id="target" 추가해야 함 플로팅 버튼 보려고 제거 -->
+                    <div class="info-card is-locked">
+                        <div class="card-head">
+                            <h3 class="text text--h4">AI 의견이 준비됐어요</h3>
+                            <span class="ai-badge">에이전트 AI</span>
+                        </div>
+                        <p class="ai-quote">지금은 현금성 33%·국내주식 31%로 현금과 국내 자산에 몰려 있어요. 해외 비중을 늘리면 최적 포트폴리오에 더 가까워지고, 한곳에 쏠린 위험도 조정됩니다.</p>
+                        <div class="card-lock">
+                            <div class="card-lock__group">
+                                <span class="lottie-anim" style="--lottie-size: 64px" data-lottie="lottieInsightAiLoader1" data-lottie-loop="true" data-lottie-path="ai-loader" aria-hidden="true"></span>
+                                <p class="card-lock__desc mt4">
+                                    AI 의견을 준비하고 있어요.
+                                    <br />
+                                    잠시만 기다려 주세요.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="accordion-notice">
+                <div class="accordion-notice__item">
+                    <button type="button" aria-expanded="true" data-acc-toggle>
+                        <span class="accordion-notice__title">알아두세요</span>
+                    </button>
+                    <div class="accordion-notice__body">
+                        <ul class="bullet is-dot--body3">
+                            <li class="bullet__item">내 자산 및 투자성향 포트폴리오에서 제시된 기대수익률 범위는 NH농협은행 WM시스템의 기대수익률과 투자위험 정보를 바탕으로 재구성되었습니다.</li>
+                            <li class="bullet__item">NH농협은행은 현금, 국내주식, 국내채권, 해외선진국주식, 해외신흥국주식, 해외채권 등 6개의 기초자산에 대해 최적자산배분을 제시하며 대체투자, 실물투자, 보험 등은 최적자산배분 프로세스에서 제외합니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="areaBtnStatic">
+                <a href="javascript:;" role="button" class="btnPressDefault">다시선택</a>
+                <a href="javascript:;" role="button" class="btnPressPoint">제안 보기</a>
+            </div>
+        </div>
+        <button type="button" class="btn-floating__circle">
+            <span>
+                AI
+                <br />
+                의견완료
+            </span>
+            <span class="btn-floating__icon" aria-hidden="true"></span>
+        </button>
+        <script>
+            /* [nochart] 기대수익 곡선은 정적 SVG로 대체 */
+
+            (function() {
+                var floating = document.querySelector('.btn-floating__circle');
+                var targetSection = document.getElementById('target');
+                var lockSec = targetSection ? targetSection.querySelector('.info-card') : null;
+                if(!floating || !targetSection || !lockSec) return;
+
+                var startY = 0;
+                var isUserScrolling = false;
+
+                var STYLES = {
+                    show: {opacity: '1', visibility: 'visible', transform: 'translateY(0)'},
+                    hide: {opacity: '0', visibility: 'hidden', transform: 'translateY(20px)'}
+                }
+
+                var observer = new MutationObserver(function() {
+                    if(lockSec.className.indexOf('is-locked') === -1) {
+                        triggerShow();
+                    }
+                });
+                observer.observe(lockSec, {attributes: true, attributeFilter: ['class']})
+
+                if(lockSec.className.indexOf('is-locked') === -1) {
+                    triggerShow();
+                }
+
+                function triggerShow() {
+                    observer.disconnect();
+
+                    if (targetSection.getBoundingClientRect().top < window.innerHeight * 0.8) return;
+
+                    setTimeout(showBtn, 50);
+                }
+
+                function showBtn() {
+                    Object.assign(floating.style, STYLES.show);
+                    startY = window.pageXOffset || document.documentElement.scrollTop;
+                    
+                    window.addEventListener('wheel', function() {  isUserScrolling = true; }, {passive: true});
+                    window.addEventListener('touchmove', function() {  isUserScrolling = true; }, {passive: true});
+                    window.addEventListener('scroll', checkScroll);
+                }
+
+                floating.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                    destroy();
+                })
+
+                function checkScroll() {
+                    if (!isUserScrolling) return;
+
+                    var currentY = window.pageXOffset || document.documentElement.scrollTop;
+                    
+                    if(currentY > startY + 30) {
+                        var rect = targetSection.getBoundingClientRect();
+                        if(rect.top < window.innerHeight * 0.8) {
+                            destroy();
+                        }
+                    }
+                }
+
+                function destroy() {
+                    Object.assign(floating.style, STYLES.hide);
+                    window.addEventListener('scroll', checkScroll)
+                }
+            })();
+
+            $(document).ready(function () {
+                tostpop();//토스트 팝업 호출
+            })
+
+            function tostpop(){
+                var $tostCont = '<div class="toastPop nds" role="status" aria-live="polite"><p class="toast-basic">최적 포트폴리오의 투자 위험을 낮췄어요.</p></div>'
+                $('.container').after($tostCont);
+            }
+        </script>
+    </body>
+</html>

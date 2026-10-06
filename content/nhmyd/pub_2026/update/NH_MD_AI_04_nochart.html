@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <!-- [nochart] 검토용 사본: 공통 head(head-mb-update.js)에서 chart.js 한 줄만 뺀 내용을 인라인 + nochart.css/js 추가 -->
+        <script>
+            /**
+             * Head include
+             * ------------------
+             * css & script 공통 include
+             */
+
+            (function () {
+                var str =
+                    "" +
+                    '<meta http-equiv="Content-Script-Type" content="text/javascript">' +
+                    '<meta http-equiv="Content-Style-Type" content="text/css">' +
+                    '<meta http-equiv="X-UA-Compatible" content="IE=edge">' +
+                    '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">' +
+                    '<meta name="apple-mobile-web-app-title" content="NH마이데이터">' +
+                    '<meta http-equiv="imagetoolbar" content="no">' +
+                    '<meta name="robots" content="no-index,follow">' +
+                    '<meta name="title" content="">' +
+                    '<meta name="author" content="">' +
+                    '<meta name="content" content="">' +
+                    '<meta name="keywords" content="NH마이데이터">' +
+                    '<meta name="description" content="NH마이데이터">' +
+                    '<meta http-equiv="Pragma" content="no-cache">' +
+                    '<meta http-equiv="Expires" content="-1">' +
+                    // title은 공통 include에 넣지 않음 — 각 html 파일에서 <title>로 직접 지정
+
+                    '<link type="text/css" rel="stylesheet" href="../../css/swiper.min.css">' +
+                    '<link type="text/css" rel="stylesheet" href="../../css/nh_base.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nh_layout.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nh_comm.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_logos.css">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_com.css" id="changeCom">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_cont.css" id="changeCont">' +
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd.css">' + //2023 마이데이터 고도화
+                    '<link type="text/css" rel="stylesheet" href="../../css/ms_allone.css">' +
+                    '<link type="text/css" rel="stylesheet" href="../../css/ms_pay.css">' + //NH-Pay
+                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd_mb.css?20250912">' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                    //'<link rel="stylesheet" type="text/css" href="../../css/update.css">' + //2026 NH농협은행 nds 적용
+                    // OF는 실 단말 하이브리드 웹뷰에서만 주입되는 네이티브 브릿지 전역객체라, pub 폴더를 브라우저로 단독
+                    // 열람하는 이 환경에는 존재하지 않음. nhasset-ui.js의 popOpenRun()이 OF.exeStatus를 가드 없이
+                    // 참조하고 있어서(레거시 원본 소스는 수정하지 않음) 여기서 빈 객체로 미리 정의해 ReferenceError를
+                    // 막는다. 실제 단말에서는 OF가 먼저 주입되어 있으므로 이 줄은 아무 영향을 주지 않는다.
+                    "<script>window.OF = window.OF || {};<\/script>" +
+                    '<script src="../../js/jquery-1.9.1.min.js"><\/script>' +
+                    '<script src="../../js/jquery-ui.min.js"><\/script>' +
+                    '<script src="../../js/jquery.ui.touch-punch.min.js"><\/script>' +
+                    '<script src="../../js/swiper.7.4.1.min.js"><\/script>' +
+                    '<script src="../../js/common_ui.js"><\/script>' +
+                    '<script src="../../js/nhasset-ui.js"><\/script>' +
+                    '<script src="../../js/nhasset-ui-myd.js"><\/script>' + //2023 마이데이터 고도화
+                    '<script src="../../js/nhasset-ui-myd-mb.js"><\/script>' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                    '<script src="../../js/update-ui.js"><\/script>' + '<link rel="stylesheet" type="text/css" href="./nochart.css">' + '<script src="./nochart.js"><\/script>'; //2026 NH농협은행 nds 적용 화면 UI 스크립트
+                //    '<link type="text/css" rel="stylesheet" href="../pub-assets/css/guide.css">'; //가이드용 css 실제 서비스에는 불필요
+                // +'<script src="../pub-assets/js/guide.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요
+                // +'<script src="../pub-assets/js/guide-mb.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요 //2025 NH농협은행 비대면 마이데이터 고객여정 개선
+                document.write(str);
+            })();
+        </script>
+        <title>AI 포트폴리오</title>
+    </head>
+
+    <body>
+        <div class="wrapper nhasset nds">
+            <div class="header">
+                <a href="javascript:;" role="button" class="btnBack"><span class="blind">이전화면으로</span></a>
+                <h1>AI 포트폴리오</h1>
+                <a href="javascript:;" class="btnGoHome" role="button"><span class="blind">Home</span></a>
+                <a href="javascript:;" class="btnAll" role="button"><span class="blind">전체메뉴</span></a>
+            </div>
+
+            <div class="container pb32">
+                <div class="diag-step">
+                    <span class="text text--body3-medium text--font3">제안</span>
+                    <!--<span class="blind">전체 3단계 중 1단계</span>
+                    <span class="diag-step__progress" aria-hidden="true">
+                        <span class="process-progress-number is-plain">
+                            <span class="process-progress-number__current">STEP</span>
+                        </span>
+                        <span class="process-progress-number is-plain">
+                            <span class="process-progress-number__current">01</span>
+                            <span class="process-progress-number__divider"></span>
+                            <span class="process-progress-number__total">03</span>
+                        </span>
+                    </span>-->
+                </div>
+
+                <section class="ai-section">
+                    <!-- prettier-ignore -->
+                    <h2 class="text text--h2 diag-lead tooltipWrap is-card">
+                        고객님이 선택한 <em class="text--point-chart">22개</em> 계좌 중
+                        <br /><em class="text--point-chart">96,000,000원</em>을 대상으로
+                        <br />제안을 진행했어요.
+                        <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span class="blind">제안 대상 도움말</span></button>
+                        <div class="tooltipCont" style="display: none">
+                            <h3>안내사항</h3>
+                            <ul>
+                                <li>진단 대상으로 선택한 계좌의 평가금액을 합한 금액이에요. 이 금액을 기준으로 최적 포트폴리오를 계산했어요.</li>
+                            </ul>
+                            <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
+                        </div>
+                    </h2>
+
+
+
+                    <div class="info-card is-locked">
+                        <div class="card-head">
+                            <h3 class="text text--h4">AI 의견이 준비됐어요</h3>
+                            <span class="ai-badge">에이전트 AI</span>
+                        </div>
+                        <p class="ai-quote">진단에서 선택한 자산이 국내주식에 몰려 있어서, 비중을 해외로 분산하여 위험자산을 84%로 높이고,
+                            기대수익은 8.3%, 투자위험은 14.2%로 제안했어요. 투자성향을 고려하여, 한 곳에 쏠린 위험도 분산됐어요.</p>
+                        <div class="card-lock">
+                            <div class="card-lock__group">
+                                <span class="lottie-anim" style="--lottie-size: 64px" data-lottie="lottieInsightAiLoader1" data-lottie-loop="true" data-lottie-path="ai-loader" aria-hidden="true"></span>
+                                <p class="card-lock__desc mt4">
+                                    AI 의견을 준비하고 있어요.
+                                    <br>
+                                    잠시만 기다려 주세요.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="ai-section">
+                    <div class="info-card ai">
+                        <h3 class="text text--h4 ai-heading">포트폴리오 비교</h3>
+
+                        <div class="donut-compare">
+                            <div class="donut-compare__col">
+                                <p class="text text--body3-medium text--font3">현재 포트폴리오</p>
+                                <div class="donut-compare__chart"><svg class="nc-donut" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><g transform="rotate(-90 50 50)"><circle cx="50" cy="50" r="41" fill="none" stroke="#22d3ee" stroke-width="18" stroke-dasharray="85.41 257.61" stroke-dashoffset="0"/><circle cx="50" cy="50" r="41" fill="none" stroke="#a3e635" stroke-width="18" stroke-dasharray="33.89 257.61" stroke-dashoffset="-85.01"/><circle cx="50" cy="50" r="41" fill="none" stroke="#f472b6" stroke-width="18" stroke-dasharray="13.28 257.61" stroke-dashoffset="-118.5"/><circle cx="50" cy="50" r="41" fill="none" stroke="#facc15" stroke-width="18" stroke-dasharray="80.26 257.61" stroke-dashoffset="-131.38"/><circle cx="50" cy="50" r="41" fill="none" stroke="#f5a623" stroke-width="18" stroke-dasharray="36.47 257.61" stroke-dashoffset="-211.24"/><circle cx="50" cy="50" r="41" fill="none" stroke="#4c6ce0" stroke-width="18" stroke-dasharray="8.13 257.61" stroke-dashoffset="-247.31"/><circle cx="50" cy="50" r="41" fill="none" stroke="#d7d7d7" stroke-width="18" stroke-dasharray="2.58 257.61" stroke-dashoffset="-255.03"/></g></svg></div>
+                            </div>
+                            <i class="donut-compare__line" aria-hidden="true"></i>
+                            <div class="donut-compare__col">
+                                <p class="text text--body3-medium text--font3">제안 포트폴리오</p>
+                                <div class="donut-compare__chart"><svg class="nc-donut" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><g transform="rotate(-90 50 50)"><circle cx="50" cy="50" r="41" fill="none" stroke="#22d3ee" stroke-width="18" stroke-dasharray="85.41 257.61" stroke-dashoffset="0"/><circle cx="50" cy="50" r="41" fill="none" stroke="#a3e635" stroke-width="18" stroke-dasharray="33.89 257.61" stroke-dashoffset="-85.01"/><circle cx="50" cy="50" r="41" fill="none" stroke="#f472b6" stroke-width="18" stroke-dasharray="13.28 257.61" stroke-dashoffset="-118.5"/><circle cx="50" cy="50" r="41" fill="none" stroke="#facc15" stroke-width="18" stroke-dasharray="80.26 257.61" stroke-dashoffset="-131.38"/><circle cx="50" cy="50" r="41" fill="none" stroke="#f5a623" stroke-width="18" stroke-dasharray="36.47 257.61" stroke-dashoffset="-211.24"/><circle cx="50" cy="50" r="41" fill="none" stroke="#4c6ce0" stroke-width="18" stroke-dasharray="8.13 257.61" stroke-dashoffset="-247.31"/><circle cx="50" cy="50" r="41" fill="none" stroke="#d7d7d7" stroke-width="18" stroke-dasharray="2.58 257.61" stroke-dashoffset="-255.03"/></g></svg></div>
+                            </div>
+                        </div>
+
+                        <ul class="blind">
+                            <li>현금성 현재 33%, 제안 33%</li>
+                            <li>국내채권 현재 13%, 제안 13%</li>
+                            <li>해외채권 현재 5%, 제안 5%</li>
+                            <li>국내주식 현재 31%, 제안 31%</li>
+                            <li>해외선진국주식 현재 14%, 제안 14%</li>
+                            <li>해외신흥국주식 현재 3%, 제안 3%</li>
+                            <li>대체자산 현재 1%, 제안 1%</li>
+                        </ul>
+
+                        <div class="diag-legend is-compare" aria-hidden="true">
+                            <ul class="diag-legend__group">
+                                <li class="diag-legend__row">
+                                    <span class="diag-legend__value">33 %</span>
+                                    <span class="diag-legend__name">
+                                        <i class="diag-legend__swatch" style="background: #22d3ee"></i>
+                                        현금성
+                                    </span>
+                                    <span class="diag-legend__value">33 %</span>
+                                </li>
+                            </ul>
+                            <ul class="diag-legend__group">
+                                <li class="diag-legend__row">
+                                    <span class="diag-legend__value">13 %</span>
+                                    <span class="diag-legend__name">
+                                        <i class="diag-legend__swatch" style="background: #a3e635"></i>
+                                        국내채권
+                                    </span>
+                                    <span class="diag-legend__value">13 %</span>
+                                </li>
+                                <li class="diag-legend__row">
+                                    <span class="diag-legend__value">5 %</span>
+                                    <span class="diag-legend__name">
+                                        <i class="diag-legend__swatch" style="background: #f472b6"></i>
+                                        해외채권
+                                    </span>
+                                    <span class="diag-legend__value">5 %</span>
+                                </li>
+                            </ul>
+                            <ul class="diag-legend__group">
+                                <li class="diag-legend__row">
+                                    <span class="diag-legend__value">31 %</span>
+                                    <span class="diag-legend__name">
+                                        <i class="diag-legend__swatch" style="background: #facc15"></i>
+                                        국내주식
+                                    </span>
+                                    <span class="diag-legend__value">31 %</span>
+                                </li>
+                                <li class="diag-legend__row">
+                                    <span class="diag-legend__value">14 %</span>
+                                    <span class="diag-legend__name">
+                                        <i class="diag-legend__swatch" style="background: #f5a623"></i>
+                                        해외선진국주식
+                                    </span>
+                                    <span class="diag-legend__value">14 %</span>
+                                </li>
+                                <li class="diag-legend__row">
+                                    <span class="diag-legend__value">3 %</span>
+                                    <span class="diag-legend__name">
+                                        <i class="diag-legend__swatch" style="background: #4c6ce0"></i>
+                                        해외신흥국주식
+                                    </span>
+                                    <span class="diag-legend__value">3 %</span>
+                                </li>
+                            </ul>
+                            <ul class="diag-legend__group">
+                                <li class="diag-legend__row">
+                                    <span class="diag-legend__value">1 %</span>
+                                    <span class="diag-legend__name">
+                                        <i class="diag-legend__swatch" style="background: #d7d7d7"></i>
+                                        대체자산
+                                    </span>
+                                    <span class="diag-legend__value">1 %</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <p class="text text--h5 text--font3 mt32">
+                            제안 포트폴리오에 비교했을 때,
+                            <br />
+                            <em class="text--point-chart">{위험자산}이 더 필요해요.</em>
+                        </p>
+
+                        <div class="risk-bar">
+                            <div class="risk-bar__item">
+                                <p class="risk-bar__label">현재 포트폴리오</p>
+                                <span class="risk-bar__bar" aria-hidden="true">
+                                    <i class="risk-bar__safe" style="width: 51.7%"></i>
+                                    <i class="risk-bar__danger"></i>
+                                </span>
+                                <p class="risk-bar__legend">
+                                    <span class="risk-bar__safe-text">안전 51.7%</span>
+                                    <span class="risk-bar__danger-text">위험 48.3%</span>
+                                </p>
+                            </div>
+                            <div class="risk-bar__item">
+                                <p class="risk-bar__label">제안 포트폴리오</p>
+                                <span class="risk-bar__bar" aria-hidden="true">
+                                    <i class="risk-bar__safe" style="width: 3%"></i>
+                                    <i class="risk-bar__danger"></i>
+                                </span>
+                                <p class="risk-bar__legend">
+                                    <span class="risk-bar__safe-text">안전 3.0%</span>
+                                    <span class="risk-bar__danger-text">위험 97.0%</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="ai-section">
+                    <div class="info-card ai">
+                        <h3 class="text text--h4 ai-heading">제안 포트폴리오</h3>
+
+                        <p class="text text--h5 text--font3 mt16">제안 포트폴리오에 맞춰 조정하려면</p>
+
+                        <ul class="alloc-bar">
+                            <li class="alloc-bar__item">
+                                <span class="alloc-bar__bar" aria-hidden="true">
+                                    <i class="alloc-bar__base" style="width: 1.5%"></i>
+                                    <i class="alloc-bar__delta is-down" style="width: 24.3%"></i>
+                                </span>
+                                <span class="alloc-bar__row">
+                                    <span class="alloc-bar__name">현금성 1%</span>
+                                    <span class="alloc-bar__change">
+                                        <em class="alloc-bar__down">-32% 줄여요</em>
+                                        -115,200,000 원
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="alloc-bar__item">
+                                <span class="alloc-bar__bar" aria-hidden="true">
+                                    <i class="alloc-bar__base" style="width: 1.5%"></i>
+                                    <i class="alloc-bar__delta is-down" style="width: 9.2%"></i>
+                                </span>
+                                <span class="alloc-bar__row">
+                                    <span class="alloc-bar__name">국내채권 1%</span>
+                                    <span class="alloc-bar__change">
+                                        <em class="alloc-bar__down">-12% 줄여요</em>
+                                        -43,200,000 원
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="alloc-bar__item">
+                                <span class="alloc-bar__bar" aria-hidden="true">
+                                    <i class="alloc-bar__base" style="width: 1.5%"></i>
+                                    <i class="alloc-bar__delta is-down" style="width: 4%"></i>
+                                </span>
+                                <span class="alloc-bar__row">
+                                    <span class="alloc-bar__name">해외채권 1%</span>
+                                    <span class="alloc-bar__change">
+                                        <em class="alloc-bar__down">-5% 줄여요</em>
+                                        -18,200,000 원
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="alloc-bar__item">
+                                <span class="alloc-bar__bar" aria-hidden="true">
+                                    <i class="alloc-bar__base" style="width: 34.9%"></i>
+                                    <i class="alloc-bar__delta is-up" style="width: 9.2%"></i>
+                                </span>
+                                <span class="alloc-bar__row">
+                                    <span class="alloc-bar__name">국내주식 48%</span>
+                                    <span class="alloc-bar__change">
+                                        <em class="alloc-bar__up">+17% 늘려요</em>
+                                        +61,200,000 원
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="alloc-bar__item">
+                                <span class="alloc-bar__bar" aria-hidden="true">
+                                    <i class="alloc-bar__base" style="width: 9.2%"></i>
+                                    <i class="alloc-bar__delta is-up" style="width: 16.2%"></i>
+                                </span>
+                                <span class="alloc-bar__row">
+                                    <span class="alloc-bar__name">해외선진국주식 34%</span>
+                                    <span class="alloc-bar__change">
+                                        <em class="alloc-bar__up">+20% 늘려요</em>
+                                        +72,000,000 원
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="alloc-bar__item">
+                                <span class="alloc-bar__bar" aria-hidden="true">
+                                    <i class="alloc-bar__base" style="width: 2.9%"></i>
+                                    <i class="alloc-bar__delta is-up" style="width: 2.2%"></i>
+                                </span>
+                                <span class="alloc-bar__row">
+                                    <span class="alloc-bar__name">해외신흥국주식 15%</span>
+                                    <span class="alloc-bar__change">
+                                        <em class="alloc-bar__up">12% 늘려요</em>
+                                        +43,200,000 원
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="alloc-bar__item">
+                                <span class="alloc-bar__bar" aria-hidden="true">
+                                    <i class="alloc-bar__base" style="width: 0%"></i>
+                                    <i class="alloc-bar__delta" style="width: 0%"></i>
+                                </span>
+                                <span class="alloc-bar__row">
+                                    <span class="alloc-bar__name">대체자산 0%</span>
+                                    <span class="alloc-bar__change">0%(0원)</span>
+                                </span>
+                            </li>
+                        </ul>
+
+                        <hr class="divider is-dash-e1" />
+
+                        <div class="card-head tooltipWrap is-card">
+                            <h4 class="perf-compare__title">
+                                성과지표 비교
+                                <button type="button" class="toolTipBtn is-sm" onclick="tooltipOpen($(this));return false;"><span class="blind">성과지표 비교 도움말</span></button>
+                            </h4>
+                            <span class="perf-compare__unit">(년 기준, %)</span>
+                            <div class="tooltipCont" style="display: none">
+                                <h3>안내사항</h3>
+                                <ul>
+                                    <li>기대수익은 1년 동안 기대할 수 있는 평균 수익률, 투자위험은 수익률이 흔들리는 정도(변동성)를 뜻해요. 현재와 제안 포트폴리오의 값을 나란히 비교해서 보여줘요.</li>
+                                </ul>
+                                <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
+                            </div>
+                        </div>
+                        <div class="perf-compare">
+                            <div class="perf-compare__group">
+                                <p class="perf-compare__name">
+                                    기대수익
+                                    <em class="perf-compare__gap is-up">2.3%차이</em>
+                                </p>
+                                <p class="perf-compare__row">
+                                    <span class="perf-compare__row-label">현재</span>
+                                    <span class="perf-compare__row-bar" aria-hidden="true"><i class="perf-compare__fill" style="width: 44.3%"></i></span>
+                                    <span class="perf-compare__row-value">6.6%</span>
+                                </p>
+                                <p class="perf-compare__row">
+                                    <span class="perf-compare__row-label">제안</span>
+                                    <span class="perf-compare__row-bar" aria-hidden="true"><i class="perf-compare__fill is-opt" style="width: 59.7%"></i></span>
+                                    <span class="perf-compare__row-value">8.9%</span>
+                                </p>
+                            </div>
+
+                            <div class="perf-compare__group">
+                                <p class="perf-compare__name">
+                                    투자위험
+                                    <em class="perf-compare__gap is-down">2.7%차이</em>
+                                </p>
+                                <p class="perf-compare__row">
+                                    <span class="perf-compare__row-label">현재</span>
+                                    <span class="perf-compare__row-bar" aria-hidden="true"><i class="perf-compare__fill" style="width: 100%"></i></span>
+                                    <span class="perf-compare__row-value">15.2%</span>
+                                </p>
+                                <p class="perf-compare__row">
+                                    <span class="perf-compare__row-label">제안</span>
+                                    <span class="perf-compare__row-bar" aria-hidden="true"><i class="perf-compare__fill is-opt" style="width: 88.8%"></i></span>
+                                    <span class="perf-compare__row-value">13.5%</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <hr class="divider is-line-f0" />
+
+                        <p class="card-note">
+                            <span class="card-note__icon" aria-hidden="true"></span>
+                            <span class="card-note__text">
+                                제안 포트폴리오에 비교해서,
+                                <em class="card-note__strong">{기대수익, 투자위험}</em>
+                                이 낮아요.
+                            </span>
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 다시 제안받기 유도 -->
+                <section class="ai-section">
+                    <div class="info-card ai">
+                        <h3 class="text text--h5 risk-ask">
+                            <span class="risk-ask__icon" aria-hidden="true"></span>
+                            투자 위험이 너무 높다고 생각하세요?
+                        </h3>
+                        <p class="card-sub">투자 위험을 낮춰 다시 진단받아보세요.</p>
+                        <button type="button" class="card-btn">위험 낮춰 다시 제안받기</button>
+                    </div>
+                </section>
+
+                <!-- 다시 제안받기 유도 -->
+                <section class="ai-section">
+                    <div class="info-card ai">
+                        <h3 class="text text--h5 risk-ask">
+                            <span class="risk-ask__icon" aria-hidden="true"></span>
+                            투자 위험 조정이 더 필요하신가요?
+                        </h3>
+                        <p class="card-sub">위험성향 진단을 다시 한번 진행해 보세요.</p>
+                        <button type="button" class="card-btn">투자성향 진단 다시하기</button>
+                    </div>
+                </section>
+
+                <section class="ai-section">
+                    <div class="info-card ai">
+                        <div class="card-head tooltipWrap is-card">
+                            <h3 class="text text--h4 ai-heading">일반 투자 상품 추천</h3>
+                            <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span class="blind">일반 투자 상품 추천 도움말</span></button>
+                            <div class="tooltipCont" style="display: none">
+                                <h3>안내사항</h3>
+                                <ul>
+                                    <li>제안 포트폴리오에 맞춰 조정할 수 있는 계좌를 골라 보여드려요.</li>
+                                </ul>
+                                <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
+                            </div>
+                        </div>
+
+                        <ul class="asset-list__data">
+                            <li class="asset-list__row">
+                                <span class="asset-list__row-label">현재평가금액</span>
+                                <strong class="asset-list__row-value is-total">170,000,000 원</strong>
+                            </li>
+                        </ul>
+                        <hr class="divider is-dash-e1 mt16 mb16" />
+                        <!--데이터 없을때-->
+                        <div class="no-data">
+                            <P class="text text-body3">투자 상품 추천을 하기 위해<br />추가 동의가 필요합니다.</P>
+                            <button type="button" class="card-btn">약관 동의하기</button>
+                        </div>
+                        <!--데이터 있을때-->
+                        <div class="info-card__list full">
+                            <ul class="finance-product asset-list">
+                                <li>
+                                    <div class="finance-head">
+                                        <span class="label is-sm is-line is-gray">만료</span>
+                                        <div class="finance-title">
+                                            <span class="finance-logo"><img src="../../images/logos/AACQ0000.png" alt=""></span>
+                                            <div class="finance-col">
+                                                <p class="finance-name">농협은행 직장인 신용대출</p>
+                                                <p class="finance-number">
+                                                    <span>농협은행</span>
+                                                    <span>000333366999</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="details-row">
+                                        <li>
+                                            <span class="details-label">만기일</span>
+                                            <span class="details-value">2027.01.23</span>
+                                        </li>
+                                        <li>
+                                            <span class="details-label">원리금균등분할상환</span>
+                                            <span class="details-value">연 19.9%</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="finance-head">
+                                        <span class="label is-sm is-line is-lightblue">부채진단</span>
+                                        <div class="finance-title">
+                                            <span class="finance-logo"><img src="../../images/logos/logo_null_06_capital.png" alt=""></span>
+                                            <div class="finance-col">
+                                                <p class="finance-name">롯데캐피탈 엘론(일반신용대출)</p>
+                                                <p class="finance-number">
+                                                    <span>롯데캐피탈</span>
+                                                    <span>000333366999</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="details-row">
+                                        <li>
+                                            <span class="details-label">만기일</span>
+                                            <span class="details-value">2027.02.12</span>
+                                        </li>
+                                        <li>
+                                            <span class="details-label">원리금균등분할상환</span>
+                                            <span class="details-value">연 19.9%</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="finance-head">
+                                        <span class="label is-sm is-line is-lightblue">부채진단</span>
+                                        <div class="finance-title">
+                                            <span class="finance-logo"><img src="../../images/logos/AACT0000.png" alt=""></span>
+                                            <div class="finance-col">
+                                                <p class="finance-name">한국투자저축은행 파인로얄론</p>
+                                                <p class="finance-number">
+                                                    <span>한국투자저축은행</span>
+                                                    <span>2222444455556</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="details-row">
+                                        <li>
+                                            <span class="details-label">만기일</span>
+                                            <span class="details-value">2028.06.27</span>
+                                        </li>
+                                        <li>
+                                            <span class="details-label">일시상환</span>
+                                            <span class="details-value">연 17.21%</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="finance-head">
+                                        <div class="finance-title">
+                                            <span class="finance-logo"><img src="../../images/logos/AAAZ0000.png" alt=""></span>
+                                            <div class="finance-col">
+                                                <p class="finance-name">전세자금대출</p>
+                                                <p class="finance-number">
+                                                    <span>농축협은행</span>
+                                                    <span>2222444455556</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="details-row">
+                                        <li>
+                                            <span class="details-label">만기일</span>
+                                            <span class="details-value">2028.04.12</span>
+                                        </li>
+                                        <li>
+                                            <span class="details-label">원리금균등분할상환</span>
+                                            <span class="details-value">연 9.21%</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                              
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="ai-section">
+                    <div class="info-card ai">
+                        <div class="card-head tooltipWrap is-card">
+                            <h3 class="text text--h4 ai-heading">연금 상품 추천</h3>
+                            <button type="button" class="toolTipBtn" onclick="tooltipOpen($(this));return false;"><span class="blind">연금 상품 추천 도움말</span></button>
+                            <div class="tooltipCont" style="display: none">
+                                <h3>안내사항</h3>
+                                <ul>
+                                    <li>제안 포트폴리오에 맞춰 조정할 수 있는 계좌를 골라 보여드려요.</li>
+                                </ul>
+                                <a href="javascript:;" class="close" onclick="tooltipClose($(this));return false;" role="button"><span class="blind">닫기</span></a>
+                            </div>
+                        </div>
+
+                        <ul class="asset-list__data">
+                            <li class="asset-list__row">
+                                <span class="asset-list__row-label">현재평가금액</span>
+                                <strong class="asset-list__row-value is-total">170,000,000 원</strong>
+                            </li>
+                        </ul>
+                        <hr class="divider is-dash-e1 mt16 mb16" />
+                        <!--데이터 없을때-->
+                        <div class="no-data">
+                            <P class="text text-body3">연금 상품 추천을 하기 위해<br />추가 동의가 필요합니다.</P>
+                            <button type="button" class="card-btn">약관 동의하기</button>
+                        </div>
+                        <!--데이터 있을때-->
+                        <div class="info-card__list full">
+                            <ul class="finance-product asset-list">
+                                <li>
+                                    <div class="finance-head">
+                                        <span class="label is-sm is-line is-gray">만료</span>
+                                        <div class="finance-title">
+                                            <span class="finance-logo"><img src="../../images/logos/AACQ0000.png" alt=""></span>
+                                            <div class="finance-col">
+                                                <p class="finance-name">농협은행 직장인 신용대출</p>
+                                                <p class="finance-number">
+                                                    <span>농협은행</span>
+                                                    <span>000333366999</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="details-row">
+                                        <li>
+                                            <span class="details-label">만기일</span>
+                                            <span class="details-value">2027.01.23</span>
+                                        </li>
+                                        <li>
+                                            <span class="details-label">원리금균등분할상환</span>
+                                            <span class="details-value">연 19.9%</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="finance-head">
+                                        <span class="label is-sm is-line is-lightblue">부채진단</span>
+                                        <div class="finance-title">
+                                            <span class="finance-logo"><img src="../../images/logos/logo_null_06_capital.png" alt=""></span>
+                                            <div class="finance-col">
+                                                <p class="finance-name">롯데캐피탈 엘론(일반신용대출)</p>
+                                                <p class="finance-number">
+                                                    <span>롯데캐피탈</span>
+                                                    <span>000333366999</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="details-row">
+                                        <li>
+                                            <span class="details-label">만기일</span>
+                                            <span class="details-value">2027.02.12</span>
+                                        </li>
+                                        <li>
+                                            <span class="details-label">원리금균등분할상환</span>
+                                            <span class="details-value">연 19.9%</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="finance-head">
+                                        <span class="label is-sm is-line is-lightblue">부채진단</span>
+                                        <div class="finance-title">
+                                            <span class="finance-logo"><img src="../../images/logos/AACT0000.png" alt=""></span>
+                                            <div class="finance-col">
+                                                <p class="finance-name">한국투자저축은행 파인로얄론</p>
+                                                <p class="finance-number">
+                                                    <span>한국투자저축은행</span>
+                                                    <span>2222444455556</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="details-row">
+                                        <li>
+                                            <span class="details-label">만기일</span>
+                                            <span class="details-value">2028.06.27</span>
+                                        </li>
+                                        <li>
+                                            <span class="details-label">일시상환</span>
+                                            <span class="details-value">연 17.21%</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="finance-head">
+                                        <div class="finance-title">
+                                            <span class="finance-logo"><img src="../../images/logos/AAAZ0000.png" alt=""></span>
+                                            <div class="finance-col">
+                                                <p class="finance-name">전세자금대출</p>
+                                                <p class="finance-number">
+                                                    <span>농축협은행</span>
+                                                    <span>2222444455556</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="details-row">
+                                        <li>
+                                            <span class="details-label">만기일</span>
+                                            <span class="details-value">2028.04.12</span>
+                                        </li>
+                                        <li>
+                                            <span class="details-label">원리금균등분할상환</span>
+                                            <span class="details-value">연 9.21%</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                              
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 안전자산 확보 -->
+                <section class="ai-section">
+                    <div class="info-card ai">
+                        <h3 class="text text--h4 ai-heading">안전자산 확보</h3>
+
+                        <ul class="asset-list__data">
+                            <li class="asset-list__row">
+                                <span class="asset-list__row-label">확보금액</span>
+                                <strong class="asset-list__row-value is-total">12,000,000 원</strong>
+                            </li>
+                        </ul>
+
+                        <div class="notice-bullet">
+                            <ul class="bullet is-dot--body3">
+                                <li class="bullet__item">언제든지 목적에 맞게 출금이 가능하도록, 파킹 통장 위주로 운용해요.</li>
+                                <li class="bullet__item">다른 상품으로 갈아탈 때는, 해지 수수료를 고려해야 해요.</li>
+                            </ul>
+                        </div>
+
+                        <hr class="divider is-dash-e1 mb32">
+
+                        <ul class="fund-list">
+                            <li class="fund-item">
+                                <p class="fund-item__labels">
+                                    <span class="label is-sm is-fill is-red">다소 높은 위험</span>
+                                    <span class="label is-sm is-line is-gray">중기이상</span>
+                                    <span class="label is-sm is-line is-gray">해외</span>
+                                    <span class="label is-sm is-line is-gray">펀드</span>
+                                </p>
+                                <p class="text text--body1-medium">OO자산운용 글로벌우주항공증권자투자신탁(H)[주식]Ce</p>
+                                <p class="text text--body3 text--font4">선취수수료 없음·해외 [주식형]</p>
+                                <ul class="fund-item__tags text text--body3 text--font4">
+                                    <li>#대표상품</li>
+                                    <li>#글로벌</li>
+                                </ul>
+                                <ul class="fund-item__rate">
+                                    <li>
+                                        <span class="text text--body2">3개월</span>
+                                        <strong class="fund-item__rate-value">6.20%</strong>
+                                    </li>
+                                    <li>
+                                        <span class="text text--body2">6개월</span>
+                                        <strong class="fund-item__rate-value">14.80%</strong>
+                                    </li>
+                                    <li>
+                                        <span class="text text--body2">12개월</span>
+                                        <strong class="fund-item__rate-value">28.50%</strong>
+                                    </li>
+                                </ul>
+                                <button type="button" class="card-btn">상품몰에서 보기</button>
+                            </li>
+
+                            <li class="fund-item">
+                                <p class="fund-item__labels">
+                                    <span class="label is-sm is-fill is-green">낮음 위험</span>
+                                    <span class="label is-sm is-line is-gray">중기이상</span>
+                                    <span class="label is-sm is-line is-gray">국내</span>
+                                    <span class="label is-sm is-line is-gray">펀드</span>
+                                </p>
+                                <p class="text text--body1-medium">OO자산운용 대한민국베스트증권자투자신탁[주식]C-e</p>
+                                <p class="text text--body3 text--font4">선취수수료 없음·국내 [주식형]</p>
+                                <ul class="fund-item__tags text text--body3 text--font4">
+                                    <li>#국내주식</li>
+                                    <li>#성장주</li>
+                                </ul>
+                                <ul class="fund-item__rate">
+                                    <li>
+                                        <span class="text text--body2">3개월</span>
+                                        <strong class="fund-item__rate-value">6.20%</strong>
+                                    </li>
+                                    <li>
+                                        <span class="text text--body2">6개월</span>
+                                        <strong class="fund-item__rate-value">14.80%</strong>
+                                    </li>
+                                    <li>
+                                        <span class="text text--body2">12개월</span>
+                                        <strong class="fund-item__rate-value">28.50%</strong>
+                                    </li>
+                                </ul>
+                                <button type="button" class="card-btn">상품몰에서 보기</button>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
+            <div class="accordion-notice">
+                <div class="accordion-notice__item">
+                    <button type="button" aria-expanded="true" data-acc-toggle>
+                        <span class="accordion-notice__title">알아두세요</span>
+                    </button>
+                    <div class="accordion-notice__body">
+                        <ul class="bullet is-dot--body3">
+                            <li class="bullet__item">NH농협은행 AI포트폴리오에서 사용하는 기대수익률, 투자위험(변동성)등의 정보는 과거 데이터를 기초하여 제시된 것으로 미래의 수익률을 보장하는 것은 아니며, 향후 수익률은 변동될 수 있습니다.</li>
+                            <li class="bullet__item">미래 투자 환경의 예측도 다른 경제 변수에 의하여 사실과 다르게 나타날 수 있으므로 투자 의사 결정은 고객 스스로 판단하셔야 하며 당행은 투자에 따른 결과를 보장하거나 책임지지 않습니다.</li>
+                            <li class="bullet__item">실제 투자 운영 시 시뮬레이션 결과와 다를 수 있으며, 투자판단을 돕는 참고 자료로만 활용하시기 바랍니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-cta is-basic is-fixed">
+                <button type="button" class="btn is-primary is-lg">진단 다시하기</button>
+            </div>
+        </div>
+
+        <script>
+            /* [nochart] 현재/제안 도넛은 정적 SVG로 대체 — 데이터 연동 시 개발에서 조각 각도 계산 */
+        </script>
+    </body>
+</html>

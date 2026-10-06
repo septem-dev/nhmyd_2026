@@ -1,0 +1,68 @@
+@charset "utf-8";
+/* nochart.css — Chart.js 없이 그린 차트 검토용(*_nochart.html) 스타일
+   확정 시 update.css로 옮길 것 */
+
+/* 도넛 (NH_MD_AI_01, NH_MD_AI_04, MSPS3430P) */
+.nds .nc-donut {display:block;width:100%;height:100%;overflow:visible}
+
+/* 곡선 (NH_MD_AI_02, NH_MD_AI_03, NH_MD_AI_03_01)
+   - 선: viewBox 0~1000 좌표를 박스 크기에 맞춰 늘림(preserveAspectRatio:none), 두께는 non-scaling-stroke로 유지
+   - 점·라벨: 박스 기준 % 좌표로 배치해 찌그러지지 않게 함 */
+.nds .nc-line {position:absolute;top:0;left:0;display:block;width:100%;height:100%;overflow:visible}
+.nds .nc-plot {position:absolute;top:4px;right:4px;bottom:4px;left:4px} /* Chart.js가 점 반지름만큼 주던 안쪽 여백 4px */
+.nds .nc-point {position:absolute;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%}
+.nds .nc-point__label {position:absolute;top:12px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:var(--font-weight-regular);line-height:1;color:#121212;white-space:nowrap}
+
+/* 누적 막대 (NH_MD_01~04 히어로)
+   - flex-grow에 항목 비중(%)을 넣어 너비 비율을 맞춤
+   - 양끝 조각은 둥근 끝이 보이도록 최소 22px(막대 높이), 가운데 조각은 최소 0.6% (기존 Chart.js 보정과 동일)
+   - 로드/슬라이드 전환/새로고침 시 왼쪽에서 펼쳐지는 애니메이션(is-play) */
+.nds .nc-stack {display:flex;width:100%;height:100%;border-radius:var(--radius-8);overflow:hidden}
+.nds .nc-stack__seg {flex:0 1 0%;min-width:0.6%}
+.nds .nc-stack__seg.is-edge {min-width:22px}
+.nds .nc-stack.is-play {animation:ncStackReveal 1s cubic-bezier(0.165, 0.84, 0.44, 1) both}
+@keyframes ncStackReveal {from {clip-path:inset(0 100% 0 0)} to {clip-path:inset(0 0 0 0)}}
+
+/* 증감 비교 막대 (NH_MD_01~04 인사이트 카드)
+   - 가운데(0) 기준 왼쪽 = 이전, 오른쪽 = 현재. 막대 길이(%)는 축 최대값 대비 비율
+   - 여백은 원본 Chart.js 측정값과 동일: 위 17px, 오른쪽 19px(축 라벨 절반), 아래 축 영역 24px, 라벨-막대 간격 10px */
+.nds .nc-cmp {display:grid;grid-template-columns:auto minmax(0, 1fr);grid-template-rows:minmax(0, 1fr) 24px;column-gap:10px;width:100%;height:100%;padding:17px 19px 0 0;box-sizing:border-box}
+.nds .nc-cmp__labels {grid-row:1;display:grid;grid-auto-rows:1fr;align-items:center;font-size:12px;line-height:1;color:#4f5359;white-space:nowrap}
+.nds .nc-cmp__plot {grid-row:1;grid-column:2;position:relative;display:grid;grid-auto-rows:1fr;align-items:stretch;
+    background-image:linear-gradient(#f0f0f0, #f0f0f0), linear-gradient(#f0f0f0, #f0f0f0), linear-gradient(#f0f0f0, #f0f0f0), linear-gradient(#f0f0f0, #f0f0f0), linear-gradient(#f0f0f0, #f0f0f0);
+    background-size:1px 100%;background-repeat:no-repeat;background-position:0 0, 25% 0, 50% 0, 75% 0, 100% 0}
+.nds .nc-cmp__labels span {cursor:pointer}
+/* 행 = 버튼: 키보드(Tab/Enter/Space)·화면 낭독기로 선택 가능, 터치 영역은 행 높이 전체 + 왼쪽 라벨까지(라벨 클릭도 연결) */
+.nds .nc-cmp__row {position:relative;display:block;width:100%;height:100%;min-height:11px;margin:0;padding:0;border:0;background:none;font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.nds .nc-cmp__row:focus {outline:none}
+.nds .nc-cmp__row:focus-visible {outline:2px solid #121212;outline-offset:-1px;border-radius:4px}
+.nds .nc-cmp__bar {position:absolute;top:50%;height:11px;margin-top:-5.5px;min-width:5.5px}
+.nds .nc-cmp__bar.is-prev {right:50%;background:#c8d2e4;border-radius:5.5px 0 0 5.5px}
+.nds .nc-cmp__bar.is-now {left:50%;background:#a1f069;border-radius:0 5.5px 5.5px 0}
+.nds .nc-cmp__axis {grid-row:2;grid-column:2;position:relative;height:24px;font-size:10px;line-height:10px;color:#767676}
+.nds .nc-cmp__axis span {position:absolute;top:6px;transform:translateX(-50%);white-space:nowrap}
+.nds .nc-cmp__axis span:nth-child(1) {left:0}
+.nds .nc-cmp__axis span:nth-child(2) {left:50%}
+.nds .nc-cmp__axis span:nth-child(3) {left:100%}
+
+/* 등장 애니메이션 — Chart.js 기본값과 동일하게 1초, easeOutQuart */
+/* 도넛: 모든 조각이 비율을 유지한 채 12시 방향부터 함께 펼쳐짐 (Chart.js animateRotate와 같은 방식) */
+.nds .nc-donut circle {animation:ncDonutIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) both}
+@keyframes ncDonutIn {from {stroke-dasharray:0 1000;stroke-dashoffset:0}}
+/* 곡선: 선과 점이 기준선(값 0 위치, --nc-base)에서 올라옴 */
+.nds .nc-line {transform-origin:50% var(--nc-base, 100%);animation:ncLineIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) both}
+@keyframes ncLineIn {from {transform:scaleY(0)}}
+.nds .nc-point {animation:ncPointIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) both}
+@keyframes ncPointIn {from {top:var(--nc-base, 100%)}}
+/* 비교 막대: 가운데(0)에서 양쪽으로 자라남 */
+.nds .nc-cmp__bar {animation:ncBarIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) both}
+@keyframes ncBarIn {from {width:0}}
+/* 동작 줄이기 설정 사용자는 애니메이션 생략 */
+@media (prefers-reduced-motion: reduce) {
+    .nds .nc-donut circle, .nds .nc-line, .nds .nc-point, .nds .nc-cmp__bar, .nds .nc-stack.is-play {animation:none}
+}
+/* 화면에 보이기 전까지 등장 애니메이션 대기 (nochart.js가 보이는 순간 nc-wait 제거) */
+.nds .nc-wait, .nds .nc-wait * {animation-play-state:paused !important}
+
+/* 화면에는 숨기고 화면 낭독기로만 읽히는 텍스트 (툴팁 앞 항목명) */
+.nds .nc-sr {position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
