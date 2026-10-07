@@ -3,7 +3,7 @@
  * 미리보기/스테이징용 병합 결과물입니다.
  * 실제 운영 파일(nhasset-ui-myd-mb.js)은 수정하지 않았습니다.
  * 구성: nhasset-ui-myd-mb.js (레거시, 원본 그대로) + update-ui.js (2026 nds)
- * 생성: 2026-10-01 / 갱신: 2026-10-07 (바텀시트 열 때 제목으로 포커스 이동)
+ * 생성: 2026-10-01 / 갱신: 2026-10-07 (팝업 열 때 제목으로 포커스 이동: fullLayerPop·popCenter 추가)
  * ※ 직접 고치지 말고 update-ui.js 수정 후 build_merged.py 로 다시 생성
  * ============================================================= */
 
@@ -2820,7 +2820,7 @@ $(function() {
  * 파일 구성
  *   1. 공통 유틸
  *   2. 팝업·바텀시트 (높이 맞춤, 포커스 복귀, 딤 닫기, 선택 목록)
- *   3. 레거시 전역 함수 오버라이드 (popClose, calendarAlign, tooltipOpen/Close, slidePopConfirm)
+ *   3. 레거시 전역 함수 오버라이드 (popClose, calendarAlign, tooltipOpen/Close, slidePopConfirm, fullLayerPop, popCenter)
  *   4. 컴포넌트 (아코디언, 약관, 탭, 칩, 자산 막대 범례, 하단 고정 영역, 거래내역 마스킹, :has() 폴백,
  *                숫자 인디케이터 캐러셀, 선택 바텀시트, 자산 히어로 카드, 필수 동의 버튼)
  *   5. 차트 (Chart.js 없이 그린 nc-* 차트)
@@ -2985,7 +2985,7 @@ $(function() {
 
   // ---------------------------------------------------------------
   // 2-2. 바텀시트 포커스 이동·복귀
-  //   - 열 때: 시트 제목(h1/h2)으로 포커스 이동
+  //   - 열 때: 팝업 제목(h1/h2)으로 포커스 이동 (slidePopConfirm·fullLayerPop·popCenter 공통)
   //   - 시트를 연 요소(버튼 등)를 기억해 두었다가, 어떤 방식(X·딤·항목 선택 후 popClose)으로 닫히든 그 요소로 포커스를 돌려줌
   //   - 연 요소에 aria-expanded가 있으면 열 때 true, 닫을 때 false로 맞춤
   //   - iOS Safari처럼 클릭해도 버튼에 포커스가 가지 않는 환경을 위해, 직전에 누른 요소도 함께 기억
@@ -3022,15 +3022,23 @@ $(function() {
 
   // 시트가 열리면 제목(h1, 없으면 h2)으로 포커스 이동 → 화면 낭독기가 시트 제목부터 읽고, Tab이 시트 안에서 시작됨
   // (닫을 때는 restorePopOpener가 연 버튼으로 되돌림)
+  // 제목이 없는 팝업(예: 날짜 선택 centerLayer)은 팝업 본문(.popInner)으로 이동
   function focusPopHeading($pop) {
       if (!$pop || !$pop.length) return;
-      var heading = $pop.find(".popInner h1")[0] || $pop.find(".popInner h2")[0];
-      if (!heading) return;
-      if (!heading.hasAttribute("tabindex")) heading.setAttribute("tabindex", "-1");
+      var target = $pop.find(".popInner h1")[0] || $pop.find(".popInner h2")[0];
+      if (!target) {
+          target = $pop.find(".popInner")[0];
+          if (!target) return;
+          if (!target.hasAttribute("tabindex")) {
+              target.setAttribute("tabindex", "-1");
+              target.style.outline = "none"; // 버튼이 아닌 영역이라 포커스 테두리는 표시하지 않음
+          }
+      }
+      if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
       try {
-          heading.focus({ preventScroll: true });
+          target.focus({ preventScroll: true });
       } catch (e) {
-          heading.focus();
+          target.focus();
       }
   }
 
@@ -3273,11 +3281,32 @@ $(function() {
       };
   }
 
+  // fullLayerPop()(전체 화면 팝업), popCenter()(가운데 팝업) — 레거시 동작은 그대로 실행하고
+  // .nds 팝업이면 연 요소를 기억(닫을 때 복귀)한 뒤 팝업 제목으로 포커스 이동
+  function overrideLayerOpen(name, selector) {
+      var legacyOpen = window[name];
+      if (typeof legacyOpen !== "function") return;
+
+      window[name] = function () {
+          var $pops = $(selector);
+          if (!$pops.filter(".nds").length) return legacyOpen.apply(this, arguments);
+
+          var opener = getPopOpener();
+          var result = legacyOpen.apply(this, arguments);
+          var $opened = $pops.filter(".nds:visible");
+          rememberPopOpener($opened, opener);
+          focusPopHeading($opened.last());
+          return result;
+      };
+  }
+
   function registerLegacyOverrides() {
       overridePopClose();
       overrideCalendarAlign();
       overrideTooltip();
       overrideSlidePopConfirm();
+      overrideLayerOpen("fullLayerPop", ".fullLayerPop");
+      overrideLayerOpen("popCenter", ".centerLayer");
 
       window.syncSlidePopConfirmHeight = syncSlidePopConfirmHeight;
       window.observeSlidePopConfirmContent = observeSlidePopConfirmContent;
