@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <script src="../pub-assets/js/head-mb-update.js"></script>
+    <script src="../pub-assets/js/head-mb-update-chart.js"></script>
     <title>기간별 성과 예측</title>
     <script>
         $(document).ready(function () {
@@ -95,7 +95,7 @@
                                         <li>0</li>
                                     </ul>
                                     <div class="predict-chart__box">
-                                        <canvas id="ai0301Chart"></canvas>
+                                        <canvas id="ai0301Chart" aria-hidden="true"></canvas>
                                     </div>
                                     <p class="predict-chart__xaxis">
                                         <span>1년</span>
@@ -159,104 +159,107 @@
         </div>
     </div>
     <script>
-        // [수정] 팝업이 열린 뒤에 그리도록 변경 — 팝업이 display:none일 때 그리면 캔버스가 0×0으로 잡혀 그래프가 깨짐
-        function drawAi0301Chart() {
-            var canvas = document.getElementById('ai0301Chart');
-            if (!canvas || typeof Chart === 'undefined') return;
+        // 함수·변수가 전역으로 새지 않도록 함수로 감쌈
+        (function () {
+            // [수정] 팝업이 열린 뒤에 그리도록 변경 — 팝업이 display:none일 때 그리면 캔버스가 0×0으로 잡혀 그래프가 깨짐
+            function drawAi0301Chart() {
+                var canvas = document.getElementById('ai0301Chart');
+                if (!canvas || typeof Chart === 'undefined') return;
 
-            var START = 3000;
-            var TARGET = { good: 13800, avg: 10000, bad: 7000 };
-            var SERIES = [
-                { key: 'good', color: '#38e784' },
-                { key: 'avg', color: '#09b2c5' },
-                { key: 'bad', color: '#ff7e7e' }
-            ];
+                var START = 3000;
+                var TARGET = { good: 13800, avg: 10000, bad: 7000 };
+                var SERIES = [
+                    { key: 'good', color: '#38e784' },
+                    { key: 'avg', color: '#09b2c5' },
+                    { key: 'bad', color: '#ff7e7e' }
+                ];
 
-            var years = 10;
-            var yLabelEls = document.querySelectorAll('[data-ai0301-yaxis] li');
+                var years = 10;
+                var yLabelEls = document.querySelectorAll('[data-ai0301-yaxis] li');
 
-            function buildSeries(target) {
-                var rate = Math.pow(target / START, 1 / (years - 1));
-                var data = [];
-                for (var y = 1; y <= years; y++) data.push({ x: y, y: START * Math.pow(rate, y - 1) });
-                return data;
-            }
-
-            function niceMax(v) {
-                var step = Math.pow(10, String(Math.round(v / 4)).length - 1);
-                return Math.ceil(v / (4 * step)) * 4 * step;
-            }
-            var yMax = niceMax(Math.max(TARGET.good, TARGET.avg, TARGET.bad));
-
-            for (var i = 0; i < yLabelEls.length; i++) {
-                yLabelEls[i].textContent = Math.round((yMax * (4 - i)) / 4).toLocaleString('ko-KR');
-            }
-
-            var BOX_W = 234;
-            var BOX_H = 178;
-            var padX = ((years - 1) * 2) / (BOX_W - 4);
-            var padY = (yMax * 24) / (BOX_H - 48);
-
-            // [수정] 값 0(기준선)으로 먼저 그린 뒤 실제 값으로 업데이트해 선이 올라오는 애니메이션을 보장
-            //        (Chart.js 최초 애니메이션은 생성 직후 캔버스 크기 재계산(resize)에 밀려 건너뛰어지는 경우가 있음)
-            var targets = SERIES.map(function (s) { return buildSeries(TARGET[s.key]); });
-            var chart = new Chart(canvas.getContext('2d'), {
-                type: 'line',
-                data: {
-                    datasets: SERIES.map(function (s) {
-                        return {
-                            data: buildSeries(TARGET[s.key]).map(function (p) { return { x: p.x, y: 0 }; }),
-                            borderColor: s.color,
-                            borderWidth: 2,
-                            pointRadius: 0,
-                            tension: 0.35,
-                            fill: false
-                        };
-                    })
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    animation: false,
-                    events: [],
-                    layout: { padding: 0 },
-                    scales: {
-                        x: { type: 'linear', min: 1 - padX, max: years + padX, display: false, grid: { display: false } },
-                        y: { type: 'linear', min: -padY, max: yMax + padY, display: false, grid: { display: false } }
-                    },
-                    plugins: { legend: { display: false }, tooltip: { enabled: false } }
+                function buildSeries(target) {
+                    var rate = Math.pow(target / START, 1 / (years - 1));
+                    var data = [];
+                    for (var y = 1; y <= years; y++) data.push({ x: y, y: START * Math.pow(rate, y - 1) });
+                    return data;
                 }
-            });
 
-            var played = false;
-            function play() {
-                if (played) return;
-                played = true;
-                chart.data.datasets.forEach(function (ds, idx) {
-                    ds.data = targets[idx];
+                function niceMax(v) {
+                    var step = Math.pow(10, String(Math.round(v / 4)).length - 1);
+                    return Math.ceil(v / (4 * step)) * 4 * step;
+                }
+                var yMax = niceMax(Math.max(TARGET.good, TARGET.avg, TARGET.bad));
+
+                for (var i = 0; i < yLabelEls.length; i++) {
+                    yLabelEls[i].textContent = Math.round((yMax * (4 - i)) / 4).toLocaleString('ko-KR');
+                }
+
+                var BOX_W = 234;
+                var BOX_H = 178;
+                var padX = ((years - 1) * 2) / (BOX_W - 4);
+                var padY = (yMax * 24) / (BOX_H - 48);
+
+                // [수정] 값 0(기준선)으로 먼저 그린 뒤 실제 값으로 업데이트해 선이 올라오는 애니메이션을 보장
+                //        (Chart.js 최초 애니메이션은 생성 직후 캔버스 크기 재계산(resize)에 밀려 건너뛰어지는 경우가 있음)
+                var targets = SERIES.map(function (s) { return buildSeries(TARGET[s.key]); });
+                var chart = new Chart(canvas.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        datasets: SERIES.map(function (s) {
+                            return {
+                                data: buildSeries(TARGET[s.key]).map(function (p) { return { x: p.x, y: 0 }; }),
+                                borderColor: s.color,
+                                borderWidth: 2,
+                                pointRadius: 0,
+                                tension: 0.35,
+                                fill: false
+                            };
+                        })
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: false,
+                        events: [],
+                        layout: { padding: 0 },
+                        scales: {
+                            x: { type: 'linear', min: 1 - padX, max: years + padX, display: false, grid: { display: false } },
+                            y: { type: 'linear', min: -padY, max: yMax + padY, display: false, grid: { display: false } }
+                        },
+                        plugins: { legend: { display: false }, tooltip: { enabled: false } }
+                    }
                 });
-                chart.options.animation = { duration: 1000, easing: 'easeOutQuart' };
-                chart.update();
+
+                var played = false;
+                function play() {
+                    if (played) return;
+                    played = true;
+                    chart.data.datasets.forEach(function (ds, idx) {
+                        ds.data = targets[idx];
+                    });
+                    chart.options.animation = { duration: 1000, easing: 'easeOutQuart' };
+                    chart.update();
+                }
+                requestAnimationFrame(function () {
+                    requestAnimationFrame(play);
+                });
+                setTimeout(play, 300);
             }
-            requestAnimationFrame(function () {
-                requestAnimationFrame(play);
+            // [수정] 그래프가 화면에 보일 때 그리기 시작 — 스크롤해야 보이는 위치라 로드 시 그리면 애니메이션이 화면 밖에서 끝나 버림
+            $(function () {
+                var box = document.querySelector('.predict-chart__box');
+                if (!box || !('IntersectionObserver' in window)) {
+                    requestAnimationFrame(drawAi0301Chart);
+                    return;
+                }
+                var io = new IntersectionObserver(function (entries) {
+                    if (!entries[0].isIntersecting) return;
+                    io.disconnect();
+                    drawAi0301Chart();
+                }, { threshold: 0.3 });
+                io.observe(box);
             });
-            setTimeout(play, 300);
-        }
-        // [수정] 그래프가 화면에 보일 때 그리기 시작 — 스크롤해야 보이는 위치라 로드 시 그리면 애니메이션이 화면 밖에서 끝나 버림
-        $(function () {
-            var box = document.querySelector('.predict-chart__box');
-            if (!box || !('IntersectionObserver' in window)) {
-                requestAnimationFrame(drawAi0301Chart);
-                return;
-            }
-            var io = new IntersectionObserver(function (entries) {
-                if (!entries[0].isIntersecting) return;
-                io.disconnect();
-                drawAi0301Chart();
-            }, { threshold: 0.3 });
-            io.observe(box);
-        });
+        })();
     </script>
 </body>
 

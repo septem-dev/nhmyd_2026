@@ -2,6 +2,7 @@
  * Head include
  * ------------------
  * css & script 공통 include
+ * [Chart.js 사용 페이지 전용] head-mb-update.js와 같고 chart.js만 추가로 불러옴 (예: *_chart.html)
  */
 
 (function () {
@@ -22,6 +23,7 @@
         '<meta http-equiv="Pragma" content="no-cache">' +
         '<meta http-equiv="Expires" content="-1">' +
         // title은 공통 include에 넣지 않음 — 각 html 파일에서 <title>로 직접 지정
+
         '<link type="text/css" rel="stylesheet" href="../../css/swiper.min.css">' +
         '<link type="text/css" rel="stylesheet" href="../../css/nh_base.css">' +
         '<link rel="stylesheet" type="text/css" href="../../css/nh_layout.css">' +
@@ -43,13 +45,12 @@
         '<script src="../../js/jquery-ui.min.js"></script>' +
         '<script src="../../js/jquery.ui.touch-punch.min.js"></script>' +
         '<script src="../../js/swiper.7.4.1.min.js"></script>' +
+        '<script src="../../js/chart.js"></script>' + //2026 NH농협은행 update chart.js 적용
         '<script src="../../js/common_ui.js"></script>' +
         '<script src="../../js/nhasset-ui.js"></script>' +
         '<script src="../../js/nhasset-ui-myd.js"></script>' + //2023 마이데이터 고도화
         '<script src="../../js/nhasset-ui-myd-mb.js"></script>' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
-        '<script src="../../js/update-ui.js"></script>'; + //2026 NH농협은행 nds 적용 화면 UI 스크립트
-    //    '<link rel="stylesheet" type="text/css" href="../update/nochart.css">' + //2026 Chart.js 없이 그린 차트 스타일
-    //    '<script src="../update/nochart.js"></script>'; //2026 Chart.js 없이 그린 차트 스크립트(애니메이션·툴팁)
+        '<script src="../../js/update-ui.js"></script>'; //2026 NH농협은행 nds 적용 화면 UI 스크립트
     //    '<link type="text/css" rel="stylesheet" href="../pub-assets/css/guide.css">'; //가이드용 css 실제 서비스에는 불필요
     // +'<script src="../pub-assets/js/guide.js"></script>'// 가이드용 js 실제 서비스에는 불필요
     // +'<script src="../pub-assets/js/guide-mb.js"></script>'// 가이드용 js 실제 서비스에는 불필요 //2025 NH농협은행 비대면 마이데이터 고객여정 개선

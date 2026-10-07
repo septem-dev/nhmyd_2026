@@ -2,7 +2,7 @@
 <html lang="ko">
     <head>
         <meta charset="utf-8" />
-        <script src="../pub-assets/js/head-mb-update.js"></script>
+        <script src="../pub-assets/js/head-mb-update-chart.js"></script>
         <title>AI 포트폴리오 진단</title>
     </head>
 
@@ -489,14 +489,17 @@
                 }
             })();
 
-            $(document).ready(function () {
-                tostpop();//토스트 팝업 호출
-            })
+            // 함수로 감쌈: 이 화면 전용 tostpop이 공통 파일(nhasset-ui-myd-mb.js)의 전역 tostpop을 덮어쓰지 않도록
+            (function () {
+                $(document).ready(function () {
+                    tostpop();//토스트 팝업 호출
+                })
 
-            function tostpop(){
-                var $tostCont = '<div class="toastPop nds" role="status" aria-live="polite"><p class="toast-basic">최적 포트폴리오의 투자 위험을 낮췄어요.</p></div>'
-                $('.container').after($tostCont);
-            }
+                function tostpop(){
+                    var $tostCont = '<div class="toastPop nds" role="status" aria-live="polite"><p class="toast-basic">최적 포트폴리오의 투자 위험을 낮췄어요.</p></div>'
+                    $('.container').after($tostCont);
+                }
+            })();
         </script>
     </body>
 </html>

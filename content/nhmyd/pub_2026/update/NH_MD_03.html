@@ -2,65 +2,7 @@
 <html lang="ko">
     <head>
         <meta charset="utf-8" />
-        <!-- [nochart] Chart.js 미사용 기본 버전 (Chart.js 버전: 파일명_chart.html) — 공통 head(head-mb-update.js)에서 chart.js 한 줄만 뺀 내용을 인라인 + nochart.css/js 추가 -->
-        <script>
-            /**
-             * Head include
-             * ------------------
-             * css & script 공통 include
-             */
-
-            (function () {
-                var str =
-                    "" +
-                    '<meta http-equiv="Content-Script-Type" content="text/javascript">' +
-                    '<meta http-equiv="Content-Style-Type" content="text/css">' +
-                    '<meta http-equiv="X-UA-Compatible" content="IE=edge">' +
-                    '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">' +
-                    '<meta name="apple-mobile-web-app-title" content="NH마이데이터">' +
-                    '<meta http-equiv="imagetoolbar" content="no">' +
-                    '<meta name="robots" content="no-index,follow">' +
-                    '<meta name="title" content="">' +
-                    '<meta name="author" content="">' +
-                    '<meta name="content" content="">' +
-                    '<meta name="keywords" content="NH마이데이터">' +
-                    '<meta name="description" content="NH마이데이터">' +
-                    '<meta http-equiv="Pragma" content="no-cache">' +
-                    '<meta http-equiv="Expires" content="-1">' +
-                    // title은 공통 include에 넣지 않음 — 각 html 파일에서 <title>로 직접 지정
-
-                    '<link type="text/css" rel="stylesheet" href="../../css/swiper.min.css">' +
-                    '<link type="text/css" rel="stylesheet" href="../../css/nh_base.css">' +
-                    '<link rel="stylesheet" type="text/css" href="../../css/nh_layout.css">' +
-                    '<link rel="stylesheet" type="text/css" href="../../css/nh_comm.css">' +
-                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_logos.css">' +
-                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_com.css" id="changeCom">' +
-                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_cont.css" id="changeCont">' +
-                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd.css">' + //2023 마이데이터 고도화
-                    '<link type="text/css" rel="stylesheet" href="../../css/ms_allone.css">' +
-                    '<link type="text/css" rel="stylesheet" href="../../css/ms_pay.css">' + //NH-Pay
-                    '<link rel="stylesheet" type="text/css" href="../../css/nhasset_myd_mb.css?20250912">' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
-                    //'<link rel="stylesheet" type="text/css" href="../../css/update.css">' + //2026 NH농협은행 nds 적용
-                    // OF는 실 단말 하이브리드 웹뷰에서만 주입되는 네이티브 브릿지 전역객체라, pub 폴더를 브라우저로 단독
-                    // 열람하는 이 환경에는 존재하지 않음. nhasset-ui.js의 popOpenRun()이 OF.exeStatus를 가드 없이
-                    // 참조하고 있어서(레거시 원본 소스는 수정하지 않음) 여기서 빈 객체로 미리 정의해 ReferenceError를
-                    // 막는다. 실제 단말에서는 OF가 먼저 주입되어 있으므로 이 줄은 아무 영향을 주지 않는다.
-                    "<script>window.OF = window.OF || {};<\/script>" +
-                    '<script src="../../js/jquery-1.9.1.min.js"><\/script>' +
-                    '<script src="../../js/jquery-ui.min.js"><\/script>' +
-                    '<script src="../../js/jquery.ui.touch-punch.min.js"><\/script>' +
-                    '<script src="../../js/swiper.7.4.1.min.js"><\/script>' +
-                    '<script src="../../js/common_ui.js"><\/script>' +
-                    '<script src="../../js/nhasset-ui.js"><\/script>' +
-                    '<script src="../../js/nhasset-ui-myd.js"><\/script>' + //2023 마이데이터 고도화
-                    '<script src="../../js/nhasset-ui-myd-mb.js"><\/script>' + //2025 NH농협은행 비대면 마이데이터 고객여정 개선
-                    '<script src="../../js/update-ui.js"><\/script>' + '<link rel="stylesheet" type="text/css" href="./nochart.css">' + '<script src="./nochart.js"><\/script>'; //2026 NH농협은행 nds 적용 화면 UI 스크립트
-                //    '<link type="text/css" rel="stylesheet" href="../pub-assets/css/guide.css">'; //가이드용 css 실제 서비스에는 불필요
-                // +'<script src="../pub-assets/js/guide.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요
-                // +'<script src="../pub-assets/js/guide-mb.js"><\/script>'// 가이드용 js 실제 서비스에는 불필요 //2025 NH농협은행 비대면 마이데이터 고객여정 개선
-                document.write(str);
-            })();
-        </script>
+        <script src="../pub-assets/js/head-mb-update.js"></script>
         <title>자산관리 포털 메인-일반인 | 마이데이터</title>
     </head>
 
@@ -1102,7 +1044,7 @@
                         </div>
 
                         <div class="promo-carousel mt32">
-                            <div class="promo-carousel__track swiper-container" id="liquiditySubPromoSwiper">
+                            <div class="promo-carousel__track swiper-container" id="loanSubPromoSwiper">
                                 <div class="swiper-wrapper">
                                     <div class="promo-carousel__slide swiper-slide">
                                         <p class="promo-carousel__title">
@@ -1445,7 +1387,7 @@
                 });
             })();
 
-            /* [nochart] Chart.js 막대 생성 스크립트 제거 → 누적 막대는 CSS, 비교 막대는 정적 마크업. 재생·툴팁은 nochart.js */
+            /* [nochart] Chart.js 막대 생성 스크립트 제거 → 누적 막대는 CSS, 비교 막대는 정적 마크업. 재생·툴팁은 update-ui.js */
 
             (function () {
                 var sheet = document.getElementById('loanAccountSheet');
@@ -1491,57 +1433,67 @@
                 );
             })();
 
-            if (typeof Swiper !== 'undefined') {
-                var subPromoTrack = document.getElementById('liquiditySubPromoSwiper');
-                if (subPromoTrack) {
-                    var subIndicatorEl = subPromoTrack.querySelector('.indicator-number');
-                    var subCurrentEl = subIndicatorEl ? subIndicatorEl.querySelector('.indicator-number__current') : null;
-                    var subPrevBtn = subIndicatorEl ? subIndicatorEl.querySelector('.indicator-number__arrow[aria-label="이전"]') : null;
-                    var subNextBtn = subIndicatorEl ? subIndicatorEl.querySelector('.indicator-number__arrow[aria-label="다음"]') : null;
-                    var subPauseBtn = subIndicatorEl ? subIndicatorEl.querySelector('.indicator-number__control') : null;
+            // 서브 프로모션 캐러셀 (예금 탭: #liquiditySubPromoSwiper, 대출 탭: #loanSubPromoSwiper)
+            // 캐러셀마다 Swiper를 따로 만들고 인디케이터(이전·다음·일시정지)를 각자 연결
+            (function () {
+                if (typeof Swiper === 'undefined') return;
 
-                    var syncSubPromoIndicator = function () {
-                        if (!subCurrentEl) return;
-                        var activeSlide = subPromoTrack.querySelector('.swiper-slide-active');
+                function initSubPromo(track) {
+                    if (!track) return;
+                    var indicatorEl = track.querySelector('.indicator-number');
+                    var currentEl = indicatorEl ? indicatorEl.querySelector('.indicator-number__current') : null;
+                    var prevBtn = indicatorEl ? indicatorEl.querySelector('.indicator-number__arrow[aria-label="이전"]') : null;
+                    var nextBtn = indicatorEl ? indicatorEl.querySelector('.indicator-number__arrow[aria-label="다음"]') : null;
+                    var pauseBtn = indicatorEl ? indicatorEl.querySelector('.indicator-number__control') : null;
+
+                    var syncIndicator = function () {
+                        if (!currentEl) return;
+                        var activeSlide = track.querySelector('.swiper-slide-active');
                         if (!activeSlide) return;
                         var dataIdx = activeSlide.getAttribute('data-swiper-slide-index');
                         var idx = dataIdx !== null ? parseInt(dataIdx, 10) : -1;
                         if (isNaN(idx) || idx < 0) {
-                            var originals = Array.prototype.slice.call(subPromoTrack.querySelectorAll('.swiper-wrapper > .swiper-slide:not(.swiper-slide-duplicate)'));
+                            var originals = Array.prototype.slice.call(track.querySelectorAll('.swiper-wrapper > .swiper-slide:not(.swiper-slide-duplicate)'));
                             idx = originals.indexOf(activeSlide);
                         }
-                        if (idx > -1) subCurrentEl.textContent = idx + 1;
+                        if (idx > -1) currentEl.textContent = idx + 1;
                     };
 
-                    var subPromoSwiper = new Swiper('#liquiditySubPromoSwiper', {
+                    var swiper = new Swiper(track, {
                         slidesPerView: 1,
                         spaceBetween: 0,
                         loop: false,
                         rewind: true,
                         a11y: false,
+                        // 숨겨진 탭(대출) 안에서 만들어져도 탭이 열릴 때 크기를 다시 계산
+                        observer: true,
+                        observeParents: true,
                         autoplay: { delay: 4000, disableOnInteraction: false },
                         on: {
-                            init: syncSubPromoIndicator,
-                            slideChange: syncSubPromoIndicator,
-                            slideChangeTransitionEnd: syncSubPromoIndicator
+                            init: syncIndicator,
+                            slideChange: syncIndicator,
+                            slideChangeTransitionEnd: syncIndicator
                         }
                     });
 
-                    if (subPrevBtn) subPrevBtn.addEventListener('click', function () { subPromoSwiper.slidePrev(); syncSubPromoIndicator(); });
-                    if (subNextBtn) subNextBtn.addEventListener('click', function () { subPromoSwiper.slideNext(); syncSubPromoIndicator(); });
-                    if (subPauseBtn) {
-                        subPauseBtn.addEventListener('click', function () {
-                            if (subPauseBtn.getAttribute('aria-label') === '재생') {
-                                subPromoSwiper.autoplay.start();
-                                subPauseBtn.setAttribute('aria-label', '일시정지');
+                    if (prevBtn) prevBtn.addEventListener('click', function () { swiper.slidePrev(); syncIndicator(); });
+                    if (nextBtn) nextBtn.addEventListener('click', function () { swiper.slideNext(); syncIndicator(); });
+                    if (pauseBtn) {
+                        pauseBtn.addEventListener('click', function () {
+                            if (pauseBtn.getAttribute('aria-label') === '재생') {
+                                swiper.autoplay.start();
+                                pauseBtn.setAttribute('aria-label', '일시정지');
                             } else {
-                                subPromoSwiper.autoplay.stop();
-                                subPauseBtn.setAttribute('aria-label', '재생');
+                                swiper.autoplay.stop();
+                                pauseBtn.setAttribute('aria-label', '재생');
                             }
                         });
                     }
                 }
-            }
+
+                initSubPromo(document.getElementById('liquiditySubPromoSwiper'));
+                initSubPromo(document.getElementById('loanSubPromoSwiper'));
+            })();
         </script>
     </body>
 </html>

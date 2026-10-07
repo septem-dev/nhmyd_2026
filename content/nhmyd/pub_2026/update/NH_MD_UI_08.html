@@ -55,25 +55,28 @@
         </div>
         <!--S : 퍼블 확인용 스크립트-->
         <script>
-            $(document).ready(function () {
-            	slidePopConfirm();
-            	syncConfirmBtnState();
+            // 변수·함수가 전역으로 새지 않도록 함수로 감쌈
+            (function () {
+                $(document).ready(function () {
+                	slidePopConfirm();
+                	syncConfirmBtnState();
 
-            	$('.inputChecked').on('change', syncConfirmBtnState);
+                	$('.inputChecked').on('change', syncConfirmBtnState);
 
-            	$('.confirmBtn').on('click', function () {
-            		if ($(this).hasClass('disabled')) return false;
-            	});
-            })
+                	$('.confirmBtn').on('click', function () {
+                		if ($(this).hasClass('disabled')) return false;
+                	});
+                })
 
-            function syncConfirmBtnState() {
-            	var $btn = $('.confirmBtn');
-            	if ($('.inputChecked').is(':checked')) {
-            		$btn.removeClass('disabled').attr('aria-disabled', 'false');
-            	} else {
-            		$btn.addClass('disabled').attr('aria-disabled', 'true');
-            	}
-            }
+                function syncConfirmBtnState() {
+                	var $btn = $('.confirmBtn');
+                	if ($('.inputChecked').is(':checked')) {
+                		$btn.removeClass('disabled').attr('aria-disabled', 'false');
+                	} else {
+                		$btn.addClass('disabled').attr('aria-disabled', 'true');
+                	}
+                }
+            })();
         </script>
         <!--E : 퍼블 확인용 스크립트-->
     </body>
