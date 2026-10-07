@@ -51,7 +51,7 @@
                             <div class="terms-link">
                                 <div class="terms-link__check">
                                     <label class="check-basic is-xs">
-                                        <input type="checkbox" class="check-basic__input" id="agreeTerms1" />
+                                        <input type="checkbox" class="check-basic__input" id="agreeTerms1" data-agree-required="terms" />
                                         <span class="check-basic__icon"></span>
                                         <span class="terms-link__text">[필수] NH마이데이터서비스 이용약관</span>
                                     </label>
@@ -61,7 +61,7 @@
                             <div class="terms-link">
                                 <div class="terms-link__check">
                                     <label class="check-basic is-xs">
-                                        <input type="checkbox" class="check-basic__input" id="agreeTerms2" />
+                                        <input type="checkbox" class="check-basic__input" id="agreeTerms2" data-agree-required="terms" />
                                         <span class="check-basic__icon"></span>
                                         <span class="terms-link__text">[필수] 개인(신용)정보 수집·이용 동의서 (NH 마이데이터 서비스)</span>
                                     </label>
@@ -85,29 +85,10 @@
                 </div>
             </div>
             <div class="areaBtnStatic">
-                <a href="javascript:;" id="btnTermsConfirm" class="btnPressPoint disabled" role="button" aria-disabled="true">서비스 가입</a>
+                <a href="javascript:;" id="btnTermsConfirm" data-agree-button="terms" class="btnPressPoint disabled" role="button" aria-disabled="true">서비스 가입</a>
             </div>
         </div>
 
-        <script>
-            $(function () {
-                var $requiredCard = $('.terms-card').eq(0);
-                var $requiredChecks = $requiredCard.find('.terms-card__list .check-basic__input');
-                var $requiredMaster = $requiredCard.find('.terms-card__header .check-basic__input');
-                var $confirmBtn = $('.areaBtnStatic .btnPressPoint');
-
-                function syncConfirmBtn() {
-                    var enabled = $requiredChecks.length > 0 && $requiredChecks.filter(':checked').length === $requiredChecks.length;
-                    $confirmBtn.toggleClass('disabled', !enabled);
-                    if (enabled) { $confirmBtn.removeAttr('aria-disabled'); } else { $confirmBtn.attr('aria-disabled', 'true'); }
-                }
-
-                $requiredChecks.add($requiredMaster).on('change', function () {
-                    setTimeout(syncConfirmBtn, 0);
-                });
-
-                syncConfirmBtn();
-            });
-        </script>
+        <!-- 필수 약관 동의 → 버튼 활성화는 공통 js/update-ui.js에서 처리 (data-agree-required / data-agree-button) -->
     </body>
 </html>

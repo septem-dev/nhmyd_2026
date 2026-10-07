@@ -382,7 +382,7 @@
 
                 function showBtn() {
                     Object.assign(floating.style, STYLES.show);
-                    startY = window.pageXOffset || document.documentElement.scrollTop;
+                    startY = window.pageYOffset || document.documentElement.scrollTop; // 세로 스크롤 위치
                     
                     window.addEventListener('wheel', function() {  isUserScrolling = true; }, {passive: true});
                     window.addEventListener('touchmove', function() {  isUserScrolling = true; }, {passive: true});
@@ -401,7 +401,7 @@
                 function checkScroll() {
                     if (!isUserScrolling) return;
 
-                    var currentY = window.pageXOffset || document.documentElement.scrollTop;
+                    var currentY = window.pageYOffset || document.documentElement.scrollTop; // 세로 스크롤 위치
                     
                     if(currentY > startY + 30) {
                         var rect = targetSection.getBoundingClientRect();
@@ -413,7 +413,7 @@
 
                 function destroy() {
                     Object.assign(floating.style, STYLES.hide);
-                    window.addEventListener('scroll', checkScroll)
+                    window.removeEventListener('scroll', checkScroll); // 숨긴 뒤에는 스크롤 감시 중단
                 }
             })();
 

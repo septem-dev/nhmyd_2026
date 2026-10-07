@@ -35,7 +35,7 @@
                                 <div class="terms-link">
                                     <div class="terms-link__check">
                                         <label class="check-basic is-xs">
-                                            <input type="checkbox" class="check-basic__input" />
+                                            <input type="checkbox" class="check-basic__input" data-agree-required="terms" />
                                             <span class="check-basic__icon" aria-hidden="true"></span>
                                             <span class="terms-link__text">NH마이데이터 「자산/부채 통합 진단」 서비스 이용약관</span>
                                         </label>
@@ -45,7 +45,7 @@
                                 <div class="terms-link">
                                     <div class="terms-link__check">
                                         <label class="check-basic is-xs">
-                                            <input type="checkbox" class="check-basic__input" />
+                                            <input type="checkbox" class="check-basic__input" data-agree-required="terms" />
                                             <span class="check-basic__icon" aria-hidden="true"></span>
                                             <span class="terms-link__text">OOO 이용약관</span>
                                         </label>
@@ -83,7 +83,7 @@
                 </div>
                 <div class="popBtnWrap">
                     <div class="popBtn">
-                        <a href="javascript:;" class="confirmBtn disabled" role="button" aria-disabled="true">시작하기</a>
+                        <a href="javascript:;" class="confirmBtn disabled" data-agree-button="terms" role="button" aria-disabled="true">시작하기</a>
                     </div>
                     <a href="javascript:;" onclick="popClose(this);return false;" class="popClose" title="해당 창을 닫습니다." role="button">
                         <img src="../../images/common/btn_popClose.png" alt="닫기" />
@@ -92,25 +92,6 @@
             </div>
         </div>
 
-        <script>
-            $(function () {
-                var $requiredCard = $('.terms-card').eq(0);
-                var $requiredChecks = $requiredCard.find('.terms-card__list .check-basic__input');
-                var $requiredMaster = $requiredCard.find('.terms-card__header .check-basic__input');
-                var $confirmBtn = $('.popBtnWrap .confirmBtn');
-
-                function syncConfirmBtn() {
-                    var enabled = $requiredChecks.length > 0 && $requiredChecks.filter(':checked').length === $requiredChecks.length;
-                    $confirmBtn.toggleClass('disabled', !enabled);
-                    if (enabled) { $confirmBtn.removeAttr('aria-disabled'); } else { $confirmBtn.attr('aria-disabled', 'true'); }
-                }
-
-                $requiredChecks.add($requiredMaster).on('change', function () {
-                    setTimeout(syncConfirmBtn, 0);
-                });
-
-                syncConfirmBtn();
-            });
-        </script>
+        <!-- 필수 약관 동의 → 버튼 활성화는 공통 js/update-ui.js에서 처리 (data-agree-required / data-agree-button) -->
     </body>
 </html>

@@ -28,10 +28,19 @@
 
                 <h2 class="guide-title">스크립트로 그리기</h2>
                 <!-- prettier-ignore -->
-                <p class="note">데이터 배열을 받아 항목 버튼을 만들고 선택 표시(<code>bottomsheet-list__check</code>)까지 붙이는 로컬 렌더링 예시입니다.</p>
+                <p class="note">데이터 배열을 받아 항목 버튼을 만들고 선택 표시(<code>bottomsheet-list__check</code>)까지 붙이는 로컬 렌더링 예시입니다. 나중에 그린 요소도 공통 컴포넌트(아코디언·탭·칩·<code>aria-pressed</code> 선택 목록 등)가 자동으로 연결되며, 직접 연결할 때는 <code>window.ndsUI.bind()</code>를 호출합니다.</p>
                 <div class="demo">
                     <button type="button" class="btn is-tertiary is-md" id="openRendered">스크립트로 그린 시트 열기</button>
                     <p class="text text--body3 text--font4" style="margin-top: 12px">선택한 값 : <strong id="pickedLabel">-</strong></p>
+                </div>
+
+                <hr class="divider" />
+
+                <h2 class="guide-title">선택 바텀시트 — data-select-sheet (화면 스크립트 없이)</h2>
+                <!-- prettier-ignore -->
+                <p class="note">버튼에 <code>data-select-sheet="시트 id"</code>, 버튼 안 글자 영역에 <code>data-select-sheet-text</code>를 주면 공통 update-ui.js가 시트 열기 → 항목 선택 표시 → 버튼 글자 변경 → 닫기 → 버튼으로 포커스 복귀까지 처리합니다. 버튼에는 <code>aria-haspopup="dialog" aria-expanded="false"</code>를 함께 씁니다. 한 화면에 시트가 여러 개여도 지정한 시트만 열립니다(NH_MD_01~04 대출 계좌 선택).</p>
+                <div class="demo">
+                    <button type="button" class="btn is-tertiary is-md" data-select-sheet="sheetSelect" aria-haspopup="dialog" aria-expanded="false"><span data-select-sheet-text>NH주택담보대출_변동</span></button>
                 </div>
 
                 <hr class="divider" />
@@ -41,6 +50,28 @@
                 <p class="note">시트 안에서 라디오·입력 그룹의 소제목으로 씁니다(NH_MD_PM_02_01).</p>
                 <div class="demo">
                     <button type="button" class="btn is-tertiary is-md" id="openOption">옵션 선택 시트 열기</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 선택 바텀시트 (data-select-sheet) -->
+        <div class="nhasset popWrap nds slidePopConfirm" id="sheetSelect" style="display: none" role="dialog" aria-modal="true" aria-labelledby="sheetSelectTitle">
+            <div class="dim"></div>
+            <div class="popInner">
+                <h1 id="sheetSelectTitle">대출 계좌 선택</h1>
+                <div class="popCont">
+                    <div class="popCont__inner">
+                        <div class="bottomsheet-list">
+                            <button type="button" class="bottomsheet-list__item" aria-pressed="false"><span>NH직장인 대출 V</span></button>
+                            <button type="button" class="bottomsheet-list__item is-selected" aria-pressed="true"><span>NH주택담보대출_변동</span></button>
+                            <button type="button" class="bottomsheet-list__item" aria-pressed="false"><span>신한 MY CAR 신차 대출</span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="popBtnWrap">
+                    <a href="javascript:;" onclick="popClose(this);return false;" class="popClose" title="해당 창을 닫습니다." role="button">
+                        <img src="../../images/common/btn_popClose.png" alt="닫기" />
+                    </a>
                 </div>
             </div>
         </div>
@@ -130,9 +161,7 @@
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 function open(id) {
-                    $('.slidePopConfirm').hide();
-                    $('#' + id).show();
-                    slidePopConfirm();
+                    slidePopConfirm(id); // 시트 id를 넘기면 그 시트만 열림 (update-ui.js)
                 }
 
                 document.getElementById('openList').addEventListener('click', function () {

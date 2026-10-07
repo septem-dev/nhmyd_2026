@@ -8,6 +8,7 @@
             $(document).ready(function () {
                 slidePopConfirm();
 
+                // ===== [Chart.js 전용 시작] 기본 화면(MSPS3430P.html)에서는 CSS 도넛으로 대체. 이 구간 밖의 코드는 기본 화면과 같으니 함께 수정 =====
                 if (typeof Chart !== 'undefined') {
                     var donutCanvas = document.querySelector('[data-category-donut-chart]');
                     if (donutCanvas) {
@@ -58,6 +59,7 @@
                         });
                     }
                 }
+                // ===== [Chart.js 전용 끝] =====
             });
         </script>
     </head>

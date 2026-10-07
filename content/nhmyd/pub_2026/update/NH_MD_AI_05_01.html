@@ -36,7 +36,7 @@
                                 <div class="terms-link">
                                     <div class="terms-link__check">
                                         <label class="check-basic is-xs">
-                                            <input type="checkbox" class="check-basic__input" id="agreeTerms1" />
+                                            <input type="checkbox" class="check-basic__input" id="agreeTerms1" data-agree-required="terms" />
                                             <span class="check-basic__icon"></span>
                                             <span class="terms-link__text">NH마이데이터 AI 서비스 이용약관</span>
                                         </label>
@@ -46,7 +46,7 @@
                                 <div class="terms-link">
                                     <div class="terms-link__check">
                                         <label class="check-basic is-xs">
-                                            <input type="checkbox" class="check-basic__input" id="agreeTerms2" />
+                                            <input type="checkbox" class="check-basic__input" id="agreeTerms2" data-agree-required="terms" />
                                             <span class="check-basic__icon"></span>
                                             <span class="terms-link__text">NH마이데이터 「AI 포트폴리오」 서비스 이용약관</span>
                                         </label>
@@ -116,7 +116,7 @@
                 </div>
                 <div class="popBtnWrap">
                     <div class="popBtn">
-                        <a href="javascript:;" id="btnTermsConfirm" class="btnPressPoint confirmBtn disabled" role="button" aria-disabled="true">시작하기</a>
+                        <a href="javascript:;" id="btnTermsConfirm" data-agree-button="terms" class="btnPressPoint confirmBtn disabled" role="button" aria-disabled="true">시작하기</a>
                     </div>
                     <a href="javascript:;" onclick="popClose(this);return false;" class="popClose" title="해당 창을 닫습니다." role="button">
                         <img src="../../images/common/btn_popClose.png" alt="닫기" />
@@ -125,37 +125,6 @@
             </div>
         </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var required = [document.getElementById('agreeTerms1'), document.getElementById('agreeTerms2')];
-                var agreeAll = document.getElementById('agreeTerms0');
-                var joinBtn = document.getElementById('btnTermsConfirm');
-
-                function syncJoinButton() {
-                    if (!joinBtn) return;
-                    var allChecked = required.every(function (c) { return c && c.checked; });
-                    joinBtn.classList.toggle('disabled', !allChecked);
-                    if (allChecked) {
-                        joinBtn.removeAttribute('aria-disabled');
-                    } else {
-                        joinBtn.setAttribute('aria-disabled', 'true');
-                    }
-                }
-
-                joinBtn && joinBtn.addEventListener('click', function (e) {
-                    if (joinBtn.classList.contains('disabled')) e.preventDefault();
-                });
-
-                function syncJoinButtonDeferred() {
-                    syncJoinButton();
-                    setTimeout(syncJoinButton, 0);
-                }
-
-                required.concat([agreeAll]).forEach(function (c) {
-                    if (c) c.addEventListener('change', syncJoinButtonDeferred);
-                });
-                syncJoinButton();
-            });
-        </script>
+        <!-- 필수 약관 동의 → 버튼 활성화는 공통 js/update-ui.js에서 처리 (data-agree-required / data-agree-button) -->
     </body>
 </html>

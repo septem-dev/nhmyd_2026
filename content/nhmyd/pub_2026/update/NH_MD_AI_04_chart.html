@@ -755,6 +755,7 @@
         </div>
 
         <script>
+            // ===== [Chart.js 전용 시작] 기본 화면(NH_MD_AI_04.html)에서는 정적 SVG 도넛으로 대체. 이 구간 밖의 코드는 기본 화면과 같으니 함께 수정 =====
             (function () {
                 if (typeof Chart === 'undefined') return;
 
@@ -780,6 +781,7 @@
                 drawDonut('ai04DonutNow', [33, 13, 5, 31, 14, 3, 1]);
                 drawDonut('ai04DonutNew', [33, 13, 5, 31, 14, 3, 1]);
             })();
+            // ===== [Chart.js 전용 끝] =====
         </script>
     </body>
 </html>

@@ -48,6 +48,44 @@
                         <button type="button" class="indicator-number__control" aria-label="재생"></button>
                     </div>
                 </div>
+                <hr class="divider" />
+
+                <h2 class="guide-title">캐러셀 연결 — data-number-carousel (화면 스크립트 없이)</h2>
+                <!-- prettier-ignore -->
+                <p class="note">Swiper 컨테이너에 <code>data-number-carousel="loop"</code>(무한 루프) 또는 <code>"rewind"</code>(끝에서 처음으로 되감기, 숨겨진 탭 안에서도 크기 재계산)를 주면 공통 update-ui.js가 Swiper 생성, 현재 번호, 이전·다음, 일시정지·재생, 4초 자동 넘김을 연결합니다. <code>.indicator-number</code>는 <code>.swiper-wrapper</code> 밖, 컨테이너 바로 안에 둡니다(NH_MD_01~04, NH_MD_CO_01_01·01_04).</p>
+                <div class="demo">
+                    <div class="promo-carousel">
+                        <div class="promo-carousel__track swiper-container" data-number-carousel="loop">
+                            <div class="swiper-wrapper">
+                                <div class="promo-carousel__slide is-fund swiper-slide">
+                                    <p class="promo-carousel__title">첫 번째 배너</p>
+                                    <p class="promo-carousel__tags"><span>#예시</span></p>
+                                </div>
+                                <div class="promo-carousel__slide is-fund swiper-slide">
+                                    <p class="promo-carousel__title">두 번째 배너</p>
+                                    <p class="promo-carousel__tags"><span>#예시</span></p>
+                                </div>
+                                <div class="promo-carousel__slide is-fund swiper-slide">
+                                    <p class="promo-carousel__title">세 번째 배너</p>
+                                    <p class="promo-carousel__tags"><span>#예시</span></p>
+                                </div>
+                            </div>
+                            <div class="indicator-number">
+                                <div class="indicator-number__paging">
+                                    <button type="button" class="indicator-number__arrow" aria-label="이전"></button>
+                                    <span class="indicator-number__count">
+                                        <span class="indicator-number__current">1</span>
+                                        <span class="indicator-number__dash" aria-hidden="true"></span>
+                                        <span class="indicator-number__total">3</span>
+                                    </span>
+                                    <button type="button" class="indicator-number__arrow" aria-label="다음"></button>
+                                </div>
+                                <button type="button" class="indicator-number__control" aria-label="일시정지"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 </div>
         </div>

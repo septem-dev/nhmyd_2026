@@ -442,7 +442,7 @@
                 <!-- 배너 -->
                 <section class="swiper-section">
                     <div class="promo-carousel">
-                        <div class="promo-carousel__track swiper-container" id="fundPromoSwiper">
+                        <div class="promo-carousel__track swiper-container" id="fundPromoSwiper" data-number-carousel="loop">
                             <div class="swiper-wrapper">
                                 <div class="promo-carousel__slide is-fund swiper-slide">
                                     <p class="promo-carousel__title">
@@ -523,56 +523,7 @@
                     });
                 }
 
-                if (typeof Swiper !== 'undefined') {
-                    var promoTrack = document.getElementById('fundPromoSwiper');
-                    if (promoTrack) {
-                        var indicatorEl = promoTrack.querySelector('.indicator-number');
-                        var currentEl = indicatorEl ? indicatorEl.querySelector('.indicator-number__current') : null;
-                        var prevBtn = indicatorEl ? indicatorEl.querySelector('.indicator-number__arrow[aria-label="이전"]') : null;
-                        var nextBtn = indicatorEl ? indicatorEl.querySelector('.indicator-number__arrow[aria-label="다음"]') : null;
-                        var pauseBtn = indicatorEl ? indicatorEl.querySelector('.indicator-number__control') : null;
-
-                        function syncPromoIndicator() {
-                            if (!currentEl) return;
-                            var activeSlide = promoTrack.querySelector('.swiper-slide-active');
-                            if (!activeSlide) return;
-                            var dataIdx = activeSlide.getAttribute('data-swiper-slide-index');
-                            var idx = dataIdx !== null ? parseInt(dataIdx, 10) : -1;
-                            if (isNaN(idx) || idx < 0) {
-                                var originals = Array.prototype.slice.call(promoTrack.querySelectorAll('.swiper-wrapper > .swiper-slide:not(.swiper-slide-duplicate)'));
-                                idx = originals.indexOf(activeSlide);
-                            }
-                            if (idx > -1) currentEl.textContent = idx + 1;
-                        }
-
-                        var promoSwiper = new Swiper('#fundPromoSwiper', {
-                            slidesPerView: 1,
-                            spaceBetween: 0,
-                            loop: true,
-                            a11y: false,
-                            autoplay: { delay: 4000, disableOnInteraction: false },
-                            on: {
-                                init: syncPromoIndicator,
-                                slideChange: syncPromoIndicator,
-                                slideChangeTransitionEnd: syncPromoIndicator
-                            }
-                        });
-
-                        if (prevBtn) prevBtn.addEventListener('click', function () { promoSwiper.slidePrev(); syncPromoIndicator(); });
-                        if (nextBtn) nextBtn.addEventListener('click', function () { promoSwiper.slideNext(); syncPromoIndicator(); });
-                        if (pauseBtn) {
-                            pauseBtn.addEventListener('click', function () {
-                                if (pauseBtn.getAttribute('aria-label') === '재생') {
-                                    promoSwiper.autoplay.start();
-                                    pauseBtn.setAttribute('aria-label', '일시정지');
-                                } else {
-                                    promoSwiper.autoplay.stop();
-                                    pauseBtn.setAttribute('aria-label', '재생');
-                                }
-                            });
-                        }
-                    }
-                }
+                // 프로모션 캐러셀(#fundPromoSwiper)은 공통 js/update-ui.js에서 처리 (data-number-carousel)
             });
         </script>
     </body>

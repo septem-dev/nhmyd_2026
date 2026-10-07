@@ -208,6 +208,47 @@
                     <hr class="terms-card__divider" />
                     <p class="terms-card__body">내용을 입력해 주세요</p>
                 </div>
+                <hr class="divider" />
+
+                <h2 class="guide-title">필수 동의 → 버튼 활성화 — data-agree-required / data-agree-button (화면 스크립트 없이)</h2>
+                <!-- prettier-ignore -->
+                <p class="note">필수 체크박스에 <code>data-agree-required="그룹명"</code>, 버튼에 같은 그룹명으로 <code>data-agree-button="그룹명"</code>을 주면 필수 항목이 모두 체크됐을 때만 버튼이 활성화됩니다(<code>.disabled</code> + <code>aria-disabled</code>, 비활성 상태 클릭 차단). 전체 동의로 한꺼번에 체크해도 반영됩니다(MSCO9100·9101, NH_MD_YO_01, NH_MD_AI_05_01, NH_MD_CO_03_01).</p>
+                <div class="terms-card">
+                    <div class="terms-card__header">
+                        <div class="terms-card__check">
+                            <label class="check-basic">
+                                <input type="checkbox" class="check-basic__input" />
+                                <span class="check-basic__icon"></span>
+                                <span class="terms-card__title">[필수] 전체 동의</span>
+                            </label>
+                        </div>
+                    </div>
+                    <hr class="terms-card__divider" />
+                    <div class="terms-card__list">
+                        <div class="terms-link">
+                            <div class="terms-link__check">
+                                <label class="check-basic is-xs">
+                                    <input type="checkbox" class="check-basic__input" data-agree-required="guideTerms" />
+                                    <span class="check-basic__icon"></span>
+                                    <span class="terms-link__text">[필수] 서비스 이용약관</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="terms-link">
+                            <div class="terms-link__check">
+                                <label class="check-basic is-xs">
+                                    <input type="checkbox" class="check-basic__input" data-agree-required="guideTerms" />
+                                    <span class="check-basic__icon"></span>
+                                    <span class="terms-link__text">[필수] 개인정보 수집·이용 동의</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo">
+                    <a href="javascript:;" class="btn is-primary is-lg disabled" role="button" aria-disabled="true" data-agree-button="guideTerms">동의하고 계속</a>
+                </div>
+
             </div>
         </div>
     </body>

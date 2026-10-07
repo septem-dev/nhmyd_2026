@@ -344,6 +344,7 @@
             <span class="btn-floating__icon" aria-hidden="true"></span>
         </button>
         <script>
+            // ===== [Chart.js 전용 시작] 기본 화면(NH_MD_AI_03.html)에서는 정적 SVG 곡선으로 대체. 이 구간 밖의 코드는 기본 화면과 같으니 함께 수정 =====
             (function () {
                 var canvas = document.getElementById('ai03ReturnChart');
                 if (!canvas || typeof Chart === 'undefined') return;
@@ -418,6 +419,7 @@
                     plugins: [pointLabelPlugin]
                 });
             })();
+            // ===== [Chart.js 전용 끝] =====
 
             (function() {
                 var floating = document.querySelector('.btn-floating__circle');
@@ -454,7 +456,7 @@
 
                 function showBtn() {
                     Object.assign(floating.style, STYLES.show);
-                    startY = window.pageXOffset || document.documentElement.scrollTop;
+                    startY = window.pageYOffset || document.documentElement.scrollTop; // 세로 스크롤 위치
                     
                     window.addEventListener('wheel', function() {  isUserScrolling = true; }, {passive: true});
                     window.addEventListener('touchmove', function() {  isUserScrolling = true; }, {passive: true});
@@ -473,7 +475,7 @@
                 function checkScroll() {
                     if (!isUserScrolling) return;
 
-                    var currentY = window.pageXOffset || document.documentElement.scrollTop;
+                    var currentY = window.pageYOffset || document.documentElement.scrollTop; // 세로 스크롤 위치
                     
                     if(currentY > startY + 30) {
                         var rect = targetSection.getBoundingClientRect();
@@ -485,7 +487,7 @@
 
                 function destroy() {
                     Object.assign(floating.style, STYLES.hide);
-                    window.addEventListener('scroll', checkScroll)
+                    window.removeEventListener('scroll', checkScroll); // 숨긴 뒤에는 스크롤 감시 중단
                 }
             })();
 

@@ -480,6 +480,7 @@
         </div>
 
         <script>
+            // ===== [Chart.js 전용 시작] 기본 화면(NH_MD_AI_02.html)에서는 정적 SVG 곡선으로 대체. 이 구간 밖의 코드는 기본 화면과 같으니 함께 수정 =====
             (function () {
                 var canvas = document.getElementById('ai02ReturnChart');
                 if (!canvas || typeof Chart === 'undefined') return;
@@ -554,6 +555,7 @@
                     plugins: [pointLabelPlugin]
                 });
             })();
+            // ===== [Chart.js 전용 끝] =====
 
             (function () {
                 var area = document.getElementById('ai02PickArea');

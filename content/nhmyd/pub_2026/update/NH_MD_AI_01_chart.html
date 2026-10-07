@@ -290,6 +290,7 @@
         <script src="../../js/chart.js"></script>
         <script>
             (function () {
+                // ===== [Chart.js 전용 시작] 기본 화면(NH_MD_AI_01.html)에서는 정적 SVG 도넛으로 대체. 이 구간 밖의 코드는 기본 화면과 같으니 함께 수정 =====
                 var canvas = document.getElementById('diagDonutChart');
                 if (canvas && typeof Chart !== 'undefined') {
                     new Chart(canvas.getContext('2d'), {
@@ -314,6 +315,7 @@
                     });
                 }
 
+                // ===== [Chart.js 전용 끝] =====
                 var unitBtns = Array.prototype.slice.call(document.querySelectorAll('[data-diag-unit]'));
                 var valueEls = Array.prototype.slice.call(document.querySelectorAll('.diag-legend__value'));
                 unitBtns.forEach(function (btn) {
